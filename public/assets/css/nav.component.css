@@ -14,12 +14,21 @@
 }
 
 nav {
+    display: flex;
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
+    align-items: center;
 }
 
 .logo img {
     height: 50px;
-    padding: 5px 0.3rem 0;
+    padding: 1px 0.3rem 1px;
+    cursor: pointer;
+}
+
+.menu {
+    width: 100%;
+    text-align: right;
+    color: black;
 }

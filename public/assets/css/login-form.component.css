@@ -1,7 +1,6 @@
-.container {
-    width: 95%;
+.login-form {
     max-width: 400px;
-    margin: 120px auto;
+    margin: auto;
 }
 
 md-toolbar {

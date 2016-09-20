@@ -7,9 +7,13 @@ import {MdButtonModule} from '@angular2-material/button';
 import {MdInputModule} from '@angular2-material/input';
 import {MdToolbarModule} from '@angular2-material/toolbar';
 
+import {routing, appRoutingProviders} from './app.routing';
 import {AppComponent} from './app.component';
+import {HomeComponent} from './home/home.component';
 import {NavComponent} from './nav/nav.component';
 import {LoginFormComponent} from './login/login-form.component';
+import {EmpresasComponent} from './empresas/empresas.component';
+import {PageNotFoundComponent} from './404.component';
 
 @NgModule({
     imports: [
@@ -20,13 +24,18 @@ import {LoginFormComponent} from './login/login-form.component';
         MdCardModule,
         MdButtonModule,
         MdInputModule,
-        MdToolbarModule
+        MdToolbarModule,
+        routing
         ],
     declarations: [
         AppComponent,
+        HomeComponent,
         NavComponent,
-        LoginFormComponent
+        LoginFormComponent,
+        EmpresasComponent,
+        PageNotFoundComponent
     ],
-    bootstrap: [AppComponent]
+    providers: [appRoutingProviders],
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

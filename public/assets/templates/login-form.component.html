@@ -1,32 +1,12 @@
-<div class="container">
+<div class="login-form">
     <md-card>
         <md-toolbar color="primary">Login form</md-toolbar>
         <md-card-content>
             <form *ngIf="active" (ngSubmit)="onSubmit(user.value, password.value)" #loginForm="ngForm">
-
                 <md-input placeholder="User" type="text" id="user" required [(ngModel)]="user.value" name="user" #user="ngModel"></md-input>
-                <div [hidden]="user.valid || user.pristine" class="alert alert-danger">
-                    user required
-                </div>
-
                 <md-input placeholder="Password" type="password" id="password" required [(ngModel)]="password.value" name="password" #password="ngModel"></md-input>
-                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-                    password required
-                </div>
-
                 <button md-raised-button color="primary" [disabled]="!loginForm.form.valid" type="submit">Submit</button>
-
             </form>
         </md-card-content>
     </md-card>
-
-</div>
-
-<div class="container">
-    <div>
-        Response: {{response}}
-    </div>
-    <div>
-        Validate: {{validate}}
-    </div>
 </div>
