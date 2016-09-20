@@ -10,8 +10,8 @@ export class LoginService {
 
     constructor (private http: Http) {}
     
-    private getUrl = 'http://date.jsontest.com';
-    private postUrl = 'http://validate.jsontest.com';
+    private getUrl = 'http://tfc.ntskoala.com/api/actions/login.php';
+    private postUrl = 'http://tfc.ntskoala.com/api/actions/login.php';
 
     getUsers() {
         return this.http.get(this.getUrl).map(res => res.json());
@@ -21,7 +21,8 @@ export class LoginService {
         let answer = {};
 
         let user = JSON.stringify(loginUser);
-        let params = 'json=' + user;
+        //let params = 'json=' + user;
+        let params = 'user=' + loginUser.username + '&password=' + loginUser.password;
         let headers = new Headers();
         headers.append('Content-type', 'application/x-www-form-urlencoded');
 
