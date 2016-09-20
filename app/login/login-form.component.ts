@@ -15,7 +15,7 @@ export class LoginFormComponent {
     active = true;
     response: Object;
     validate: boolean;
-
+    user: any;
     getUsers() {
         this.loginService.getUsers().subscribe(
             data => console.log(data)
@@ -30,6 +30,15 @@ export class LoginFormComponent {
         this.loginService.logUser(logingUser).subscribe(
             (data) => {
                 this.response = JSON.stringify(data);
+                if (this.response.toString().includes("Error")){
+                    alert ('no valido');
+                }else{
+                this.user = JSON.parse(data);
+                //this.user.forEach (usuario => alert('nombre: ' + usuario.nombre + 'tipouser: ' + usuario.tipouser+ 'empresa: ' + usuario.idempresa));
+                sessionStorage.setItem('usuario',this.user[0].idusuario);
+                sessionStorage.setItem('empresa',this.user[0].idempresa);
+                //REDIRECCIONAR
+                }
                 this.validate = data.validate;
             }
         )
