@@ -9,6 +9,7 @@
         "experimentalDecorators": true,
         "removeComments": false,
         "noImplicitAny": false
+        //"strictNullChecks": true
     },
     "types": [
         "jasmine",

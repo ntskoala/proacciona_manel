@@ -8,8 +8,8 @@
     background-color: #e91e63;
     color: #fff;
     min-height: 56px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.24);
-    background: linear-gradient(45deg ,#80CBC4, #B2DFDB, #80CBC4);
+    box-shadow: 0 0px 10px 0px rgba(0,0,0,0.2);
+    background: linear-gradient(45deg ,#F5F5F5, #FAFAFA, #F5F5F5);
     z-index: 10;
 }
 
