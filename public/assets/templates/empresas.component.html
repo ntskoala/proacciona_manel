@@ -1,3 +1,4 @@
 <div class="message">
     página principal de empresas
 </div>
+<button *ngFor="let empresa of empresas" (click)="seleccionaempresa(empresa)">{{empresa.nombreempresa}}</button>
