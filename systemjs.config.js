@@ -55,6 +55,9 @@
             },
             '@angular2-material/toolbar': {
                 main: 'toolbar.umd.js',
+            },
+            '@angular2-material/tabs': {
+                main: 'tabs.umd.js',
             }
         }
     });

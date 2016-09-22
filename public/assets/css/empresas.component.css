@@ -1,5 +1,8 @@
-.message {
-    font: 600 2rem 'Open Sans', sans-serif;
-    color: #666;
-    text-transform: uppercase;
+seleccionar-empresa,
+nueva-empresa {
+    width: 50%;
+}
+
+gestion-empresa {
+    width: 100%;
 }

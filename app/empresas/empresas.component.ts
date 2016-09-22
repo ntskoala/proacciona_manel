@@ -1,29 +1,18 @@
-import {Component} from '@angular/core';
-import {EmpresasService} from './empresas.service';
+import {Component, Output, EventEmitter} from '@angular/core';
+import {Empresa} from './empresa';
 
 @Component({
     selector: 'empresas',
     templateUrl: 'public/assets/templates/empresas.component.html',
     styleUrls: ['public/assets/css/empresas.component.css'],
-    providers: [EmpresasService]
 })
+
 export class EmpresasComponent {
-public empresas:any;
-private response:any;
-    constructor(private empresasService: EmpresasService) {
-        this.empresasService.getEmpresas().subscribe(
-            data => {
-            this.response = JSON.stringify(data);
-            console.log (this.response);
-            this.empresas = data;
-            }
-        );
-    };
 
+    @Output() seleccionada: EventEmitter<Empresa> = new EventEmitter();
 
-seleccionaempresa(empresa){
-    alert('Empresa seleccionada id: ' + empresa.idempresa + ' nombre: ' + empresa.nombreempresa);
-}
-
+    seleccion(empresa: Empresa) {
+        this.seleccionada.emit(empresa)
+    }
 
 }
