@@ -7,28 +7,24 @@ import {Empresa} from './empresa';
     templateUrl: 'public/assets/templates/seleccionar-empresa.component.html',
     styleUrls: ['public/assets/css/seleccionar-empresa.component.css'],
     providers: [EmpresasService],
-    // outputs: ['seleccionada']
 })
 
 export class SeleccionarEmpresaComponent {
     
-    public empresas: Empresa[] = [];  // esto está bien?
-    // public seleccionada = new EventEmitter<Empresa>();
+    public empresas: Empresa[] = [];
     private response: any;
-    
+    // variable para generar un evento
     @Output() seleccionada: EventEmitter<Empresa> = new EventEmitter();
 
     constructor(private empresasService: EmpresasService) {
-
         this.empresasService.getEmpresas().subscribe(
             data => {
                 data.forEach(empresa => {
                     this.empresas.push(new Empresa(empresa.idempresa, empresa.nombreempresa));
                 })
             })
-    
     }
-    
+    // al seleccionar empresa genera event para que lo recoja el padre
     seleccionaEmpresa(seleccion: number){
         this.seleccionada.emit(this.empresas.find(empresa => empresa.id == seleccion));
     }

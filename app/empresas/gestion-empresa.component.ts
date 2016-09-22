@@ -1,13 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Empresa} from './empresa';
+// import {SeleccionarEmpresaComponent} from './seleccionar-empresa.component';
 
 @Component({
     selector: 'gestion-empresa',
     templateUrl: 'public/assets/templates/gestion-empresa.component.html',
     styleUrls: ['public/assets/css/gestion-empresa.component.css'],
-    inputs: ['seleccionada']
 })
 
 export class GestionEmpresaComponent {
-    public seleccionada: Empresa;
+    
+    @Input() seleccionada: Empresa;
+
 }

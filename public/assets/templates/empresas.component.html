@@ -1,3 +1,5 @@
+<!-- componente de selección de empresa con el objeto Empresa -->
 <seleccionar-empresa (seleccionada)="seleccion($event)"></seleccionar-empresa>
 <nueva-empresa></nueva-empresa>
-<gestion-empresa [seleccionada]="seleccionada()"></gestion-empresa>
+ <!--una vez seleccionada la empresa, pasamos el objeto Empresa -->
+<gestion-empresa [seleccionada]="seleccionada"></gestion-empresa>

@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component} from '@angular/core';
 import {Empresa} from './empresa';
 
 @Component({
@@ -9,10 +9,10 @@ import {Empresa} from './empresa';
 
 export class EmpresasComponent {
 
-    @Output() seleccionada: EventEmitter<Empresa> = new EventEmitter();
+    public seleccionada: Empresa;
 
     seleccion(empresa: Empresa) {
-        this.seleccionada.emit(empresa)
+        this.seleccionada = empresa
     }
 
 }

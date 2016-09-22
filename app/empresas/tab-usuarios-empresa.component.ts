@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Empresa} from './empresa'
 
 @Component({
@@ -7,13 +7,8 @@ import {Empresa} from './empresa'
     styleUrls: ['public/assets/css/tab-usuarios-empresa.component.css']
 })
 
-// export class TabUsuariosEmpresaComponent implements OnChanges {
 export class TabUsuariosEmpresaComponent {
 
-    // @Input() selected: Empresa;
+    @Input() seleccionada: Empresa;
 
-    // ngOnChanges() {
-    //     console.log('cambio detectado');
-    // }
-    
 }
