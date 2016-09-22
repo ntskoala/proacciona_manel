@@ -5,7 +5,7 @@
             <form *ngIf="active" (ngSubmit)="onSubmit(user.value, password.value)" #loginForm="ngForm">
                 <md-input placeholder="User" type="text" id="user" required [(ngModel)]="user.value" name="user" #user="ngModel"></md-input>
                 <md-input placeholder="Password" type="password" id="password" required [(ngModel)]="password.value" name="password" #password="ngModel"></md-input>
-                <button md-raised-button color="primary" [disabled]="!loginForm.form.valid" type="submit">Submit</button>
+                <button md-raised-button color="primary" [disabled]="!loginForm.form.valid" type="submit">Enviar</button>
             </form>
         </md-card-content>
     </md-card>

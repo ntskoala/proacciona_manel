@@ -1,0 +1,49 @@
+md-tab-group {
+    font: 400 1rem 'Open Sans', sans-serif;
+}
+
+table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font: 400 1rem/2rem 'Open Sans', sans-serif;
+    text-align: left;
+    background: #fff;
+}
+
+tr {
+    display: table-row;
+    transition: background-color, 0.2s;
+    
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+th {
+    background: #fff3e0;
+	padding: 0.5rem 0.8rem;
+}
+
+td {
+	padding: 0.5rem 0.8rem;   
+    border: 1px solid #fafafa;
+}
+
+ select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /*appearance: none;*/
+    min-width: 170px;
+    font: 400 1rem 'Open Sans', sans-serif;
+    border: 0;
+    border-radius: 0;
+    padding: 0.2rem 0.3rem;
+	background: url('public/assets/images/down_arrow.png') no-repeat 97% 50% #fff3e0;
+}
+    
+select:focus {
+	outline: 0;
+}

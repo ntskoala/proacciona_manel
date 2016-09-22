@@ -1,3 +1,15 @@
-p {
-    font: 400 2rem 'Open Sans', sans-serif;
+.form-nueva-empresa {
+    width: 100%;
+    max-width: 300px;
+    float: right;
+}
+
+h3 {
+    font: 400 1.2rem/2rem 'OpenSans', sans-serif;
+    margin: 0 auto 0.3rem;
+}
+
+md-input {
+    width: 100%;
+    font: 400 1rem 'Open Sans', sans-serif;
 }

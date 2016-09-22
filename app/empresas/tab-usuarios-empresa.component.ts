@@ -8,7 +8,13 @@ import {Empresa} from './empresa'
 })
 
 export class TabUsuariosEmpresaComponent {
-
+    // importamos el objeto empresa seleccionada
     @Input() seleccionada: Empresa;
+
+    public usuarios = [
+        {nombre: 'Antonio', password: '123456', tipo: 'Administrador', activo: true},
+        {nombre: 'Sara', password: 'lkjshs', tipo: 'Normal', activo: true},
+        {nombre: 'Xavi', password: '87uyhg', tipo: 'Normal', activo: false}
+    ]
 
 }

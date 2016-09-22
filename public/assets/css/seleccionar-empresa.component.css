@@ -1,14 +1,19 @@
-select {
+h3 {
+    font: 400 1.2rem/2rem 'OpenSans', sans-serif;
+    margin: 0 auto 0.3rem;
+    padding-left: 0.6rem;
+}
+ 
+ select {
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
+    /*appearance: none;*/
     min-width: 300px;
-    font: 600 1.2rem 'Open Sans', sans-serif;
+    font: 600 1rem 'Open Sans', sans-serif;
     border: 1px solid #FF9800;
     border-radius: 0;
-    background: #FFF3E0;
     padding: 0.3rem 0.6rem;
-	/*background: url('../img/down_arrow.png') no-repeat right #eee;*/
+	background: url('public/assets/images/down_arrow.png') no-repeat 97% 50% #fff3e0;
 }
     
 select:focus {

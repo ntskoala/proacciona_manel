@@ -1,1 +1,8 @@
-<p>Nueva empresa</p>
+<div class="form-nueva-empresa">
+    <h3>Nueva empresa</h3>
+
+    <form *ngIf="active" (ngSubmit)="nuevaEmpresa(nombre.value)" #nuevaEmpresaForm="ngForm">
+        <md-input placeholder="Nombre" type="text" required [(ngModel)]="nombre.value" name="nombre" #nombre="ngModel"></md-input>
+        <button md-raised-button color="primary" [disabled]="!nuevaEmpresaForm.form.valid" type="submit">Enviar</button>
+    </form>
+</div>

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../user';
 import {LoginService} from './login.service';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
+
+import {User} from './user';
 
 @Component({
     selector: 'login-form',
@@ -10,40 +11,36 @@ import {Router} from '@angular/router'
     providers: [LoginService]
 })
 export class LoginFormComponent {
-    // injection of LoginService as a property
+    // inyección de LoginService como propiedad
     constructor(private loginService: LoginService, public router: Router) {};
 
-    active = true;
-    response: Object;
-    validate: boolean;
-    user: any;
-    getUsers() {
-        this.loginService.getUsers().subscribe(
-            data => console.log(data)
-        )
-    }
+    public active = true;
+    private response: any;
 
-    onSubmit(user, password) {
+    onSubmit(nombre: string, password: string) {
+        // truco de Angular para recargar el form y que se vacíe
         this.active = false;
         setTimeout(() => this.active = true, 0);
 
-        let logingUser = new User(user, password);
+        let logingUser = new User(nombre, password);
+
         this.loginService.logUser(logingUser).subscribe(
             (data) => {
-                this.response = JSON.stringify(data);
-                if (this.response.toString().includes('Error')) {
-                    alert ('no valido');
-                } else {
-                    this.user = JSON.parse(data);
-                    //this.user.forEach (usuario => alert('nombre: ' + usuario.nombre + 'tipouser: ' + usuario.tipouser+ 'empresa: ' + usuario.idempresa));
-                    sessionStorage.setItem('usuario',this.user[0].idusuario);
-                    sessionStorage.setItem('empresa',this.user[0].idempresa);
-                    //REDIRECCIONAR
+                this.response = JSON.parse(data);
+                // si el usuario es correcto
+                if (this.response.success) {
+                    let user = new User(nombre, password);
+                    // TODO: estos parámetros habrá que sustituirlos por los de la respuesta
+                    sessionStorage.setItem('usuario', user.nombre);
+                    sessionStorage.setItem('empresa', 'empresa1');
+                    // redirecciona a home
                     this.router.navigate(['home']);
                 }
-            }
-        )
-
-    }
+                // usuario erróneo
+                else {
+                    alert('Usuario no válido');
+                }
+            })
+        }
 
 }

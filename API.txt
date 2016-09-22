@@ -1,0 +1,44 @@
+-------------
+LOGIN USUARIO
+-------------
+POST
+{
+    'usuario': 'string',
+    'password': 'string'
+}
+
+Respuesta
+{
+    'success': true,
+    'data':
+        {
+            'nombre': 'string',
+            'empresa': number
+        }
+}
+
+Error
+{
+    'success': false,
+}
+
+
+-------------
+NUEVA EMPRESA
+-------------
+POST
+{
+    'nombre': 'string',
+}
+
+Respuesta
+{
+    'success': true,
+    'data': {}
+}
+
+Error
+{
+    'success': false,
+}
+

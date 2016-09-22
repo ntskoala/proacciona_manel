@@ -5,13 +5,16 @@ import {EmpresasComponent} from './empresas.component';
     selector: 'nueva-empresa',
     templateUrl: 'public/assets/templates/nueva-empresa.component.html',
     styleUrls: ['public/assets/css/nueva-empresa.component.css'],
-    providers: [EmpresasComponent]
 })
 
 export class NuevaEmpresaComponent {
     
-    constructor(private empresa:EmpresasComponent) {
-        console.log(this.empresa.seleccionada);
-    }    
+    public active = true;
+    
+    nuevaEmpresa(nombre: string) {
+        this.active = false;
+        setTimeout(() => this.active = true, 0);
 
+        console.log(nombre);
+    }
 }

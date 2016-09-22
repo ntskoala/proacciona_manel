@@ -1,3 +1,24 @@
-<p>Contenido de usuarios</p>
-<p *ngIf="seleccionada">Id: {{seleccionada.id}}</p>
-<p *ngIf="seleccionada">Nombre: {{seleccionada.nombre}}</p>
+<table>
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Password</th>
+            <th>Tipo</th>
+            <th>Activo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let usuario of usuarios">
+            <td>{{usuario.nombre}}</td>
+            <td>{{usuario.password}}</td>
+            <td>
+                <select (change)="seleccionaEmpresa($event.target.value)">
+                    <option>Administrador</option>
+                    <option>Normal</option>
+                </select>
+            </td>
+            <td>{{usuario.activo}}</td>
+        </tr>
+    </tbody>
+</table>
+
