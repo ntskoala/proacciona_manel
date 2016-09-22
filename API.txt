@@ -12,6 +12,7 @@ Respuesta
     'success': true,
     'data':
         {
+            'token': 'string',  <= creo que este es el único necesario
             'nombre': 'string',
             'empresa': number
         }
@@ -34,11 +35,11 @@ POST
 Respuesta
 {
     'success': true,
-    'data': {}
+    'data': {}  <= no creo que haga falta data aquí
 }
 
 Error
 {
     'success': false,
+    'error': string  <= explicación del error para el usuario (empresa repeditda, por ejemplo)
 }
-

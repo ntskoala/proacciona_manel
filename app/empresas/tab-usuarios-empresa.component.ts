@@ -12,9 +12,12 @@ export class TabUsuariosEmpresaComponent {
     @Input() seleccionada: Empresa;
 
     public usuarios = [
-        {nombre: 'Antonio', password: '123456', tipo: 'Administrador', activo: true},
-        {nombre: 'Sara', password: 'lkjshs', tipo: 'Normal', activo: true},
-        {nombre: 'Xavi', password: '87uyhg', tipo: 'Normal', activo: false}
+        {id: 1, nombre: 'Antonio', password: '123456', tipo: 'Administrador', activo: true},
+        {id: 2, nombre: 'Sara', password: 'lkjshs', tipo: 'Normal', activo: true},
+        {id: 3, nombre: 'Xavi', password: '87uyhg', tipo: 'Normal', activo: false}
     ]
 
+    cambioTipo(tipo: string) {
+        console.log(tipo);
+    }
 }

@@ -4,7 +4,8 @@
             <th>Usuario</th>
             <th>Password</th>
             <th>Tipo</th>
-            <th>Activo</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -12,13 +13,17 @@
             <td>{{usuario.nombre}}</td>
             <td>{{usuario.password}}</td>
             <td>
-                <select (change)="seleccionaEmpresa($event.target.value)">
+                <select [(ngModel)]="usuario.tipo" (change)="cambioTipo($event.target.value)">
                     <option>Administrador</option>
                     <option>Normal</option>
                 </select>
             </td>
-            <td>{{usuario.activo}}</td>
+            <td class="center">
+                <label><input type="checkbox" [(ngModel)]="usuario.activo"/>Activo</label>
+            </td>
+            <td class="center">
+                <button md-button>Borrar</button>
+            </td>
         </tr>
     </tbody>
 </table>
-
