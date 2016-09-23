@@ -57,9 +57,9 @@ Error
 CONSULTA USUARIOS DE UNA EMPRESA
 --------------------------------
 GET
-url: http://tfc.ntskoala.com/api/actions/getusers.php?idempresa=XXX
+url: http://tfc.ntskoala.com/api/views/getusers.php
 {
-    'idempresa': number
+    'idempresa': number,
 }
 
 Respuesta
@@ -74,5 +74,4 @@ Respuesta
             'nombre': 'string',
             'idempresa': number
         }]
-
 }

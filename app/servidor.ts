@@ -16,7 +16,7 @@ export class Servidor {
         if (metodo == 'POST') {
             return this.llamada.post(serverUrl, parametros, {headers: headers}).map(res => res.json());
         } else if (metodo == 'GET') {
-            return this.llamada.get(serverUrl);
+            return this.llamada.get(serverUrl + '?' + parametros);
         } else {
             console.log('Método erróneo');
             return;

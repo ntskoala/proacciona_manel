@@ -5,21 +5,21 @@
             <th>Password</th>
             <th>Tipo</th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="seleccionada">
         <tr *ngFor="let usuario of usuarios">
-            <td>{{usuario.nombre}}</td>
-            <td>{{usuario.password}}</td>
             <td>
-                <select [(ngModel)]="usuario.tipo" (change)="cambioTipo($event.target.value)">
+                <input [value]="usuario.nombre" type="text">
+            </td>
+            <td>
+                <input [value]="usuario.password" type="text">
+            </td>
+            <td>
+                <select [value]="usuario.tipo" (change)="cambioTipo($event.target.value)">
                     <option>Administrador</option>
                     <option>Normal</option>
                 </select>
-            </td>
-            <td class="center">
-                <label><input type="checkbox" [(ngModel)]="usuario.activo"/>Activo</label>
             </td>
             <td class="center">
                 <button md-button>Borrar</button>

@@ -40,7 +40,7 @@ export class LoginFormComponent {
                 else { // NO FUNCIONA
                     alert('Usuario no válido');
                 }
-            })
+        })
     }
 
 }

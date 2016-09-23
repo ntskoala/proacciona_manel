@@ -23,14 +23,11 @@ export class NuevaEmpresaComponent {
         setTimeout(() => this.active = true, 0);
 
         let token = sessionStorage.getItem('token');
-        console.log('TOKEN');
-        console.log(token);
         let parametros = 'nombre=' + nombre + '&token=' + token; 
 
         this.servidor.llamadaServidor('POST', URLS.NUEVA_EMPRESA, parametros).subscribe(
             (data) => {
                 this.response = JSON.parse(data);
-                console.log(this.response);
                 // si tiene éxito
                 if (this.response.success) {
                     alert('Empresa creada');

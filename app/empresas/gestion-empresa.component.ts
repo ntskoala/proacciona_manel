@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Empresa} from './empresa';
-// import {SeleccionarEmpresaComponent} from './seleccionar-empresa.component';
 
 @Component({
     selector: 'gestion-empresa',

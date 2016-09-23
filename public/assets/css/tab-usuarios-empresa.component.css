@@ -32,6 +32,13 @@ td {
     border: 1px solid #fafafa;
 }
 
+input[type="text"] {
+    font: 400 1rem 'Open Sans', sans-serif;
+    border: 0;
+    padding: 0.2rem 0.4rem;
+    outline: 0;
+}
+
  select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -41,7 +48,7 @@ td {
     border: 0;
     border-radius: 0;
     padding: 0.2rem 0.3rem;
-	background: url('public/assets/images/down_arrow.png') no-repeat 97% 50% #e0e0e0;
+	background: url('public/assets/images/down_arrow.png') no-repeat 97% 50% #fff;
 }
     
 select:focus,
