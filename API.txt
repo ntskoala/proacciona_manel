@@ -10,9 +10,9 @@ POST
 Respuesta
 {
     'success': true,
+    'token': 'string',  <= creo que este es el único necesario
     'data':
         {
-            'token': 'string',  <= creo que este es el único necesario
             'nombre': 'string',
             'empresa': number
         }
@@ -30,6 +30,7 @@ NUEVA EMPRESA
 POST
 {
     'nombre': 'string',
+    'token': 'string'
 }
 
 Respuesta
