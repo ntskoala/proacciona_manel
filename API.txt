@@ -2,6 +2,8 @@
 LOGIN USUARIO
 -------------
 POST
+url: http://tfc.ntskoala.com/api/actions/login.php
+(nombre: demo, password: demo)
 {
     'usuario': 'string',
     'password': 'string'
@@ -13,8 +15,12 @@ Respuesta
     'token': 'string',  <= creo que este es el único necesario
     'data':
         {
+            'idusuario': number,
+            'usuario': 'string',
+            'password': 'string',
+            'tipouser': 'string',
             'nombre': 'string',
-            'empresa': number
+            'idempresa': number
         }
 }
 
@@ -28,6 +34,7 @@ Error
 NUEVA EMPRESA
 -------------
 POST
+url: http://tfc.ntskoala.com/api/actions/nuevaempresa.php
 {
     'nombre': 'string',
     'token': 'string'
@@ -43,4 +50,29 @@ Error
 {
     'success': false,
     'error': string  <= explicación del error para el usuario (empresa repeditda, por ejemplo)
+}
+
+
+--------------------------------
+CONSULTA USUARIOS DE UNA EMPRESA
+--------------------------------
+GET
+url: http://tfc.ntskoala.com/api/actions/getusers.php?idempresa=XXX
+{
+    'idempresa': number
+}
+
+Respuesta
+{
+    'success': true,
+    'data':
+        [{
+            'idusuario': number,
+            'usuario': 'string',
+            'password': 'string',
+            'tipouser': 'string',
+            'nombre': 'string',
+            'idempresa': number
+        }]
+
 }
