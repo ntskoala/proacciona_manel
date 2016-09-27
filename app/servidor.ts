@@ -11,12 +11,12 @@ export class Servidor {
     llamadaServidor(metodo: string, serverUrl: string, parametros?: string) {
 
         let headers = new Headers();
-        headers.append('Content-type', 'application/x-www-form-urlencoded');
+        headers.append('Content-type', 'application/x-www-form-urlencoded');        
 
         if (metodo == 'POST') {
             return this.llamada.post(serverUrl, parametros, {headers: headers}).map(res => res.json());
         } else if (metodo == 'GET') {
-            return this.llamada.get(serverUrl + '?' + parametros);
+            return this.llamada.get(serverUrl + parametros);
         } else {
             console.log('Método erróneo');
             return;

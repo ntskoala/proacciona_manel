@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Empresa} from './empresa'
+import {Component} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
 
+import {SeleccionarEmpresaService} from './seleccionar-empresa.service';
 import {Servidor} from '../servidor';
 import {URLS} from '../config';
+import {Empresa} from './empresa'
 import {Usuario} from '../login/usuario';
 
 @Component({
@@ -12,40 +14,37 @@ import {Usuario} from '../login/usuario';
     providers: [Servidor]
 })
 
-export class TabUsuariosEmpresaComponent implements OnInit{
-
-    constructor(private servidor: Servidor) {}
-
-    // importamos el objeto empresa seleccionada
-    @Input() seleccionada: Empresa;
+export class TabUsuariosEmpresaComponent {
 
     public usuarios: Usuario[] = [];
+    private subscription: Subscription;
 
-    ngOnInit() {
-        let token = sessionStorage.getItem('token');
-        let parametros = 'idempresa=' + this.seleccionada.id + '&token=' + token; 
+    constructor(
+        private servidor: Servidor,
+        private seleccionarEmpresaService: SeleccionarEmpresaService) {
 
-        this.servidor.llamadaServidor('GET', URLS.USUARIOS_EMPRESA, parametros).subscribe(
-            (data) => {
-                let response = JSON.parse(data.json());
-                if (response.success) {
-                    for (let i = 0; i < response.data.length; i++) {
-                        this.usuarios.push(new Usuario(
-                            response.data[i].idusuario,
-                            response.data[i].usuario,
-                            response.data[i].password,
-                            response.data[i].tipouser,
-                            response.data[i].nombre,
-                            response.data[i].idempresa
-                        ))
-                    }
-                }
-            }
-        )
-
+            this.subscription = seleccionarEmpresaService.nuevaEmpresa.subscribe(
+                seleccionada => {
+                    let token = sessionStorage.getItem('token');
+                    let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
+                    this.servidor.llamadaServidor('GET', URLS.USUARIOS_EMPRESA, parametros).subscribe(
+                        data => {
+                            this.usuarios = [];
+                            let response = JSON.parse(data.json());
+                            if (response.success && response.data) {
+                                for (let i = 0; i < response.data.length; i++) {
+                                    this.usuarios.push(new Usuario(
+                                        response.data[i].idusuario,
+                                        response.data[i].usuario,
+                                        response.data[i].password,
+                                        response.data[i].tipouser,
+                                        response.data[i].nombre,
+                                        response.data[i].idempresa
+                                    ))
+                                }
+                            }
+                        });
+                });
     }
 
-    cambioTipo(tipo: string) {
-        console.log(tipo);
-    }
 }

@@ -8,7 +8,7 @@ import {URLS} from '../config';
     selector: 'login-form',
     templateUrl: 'public/assets/templates/login-form.component.html',
     styleUrls: ['public/assets/css/login-form.component.css'],
-    providers: [Servidor]
+    providers: [Servidor],
 })
 export class LoginFormComponent {
     // inyección de servidor como propiedad

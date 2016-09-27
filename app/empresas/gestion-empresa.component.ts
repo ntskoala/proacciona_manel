@@ -1,5 +1,4 @@
-import {Component, Input} from '@angular/core';
-import {Empresa} from './empresa';
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'gestion-empresa',
@@ -7,8 +6,4 @@ import {Empresa} from './empresa';
     styleUrls: ['public/assets/css/gestion-empresa.component.css'],
 })
 
-export class GestionEmpresaComponent {
-    
-    @Input() seleccionada: Empresa;
-
-}
+export class GestionEmpresaComponent {}

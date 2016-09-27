@@ -5,9 +5,28 @@
             <th>Password</th>
             <th>Tipo</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
-    <tbody *ngIf="seleccionada">
+    <tbody>
+        <tr>
+            <td>
+                <input type="text">
+            </td>
+            <td>
+                <input type="text">                
+            </td>
+            <td>
+                <select>
+                    <option>Administrador</option>
+                    <option>Normal</option>
+                </select>
+            </td>
+            <td></td>
+            <td>
+                <button md-button>Guardar</button>
+            </td>
+        </tr>
         <tr *ngFor="let usuario of usuarios">
             <td>
                 <input [value]="usuario.nombre" type="text">
@@ -16,7 +35,7 @@
                 <input [value]="usuario.password" type="text">
             </td>
             <td>
-                <select [value]="usuario.tipo" (change)="cambioTipo($event.target.value)">
+                <select [value]="usuario.tipo">
                     <option>Administrador</option>
                     <option>Normal</option>
                 </select>
@@ -24,6 +43,7 @@
             <td class="center">
                 <button md-button>Borrar</button>
             </td>
+            <td></td>
         </tr>
     </tbody>
 </table>

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 
 import {Servidor} from '../servidor';
 import {URLS} from '../config';
+import {Empresa} from './empresa';
 
 @Component({
     selector: 'nueva-empresa',
@@ -17,15 +18,16 @@ export class NuevaEmpresaComponent {
     public active = true;
     private response: any;
     
-    nuevaEmpresa(nombre: string) {
+    nuevaEmpresa(nombre: string, nif: string) {
         // truco de Angular para recargar el form y que se vacíe
         this.active = false;
         setTimeout(() => this.active = true, 0);
 
         let token = sessionStorage.getItem('token');
-        let parametros = 'nombre=' + nombre + '&token=' + token; 
+        let parametros = new Empresa(nombre, nif, 0);
+        let param = JSON.stringify(parametros);
 
-        this.servidor.llamadaServidor('POST', URLS.NUEVA_EMPRESA, parametros).subscribe(
+        this.servidor.llamadaServidor('POST', URLS.EMPRESAS, param).subscribe(
             (data) => {
                 this.response = JSON.parse(data);
                 // si tiene éxito
@@ -33,7 +35,7 @@ export class NuevaEmpresaComponent {
                     alert('Empresa creada');
                 }
                 // usuario erróneo
-                else { // NO FUNCIONA
+                else {
                     alert('Empresa no creada');
                 }
             })

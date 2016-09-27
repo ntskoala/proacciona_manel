@@ -1,3 +1,3 @@
 export class Empresa {
-    constructor(public id: number, public nombre: string) { }
+    constructor(public nombre: string, public cif: string, public id?: number) { }
 }

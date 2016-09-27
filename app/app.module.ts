@@ -8,7 +8,6 @@ import {MdInputModule} from '@angular2-material/input';
 import {MdToolbarModule} from '@angular2-material/toolbar';
 import {MdTabsModule} from '@angular2-material/tabs';
 
-import {routing, appRoutingProviders} from './app.routing';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {NavComponent} from './nav/nav.component';
@@ -19,6 +18,9 @@ import {NuevaEmpresaComponent} from './empresas/nueva-empresa.component';
 import {GestionEmpresaComponent} from './empresas/gestion-empresa.component';
 import {TabUsuariosEmpresaComponent} from './empresas/tab-usuarios-empresa.component';
 import {PageNotFoundComponent} from './404.component';
+
+import {routing, appRoutingProviders} from './app.routing';
+import {SeleccionarEmpresaService} from './empresas/seleccionar-empresa.service';
 
 @NgModule({
     imports: [
@@ -32,7 +34,7 @@ import {PageNotFoundComponent} from './404.component';
         MdToolbarModule,
         MdTabsModule,
         routing
-        ],
+    ],
     declarations: [
         AppComponent,
         HomeComponent,
@@ -45,7 +47,10 @@ import {PageNotFoundComponent} from './404.component';
         TabUsuariosEmpresaComponent,
         PageNotFoundComponent
     ],
-    providers: [appRoutingProviders],
+    providers: [
+        appRoutingProviders,
+        SeleccionarEmpresaService
+    ],
     bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
