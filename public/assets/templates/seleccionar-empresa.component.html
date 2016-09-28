@@ -1,9 +1,16 @@
-<h3>Empresa</h3>
-<form>
-    <select (change)="seleccionaEmpresa($event.target.value)">
-        <option disabled>Seleccionar empresa</option>
-        <option *ngFor="let empresa of empresas" [value]="empresa.id">
-            {{empresa.nombre}}
-        </option>
-    </select>
-</form>
+<md-card>
+    <md-card-title>
+        <md-toolbar color="accent">Empresa</md-toolbar>
+    </md-card-title>
+    <md-card-content>
+        <form>
+            <select (change)="seleccionaEmpresa($event.target.value)">
+                <option disabled>Seleccionar empresa</option>
+                <option *ngFor="let empresa of empresas" [value]="empresa.id">
+                    {{empresa.nombre}}
+                </option>
+            </select>
+        </form>
+    </md-card-content>
+</md-card>
+

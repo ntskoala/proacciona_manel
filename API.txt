@@ -75,3 +75,59 @@ Respuesta
             'idempresa': number
         }]
 }
+
+
+--------------------------------
+ALTA USUARIOS DE UNA EMPRESA
+--------------------------------
+POST
+url: http://tfc.ntskoala.com/api/usuarios.php
+{
+    'idempresa': number,
+    'usuario': 'string',
+    'password': 'string',
+    'tipouser': 'string',
+    'nombre': 'string'
+}
+
+Respuesta
+{
+    'success': true,
+    'id': number
+}
+
+
+--------------------------------
+UPDATE USUARIOS DE UNA EMPRESA
+--------------------------------
+PUT
+url: http://tfc.ntskoala.com/api/usuarios.php
+{
+    'idusuario': number,
+    'idempresa': number,
+    'usuario': 'string',
+    'password': 'string',
+    'tipouser': 'string',
+    'nombre': 'string'
+}
+
+Respuesta
+{
+    'success': true,
+    'rows': number
+}
+
+
+--------------------------------
+BAJA USUARIOS DE UNA EMPRESA
+--------------------------------
+DELETE
+url: http://tfc.ntskoala.com/api/usuarios.php
+{
+    'id': number,
+}
+
+Respuesta
+{
+    'success': true,
+}

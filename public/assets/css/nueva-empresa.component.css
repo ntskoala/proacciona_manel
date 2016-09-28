@@ -9,7 +9,7 @@ h3 {
     margin: 0 auto 0.3rem;
 }
 
-md-input {
-    width: 100%;
-    font: 400 1rem 'Open Sans', sans-serif;
+/* Material components */
+md-card-footer {
+    position: inherit;
 }

@@ -3,7 +3,8 @@ import {Component} from '@angular/core';
 @Component({
     selector: 'gestion-empresa',
     templateUrl: 'public/assets/templates/gestion-empresa.component.html',
-    styleUrls: ['public/assets/css/gestion-empresa.component.css'],
+    styleUrls: ['public/assets/css/gestion-empresa.component.css']
 })
 
-export class GestionEmpresaComponent {}
+export class GestionEmpresaComponent {
+}

@@ -1,8 +1,15 @@
-seleccionar-empresa,
+seleccionar-empresa {
+    width: 50%;
+    float: left;
+    padding-right: 4%;
+}
 nueva-empresa {
     width: 50%;
+    float: right;
+    padding-left: 4%;
 }
 
 gestion-empresa {
     width: 100%;
+    padding-top: 4%;
 }

@@ -25,7 +25,7 @@
             'rxjs':                       'npm:rxjs',
             'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
             // material design
-            '@angular2-material': 'npm:@angular2-material'
+            '@angular/material': 'npm:@angular/material/material.umd.js'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -39,25 +39,6 @@
             'angular2-in-memory-web-api': {
                 main: './index.js',
                 defaultExtension: 'js'
-            },
-            // material design
-            '@angular2-material/core': {
-                main: 'core.umd.js',
-            },
-            '@angular2-material/card': {
-                main: 'card.umd.js',
-            },
-            '@angular2-material/button': {
-                main: 'button.umd.js',
-            },
-            '@angular2-material/input': {
-                main: 'input.umd.js',
-            },
-            '@angular2-material/toolbar': {
-                main: 'toolbar.umd.js',
-            },
-            '@angular2-material/tabs': {
-                main: 'tabs.umd.js',
             }
         }
     });

@@ -2,11 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpModule, JsonpModule} from '@angular/http';
-import {MdCardModule} from '@angular2-material/card';
-import {MdButtonModule} from '@angular2-material/button';
-import {MdInputModule} from '@angular2-material/input';
-import {MdToolbarModule} from '@angular2-material/toolbar';
-import {MdTabsModule} from '@angular2-material/tabs';
+import {MaterialModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
@@ -17,6 +13,7 @@ import {SeleccionarEmpresaComponent} from './empresas/seleccionar-empresa.compon
 import {NuevaEmpresaComponent} from './empresas/nueva-empresa.component';
 import {GestionEmpresaComponent} from './empresas/gestion-empresa.component';
 import {TabUsuariosEmpresaComponent} from './empresas/tab-usuarios-empresa.component';
+import {TabControlesEmpresaComponent} from './empresas/tab-controles-empresa.component';
 import {PageNotFoundComponent} from './404.component';
 
 import {routing, appRoutingProviders} from './app.routing';
@@ -28,11 +25,7 @@ import {SeleccionarEmpresaService} from './empresas/seleccionar-empresa.service'
         FormsModule,
         HttpModule,
         JsonpModule,
-        MdCardModule,
-        MdButtonModule,
-        MdInputModule,
-        MdToolbarModule,
-        MdTabsModule,
+        MaterialModule,
         routing
     ],
     declarations: [
@@ -45,6 +38,7 @@ import {SeleccionarEmpresaService} from './empresas/seleccionar-empresa.service'
         NuevaEmpresaComponent,
         GestionEmpresaComponent,
         TabUsuariosEmpresaComponent,
+        TabControlesEmpresaComponent,
         PageNotFoundComponent
     ],
     providers: [

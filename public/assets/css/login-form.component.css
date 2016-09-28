@@ -3,27 +3,7 @@
     margin: auto;
 }
 
-md-toolbar {
-    font: 600 1.2rem 'Open Sans', sans-serif;
-}
-
-md-card {
-    padding: 0;
-}
-
-md-card-content {
-    margin: 1rem;
-}
-
-md-input {
-    width: 100%;
-    font: 400 1rem 'Open Sans', sans-serif;
-}
-
-button {
-    margin: 1rem 0 !important;
-}
-
-.ng-invalid:not(form)  {
-    /* border-left: 1px solid rgba(255, 0, 0, 1) !important; */
+/* Material components */
+md-card-footer {
+    position: inherit;
 }

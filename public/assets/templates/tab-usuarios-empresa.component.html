@@ -1,3 +1,26 @@
+<form *ngIf="active" (ngSubmit)="crearUsuario(usuario.value, password.value, tipo.value)" #crearForm="ngForm">
+    <table>
+        <tr>
+            <td>
+                <input type="text" name="usuario" placeholder="usuario" [(ngModel)]="usuario.value" required #usuario="ngModel">
+            </td>
+            <td>
+                <input type="text" name="password" placeholder="password" [(ngModel)]="password.value" required #password="ngModel">                
+            </td>
+            <td>
+                <select name="tipo" [(ngModel)]="tipo.value" required #tipo="ngModel">
+                    <option>Normal</option>
+                    <option>Administrador</option>
+                </select>
+            </td>
+            <td></td>
+            <td>
+                <button md-raised-button color="accent" [disabled]="!crearForm.form.valid" type="submit">Guardar</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
 <table>
     <thead>
         <tr>
@@ -9,24 +32,6 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                <input type="text">
-            </td>
-            <td>
-                <input type="text">                
-            </td>
-            <td>
-                <select>
-                    <option>Administrador</option>
-                    <option>Normal</option>
-                </select>
-            </td>
-            <td></td>
-            <td>
-                <button md-button>Guardar</button>
-            </td>
-        </tr>
         <tr *ngFor="let usuario of usuarios">
             <td>
                 <input [value]="usuario.nombre" type="text">
@@ -36,12 +41,12 @@
             </td>
             <td>
                 <select [value]="usuario.tipo">
-                    <option>Administrador</option>
                     <option>Normal</option>
+                    <option>Administrador</option>
                 </select>
             </td>
-            <td class="center">
-                <button md-button>Borrar</button>
+            <td>
+                <button md-button (click)="borrarUsuario(usuario.id)">Borrar</button>
             </td>
             <td></td>
         </tr>

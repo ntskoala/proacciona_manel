@@ -1,9 +1,14 @@
-<div class="form-nueva-empresa">
-    <h3>Nueva empresa</h3>
-
+<md-card>
+    <md-card-title>
+        <md-toolbar color="accent">Nueva empresa</md-toolbar>
+    </md-card-title>
     <form *ngIf="active" (ngSubmit)="nuevaEmpresa(nombre.value, nif.value)" #nuevaEmpresaForm="ngForm">
-        <md-input placeholder="Nombre" type="text" required [(ngModel)]="nombre.value" name="nombre" #nombre="ngModel"></md-input>
-        <md-input placeholder="NIF" type="text" required [(ngModel)]="nif.value" name="nif" #nif="ngModel"></md-input>
-        <button md-raised-button color="primary" [disabled]="!nuevaEmpresaForm.form.valid" type="submit">Enviar</button>
+        <md-card-content>
+            <md-input class="full" placeholder="Nombre" type="text" required [(ngModel)]="nombre.value" name="nombre" #nombre="ngModel"></md-input>
+            <md-input class="full" placeholder="NIF" type="text" required [(ngModel)]="nif.value" name="nif" #nif="ngModel"></md-input>
+        </md-card-content>
+        <md-card-footer>
+            <button md-raised-button color="accent" [disabled]="!nuevaEmpresaForm.form.valid" type="submit">Enviar</button>
+        </md-card-footer>
     </form>
-</div>
+</md-card>

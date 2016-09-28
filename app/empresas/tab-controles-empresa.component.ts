@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {SeleccionarEmpresaService} from './seleccionar-empresa.service';
@@ -8,18 +8,16 @@ import {Empresa} from './empresa'
 import {Usuario} from '../login/usuario';
 
 @Component({
-    selector: 'tab-usuarios-empresa',
-    templateUrl: 'public/assets/templates/tab-usuarios-empresa.component.html',
-    styleUrls: ['public/assets/css/tab-usuarios-empresa.component.css'],
+    selector: 'tab-controles-empresa',
+    templateUrl: 'public/assets/templates/tab-controles-empresa.component.html',
+    styleUrls: ['public/assets/css/tab-controles-empresa.component.css'],
     providers: [Servidor]
 })
 
-export class TabUsuariosEmpresaComponent {
+export class TabControlesEmpresaComponent {
 
-    public empresaSeleccionada: number = 0;
     public usuarios: Usuario[] = [];
     private subscription: Subscription;
-    public active: boolean = true;
 
     constructor(
         private servidor: Servidor,
@@ -27,7 +25,6 @@ export class TabUsuariosEmpresaComponent {
 
             this.subscription = seleccionarEmpresaService.nuevaEmpresa.subscribe(
                 seleccionada => {
-                    this.empresaSeleccionada = seleccionada.id;
                     let token = sessionStorage.getItem('token');
                     let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
                     this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
@@ -37,7 +34,7 @@ export class TabUsuariosEmpresaComponent {
                             if (response.success && response.data) {
                                 for (let i = 0; i < response.data.length; i++) {
                                     this.usuarios.push(new Usuario(
-                                        response.data[i].id,
+                                        response.data[i].idusuario,
                                         response.data[i].usuario,
                                         response.data[i].password,
                                         response.data[i].tipouser,
@@ -48,30 +45,6 @@ export class TabUsuariosEmpresaComponent {
                             }
                         });
                 });
-    }
-
-    crearUsuario(nombre: string, password: string, tipo: string) {
-        // truco de Angular para recargar el form y que se vacíe
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
-
-        let parametros = new Usuario(0, nombre, password, tipo, '', this.empresaSeleccionada)
-        let param = JSON.stringify(parametros);
-
-        this.servidor.llamadaServidor('POST', URLS.USUARIOS, param).subscribe(
-            data => {
-                console.log(data);
-            }
-        )
-    }
-
-    borrarUsuario(idUsuario: number) {
-        let parametros = '?id=' + idUsuario
-        this.servidor.llamadaServidor('DELETE', URLS.USUARIOS, parametros).subscribe(
-            data => {
-                console.log(data);
-            }
-        )
     }
 
 }
