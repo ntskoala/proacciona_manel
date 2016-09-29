@@ -17,7 +17,7 @@ import {TabControlesEmpresaComponent} from './empresas/tab-controles-empresa.com
 import {PageNotFoundComponent} from './404.component';
 
 import {routing, appRoutingProviders} from './app.routing';
-import {SeleccionarEmpresaService} from './empresas/seleccionar-empresa.service';
+import {EmpresasService} from './empresas/empresas.service';
 
 @NgModule({
     imports: [
@@ -43,7 +43,7 @@ import {SeleccionarEmpresaService} from './empresas/seleccionar-empresa.service'
     ],
     providers: [
         appRoutingProviders,
-        SeleccionarEmpresaService
+        EmpresasService
     ],
     bootstrap: [AppComponent],
 })

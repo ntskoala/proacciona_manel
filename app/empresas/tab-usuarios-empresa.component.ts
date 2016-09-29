@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
-import {SeleccionarEmpresaService} from './seleccionar-empresa.service';
+import {EmpresasService} from './empresas.service';
 import {Servidor} from '../servidor';
 import {URLS} from '../config';
 import {Empresa} from './empresa'
@@ -16,18 +16,18 @@ import {Usuario} from '../login/usuario';
 
 export class TabUsuariosEmpresaComponent {
 
-    public empresaSeleccionada: number = 0;
+    public seleccionada: number = 0;
     public usuarios: Usuario[] = [];
     private subscription: Subscription;
     public active: boolean = true;
 
     constructor(
         private servidor: Servidor,
-        private seleccionarEmpresaService: SeleccionarEmpresaService) {
+        private empresasService: EmpresasService) {
 
-            this.subscription = seleccionarEmpresaService.nuevaEmpresa.subscribe(
+            this.subscription = empresasService.empresaSeleccionada.subscribe(
                 seleccionada => {
-                    this.empresaSeleccionada = seleccionada.id;
+                    this.seleccionada = seleccionada.id;
                     let token = sessionStorage.getItem('token');
                     let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
                     this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
@@ -55,7 +55,7 @@ export class TabUsuariosEmpresaComponent {
         this.active = false;
         setTimeout(() => this.active = true, 0);
 
-        let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.empresaSeleccionada)
+        let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.seleccionada)
         let parametros = JSON.stringify(nuevoUsuario);
 
         this.servidor.llamadaServidor('POST', URLS.USUARIOS, parametros).subscribe(

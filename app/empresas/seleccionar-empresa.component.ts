@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
 
-import {SeleccionarEmpresaService} from './seleccionar-empresa.service';
+import {EmpresasService} from './empresas.service';
 import {Servidor} from '../servidor';
 import {URLS} from '../config';
 import {Empresa} from './empresa';
@@ -15,32 +16,37 @@ import {Empresa} from './empresa';
 export class SeleccionarEmpresaComponent {
     
     public empresas: Empresa[] = [];
+    subscription: Subscription;
     
-    constructor(
-        private servidor: Servidor,
-        private seleccionarEmpresaService: SeleccionarEmpresaService) {
+    constructor(private servidor: Servidor, private empresasService: EmpresasService) {
+        // Subscripción a la creación de nuevas empresa
+        this.subscription = this.empresasService.nuevaEmpresa.subscribe(
+            empresa => {
+                this.empresas.push(empresa);
+            }
+        )
         
-            let token = sessionStorage.getItem('token');
-            let parametros = ''; //token=' + token; 
+        let token = sessionStorage.getItem('token');
+        let parametros = '?token=' + token; 
 
-            this.servidor.llamadaServidor('GET', URLS.EMPRESAS, parametros).subscribe(
-                data => {
-                    let response = JSON.parse(data.json());
-                    if (response.success) {
-                        for (let i = 0; i < response.data.length; i++) {
-                            this.empresas.push(new Empresa(
-                                response.data[i].nombre,
-                                response.data[i].cif,
-                                response.data[i].id
-                            ))
-                        }
+        this.servidor.llamadaServidor('GET', URLS.EMPRESAS, parametros).subscribe(
+            data => {
+                let response = JSON.parse(data.json());
+                if (response.success) {
+                    for (let i = 0; i < response.data.length; i++) {
+                        this.empresas.push(new Empresa(
+                            response.data[i].nombre,
+                            response.data[i].cif,
+                            response.data[i].id
+                        ))
                     }
-                })
+                }
+            })
 
     }
 
     seleccionaEmpresa(seleccion: number){
-        this.seleccionarEmpresaService.seleccionar(this.empresas.find(empresa => empresa.id == seleccion));
+        this.empresasService.seleccionar(this.empresas.find(empresa => empresa.id == seleccion));
     }
 
 }

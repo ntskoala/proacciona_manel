@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 
+import {EmpresasService} from './empresas.service';
 import {Servidor} from '../servidor';
 import {URLS} from '../config';
 import {Empresa} from './empresa';
@@ -13,7 +14,7 @@ import {Empresa} from './empresa';
 
 export class NuevaEmpresaComponent {
 
-    constructor(private servidor: Servidor) {}
+    constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
     
     public active = true;
     private response: any;
@@ -24,15 +25,16 @@ export class NuevaEmpresaComponent {
         setTimeout(() => this.active = true, 0);
 
         let token = sessionStorage.getItem('token');
-        let parametros = new Empresa(nombre, nif, 0);
-        let param = JSON.stringify(parametros);
+        let nuevaEmpresa = new Empresa(nombre, nif, 0);
+        let parametros = JSON.stringify(nuevaEmpresa);
 
-        this.servidor.llamadaServidor('POST', URLS.EMPRESAS, param).subscribe(
+        this.servidor.llamadaServidor('POST', URLS.EMPRESAS, parametros).subscribe(
             (data) => {
                 this.response = JSON.parse(data);
                 // si tiene éxito
                 if (this.response.success) {
-                    alert('Empresa creada');
+                    this.empresasService.crear(nuevaEmpresa);
+                    console.log('Empresa creada')
                 }
                 // usuario erróneo
                 else {
