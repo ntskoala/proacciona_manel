@@ -10,12 +10,13 @@
             <td>
                 <select name="tipo" [(ngModel)]="tipo.value" required #tipo="ngModel">
                     <option>Normal</option>
+                    <option>Gerente</option>
                     <option>Administrador</option>
                 </select>
             </td>
             <td></td>
             <td>
-                <button md-raised-button color="accent" [disabled]="!crearForm.form.valid" type="submit">Guardar</button>
+                <button md-raised-button color="accent" [disabled]="!crearForm.form.valid" type="submit">Crear</button>
             </td>
         </tr>
     </table>
@@ -34,14 +35,15 @@
     <tbody>
         <tr *ngFor="let usuario of usuarios">
             <td>
-                <input [value]="usuario.nombre" type="text">
+                <input [value]="usuario.usuario" type="text">
             </td>
             <td>
                 <input [value]="usuario.password" type="text">
             </td>
             <td>
-                <select [value]="usuario.tipo">
+                <select [value]="usuario.tipouser">
                     <option>Normal</option>
+                    <option>Gerente</option>
                     <option>Administrador</option>
                 </select>
             </td>

@@ -50,28 +50,37 @@ export class TabUsuariosEmpresaComponent {
                 });
     }
 
-    crearUsuario(nombre: string, password: string, tipo: string) {
+    crearUsuario(usuario: string, password: string, tipo: string) {
         // truco de Angular para recargar el form y que se vacíe
         this.active = false;
         setTimeout(() => this.active = true, 0);
 
-        let parametros = new Usuario(0, nombre, password, tipo, '', this.empresaSeleccionada)
-        let param = JSON.stringify(parametros);
+        let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.empresaSeleccionada)
+        let parametros = JSON.stringify(nuevoUsuario);
 
-        this.servidor.llamadaServidor('POST', URLS.USUARIOS, param).subscribe(
+        this.servidor.llamadaServidor('POST', URLS.USUARIOS, parametros).subscribe(
             data => {
-                console.log(data);
+                let response = JSON.parse(data);
+                if (response.success) {
+                    nuevoUsuario.id = response.id;
+                    this.usuarios.push(nuevoUsuario);
+                }
             }
-        )
+        );
     }
 
     borrarUsuario(idUsuario: number) {
         let parametros = '?id=' + idUsuario
         this.servidor.llamadaServidor('DELETE', URLS.USUARIOS, parametros).subscribe(
             data => {
-                console.log(data);
+                let response = JSON.parse(data.json());
+                if (response.success) {
+                    let usuarioBorrar = this.usuarios.find(usuario => usuario.id == idUsuario);
+                    let indice = this.usuarios.indexOf(usuarioBorrar)
+                    this.usuarios.splice(indice, 1);
+                }
             }
-        )
+        );
     }
 
 }

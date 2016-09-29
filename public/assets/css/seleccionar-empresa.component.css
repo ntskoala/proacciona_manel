@@ -10,10 +10,10 @@ h3 {
     /*appearance: none;*/
     min-width: 300px;
     font: 600 1rem 'Open Sans', sans-serif;
-    border: 1px solid #FF9800;
+    border: 1px solid #fbc02d;
     border-radius: 0;
     padding: 0.3rem 0.6rem;
-	background: url('public/assets/images/down_arrow.png') no-repeat 97% 50% #fff3e0;
+	background: url('public/assets/images/down_arrow.png') no-repeat 97% 50% #fff9c4;
 }
     
 select:focus {

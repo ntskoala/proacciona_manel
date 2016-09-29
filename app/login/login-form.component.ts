@@ -37,7 +37,7 @@ export class LoginFormComponent {
                     this.router.navigate(['home']);
                 }
                 // usuario erróneo
-                else { // NO FUNCIONA
+                else {
                     alert('Usuario no válido');
                 }
         })
