@@ -1,46 +1,91 @@
-<table>
-    <thead>
-        <tr>
-            <th>Control</th>
-            <th>pla-appc</th>
-            <th>Mínimo</th>
-            <th>Máximo</th>
-            <th>Objetivo</th>
-            <th>Tolerancia</th>
-            <th>Crítico</th>
-            <th>Periodicidad</th>
-            <th>Periodo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr *ngFor="let usuario of usuarios">
-            <td>
-                <input [value]="usuario.nombre" type="text">
-            </td>
-            <td>
-                <input [value]="usuario.password" type="text">
-            </td>
-            <td>
-                <select [value]="usuario.tipo">
-                    <option>Administrador</option>
-                    <option>Normal</option>
-                </select>
-            </td>
-            <td class="center">
-                <button md-button>Borrar</button>
-            </td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+<div class="table">
+    <form class="row" *ngIf="active"
+        (ngSubmit)="crearControl(nombre.value, pla.value, minimo.value, maximo.value, objetivo.value,
+            tolerancia.value, critico.value, periodicidad.value, periodo.value)"
+        #crearControlForm="ngForm"
+    >
+        <span class="cell">
+            <input type="text" name="nombre" placeholder="nombre" [(ngModel)]="nombre.value" required #nombre="ngModel">
+        </span>
+        <span class="cell">
+            <input type="text" name="pla" placeholder="" [(ngModel)]="pla.value" required #pla="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="minimo" placeholder="" [(ngModel)]="minimo.value" required #minimo="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="maximo" placeholder="" [(ngModel)]="maximo.value" required #maximo="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="objetivo" placeholder="" [(ngModel)]="objetivo.value" required #objetivo="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="tolerancia" placeholder="" [(ngModel)]="tolerancia.value" required #tolerancia="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="critico" placeholder="" [(ngModel)]="critico.value" required #critico="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="periodicidad" placeholder="" [(ngModel)]="periodicidad.value" required #periodicidad="ngModel">
+        </span>
+        <span class="cell">
+            <input type="text" name="periodo" placeholder="" [(ngModel)]="periodo.value" required #periodo="ngModel">
+        </span>
+        <span class="cell"></span>
+        <span class="cell">
+            <button md-raised-button color="accent" [disabled]="!crearControlForm.form.valid" type="submit">Crear</button>
+        </span>
+    </form>
+    <div class="header-row">
+        <span class="cell">Control</span>
+        <span class="cell">Pla</span>
+        <span class="cell small">min</span>
+        <span class="cell small">max</span>
+        <span class="cell small">obj</span>
+        <span class="cell small">tol</span>
+        <span class="cell small">crit</span>
+        <span class="cell small">per</span>
+        <span class="cell">Periodo</span>
+        <span class="cell"></span>
+        <span class="cell"></span>
+    </div>
+    <form class="row"
+        *ngFor="let control of controles"
+        (ngSubmit)="actualizarControl(control.id)"
+        #actualizarControlForm="ngForm"
+    >
+        <span class="cell">
+            <input type="text" name="modNombre" [(ngModel)]="control.nombre" (keyup)="modificarControl(control.id)" #modNombre="ngModel">
+        </span>
+        <span class="cell">
+            <input type="text" name="modPla" [(ngModel)]="control.pla" (keyup)="modificarControl(control.id)" #modPla="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="modMinimo" [(ngModel)]="control.minimo" (keyup)="modificarControl(control.id)" #modMinimo="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="modMaximo" [(ngModel)]="control.maximo" (keyup)="modificarControl(control.id)" #modMaximo="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="modObjetivo" [(ngModel)]="control.objetivo" (keyup)="modificarControl(control.id)" #modObjetivo="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="modTolerancia" [(ngModel)]="control.tolerancia" (keyup)="modificarControl(control.id)" #modTolerancia="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="modCritico" [(ngModel)]="control.critico" (keyup)="modificarControl(control.id)" #modCritico="ngModel">
+        </span>
+        <span class="cell">
+            <input class="small" type="text" name="modPeriodicidad" [(ngModel)]="control.periodicidad" (keyup)="modificarControl(control.id)" #modPeriodo="ngModel">
+        </span>
+        <span class="cell">
+            <input type="text" name="modPeriodo" [(ngModel)]="control.periodo" (keyup)="modificarControl(control.id)" #modPeriodo="ngModel">
+        </span>
+        <span class="cell">
+            <button md-button color="primary" (click)="borrarControl(control.id)" type="button">Borrar</button>
+        </span>
+        <span class="cell">
+            <button md-button color="primary" [disabled]="!guardar[control.id]" type="submit">Guardar</button>                
+        </span>
+    </form>
+</div>

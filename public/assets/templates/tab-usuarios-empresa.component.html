@@ -1,5 +1,5 @@
 <div class="table">
-    <form class="row" *ngIf="active" (ngSubmit)="crearUsuario(usuario.value, password.value, tipo.value)" #crearForm="ngForm">
+    <form class="row" *ngIf="active" (ngSubmit)="crearUsuario(usuario.value, password.value, tipo.value)" #crearUsuarioForm="ngForm">
         <span class="cell">
             <input type="text" name="usuario" placeholder="usuario" [(ngModel)]="usuario.value" required #usuario="ngModel">
         </span>
@@ -15,7 +15,7 @@
         </span>
         <span class="cell"></span>
         <span class="cell">
-            <button md-raised-button color="accent" [disabled]="!crearForm.form.valid" type="submit">Crear</button>
+            <button md-raised-button color="accent" [disabled]="!crearUsuarioForm.form.valid" type="submit">Crear</button>
         </span>
     </form>
     <div class="header-row">
@@ -28,7 +28,7 @@
     <form class="row"
         *ngFor="let usuario of usuarios"
         (ngSubmit)="actualizarUsuario(usuario.id)"
-        #actualizarForm="ngForm"
+        #actualizarUsuarioForm="ngForm"
     >
         <span class="cell">
             <input type="text" name="modUsuario" [(ngModel)]="usuario.usuario" (keyup)="modificarUsuario(usuario.id)" #modUsuario="ngModel">

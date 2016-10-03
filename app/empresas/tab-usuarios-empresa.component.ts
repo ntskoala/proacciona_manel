@@ -17,7 +17,6 @@ import {Usuario} from '../login/usuario';
 export class TabUsuariosEmpresaComponent {
 
     private subscription: Subscription;
-    private subscription2: Subscription;
     public seleccionada: number;
     public usuarios: Usuario[] = [];
     public active: boolean = true;
@@ -59,7 +58,7 @@ export class TabUsuariosEmpresaComponent {
         this.active = false;
         setTimeout(() => this.active = true, 0);
 
-        let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.seleccionada)
+        let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.seleccionada);
         let parametros = JSON.stringify(nuevoUsuario);
 
         this.servidor.llamadaServidor('POST', URLS.USUARIOS, parametros).subscribe(
@@ -74,7 +73,7 @@ export class TabUsuariosEmpresaComponent {
     }
 
     borrarUsuario(idUsuario: number) {
-        let parametros = '?id=' + idUsuario
+        let parametros = '?id=' + idUsuario;
         this.servidor.llamadaServidor('DELETE', URLS.USUARIOS, parametros).subscribe(
             data => {
                 let response = JSON.parse(data.json());

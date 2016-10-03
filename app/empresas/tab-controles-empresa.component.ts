@@ -5,7 +5,7 @@ import {EmpresasService} from './empresas.service';
 import {Servidor} from '../servidor';
 import {URLS} from '../config';
 import {Empresa} from './empresa'
-import {Usuario} from '../login/usuario';
+import {Control} from '../empresas/control';
 
 @Component({
     selector: 'tab-controles-empresa',
@@ -16,8 +16,11 @@ import {Usuario} from '../login/usuario';
 
 export class TabControlesEmpresaComponent {
 
-    public usuarios: Usuario[] = [];
     private subscription: Subscription;
+    public seleccionada: number;
+    public controles: Control[] = [];
+    public active: boolean = true;
+    public guardar = [];
 
     constructor(
         private servidor: Servidor,
@@ -25,26 +28,90 @@ export class TabControlesEmpresaComponent {
 
             this.subscription = empresasService.empresaSeleccionada.subscribe(
                 seleccionada => {
+                    this.seleccionada = seleccionada.id;
                     let token = sessionStorage.getItem('token');
                     let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
-                    this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
+                    this.servidor.llamadaServidor('GET', URLS.CONTROLES, parametros).subscribe(
                         data => {
-                            this.usuarios = [];
+                            this.controles = [];
                             let response = JSON.parse(data.json());
                             if (response.success && response.data) {
                                 for (let i = 0; i < response.data.length; i++) {
-                                    this.usuarios.push(new Usuario(
-                                        response.data[i].idusuario,
-                                        response.data[i].usuario,
-                                        response.data[i].password,
-                                        response.data[i].tipouser,
+                                    this.controles.push(new Control(
+                                        response.data[i].id,
                                         response.data[i].nombre,
-                                        response.data[i].idempresa
+                                        response.data[i].pla,
+                                        response.data[i].valorminimo,
+                                        response.data[i].valormaximo,
+                                        response.data[i].objetivo,
+                                        response.data[i].tolerancia,
+                                        response.data[i].critico,
+                                        response.data[i].periodicidad,
+                                        response.data[i].tipoperiodo,
+                                        response.data[i].idempresa,
                                     ))
+                                    this.guardar[response.data[i].id] = false;
                                 }
                             }
                         });
-                });
+            });
+
+    }
+
+    crearControl(nombre: string, pla: string, minimo:number, maximo: number, objetivo: number,
+        tolerancia: number, critico: number, periodicidad: string, periodo: string) {
+        // truco de Angular para recargar el form y que se vacíe
+        this.active = false;
+        setTimeout(() => this.active = true, 0);
+
+        let nuevoControl = new Control(0, nombre, pla, minimo, maximo, objetivo,
+            tolerancia, critico, periodicidad, periodo, this.seleccionada);
+        console.log(nuevoControl);
+        let parametros = JSON.stringify(nuevoControl);
+
+        this.servidor.llamadaServidor('POST', URLS.CONTROLES, parametros).subscribe(
+            data => {
+                let response = JSON.parse(data);
+                if (response.success) {
+                    nuevoControl.id = response.id;
+                    this.controles.push(nuevoControl);
+                }
+            }
+        );
+    }
+
+    borrarControl(idControl: number) {
+        let parametros = '?id=' + idControl
+        this.servidor.llamadaServidor('DELETE', URLS.CONTROLES, parametros).subscribe(
+            data => {
+                let response = JSON.parse(data.json());
+                if (response.success) {
+                    let controlBorrar = this.controles.find(control => control.id == idControl);
+                    let indice = this.controles.indexOf(controlBorrar)
+                    this.controles.splice(indice, 1);
+                }
+            }
+        );
+    }
+
+    modificarControl(idControl: number) {
+        this.guardar[idControl] = true;
+    }
+
+    actualizarControl(idControl: number) {
+        this.guardar[idControl] = false;
+        let parametros = '?id=' + idControl.toString();        
+        let modControl = this.controles.find(control => control.id == idControl);
+
+        this.servidor.llamadaServidor('PUT', URLS.CONTROLES, parametros, modControl).subscribe(
+            data => {
+                let response = JSON.parse(data.json());
+                if (response.success) {
+                    console.log('Control modificado');
+                }
+            }
+        );
+
     }
 
 }

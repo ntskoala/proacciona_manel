@@ -1,73 +1,32 @@
-md-tab-group {
-    font: 400 1rem 'Open Sans', sans-serif;
-}
-
-table {
-    display: table;
-    width: 100%;
-    border-collapse: collapse;
-    font: 400 1rem/2rem 'Open Sans', sans-serif;
-    text-align: left;
-    background: #fff;
-}
-
-tr {
-    display: table-row;
-    transition: background-color, 0.2s;
-    
-}
-
-tr:hover {
+.row:hover {
     background-color: #eee;
 }
 
-th {
-    background: #fff3e0;
-	padding: 0.5rem 0.8rem;
-}
-
-td {
-	padding: 0.5rem 0.8rem;   
-    border: 1px solid #fafafa;
-}
-
 input[type="text"] {
-    font: 400 1rem 'Open Sans', sans-serif;
+    width: 110px;
+    font-size: 1rem;
     border: 0;
     padding: 0.2rem 0.4rem;
     outline: 0;
 }
 
- select {
+select {
     -webkit-appearance: none;
     -moz-appearance: none;
-    /*appearance: none;*/
+    appearance: none;
     min-width: 150px;
-    font: 400 1rem 'Open Sans', sans-serif;
+    font-size: 1rem;
     border: 0;
     border-radius: 0;
     padding: 0.2rem 0.3rem;
-	background: url('public/assets/images/down_arrow.png') no-repeat 97% 50% #fff;
+	background: url('public/assets/images/keyboard_arrow_down.svg') no-repeat 97% 50% #fff;
 }
     
-select:focus,
-input[type="checkbox"]:focus {
+select:focus {
 	outline: 0;
 }
 
-input[type="checkbox"] {
-    width: 1rem;
-    height: 0.9rem;
-}
-
-label {
-    padding: 2rem;
-}
-
-.center {
-    text-align: center;
-}
-
-.md-tab-label {
-    font-size: 30px;
+.small {
+    width: 45px !important;
+    text-align: right;
 }

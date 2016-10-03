@@ -21,7 +21,7 @@ body {
 
 .container {
     width: 95%;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 100px auto;
     display: flex;
 }
@@ -38,6 +38,35 @@ empresas {
 .full {
     width: 100%;
 }
+
+
+/* Table */
+.table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background: #fff;
+}
+
+.header-row {
+    display: table-row;
+    background: #fff59d;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.row {
+    display: table-row;
+    transition: background-color, 0.2s;
+}
+
+.cell {
+    display: table-cell;
+	padding: 0.5rem 0.8rem;   
+    border: 1px solid #fafafa;
+}
+
 
 /* Material components */
 md-card-title {
