@@ -7,7 +7,7 @@ export class Servidor {
 
     constructor (private llamada: Http) { }
     
-    llamadaServidor(metodo: string, serverUrl: string, parametros?: string) {
+    llamadaServidor(metodo: string, serverUrl: string, parametros: string, object?: Object) {
 
         let headers = new Headers();
         headers.append('Content-type', 'application/x-www-form-urlencoded');
@@ -17,6 +17,9 @@ export class Servidor {
                 return this.llamada.post(serverUrl, parametros, {headers: headers}).map(res => res.json());
             case 'GET':
                 return this.llamada.get(serverUrl + parametros);
+            case 'PUT':
+                let payload = JSON.stringify(object);
+                return this.llamada.put(serverUrl + parametros, payload);
             case 'DELETE':
                 return this.llamada.delete(serverUrl + parametros);
             default:

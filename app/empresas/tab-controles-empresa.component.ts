@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
-import {SeleccionarEmpresaService} from './seleccionar-empresa.service';
+import {EmpresasService} from './empresas.service';
 import {Servidor} from '../servidor';
 import {URLS} from '../config';
 import {Empresa} from './empresa'
@@ -21,9 +21,9 @@ export class TabControlesEmpresaComponent {
 
     constructor(
         private servidor: Servidor,
-        private seleccionarEmpresaService: SeleccionarEmpresaService) {
+        private empresasService: EmpresasService) {
 
-            this.subscription = seleccionarEmpresaService.nuevaEmpresa.subscribe(
+            this.subscription = empresasService.empresaSeleccionada.subscribe(
                 seleccionada => {
                     let token = sessionStorage.getItem('token');
                     let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 

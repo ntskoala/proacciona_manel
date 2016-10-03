@@ -1,4 +1,4 @@
-table {
+.table {
     display: table;
     width: 100%;
     border-collapse: collapse;
@@ -6,32 +6,36 @@ table {
     background: #fff;
 }
 
-tr {
+.header-row {
+    display: table-row;
+    background: #fff59d;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.row {
     display: table-row;
     transition: background-color, 0.2s;
 }
 
-tr:hover {
+.row:hover {
     background-color: #eee;
 }
 
-th {
-    background: #fff59d;
-	padding: 0.5rem 0.8rem;
-}
-
-td {
+.cell {
+    display: table-cell;
 	padding: 0.5rem 0.8rem;   
     border: 1px solid #fafafa;
 }
 
 input[type="text"] {
+    font-size: 1rem;
     border: 0;
     padding: 0.2rem 0.4rem;
     outline: 0;
 }
 
- select {
+select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -45,8 +49,4 @@ input[type="text"] {
     
 select:focus {
 	outline: 0;
-}
-
-input {
-    font-size: 1rem;
 }

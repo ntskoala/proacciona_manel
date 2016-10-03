@@ -20,6 +20,7 @@ export class TabUsuariosEmpresaComponent {
     public usuarios: Usuario[] = [];
     private subscription: Subscription;
     public active: boolean = true;
+    public guardar = [];
 
     constructor(
         private servidor: Servidor,
@@ -44,6 +45,7 @@ export class TabUsuariosEmpresaComponent {
                                         response.data[i].nombre,
                                         response.data[i].idempresa
                                     ))
+                                    this.guardar[response.data[i].id] = false;
                                 }
                             }
                         });
@@ -81,6 +83,26 @@ export class TabUsuariosEmpresaComponent {
                 }
             }
         );
+    }
+
+    modificarUsuario(idUsuario: number) {
+        this.guardar[idUsuario] = true;
+    }
+
+    actualizarUsuario(idUsuario: number) {
+        this.guardar[idUsuario] = false;
+        let parametros = '?id=' + idUsuario.toString();        
+        let modUsuario = this.usuarios.find(usuario => usuario.id == idUsuario);
+
+        this.servidor.llamadaServidor('PUT', URLS.USUARIOS, parametros, modUsuario).subscribe(
+            data => {
+                let response = JSON.parse(data.json());
+                if (response.success) {
+                    console.log('Usuario modificado');
+                }
+            }
+        );
+
     }
 
 }

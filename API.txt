@@ -30,9 +30,12 @@ Error
 }
 
 
--------------
-NUEVA EMPRESA
--------------
+***********
+* EMPRESA *
+***********
+
+*** CREAR ***
+
 POST
 url: http://tfc.ntskoala.com/api/actions/nuevaempresa.php
 {
@@ -53,9 +56,28 @@ Error
 }
 
 
---------------------------------
-CONSULTA USUARIOS DE UNA EMPRESA
---------------------------------
+************
+* USUARIOS *
+************
+
+*** CREAR ***
+POST
+url: http://tfc.ntskoala.com/api/usuarios.php
+{
+    'idempresa': number,
+    'usuario': 'string',
+    'password': 'string',
+    'tipouser': 'string',
+    'nombre': 'string'
+}
+
+Respuesta
+{
+    'success': true,
+    'id': number
+}
+
+*** CONSULTAR ***
 GET
 url: http://tfc.ntskoala.com/api/views/getusers.php
 {
@@ -76,31 +98,10 @@ Respuesta
         }]
 }
 
-
---------------------------------
-ALTA USUARIOS DE UNA EMPRESA
---------------------------------
-POST
-url: http://tfc.ntskoala.com/api/usuarios.php
-{
-    'idempresa': number,
-    'usuario': 'string',
-    'password': 'string',
-    'tipouser': 'string',
-    'nombre': 'string'
-}
-
-Respuesta
-{
-    'success': true,
-    'id': number
-}
-
-
---------------------------------
-UPDATE USUARIOS DE UNA EMPRESA
---------------------------------
+*** ACTUALIZAR ***
 PUT
+
+pide id
 url: http://tfc.ntskoala.com/api/usuarios.php
 {
     'idusuario': number,
@@ -118,9 +119,7 @@ Respuesta
 }
 
 
---------------------------------
-BAJA USUARIOS DE UNA EMPRESA
---------------------------------
+*** BORRAR ***
 DELETE
 url: http://tfc.ntskoala.com/api/usuarios.php
 {
@@ -131,3 +130,13 @@ Respuesta
 {
     'success': true,
 }
+
+
+*************
+* CONTROLES *
+*************
+
+*** CREAR ***
+POST
+url: http://tfc.ntskoala.com/api/controles.php
+

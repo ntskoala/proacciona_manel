@@ -1,56 +1,53 @@
-<form *ngIf="active" (ngSubmit)="crearUsuario(usuario.value, password.value, tipo.value)" #crearForm="ngForm">
-    <table>
-        <tr>
-            <td>
-                <input type="text" name="usuario" placeholder="usuario" [(ngModel)]="usuario.value" required #usuario="ngModel">
-            </td>
-            <td>
-                <input type="text" name="password" placeholder="password" [(ngModel)]="password.value" required #password="ngModel">                
-            </td>
-            <td>
-                <select name="tipo" [(ngModel)]="tipo.value" required #tipo="ngModel">
-                    <option>Normal</option>
-                    <option>Gerente</option>
-                    <option>Administrador</option>
-                </select>
-            </td>
-            <td></td>
-            <td>
-                <button md-raised-button color="accent" [disabled]="!crearForm.form.valid" type="submit">Crear</button>
-            </td>
-        </tr>
-    </table>
-</form>
-
-<table>
-    <thead>
-        <tr>
-            <th>Usuario</th>
-            <th>Password</th>
-            <th>Tipo</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let usuario of usuarios">
-            <td>
-                <input [value]="usuario.usuario" type="text">
-            </td>
-            <td>
-                <input [value]="usuario.password" type="text">
-            </td>
-            <td>
-                <select [value]="usuario.tipouser">
-                    <option>Normal</option>
-                    <option>Gerente</option>
-                    <option>Administrador</option>
-                </select>
-            </td>
-            <td>
-                <button md-button (click)="borrarUsuario(usuario.id)">Borrar</button>
-            </td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+<div class="table">
+    <form class="row" *ngIf="active" (ngSubmit)="crearUsuario(usuario.value, password.value, tipo.value)" #crearForm="ngForm">
+        <span class="cell">
+            <input type="text" name="usuario" placeholder="usuario" [(ngModel)]="usuario.value" required #usuario="ngModel">
+        </span>
+        <span class="cell">
+            <input type="text" name="password" placeholder="password" [(ngModel)]="password.value" required #password="ngModel">                
+        </span>
+        <span class="cell">
+            <select name="tipo" [(ngModel)]="tipo.value" required #tipo="ngModel">
+                <option>Normal</option>
+                <option>Gerente</option>
+                <option>Administrador</option>
+            </select>
+        </span>
+        <span class="cell"></span>
+        <span class="cell">
+            <button md-raised-button color="accent" [disabled]="!crearForm.form.valid" type="submit">Crear</button>
+        </span>
+    </form>
+    <div class="header-row">
+        <span class="cell">Usuario</span>
+        <span class="cell">Password</span>
+        <span class="cell">Tipo</span>
+        <span class="cell"></span>
+        <span class="cell"></span>
+    </div>
+    <form class="row"
+        *ngFor="let usuario of usuarios"
+        (ngSubmit)="actualizarUsuario(usuario.id)"
+        #actualizarForm="ngForm"
+    >
+        <span class="cell">
+            <input type="text" name="modUsuario" [(ngModel)]="usuario.usuario" (keyup)="modificarUsuario(usuario.id)" #modUsuario="ngModel">
+        </span>
+        <span class="cell">
+            <input type="text" name="modPassword" [(ngModel)]="usuario.password" (keyup)="modificarUsuario(usuario.id)" #modPassword="ngModel">
+        </span>
+        <span class="cell">
+            <select name="modTipo" [(ngModel)]="usuario.tipouser" (change)="modificarUsuario(usuario.id)" #modTipo="ngModel">
+                <option>Normal</option>
+                <option>Gerente</option>
+                <option>Administrador</option>
+            </select>
+        </span>
+        <span class="cell">
+            <button md-button color="primary" (click)="borrarUsuario(usuario.id)" type="button">Borrar</button>
+        </span>
+        <span class="cell">
+            <button md-button color="primary" [disabled]="!guardar[usuario.id]" type="submit">Guardar</button>                
+        </span>
+    </form>
+</div>
