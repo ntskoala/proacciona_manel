@@ -1,9 +1,9 @@
-<md-card>
+<!--<md-card>
     <md-card-title>
         <md-toolbar color="accent">Tablas</md-toolbar>
     </md-card-title>
     <md-card-content>
-            <md-tab-group>
+            <md-tab-group (focusChange)="cambiaTab()">
                 <md-tab>
                     <template md-tab-label>Usuarios</template>
                     <template md-tab-content>
@@ -23,5 +23,18 @@
                     </template>
                 </md-tab>
             </md-tab-group>
+    </md-card-content>
+</md-card>-->
+
+<md-card>
+    <md-card-title>
+        <md-toolbar color="accent">Tablas</md-toolbar>
+    </md-card-title>
+    <md-card-content>
+        <button md-button (click)="cambiarTab('usuarios')">Usuarios</button>
+        <button md-button (click)="cambiarTab('controles')">Controles</button>
+        <button md-button>Otros</button>
+        <tab-usuarios-empresa class="tab" [class.active]="tabActivo=='usuarios'"></tab-usuarios-empresa>
+        <tab-controles-empresa class="tab" [class.active]="tabActivo=='controles'"></tab-controles-empresa>
     </md-card-content>
 </md-card>

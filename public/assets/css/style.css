@@ -43,3 +43,7 @@ empresas {
 md-card-title {
     margin: -24px -24px 24px -24px !important;
 }
+
+md-input {
+    font-size: 1rem !important;
+}

@@ -16,9 +16,10 @@ import {Usuario} from '../login/usuario';
 
 export class TabUsuariosEmpresaComponent {
 
-    public seleccionada: number = 0;
-    public usuarios: Usuario[] = [];
     private subscription: Subscription;
+    private subscription2: Subscription;
+    public seleccionada: number;
+    public usuarios: Usuario[] = [];
     public active: boolean = true;
     public guardar = [];
 
@@ -49,7 +50,8 @@ export class TabUsuariosEmpresaComponent {
                                 }
                             }
                         });
-                });
+            });
+
     }
 
     crearUsuario(usuario: string, password: string, tipo: string) {

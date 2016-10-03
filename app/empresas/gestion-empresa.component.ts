@@ -7,4 +7,11 @@ import {Component} from '@angular/core';
 })
 
 export class GestionEmpresaComponent {
+
+    public tabActivo = 'usuarios';
+
+    cambiarTab(tab: string) {
+        this.tabActivo = tab;
+    }
+
 }
