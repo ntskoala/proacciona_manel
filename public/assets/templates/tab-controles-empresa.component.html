@@ -1,7 +1,7 @@
 <div class="table">
     <form class="row" *ngIf="active"
-        (ngSubmit)="crearControl(nombre.value, pla.value, minimo.value, maximo.value, objetivo.value,
-            tolerancia.value, critico.value, periodicidad.value, periodo.value)"
+        (ngSubmit)="crearControl(nombre.value, pla.value, valorminimo.value, valormaximo.value, objetivo.value,
+            tolerancia.value, critico.value, periodicidad.value, tipoperiodo.value)"
         #crearControlForm="ngForm"
     >
         <span class="cell">
@@ -11,10 +11,10 @@
             <input type="text" name="pla" placeholder="" [(ngModel)]="pla.value" required #pla="ngModel">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="minimo" placeholder="" [(ngModel)]="minimo.value" required #minimo="ngModel">
+            <input class="small" type="text" name="valorminimo" placeholder="" [(ngModel)]="valorminimo.value" required #valorminimo="ngModel">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="maximo" placeholder="" [(ngModel)]="maximo.value" required #maximo="ngModel">
+            <input class="small" type="text" name="valormaximo" placeholder="" [(ngModel)]="valormaximo.value" required #valormaximo="ngModel">
         </span>
         <span class="cell">
             <input class="small" type="text" name="objetivo" placeholder="" [(ngModel)]="objetivo.value" required #objetivo="ngModel">
@@ -29,7 +29,7 @@
             <input class="small" type="text" name="periodicidad" placeholder="" [(ngModel)]="periodicidad.value" required #periodicidad="ngModel">
         </span>
         <span class="cell">
-            <input type="text" name="periodo" placeholder="" [(ngModel)]="periodo.value" required #periodo="ngModel">
+            <input type="text" name="tipoperiodo" placeholder="" [(ngModel)]="tipoperiodo.value" required #tipoperiodo="ngModel">
         </span>
         <span class="cell"></span>
         <span class="cell">
@@ -37,17 +37,17 @@
         </span>
     </form>
     <div class="header-row">
-        <span class="cell">Control</span>
-        <span class="cell">Pla</span>
-        <span class="cell small">min</span>
-        <span class="cell small">max</span>
-        <span class="cell small">obj</span>
-        <span class="cell small">tol</span>
-        <span class="cell small">crit</span>
-        <span class="cell small">per</span>
-        <span class="cell">Periodo</span>
-        <span class="cell"></span>
-        <span class="cell"></span>
+        <span class="header-cell">Control</span>
+        <span class="header-cell">Pla</span>
+        <span class="header-cell small">min</span>
+        <span class="header-cell small">max</span>
+        <span class="header-cell small">obj</span>
+        <span class="header-cell small">tol</span>
+        <span class="header-cell small">crit</span>
+        <span class="header-cell small">per</span>
+        <span class="header-cell">Periodo</span>
+        <span class="header-cell"></span>
+        <span class="header-cell"></span>
     </div>
     <form class="row"
         *ngFor="let control of controles"
@@ -61,10 +61,10 @@
             <input type="text" name="modPla" [(ngModel)]="control.pla" (keyup)="modificarControl(control.id)" #modPla="ngModel">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="modMinimo" [(ngModel)]="control.minimo" (keyup)="modificarControl(control.id)" #modMinimo="ngModel">
+            <input class="small" type="text" name="modValorMinimo" [(ngModel)]="control.valorminimo" (keyup)="modificarControl(control.id)" #modValorMinimo="ngModel">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="modMaximo" [(ngModel)]="control.maximo" (keyup)="modificarControl(control.id)" #modMaximo="ngModel">
+            <input class="small" type="text" name="modValorMaximo" [(ngModel)]="control.valormaximo" (keyup)="modificarControl(control.id)" #modValorMaximo="ngModel">
         </span>
         <span class="cell">
             <input class="small" type="text" name="modObjetivo" [(ngModel)]="control.objetivo" (keyup)="modificarControl(control.id)" #modObjetivo="ngModel">
@@ -79,7 +79,7 @@
             <input class="small" type="text" name="modPeriodicidad" [(ngModel)]="control.periodicidad" (keyup)="modificarControl(control.id)" #modPeriodo="ngModel">
         </span>
         <span class="cell">
-            <input type="text" name="modPeriodo" [(ngModel)]="control.periodo" (keyup)="modificarControl(control.id)" #modPeriodo="ngModel">
+            <input type="text" name="modTipoPeriodo" [(ngModel)]="control.tipoperiodo" (keyup)="modificarControl(control.id)" #modTipoPeriodo="ngModel">
         </span>
         <span class="cell">
             <button md-button color="primary" (click)="borrarControl(control.id)" type="button">Borrar</button>

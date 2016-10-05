@@ -16,8 +16,7 @@ export class NuevaEmpresaComponent {
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
     
-    public active = true;
-    private response: any;
+    public active: boolean = true;
     
     nuevaEmpresa(nombre: string, nif: string) {
         // truco de Angular para recargar el form y que se vacíe
@@ -30,9 +29,9 @@ export class NuevaEmpresaComponent {
 
         this.servidor.llamadaServidor('POST', URLS.EMPRESAS, parametros).subscribe(
             (data) => {
-                this.response = JSON.parse(data);
+                let response = JSON.parse(data);
                 // si tiene éxito
-                if (this.response.success) {
+                if (response.success) {
                     this.empresasService.crear(nuevaEmpresa);
                     console.log('Empresa creada')
                 }

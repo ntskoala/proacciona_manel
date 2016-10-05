@@ -1,0 +1,8 @@
+<form>
+    <select (change)="seleccionaChecklist($event.target.value)">
+        <option disabled>Seleccionar checklist</option>
+        <option *ngFor="let checklist of checklists" [value]="checklist.id">
+            {{checklist.nombrechecklist}}
+        </option>
+    </select>
+</form>

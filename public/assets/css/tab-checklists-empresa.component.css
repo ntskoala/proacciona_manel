@@ -1,0 +1,17 @@
+seleccionar-checklist,
+nueva-checklist {
+    width: 50%;
+    float: left;
+}
+
+seleccionar-checklist {
+    padding-right: 4%;
+}
+
+nueva-checklist {
+    padding-left: 4%;
+}
+
+mostrar-checklist {
+    width: 100%;
+}

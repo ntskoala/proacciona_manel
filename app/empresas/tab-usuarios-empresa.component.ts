@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
@@ -30,7 +30,8 @@ export class TabUsuariosEmpresaComponent {
                 seleccionada => {
                     this.seleccionada = seleccionada.id;
                     let token = sessionStorage.getItem('token');
-                    let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
+                    let parametros = '?idempresa=' + seleccionada.id + '&token=' + token;
+                    // llamada al servidor para conseguir los usuarios
                     this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
                         data => {
                             this.usuarios = [];
@@ -48,7 +49,7 @@ export class TabUsuariosEmpresaComponent {
                                     this.guardar[response.data[i].id] = false;
                                 }
                             }
-                        });
+                    });
             });
 
     }

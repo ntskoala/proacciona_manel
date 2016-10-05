@@ -3,27 +3,11 @@
 }
 
 input[type="text"] {
-    width: 110px;
+    width: 105px;
     font-size: 1rem;
     border: 0;
-    padding: 0.2rem 0.4rem;
+    padding: 0.2rem;
     outline: 0;
-}
-
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    min-width: 150px;
-    font-size: 1rem;
-    border: 0;
-    border-radius: 0;
-    padding: 0.2rem 0.3rem;
-	background: url('public/assets/images/keyboard_arrow_down.svg') no-repeat 97% 50% #fff;
-}
-    
-select:focus {
-	outline: 0;
 }
 
 .small {

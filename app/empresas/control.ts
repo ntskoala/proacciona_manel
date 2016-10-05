@@ -3,13 +3,13 @@ export class Control {
         public id: number,
         public nombre: string,
         public pla: string,
-        public minimo: number,
-        public maximo: number,
+        public valorminimo: number,
+        public valormaximo: number,
         public objetivo: number,
         public tolerancia: number,
         public critico: number,
         public periodicidad: string,
-        public periodo: string,
+        public tipoperiodo: string,
         public idempresa: number
     ) {}
 }

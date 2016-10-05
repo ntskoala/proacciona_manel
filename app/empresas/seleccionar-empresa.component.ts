@@ -28,7 +28,7 @@ export class SeleccionarEmpresaComponent {
         
         let token = sessionStorage.getItem('token');
         let parametros = '?token=' + token; 
-
+        // Conseguir la lista de empresas
         this.servidor.llamadaServidor('GET', URLS.EMPRESAS, parametros).subscribe(
             data => {
                 let response = JSON.parse(data.json());
