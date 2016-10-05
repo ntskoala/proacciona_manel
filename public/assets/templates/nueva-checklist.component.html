@@ -1,4 +1,5 @@
-<form *ngIf="active" (ngSubmit)="nuevaEmpresa(nombre.value, nif.value)" #nuevaEmpresaForm="ngForm">
-    <md-input class="full" placeholder="Nombre" type="text" required [(ngModel)]="nombre.value" name="nombre" #nombre="ngModel"></md-input>
-    <button md-raised-button color="accent" [disabled]="!nuevaEmpresaForm.form.valid" type="submit">Crear</button>
+<h2>Nueva checklist</h2>
+<form *ngIf="active" (ngSubmit)="nuevaChecklist(nombreChecklist.value)" #nuevaChecklistForm="ngForm">
+    <md-input class="full" placeholder="Nombre" type="text" required [(ngModel)]="nombreChecklist.value" name="nombreChecklist" #nombreChecklist="ngModel"></md-input>
+    <button md-raised-button color="accent" [disabled]="!nuevaChecklistForm.form.valid" type="submit">Crear</button>
 </form>

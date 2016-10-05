@@ -2,15 +2,14 @@ import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor';
+import {Servidor} from '../servidor.service';
 import {URLS} from '../config';
 import {Empresa} from './empresa';
 
 @Component({
     selector: 'seleccionar-empresa',
     templateUrl: 'public/assets/templates/seleccionar-empresa.component.html',
-    styleUrls: ['public/assets/css/seleccionar-empresa.component.css'],
-    providers: [Servidor],
+    styleUrls: ['public/assets/css/seleccionar-empresa.component.css']
 })
 
 export class SeleccionarEmpresaComponent {
@@ -21,10 +20,8 @@ export class SeleccionarEmpresaComponent {
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {
         // Subscripción a la creación de nuevas empresa
         this.subscription = this.empresasService.nuevaEmpresa.subscribe(
-            empresa => {
-                this.empresas.push(empresa);
-            }
-        )
+            empresa => this.empresas.push(empresa)
+        );
         
         let token = sessionStorage.getItem('token');
         let parametros = '?token=' + token; 

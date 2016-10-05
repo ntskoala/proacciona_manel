@@ -5,16 +5,15 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Servidor {
 
-    constructor (private llamada: Http) { }
+    constructor (private llamada: Http) {}
     
     llamadaServidor(metodo: string, serverUrl: string, parametros: string, object?: Object) {
-
         let headers = new Headers();
         headers.append('Content-type', 'application/x-www-form-urlencoded');
-
+        // llamada en función del método
         switch(metodo) {
             case 'POST':
-                return this.llamada.post(serverUrl, parametros, {headers: headers}).map(res => res.json());
+                return this.llamada.post(serverUrl, parametros, {headers: headers});
             case 'GET':
                 return this.llamada.get(serverUrl + parametros);
             case 'PUT':
@@ -26,9 +25,6 @@ export class Servidor {
                 console.log('Método erróneo');
                 return;
         }
-
-        
-
     }
     
 }

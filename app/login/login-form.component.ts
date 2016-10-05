@@ -1,14 +1,13 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {Servidor} from '../servidor';
+import {Servidor} from '../servidor.service';
 import {URLS} from '../config';
 
 @Component({
     selector: 'login-form',
     templateUrl: 'public/assets/templates/login-form.component.html',
-    styleUrls: ['public/assets/css/login-form.component.css'],
-    providers: [Servidor],
+    styleUrls: ['public/assets/css/login-form.component.css']
 })
 export class LoginFormComponent {
     // inyección de servidor como propiedad

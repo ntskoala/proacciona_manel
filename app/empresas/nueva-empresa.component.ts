@@ -1,15 +1,14 @@
 import {Component} from '@angular/core';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor';
+import {Servidor} from '../servidor.service';
 import {URLS} from '../config';
 import {Empresa} from './empresa';
 
 @Component({
     selector: 'nueva-empresa',
     templateUrl: 'public/assets/templates/nueva-empresa.component.html',
-    styleUrls: ['public/assets/css/nueva-empresa.component.css'],
-    providers: [Servidor]
+    styleUrls: ['public/assets/css/nueva-empresa.component.css']
 })
 
 export class NuevaEmpresaComponent {
@@ -28,18 +27,18 @@ export class NuevaEmpresaComponent {
         let parametros = JSON.stringify(nuevaEmpresa);
 
         this.servidor.llamadaServidor('POST', URLS.EMPRESAS, parametros).subscribe(
-            (data) => {
-                let response = JSON.parse(data);
+            data => {
+                let response = JSON.parse(data.json());
                 // si tiene éxito
                 if (response.success) {
-                    this.empresasService.crear(nuevaEmpresa);
+                    this.empresasService.empresaCreada(nuevaEmpresa);
                     console.log('Empresa creada')
                 }
                 // usuario erróneo
                 else {
                     alert('Empresa no creada');
                 }
-            })
+        });
     }
 
 }

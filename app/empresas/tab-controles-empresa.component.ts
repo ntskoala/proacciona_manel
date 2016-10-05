@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor';
+import {Servidor} from '../servidor.service';
 import {URLS} from '../config';
 import {Empresa} from './empresa'
 import {Control} from '../empresas/control';
@@ -10,8 +10,7 @@ import {Control} from '../empresas/control';
 @Component({
     selector: 'tab-controles-empresa',
     templateUrl: 'public/assets/templates/tab-controles-empresa.component.html',
-    styleUrls: ['public/assets/css/tab-controles-empresa.component.css'],
-    providers: [Servidor]
+    styleUrls: ['public/assets/css/tab-controles-empresa.component.css']
 })
 
 export class TabControlesEmpresaComponent {

@@ -22,6 +22,7 @@ import {TabPermisosEmpresaComponent} from './empresas/tab-permisos-empresa.compo
 import {PageNotFoundComponent} from './404.component';
 
 import {routing} from './app.routing';
+import {Servidor} from './servidor.service';
 import {EmpresasService} from './empresas/empresas.service';
 
 @NgModule({
@@ -52,6 +53,7 @@ import {EmpresasService} from './empresas/empresas.service';
         PageNotFoundComponent
     ],
     providers: [
+        Servidor,
         EmpresasService
     ],
     bootstrap: [AppComponent],

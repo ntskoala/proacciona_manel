@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor';
+import {Servidor} from '../servidor.service';
 import {URLS} from '../config';
 import {Empresa} from './empresa'
 import {Usuario} from '../login/usuario';
@@ -10,8 +10,7 @@ import {Usuario} from '../login/usuario';
 @Component({
     selector: 'tab-usuarios-empresa',
     templateUrl: 'public/assets/templates/tab-usuarios-empresa.component.html',
-    styleUrls: ['public/assets/css/tab-usuarios-empresa.component.css'],
-    providers: [Servidor]
+    styleUrls: ['public/assets/css/tab-usuarios-empresa.component.css']
 })
 
 export class TabUsuariosEmpresaComponent {
@@ -22,35 +21,33 @@ export class TabUsuariosEmpresaComponent {
     public active: boolean = true;
     public guardar = [];
 
-    constructor(
-        private servidor: Servidor,
-        private empresasService: EmpresasService) {
+    constructor(private servidor: Servidor, private empresasService: EmpresasService) {
 
-            this.subscription = empresasService.empresaSeleccionada.subscribe(
-                seleccionada => {
-                    this.seleccionada = seleccionada.id;
-                    let token = sessionStorage.getItem('token');
-                    let parametros = '?idempresa=' + seleccionada.id + '&token=' + token;
-                    // llamada al servidor para conseguir los usuarios
-                    this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
-                        data => {
-                            this.usuarios = [];
-                            let response = JSON.parse(data.json());
-                            if (response.success && response.data) {
-                                for (let i = 0; i < response.data.length; i++) {
-                                    this.usuarios.push(new Usuario(
-                                        response.data[i].id,
-                                        response.data[i].usuario,
-                                        response.data[i].password,
-                                        response.data[i].tipouser,
-                                        response.data[i].nombre,
-                                        response.data[i].idempresa
-                                    ))
-                                    this.guardar[response.data[i].id] = false;
-                                }
+        this.subscription = empresasService.empresaSeleccionada.subscribe(
+            seleccionada => {
+                this.seleccionada = seleccionada.id;
+                let token = sessionStorage.getItem('token');
+                let parametros = '?idempresa=' + seleccionada.id + '&token=' + token;
+                // llamada al servidor para conseguir los usuarios
+                this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
+                    data => {
+                        this.usuarios = [];
+                        let response = JSON.parse(data.json());
+                        if (response.success && response.data) {
+                            for (let i = 0; i < response.data.length; i++) {
+                                this.usuarios.push(new Usuario(
+                                    response.data[i].id,
+                                    response.data[i].usuario,
+                                    response.data[i].password,
+                                    response.data[i].tipouser,
+                                    response.data[i].nombre,
+                                    response.data[i].idempresa
+                                ))
+                                this.guardar[response.data[i].id] = false;
                             }
-                    });
-            });
+                        }
+                });
+        });
 
     }
 
