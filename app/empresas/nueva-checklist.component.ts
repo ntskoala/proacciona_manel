@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor.service';
+import {Servidor} from './servidor.service';
 import {URLS} from '../config';
-import {Checklist} from './checklist';
+import {Checklist} from '../objetos/checklist';
 
 @Component({
     selector: 'nueva-checklist',

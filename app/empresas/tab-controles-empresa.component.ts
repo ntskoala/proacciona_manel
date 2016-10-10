@@ -2,10 +2,9 @@ import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor.service';
+import {Servidor} from './servidor.service';
 import {URLS} from '../config';
-import {Empresa} from './empresa'
-import {Control} from '../empresas/control';
+import {Control} from '../objetos/control';
 
 @Component({
     selector: 'tab-controles-empresa',
@@ -21,39 +20,37 @@ export class TabControlesEmpresaComponent {
     public active: boolean = true;
     public guardar = [];
 
-    constructor(
-        private servidor: Servidor,
-        private empresasService: EmpresasService) {
+    constructor(private servidor: Servidor, private empresasService: EmpresasService) {
 
-            this.subscription = empresasService.empresaSeleccionada.subscribe(
-                seleccionada => {
-                    this.seleccionada = seleccionada.id;
-                    let token = sessionStorage.getItem('token');
-                    let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
-                    this.servidor.llamadaServidor('GET', URLS.CONTROLES, parametros).subscribe(
-                        data => {
-                            this.controles = [];
-                            let response = JSON.parse(data.json());
-                            if (response.success && response.data) {
-                                for (let i = 0; i < response.data.length; i++) {
-                                    this.controles.push(new Control(
-                                        response.data[i].id,
-                                        response.data[i].nombre,
-                                        response.data[i].pla,
-                                        response.data[i].valorminimo,
-                                        response.data[i].valormaximo,
-                                        response.data[i].objetivo,
-                                        response.data[i].tolerancia,
-                                        response.data[i].critico,
-                                        response.data[i].periodicidad,
-                                        response.data[i].tipoperiodo,
-                                        response.data[i].idempresa,
-                                    ))
-                                    this.guardar[response.data[i].id] = false;
-                                }
+        this.subscription = empresasService.empresaSeleccionada.subscribe(
+            seleccionada => {
+                this.seleccionada = seleccionada.id;
+                let token = sessionStorage.getItem('token');
+                let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
+                this.servidor.llamadaServidor('GET', URLS.CONTROLES, parametros).subscribe(
+                    data => {
+                        this.controles = [];
+                        let response = JSON.parse(data.json());
+                        if (response.success && response.data) {
+                            for (let i = 0; i < response.data.length; i++) {
+                                this.controles.push(new Control(
+                                    response.data[i].id,
+                                    response.data[i].nombre,
+                                    response.data[i].pla,
+                                    response.data[i].valorminimo,
+                                    response.data[i].valormaximo,
+                                    response.data[i].objetivo,
+                                    response.data[i].tolerancia,
+                                    response.data[i].critico,
+                                    response.data[i].periodicidad,
+                                    response.data[i].tipoperiodo,
+                                    response.data[i].idempresa
+                                ));
+                                this.guardar[response.data[i].id] = false;
                             }
-                        });
-            });
+                        }
+                });
+        });
 
     }
 
@@ -75,8 +72,7 @@ export class TabControlesEmpresaComponent {
                     nuevoControl.id = response.id;
                     this.controles.push(nuevoControl);
                 }
-            }
-        );
+        });
     }
 
     borrarControl(idControl: number) {
@@ -89,8 +85,7 @@ export class TabControlesEmpresaComponent {
                     let indice = this.controles.indexOf(controlBorrar)
                     this.controles.splice(indice, 1);
                 }
-            }
-        );
+        });
     }
 
     modificarControl(idControl: number) {
@@ -108,9 +103,7 @@ export class TabControlesEmpresaComponent {
                 if (response.success) {
                     console.log('Control modificado');
                 }
-            }
-        );
-
+        });
     }
 
 }

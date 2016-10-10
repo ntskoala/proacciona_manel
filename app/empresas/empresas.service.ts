@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 
-import {Empresa} from './empresa';
-import {Checklist} from './checklist';
+import {Empresa} from '../objetos/empresa';
+import {Checklist} from '../objetos/checklist';
+import {Usuario} from '../objetos/usuario';
 
 @Injectable()
 export class EmpresasService {
@@ -11,13 +12,15 @@ export class EmpresasService {
     private nuevaEmpresaFuente = new Subject<Empresa>();
     private checklistSeleccionadaFuente = new Subject<Checklist>();
     private nuevaChecklistFuente = new Subject<Checklist>();
+    private usuarioSeleccionadoFuente = new Subject<Usuario>();
     // Streaming del observable
     empresaSeleccionada = this.empresaSeleccionadaFuente.asObservable();
     nuevaEmpresa = this.nuevaEmpresaFuente.asObservable();
     checklistSeleccionada = this.checklistSeleccionadaFuente.asObservable();
     nuevaChecklist = this.nuevaChecklistFuente.asObservable();
+    usuarioSeleccionado = this.usuarioSeleccionadoFuente.asObservable();
 
-    seleccionar(empresa: Empresa) {
+    seleccionarEmpresa(empresa: Empresa) {
         this.empresaSeleccionadaFuente.next(empresa);
     }
     empresaCreada(empresa: Empresa) {
@@ -28,5 +31,8 @@ export class EmpresasService {
     }
     checklistCreada(checklist: Checklist) {
         this.nuevaChecklistFuente.next(checklist);
+    }
+    seleccionarUsuario(usuario: Usuario) {
+        this.usuarioSeleccionadoFuente.next(usuario);
     }
 }

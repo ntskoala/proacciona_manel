@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor.service';
+import {Servidor} from './servidor.service';
 import {URLS} from '../config';
-import {Empresa} from './empresa';
+import {Empresa} from '../objetos/empresa';
 
 @Component({
     selector: 'nueva-empresa',

@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor.service';
+import {Servidor} from './servidor.service';
 import {URLS} from '../config';
-import {ControlChecklist} from './controlchecklist';
+import {ControlChecklist} from '../objetos/controlchecklist';
 
 @Component({
     selector: 'mostrar-checklist',
@@ -26,7 +26,7 @@ export class MostrarChecklistComponent {
                 let token = sessionStorage.getItem('token');
                 let parametros = '?idchecklist=' + seleccionada.id + '&token=' + token;
                 // llamada al servidor para conseguir los controlchecklist
-                this.servidor.llamadaServidor('GET', URLS.CONTROLCHECKLIST, parametros).subscribe(
+                this.servidor.llamadaServidor('GET', URLS.CONTROLCHECKLISTS, parametros).subscribe(
                     data => {
                         this.controlchecklists = [];
                         let response = JSON.parse(data.json());
@@ -52,7 +52,7 @@ export class MostrarChecklistComponent {
         let nuevoControlchecklist = new ControlChecklist(0, this.seleccionada, nombre);
         let parametros = JSON.stringify(nuevoControlchecklist);
 
-        this.servidor.llamadaServidor('POST', URLS.CONTROLCHECKLIST, parametros).subscribe(
+        this.servidor.llamadaServidor('POST', URLS.CONTROLCHECKLISTS, parametros).subscribe(
             data => {
                 let response = JSON.parse(data.json());
                 if (response.success) {
@@ -64,7 +64,7 @@ export class MostrarChecklistComponent {
 
     borrarControlchecklist(idControlchecklist: number) {
         let parametros = '?id=' + idControlchecklist;
-        this.servidor.llamadaServidor('DELETE', URLS.CONTROLCHECKLIST, parametros).subscribe(
+        this.servidor.llamadaServidor('DELETE', URLS.CONTROLCHECKLISTS, parametros).subscribe(
             data => {
                 let response = JSON.parse(data.json());
                 if (response.success) {
@@ -84,7 +84,7 @@ export class MostrarChecklistComponent {
         let parametros = '?id=' +  idControlchecklist.toString();
         let modControlchecklist = this.controlchecklists.find(controlchecklist => controlchecklist.id == idControlchecklist);
 
-        this.servidor.llamadaServidor('PUT', URLS.CONTROLCHECKLIST, parametros, modControlchecklist).subscribe(
+        this.servidor.llamadaServidor('PUT', URLS.CONTROLCHECKLISTS, parametros, modControlchecklist).subscribe(
             data => {
                 let response = JSON.parse(data.json());
                 if (response.success) {

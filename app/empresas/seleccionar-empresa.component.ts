@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor.service';
+import {Servidor} from './servidor.service';
 import {URLS} from '../config';
-import {Empresa} from './empresa';
+import {Empresa} from '../objetos/empresa';
 
 @Component({
     selector: 'seleccionar-empresa',
@@ -46,7 +46,7 @@ export class SeleccionarEmpresaComponent {
     }
 
     seleccionaEmpresa(seleccion: number){
-        this.empresasService.seleccionar(this.empresas.find(empresa => empresa.id == seleccion));
+        this.empresasService.seleccionarEmpresa(this.empresas.find(empresa => empresa.id == seleccion));
         this.seleccionada = seleccion;
     }
 
@@ -62,7 +62,7 @@ export class SeleccionarEmpresaComponent {
                     console.log('Empresa eliminada');
                 }
         });
-        this.empresasService.seleccionar(this.empresa); 
+        this.empresasService.seleccionarEmpresa(this.empresa); 
     }
 
 }

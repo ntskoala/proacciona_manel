@@ -10,11 +10,10 @@ import {URLS} from '../config';
     styleUrls: ['public/assets/css/login-form.component.css']
 })
 export class LoginFormComponent {
-    // inyección de servidor como propiedad
-    constructor(private servidor: Servidor, public router: Router) {};
 
     public active = true;
-    private response: any;
+
+    constructor(private servidor: Servidor, public router: Router) {};
 
     onSubmit(nombre: string, password: string) {
         // truco de Angular para recargar el form y que se vacíe
@@ -25,13 +24,13 @@ export class LoginFormComponent {
 
         this.servidor.llamadaServidor('POST', URLS.LOGIN, parametros).subscribe(
             data => {
-                this.response = JSON.parse(data.json());
+                let response = JSON.parse(data.json());
                 // si el usuario es correcto
-                if (this.response.success) {
+                if (response.success) {
                     // guarda los valores en Session Storage
-                    sessionStorage.setItem('token', this.response.token);
-                    sessionStorage.setItem('usuario', this.response.data[0].usuario);
-                    sessionStorage.setItem('empresa', this.response.data[0].idempresa);
+                    sessionStorage.setItem('token', response.token);
+                    sessionStorage.setItem('usuario', response.data[0].usuario);
+                    sessionStorage.setItem('empresa', response.data[0].idempresa);
                     // redirecciona a home
                     this.router.navigate(['home']);
                 }
@@ -39,7 +38,7 @@ export class LoginFormComponent {
                 else {
                     alert('Usuario no válido');
                 }
-        })
+        });
     }
 
 }

@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
-import {Servidor} from '../servidor.service';
+import {Servidor} from './servidor.service';
 import {URLS} from '../config';
-import {Empresa} from './empresa';
-import {Usuario} from '../login/usuario';
+import {Empresa} from '../objetos/empresa';
+import {Usuario} from '../objetos/usuario';
 
 @Component({
     selector: 'tab-usuarios-empresa',
@@ -66,8 +66,7 @@ export class TabUsuariosEmpresaComponent {
                     nuevoUsuario.id = response.id;
                     this.usuarios.push(nuevoUsuario);
                 }
-            }
-        );
+        });
     }
 
     borrarUsuario(idUsuario: number) {

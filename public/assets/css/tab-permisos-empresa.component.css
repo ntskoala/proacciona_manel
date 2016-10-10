@@ -1,0 +1,16 @@
+seleccionar-usuario {
+    width: 100%;
+}
+
+marcar-controles,
+marcar-checklists {
+    width: 50%;
+}
+
+marcar-controles {
+    padding-right: 4%;
+}
+
+marcar-checklists {
+    padding-left: 4%;
+}

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'tab-permisos-empresa',
-    template: '<p>Permisos</p>'
+    templateUrl: 'public/assets/templates/tab-permisos-empresa.component.html',
+    styleUrls: ['public/assets/css/tab-permisos-empresa.component.css']
 })
 export class TabPermisosEmpresaComponent {}
