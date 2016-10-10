@@ -1,4 +1,7 @@
 import {Component} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+
+import {EmpresasService} from './empresas.service';
 
 @Component({
     selector: 'gestion-empresa',
@@ -8,7 +11,15 @@ import {Component} from '@angular/core';
 
 export class GestionEmpresaComponent {
 
+    private subscription: Subscription;
+    public seleccionada: boolean = false;
     public tabActivo = 'usuarios';
+
+    constructor(private empresasService: EmpresasService) {
+        this.subscription = empresasService.empresaSeleccionada.subscribe(
+            seleccionada => this.seleccionada = true
+        )
+    }
 
     cambiarTab(tab: string) {
         this.tabActivo = tab;

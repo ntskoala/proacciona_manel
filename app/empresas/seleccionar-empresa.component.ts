@@ -14,8 +14,10 @@ import {Empresa} from './empresa';
 
 export class SeleccionarEmpresaComponent {
     
+    private subscription: Subscription;
+    public empresa: Empresa = new Empresa('Seleccionar empresa', '', 0);
     public empresas: Empresa[] = [];
-    subscription: Subscription;
+    public seleccionada: number = 0;
     
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {
         // Subscripción a la creación de nuevas empresa
@@ -26,6 +28,7 @@ export class SeleccionarEmpresaComponent {
         let token = sessionStorage.getItem('token');
         let parametros = '?token=' + token; 
         // Conseguir la lista de empresas
+        this.empresas.push(this.empresa);
         this.servidor.llamadaServidor('GET', URLS.EMPRESAS, parametros).subscribe(
             data => {
                 let response = JSON.parse(data.json());
@@ -44,6 +47,22 @@ export class SeleccionarEmpresaComponent {
 
     seleccionaEmpresa(seleccion: number){
         this.empresasService.seleccionar(this.empresas.find(empresa => empresa.id == seleccion));
+        this.seleccionada = seleccion;
+    }
+
+    borrarEmpresa() {
+        let parametros = '?id=' +  this.seleccionada;
+        this.servidor.llamadaServidor('DELETE', URLS.EMPRESAS, parametros).subscribe(
+            data => {
+                let response = JSON.parse(data.json());
+                if (response.success) {
+                    let empresaBorrar = this.empresas.find(empresa => empresa.id == this.seleccionada);
+                    let indice = this.empresas.indexOf(empresaBorrar);
+                    this.empresas.splice(indice, 1);
+                    console.log('Empresa eliminada');
+                }
+        });
+        this.empresasService.seleccionar(this.empresa); 
     }
 
 }

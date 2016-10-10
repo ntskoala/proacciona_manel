@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {EmpresasService} from './empresas.service';
 import {Servidor} from '../servidor.service';
 import {URLS} from '../config';
-import {Empresa} from './empresa'
+import {Empresa} from './empresa';
 import {Usuario} from '../login/usuario';
 
 @Component({
@@ -61,7 +61,7 @@ export class TabUsuariosEmpresaComponent {
 
         this.servidor.llamadaServidor('POST', URLS.USUARIOS, parametros).subscribe(
             data => {
-                let response = JSON.parse(data);
+                let response = JSON.parse(data.json());
                 if (response.success) {
                     nuevoUsuario.id = response.id;
                     this.usuarios.push(nuevoUsuario);
@@ -77,11 +77,10 @@ export class TabUsuariosEmpresaComponent {
                 let response = JSON.parse(data.json());
                 if (response.success) {
                     let usuarioBorrar = this.usuarios.find(usuario => usuario.id == idUsuario);
-                    let indice = this.usuarios.indexOf(usuarioBorrar)
+                    let indice = this.usuarios.indexOf(usuarioBorrar);
                     this.usuarios.splice(indice, 1);
                 }
-            }
-        );
+        });
     }
 
     modificarUsuario(idUsuario: number) {
@@ -99,9 +98,7 @@ export class TabUsuariosEmpresaComponent {
                 if (response.success) {
                     console.log('Usuario modificado');
                 }
-            }
-        );
-
+        });
     }
 
 }

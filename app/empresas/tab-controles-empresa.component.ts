@@ -70,7 +70,7 @@ export class TabControlesEmpresaComponent {
 
         this.servidor.llamadaServidor('POST', URLS.CONTROLES, parametros).subscribe(
             data => {
-                let response = JSON.parse(data);
+                let response = JSON.parse(data.json());
                 if (response.success) {
                     nuevoControl.id = response.id;
                     this.controles.push(nuevoControl);

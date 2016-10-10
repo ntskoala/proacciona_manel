@@ -15,7 +15,8 @@ export class SeleccionarChecklistComponent {
 
     private subscription1: Subscription;
     private subscription2: Subscription;
-    public seleccionada: number;
+    public seleccionada: number = 0;
+    public checklist: number = 0;
     public checklists: Checklist[] = [];
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {
@@ -49,8 +50,22 @@ export class SeleccionarChecklistComponent {
     }
 
     seleccionaChecklist(seleccion: number){
-        console.log(seleccion);
-        // this.empresasService.seleccionar(this.empresas.find(empresa => empresa.id == seleccion));
+        this.empresasService.seleccionarChecklist(this.checklists.find(checklist => checklist.id == seleccion));
+        this.checklist = seleccion;
+    }
+
+    borrarChecklist() {
+        let parametros = '?id=' +  this.checklist;
+        this.servidor.llamadaServidor('DELETE', URLS.CHECKLISTS, parametros).subscribe(
+            data => {
+                let response = JSON.parse(data.json());
+                if (response.success) {
+                    let checklistBorrar = this.checklists.find(checklist => checklist.id == this.checklist);
+                    let indice = this.checklists.indexOf(checklistBorrar);
+                    this.checklists.splice(indice, 1);
+                    console.log('Checklist eliminada')
+                }
+        });
     }
 
 

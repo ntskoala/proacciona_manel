@@ -1,17 +1,18 @@
+.left {
+    width: 50%;
+    padding-right: 4%;
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-start;
+}
+
 seleccionar-checklist,
 nueva-checklist {
-    width: 50%;
+    width: 100%;
     float: left;
 }
 
-seleccionar-checklist {
-    padding-right: 4%;
-}
-
-nueva-checklist {
-    padding-left: 4%;
-}
-
 mostrar-checklist {
-    width: 100%;
+    width: 50%;
+    padding-left: 4%;
 }

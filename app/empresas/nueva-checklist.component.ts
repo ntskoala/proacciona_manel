@@ -38,6 +38,7 @@ export class NuevaChecklistComponent {
                 let response = JSON.parse(data.json());
                 // si tiene éxito
                 if (response.success) {
+                    nuevaChecklist.id = response.id;
                     this.empresasService.checklistCreada(nuevaChecklist);
                     console.log('Checklist creada');
                 }

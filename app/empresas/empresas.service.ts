@@ -9,10 +9,12 @@ export class EmpresasService {
     // Fuente del observable
     private empresaSeleccionadaFuente = new Subject<Empresa>();
     private nuevaEmpresaFuente = new Subject<Empresa>();
+    private checklistSeleccionadaFuente = new Subject<Checklist>();
     private nuevaChecklistFuente = new Subject<Checklist>();
     // Streaming del observable
     empresaSeleccionada = this.empresaSeleccionadaFuente.asObservable();
     nuevaEmpresa = this.nuevaEmpresaFuente.asObservable();
+    checklistSeleccionada = this.checklistSeleccionadaFuente.asObservable();
     nuevaChecklist = this.nuevaChecklistFuente.asObservable();
 
     seleccionar(empresa: Empresa) {
@@ -20,6 +22,9 @@ export class EmpresasService {
     }
     empresaCreada(empresa: Empresa) {
         this.nuevaEmpresaFuente.next(empresa);
+    }
+    seleccionarChecklist(checklist: Checklist) {
+        this.checklistSeleccionadaFuente.next(checklist);
     }
     checklistCreada(checklist: Checklist) {
         this.nuevaChecklistFuente.next(checklist);

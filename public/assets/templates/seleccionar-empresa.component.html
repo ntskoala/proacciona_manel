@@ -5,11 +5,12 @@
     <md-card-content>
         <form>
             <select (change)="seleccionaEmpresa($event.target.value)">
-                <option disabled>Seleccionar empresa</option>
+                <!--<option disabled>Seleccionar empresa</option>-->
                 <option *ngFor="let empresa of empresas" [value]="empresa.id">
                     {{empresa.nombre}}
                 </option>
             </select>
         </form>
+        <button md-button color="primary" (click)="borrarEmpresa()" type="submit">Eliminar</button>
     </md-card-content>
 </md-card>
