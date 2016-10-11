@@ -1,30 +1,35 @@
 import {Injectable} from '@angular/core'; 
-import {Http, Headers} from '@angular/http';
+import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class Servidor {
 
+    public resultado: any;
+
     constructor (private llamada: Http) {}
     
     llamadaServidor(metodo: string, serverUrl: string, parametros: string, object?: Object) {
-        let headers = new Headers();
-        headers.append('Content-type', 'application/x-www-form-urlencoded');
+        let payload = JSON.stringify(object);
         // llamada en función del método
         switch(metodo) {
             case 'POST':
-                return this.llamada.post(serverUrl, parametros, {headers: headers});
+                this.resultado = this.llamada.post(serverUrl + parametros, payload)
+                break;
             case 'GET':
-                return this.llamada.get(serverUrl + parametros);
+                this.resultado = this.llamada.get(serverUrl + parametros);
+                break;
             case 'PUT':
-                let payload = JSON.stringify(object);
-                return this.llamada.put(serverUrl + parametros, payload);
+                this.resultado =  this.llamada.put(serverUrl + parametros, payload);
+                break;
             case 'DELETE':
-                return this.llamada.delete(serverUrl + parametros);
+                this.resultado = this.llamada.delete(serverUrl + parametros);
+                break;
             default:
                 console.log('Método erróneo');
                 return;
         }
+        return this.resultado.map((res: Response) => JSON.parse(res.json()));;
     }
     
 }

@@ -7,13 +7,15 @@ import {Usuario} from '../objetos/usuario';
 
 @Injectable()
 export class EmpresasService {
-    // Fuente del observable
+    // variables
+    public seleccionada: number;
+    // fuente del observable
     private empresaSeleccionadaFuente = new Subject<Empresa>();
     private nuevaEmpresaFuente = new Subject<Empresa>();
     private checklistSeleccionadaFuente = new Subject<Checklist>();
     private nuevaChecklistFuente = new Subject<Checklist>();
     private usuarioSeleccionadoFuente = new Subject<Usuario>();
-    // Streaming del observable
+    // streaming del observable
     empresaSeleccionada = this.empresaSeleccionadaFuente.asObservable();
     nuevaEmpresa = this.nuevaEmpresaFuente.asObservable();
     checklistSeleccionada = this.checklistSeleccionadaFuente.asObservable();
@@ -21,6 +23,7 @@ export class EmpresasService {
     usuarioSeleccionado = this.usuarioSeleccionadoFuente.asObservable();
 
     seleccionarEmpresa(empresa: Empresa) {
+        this.seleccionada = empresa.id;
         this.empresaSeleccionadaFuente.next(empresa);
     }
     empresaCreada(empresa: Empresa) {

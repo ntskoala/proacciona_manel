@@ -30,8 +30,7 @@ export class SeleccionarEmpresaComponent {
         // Conseguir la lista de empresas
         this.empresas.push(this.empresa);
         this.servidor.llamadaServidor('GET', URLS.EMPRESAS, parametros).subscribe(
-            data => {
-                let response = JSON.parse(data.json());
+            response => {
                 if (response.success) {
                     for (let i = 0; i < response.data.length; i++) {
                         this.empresas.push(new Empresa(
@@ -41,7 +40,7 @@ export class SeleccionarEmpresaComponent {
                         ))
                     }
                 }
-            })
+        });
 
     }
 
@@ -51,10 +50,10 @@ export class SeleccionarEmpresaComponent {
     }
 
     borrarEmpresa() {
-        let parametros = '?id=' +  this.seleccionada;
+        let token = sessionStorage.getItem('token');
+        let parametros = '?id=' +  this.seleccionada + '&token=' + token;
         this.servidor.llamadaServidor('DELETE', URLS.EMPRESAS, parametros).subscribe(
-            data => {
-                let response = JSON.parse(data.json());
+            response => {
                 if (response.success) {
                     let empresaBorrar = this.empresas.find(empresa => empresa.id == this.seleccionada);
                     let indice = this.empresas.indexOf(empresaBorrar);

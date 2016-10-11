@@ -4,7 +4,6 @@ import {Subscription} from 'rxjs/Subscription';
 import {EmpresasService} from './empresas.service';
 import {Servidor} from './servidor.service';
 import {URLS} from '../config';
-import {Empresa} from '../objetos/empresa';
 import {Usuario} from '../objetos/usuario';
 
 @Component({
@@ -30,9 +29,8 @@ export class TabUsuariosEmpresaComponent {
                 let parametros = '?idempresa=' + seleccionada.id + '&token=' + token;
                 // llamada al servidor para conseguir los usuarios
                 this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
-                    data => {
+                    response => {
                         this.usuarios = [];
-                        let response = JSON.parse(data.json());
                         if (response.success && response.data) {
                             for (let i = 0; i < response.data.length; i++) {
                                 this.usuarios.push(new Usuario(
@@ -57,11 +55,10 @@ export class TabUsuariosEmpresaComponent {
         setTimeout(() => this.active = true, 0);
 
         let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.seleccionada);
-        let parametros = JSON.stringify(nuevoUsuario);
-
-        this.servidor.llamadaServidor('POST', URLS.USUARIOS, parametros).subscribe(
-            data => {
-                let response = JSON.parse(data.json());
+        let token = sessionStorage.getItem('token');
+        let parametros = '?token=' + token;
+        this.servidor.llamadaServidor('POST', URLS.USUARIOS, parametros, nuevoUsuario).subscribe(
+            response => {
                 if (response.success) {
                     nuevoUsuario.id = response.id;
                     this.usuarios.push(nuevoUsuario);
@@ -70,10 +67,10 @@ export class TabUsuariosEmpresaComponent {
     }
 
     borrarUsuario(idUsuario: number) {
-        let parametros = '?id=' + idUsuario;
+        let token = sessionStorage.getItem('token');
+        let parametros = '?id=' + idUsuario + '&token=' + token;
         this.servidor.llamadaServidor('DELETE', URLS.USUARIOS, parametros).subscribe(
-            data => {
-                let response = JSON.parse(data.json());
+            response => {
                 if (response.success) {
                     let usuarioBorrar = this.usuarios.find(usuario => usuario.id == idUsuario);
                     let indice = this.usuarios.indexOf(usuarioBorrar);
@@ -88,12 +85,11 @@ export class TabUsuariosEmpresaComponent {
 
     actualizarUsuario(idUsuario: number) {
         this.guardar[idUsuario] = false;
-        let parametros = '?id=' + idUsuario.toString();        
+        let token = sessionStorage.getItem('token');
+        let parametros = '?id=' + idUsuario.toString() + '&token=' + token;        
         let modUsuario = this.usuarios.find(usuario => usuario.id == idUsuario);
-
         this.servidor.llamadaServidor('PUT', URLS.USUARIOS, parametros, modUsuario).subscribe(
-            data => {
-                let response = JSON.parse(data.json());
+            response => {
                 if (response.success) {
                     console.log('Usuario modificado');
                 }

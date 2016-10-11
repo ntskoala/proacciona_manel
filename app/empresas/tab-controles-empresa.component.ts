@@ -28,9 +28,8 @@ export class TabControlesEmpresaComponent {
                 let token = sessionStorage.getItem('token');
                 let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
                 this.servidor.llamadaServidor('GET', URLS.CONTROLES, parametros).subscribe(
-                    data => {
+                    response => {
                         this.controles = [];
-                        let response = JSON.parse(data.json());
                         if (response.success && response.data) {
                             for (let i = 0; i < response.data.length; i++) {
                                 this.controles.push(new Control(
@@ -62,12 +61,11 @@ export class TabControlesEmpresaComponent {
 
         let nuevoControl = new Control(0, nombre, pla, minimo, maximo, objetivo,
             tolerancia, critico, periodicidad, periodo, this.seleccionada);
-        console.log(nuevoControl);
-        let parametros = JSON.stringify(nuevoControl);
+        let token = sessionStorage.getItem('token');
+        let parametros = '?token=' + token;
 
-        this.servidor.llamadaServidor('POST', URLS.CONTROLES, parametros).subscribe(
-            data => {
-                let response = JSON.parse(data.json());
+        this.servidor.llamadaServidor('POST', URLS.CONTROLES, parametros, nuevoControl).subscribe(
+            response => {
                 if (response.success) {
                     nuevoControl.id = response.id;
                     this.controles.push(nuevoControl);
@@ -76,10 +74,10 @@ export class TabControlesEmpresaComponent {
     }
 
     borrarControl(idControl: number) {
-        let parametros = '?id=' + idControl
+        let token = sessionStorage.getItem('token');
+        let parametros = '?id=' + idControl + '&token=' + token;
         this.servidor.llamadaServidor('DELETE', URLS.CONTROLES, parametros).subscribe(
-            data => {
-                let response = JSON.parse(data.json());
+            response => {
                 if (response.success) {
                     let controlBorrar = this.controles.find(control => control.id == idControl);
                     let indice = this.controles.indexOf(controlBorrar)
@@ -94,12 +92,12 @@ export class TabControlesEmpresaComponent {
 
     actualizarControl(idControl: number) {
         this.guardar[idControl] = false;
-        let parametros = '?id=' + idControl.toString();        
+        let token = sessionStorage.getItem('token');
+        let parametros = '?id=' + idControl.toString() + '&token=' + token;        
         let modControl = this.controles.find(control => control.id == idControl);
 
         this.servidor.llamadaServidor('PUT', URLS.CONTROLES, parametros, modControl).subscribe(
-            data => {
-                let response = JSON.parse(data.json());
+            response => {
                 if (response.success) {
                     console.log('Control modificado');
                 }

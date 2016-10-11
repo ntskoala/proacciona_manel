@@ -1,3 +1,52 @@
-<seleccionar-usuario></seleccionar-usuario>
-<marcar-controles></marcar-controles>
-<marcar-checklists></marcar-checklists>
+<div class="seleccionar-usuario">
+    <h2>Usuario</h2>
+    <form>
+        <select (change)="seleccionaUsuario($event.target.value)">
+            <option *ngFor="let usuario of usuarios" [value]="usuario.id">
+                {{usuario.usuario}}
+            </option>
+        </select>
+    </form>
+</div>
+
+<div class="marcar-controles" *ngIf="seleccionada != 0">
+    <h2>Controles</h2>
+    <div class="table">
+        <div class="header-row">
+            <span class="header-cell">Control</span>
+            <span class="header-cell">Permiso</span>
+        </div>
+        <form class="row"
+            *ngFor="let control of controles"
+            (ngSubmit)="actualizarControlchecklist(control.id)"
+            #actualizarControlchecklistForm="ngForm"
+        >
+            <span class="cell">{{control.nombre}}</span>
+            <span class="cell">
+                <md-checkbox>Permitido</md-checkbox>
+                <!--<button md-button color="primary" [disabled]="!guardar[control.id]" type="submit">Guardar</button>                -->
+            </span>
+        </form>
+    </div>
+</div>
+
+<div class="marcar-checklists">
+    <h2>Checklists</h2>
+    <div class="table">
+        <div class="header-row">
+            <span class="header-cell">Control</span>
+            <span class="header-cell">Permiso</span>
+        </div>
+        <form class="row"
+            *ngFor="let checklist of checklists"
+            (ngSubmit)="actualizarControlchecklist(checklist.id)"
+            #actualizarControlchecklistForm="ngForm"
+        >
+            <span class="cell">{{checklist.nombrechecklist}}</span>
+            <span class="cell">
+                <md-checkbox>Permitido</md-checkbox>
+                <!--<button md-button color="primary" [disabled]="!guardar[control.id]" type="submit">Guardar</button>                -->
+            </span>
+        </form>
+    </div>
+</div>

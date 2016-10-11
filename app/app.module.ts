@@ -19,9 +19,6 @@ import {SeleccionarChecklistComponent} from './empresas/seleccionar-checklist.co
 import {NuevaChecklistComponent} from './empresas/nueva-checklist.component';
 import {MostrarChecklistComponent} from './empresas/mostrar-checklist.component';
 import {TabPermisosEmpresaComponent} from './empresas/tab-permisos-empresa.component';
-import {SeleccionarUsuarioComponent} from './empresas/seleccionar-usuario.component'
-import {MarcarControlesComponent} from './empresas/marcar-controles.component'
-import {MarcarChecklistsComponent} from './empresas/marcar-checklists.component'
 import {PageNotFoundComponent} from './404.component';
 
 import {routing} from './app.routing';
@@ -53,9 +50,6 @@ import {EmpresasService} from './empresas/empresas.service';
         SeleccionarChecklistComponent,
         NuevaChecklistComponent,
         MostrarChecklistComponent,
-        SeleccionarUsuarioComponent,
-        MarcarControlesComponent,
-        MarcarChecklistsComponent,
         PageNotFoundComponent
     ],
     providers: [

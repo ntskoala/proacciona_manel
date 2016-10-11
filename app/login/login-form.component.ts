@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {Servidor} from '../servidor.service';
+import {Servidor} from '../empresas/servidor.service';
 import {URLS} from '../config';
 
 @Component({

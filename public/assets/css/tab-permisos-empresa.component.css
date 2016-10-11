@@ -1,16 +1,29 @@
-seleccionar-usuario {
+.seleccionar-usuario {
     width: 100%;
 }
 
-marcar-controles,
-marcar-checklists {
+.marcar-controles,
+.marcar-checklists {
     width: 50%;
 }
 
-marcar-controles {
+.marcar-controles {
     padding-right: 4%;
 }
 
-marcar-checklists {
+.marcar-checklists {
     padding-left: 4%;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    min-width: 300px;
+    font: 600 1rem 'Open Sans', sans-serif;
+    border: 1px solid #fbc02d;
+    border-radius: 0;
+    padding: 0.3rem 0.6rem;
+	background: url('public/assets/images/keyboard_arrow_down.svg') no-repeat 97% 50% #fff9c4;
+    outline: 0;
 }

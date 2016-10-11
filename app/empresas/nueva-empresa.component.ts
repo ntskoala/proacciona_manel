@@ -22,13 +22,12 @@ export class NuevaEmpresaComponent {
         this.active = false;
         setTimeout(() => this.active = true, 0);
 
-        let token = sessionStorage.getItem('token');
         let nuevaEmpresa = new Empresa(nombre, nif, 0);
-        let parametros = JSON.stringify(nuevaEmpresa);
+        let token = sessionStorage.getItem('token');
+        let parametros = '?token=' + token;
 
-        this.servidor.llamadaServidor('POST', URLS.EMPRESAS, parametros).subscribe(
-            data => {
-                let response = JSON.parse(data.json());
+        this.servidor.llamadaServidor('POST', URLS.EMPRESAS, parametros, nuevaEmpresa).subscribe(
+            response => {
                 // si tiene éxito
                 if (response.success) {
                     this.empresasService.empresaCreada(nuevaEmpresa);
