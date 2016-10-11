@@ -15,9 +15,6 @@ import {GestionEmpresaComponent} from './empresas/gestion-empresa.component';
 import {TabUsuariosEmpresaComponent} from './empresas/tab-usuarios-empresa.component';
 import {TabControlesEmpresaComponent} from './empresas/tab-controles-empresa.component';
 import {TabChecklistsEmpresaComponent} from './empresas/tab-checklists-empresa.component';
-import {SeleccionarChecklistComponent} from './empresas/seleccionar-checklist.component';
-import {NuevaChecklistComponent} from './empresas/nueva-checklist.component';
-import {MostrarChecklistComponent} from './empresas/mostrar-checklist.component';
 import {TabPermisosEmpresaComponent} from './empresas/tab-permisos-empresa.component';
 import {PageNotFoundComponent} from './404.component';
 
@@ -47,9 +44,6 @@ import {EmpresasService} from './empresas/empresas.service';
         TabControlesEmpresaComponent,
         TabChecklistsEmpresaComponent,
         TabPermisosEmpresaComponent,
-        SeleccionarChecklistComponent,
-        NuevaChecklistComponent,
-        MostrarChecklistComponent,
         PageNotFoundComponent
     ],
     providers: [

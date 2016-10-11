@@ -33,9 +33,8 @@ export class TabPermisosEmpresaComponent {
         let parametros = '?idempresa=' + this.seleccionada + '&token=' + token;
         // conseguir usuarios
         this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
-            data => {
+            response => {
                 this.usuarios = [];
-                let response = JSON.parse(data.json());
                 if (response.success && response.data) {
                     for (let i = 0; i < response.data.length; i++) {
                         this.usuarios.push(new Usuario(
@@ -51,9 +50,8 @@ export class TabPermisosEmpresaComponent {
         });
         // conseguir controles
         this.servidor.llamadaServidor('GET', URLS.CONTROLES, parametros).subscribe(
-            data => {
+            response => {
                 this.controles = [];
-                let response = JSON.parse(data.json());
                 if (response.success && response.data) {
                     for (let i = 0; i < response.data.length; i++) {
                         this.controles.push(new Control(
@@ -74,9 +72,8 @@ export class TabPermisosEmpresaComponent {
         });
         // conseguir checklists
         this.servidor.llamadaServidor('GET', URLS.CHECKLISTS, parametros).subscribe(
-            data => {
+            response => {
                 this.checklists = [];
-                let response = JSON.parse(data.json());
                 if (response.success && response.data) {
                     for (let i = 0; i < response.data.length; i++) {
                         this.checklists.push(new Checklist(

@@ -1,5 +1,0 @@
-<h2>Nueva checklist</h2>
-<form *ngIf="active" (ngSubmit)="nuevaChecklist(nombreChecklist.value)" #nuevaChecklistForm="ngForm">
-    <md-input class="full" placeholder="Nombre" type="text" required [(ngModel)]="nombreChecklist.value" name="nombreChecklist" #nombreChecklist="ngModel"></md-input>
-    <button md-raised-button color="accent" [disabled]="!nuevaChecklistForm.form.valid" type="submit">Crear</button>
-</form>

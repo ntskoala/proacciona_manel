@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core'; 
+import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -14,7 +14,7 @@ export class Servidor {
         // llamada en función del método
         switch(metodo) {
             case 'POST':
-                this.resultado = this.llamada.post(serverUrl + parametros, payload)
+                this.resultado = this.llamada.post(serverUrl + parametros, payload);
                 break;
             case 'GET':
                 this.resultado = this.llamada.get(serverUrl + parametros);
@@ -29,7 +29,7 @@ export class Servidor {
                 console.log('Método erróneo');
                 return;
         }
-        return this.resultado.map((res: Response) => JSON.parse(res.json()));;
+        return this.resultado.map((res: Response) => JSON.parse(res.json()));
     }
     
 }

@@ -20,14 +20,14 @@ export class SeleccionarEmpresaComponent {
     public seleccionada: number = 0;
     
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {
-        // Subscripción a la creación de nuevas empresa
+        // subscripción a la creación de nuevas empresa
         this.subscription = this.empresasService.nuevaEmpresa.subscribe(
             empresa => this.empresas.push(empresa)
         );
         
         let token = sessionStorage.getItem('token');
         let parametros = '?token=' + token; 
-        // Conseguir la lista de empresas
+        // conseguir la lista de empresas
         this.empresas.push(this.empresa);
         this.servidor.llamadaServidor('GET', URLS.EMPRESAS, parametros).subscribe(
             response => {
