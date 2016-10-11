@@ -24,8 +24,7 @@ export class LoginFormComponent {
         // let parametros = {'user': nombre, 'password': password}; 
 
         this.servidor.llamadaServidor('POST', URLS.LOGIN, parametros).subscribe(
-            data => {
-                let response = JSON.parse(data);
+            response => {
                 // si el usuario es correcto
                 if (response.success) {
                     // guarda los valores en Session Storage

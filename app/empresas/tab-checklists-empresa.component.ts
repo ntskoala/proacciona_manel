@@ -33,6 +33,8 @@ export class TabChecklistsEmpresaComponent {
                 // llamada al servidor para conseguir las checklists
                 this.servidor.llamadaServidor('GET', URLS.CHECKLISTS, parametros).subscribe(
                     response => {
+                        // ocultamos mostrar control checklists
+                        this.checklistNumber = 0;
                         // vaciamos la lista actual
                         this.checklists = [];
                         this.checklists.push(this.checklist);
@@ -53,8 +55,8 @@ export class TabChecklistsEmpresaComponent {
     }
 
     seleccionaChecklist(seleccion: number){
-        this.checklistNumber = seleccion;
         this.empresasService.seleccionarChecklist(this.checklists.find(checklist => checklist.id == seleccion));
+        this.mostrarControlchecklist(seleccion);
     }
 
     borrarChecklist() {
@@ -75,7 +77,7 @@ export class TabChecklistsEmpresaComponent {
         // truco de Angular para recargar el form y que se vacíe
         this.active = false;
         setTimeout(() => this.active = true, 0);
-
+        
         let nuevaChecklist = new Checklist(0, this.seleccionada, nombre);
         let token = sessionStorage.getItem('token');
         let parametros = '?token=' + token;
@@ -94,9 +96,9 @@ export class TabChecklistsEmpresaComponent {
         });
     }
     
-    mostrarControlchecklist() {
+    mostrarControlchecklist(seleccion: number) {
         let token = sessionStorage.getItem('token');
-        let parametros = '?idchecklist=' + this.seleccionada + '&token=' + token;
+        let parametros = '?idchecklist=' + seleccion + '&token=' + token;
         // llamada al servidor para conseguir los controlchecklist
         this.servidor.llamadaServidor('GET', URLS.CONTROLCHECKLISTS, parametros).subscribe(
             response => {
@@ -111,6 +113,8 @@ export class TabChecklistsEmpresaComponent {
                         this.guardar[response.data[i].id] = false;
                     }
                 }
+            // mostramos la lista de control checklists
+            this.checklistNumber = seleccion;        
         });
     }
 
@@ -119,9 +123,9 @@ export class TabChecklistsEmpresaComponent {
         this.active = false;
         setTimeout(() => this.active = true, 0);
 
-        let nuevoControlchecklist = new ControlChecklist(0, this.seleccionada, nombre);
+        let nuevoControlchecklist = new ControlChecklist(0, this.checklistNumber, nombre);
         let token = sessionStorage.getItem('token');
-        let parametros = '?token=';
+        let parametros = '?token=' + token;
 
         this.servidor.llamadaServidor('POST', URLS.CONTROLCHECKLISTS, parametros, nuevoControlchecklist).subscribe(
             response => {
