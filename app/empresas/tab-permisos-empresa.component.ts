@@ -26,17 +26,19 @@ export class TabPermisosEmpresaComponent {
     public permissionuserchecklists: PermissionUserChecklist[] = [];
     public empresaSeleccionada: number = 0;
     public usuarioSeleccionado: number = 0;
+    public checkControl: boolean[] = [];
+    public checkChecklist: boolean[] = [];
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {
         this.subscription = this.empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
-                this.usuarioSeleccionado = 0;
                 this.empresaSeleccionada = seleccionada.id;
                 this.seleccionarPermisos();
         });
     }
 
     seleccionarPermisos() {
+        this.usuarioSeleccionado = 0;
         this.empresaSeleccionada = this.empresasService.seleccionada;
         let token = sessionStorage.getItem('token');
         let parametros = '?idempresa=' + this.empresaSeleccionada + '&token=' + token;
@@ -98,6 +100,8 @@ export class TabPermisosEmpresaComponent {
 
     seleccionarUsuario(idUsuario: number) {
         this.usuarioSeleccionado = idUsuario;
+        this.checkControl = [];
+        this.checkChecklist = [];
         let token = sessionStorage.getItem('token');
         let parametros = '?idusuario=' + idUsuario + '&token=' + token;
         // conseguir permissionusercontrol
@@ -106,11 +110,7 @@ export class TabPermisosEmpresaComponent {
                 this.permissionusercontrols = [];
                 if (response.success && response.data) {
                     for (let i = 0; i < response.data.length; i++) {
-                        this.permissionusercontrols.push(new PermissionUserControl(
-                            response.data[i].id,
-                            response.data[i].idcontrol,
-                            response.data[i].idusuario
-                        ));
+                        this.checkControl[response.data[i].idcontrol] = true;
                     }
                 }
         });
@@ -120,15 +120,60 @@ export class TabPermisosEmpresaComponent {
                 this.permissionuserchecklists = [];
                 if (response.success && response.data) {
                     for (let i = 0; i < response.data.length; i++) {
-                        this.permissionuserchecklists.push(new PermissionUserChecklist(
-                            response.data[i].id,
-                            response.data[i].idchecklist,
-                            response.data[i].idusuario
-                        ));
+                        this.checkChecklist[response.data[i].idchecklist] = true;
                     }
                 }
         });
 
+    }
+
+    changeControl(idControl: number) {
+        let token = sessionStorage.getItem('token');
+        let parametros = '?id=' + idControl + '&token=' + token;
+        if (this.checkControl[idControl]) {
+            this.checkControl[idControl] = false;
+            this.servidor.llamadaServidor('DELETE', URLS.PERMISSION_USER_CONTROL, parametros).subscribe(
+                response => {
+                    console.log(response.success);
+                    if (response.success) {
+                        console.log('Permiso eliminado')
+                    }
+            });
+        }
+        else {
+            this.checkControl[idControl] = true;
+            let nuevoPermiso = new PermissionUserControl(0, idControl, this.usuarioSeleccionado);
+            this.servidor.llamadaServidor('POST', URLS.PERMISSION_USER_CONTROL, parametros, nuevoPermiso).subscribe(
+                response => {
+                    if (response.success) {
+                        console.log('Permiso añadido')
+                    }
+            });
+        }
+    }
+
+    changeChecklist(idChecklist: number) {
+        let token = sessionStorage.getItem('token');
+        let parametros = '?id=' + idChecklist + '&token=' + token;
+        if (this.checkChecklist[idChecklist]) {
+            this.checkChecklist[idChecklist] = false;
+            this.servidor.llamadaServidor('DELETE', URLS.PERMISSION_USER_CHECKLIST, parametros).subscribe(
+                response => {
+                    if (response.success) {
+                        console.log('Permiso eliminado')
+                    }
+            });
+        }
+        else {
+            this.checkChecklist[idChecklist] = true;
+            let nuevoPermiso = new PermissionUserChecklist(0, idChecklist, this.usuarioSeleccionado);
+            this.servidor.llamadaServidor('POST', URLS.PERMISSION_USER_CHECKLIST, parametros, nuevoPermiso).subscribe(
+                response => {
+                    if (response.success) {
+                        console.log('Permiso añadido')
+                    }
+            });
+        }
     }
 
 }

@@ -16,17 +16,16 @@
             <span class="header-cell">Control</span>
             <span class="header-cell">Permiso</span>
         </div>
-        <form class="row"
-            *ngFor="let control of controles"
-            (ngSubmit)="actualizarControlchecklist(control.id)"
-            #actualizarControlchecklistForm="ngForm"
-        >
-            <span class="cell">{{control.nombre}}</span>
+        <div class="row" *ngFor="let control of controles">
             <span class="cell">
-                <md-checkbox>Permitido</md-checkbox>
-                <!--<button md-button color="primary" [disabled]="!guardar[control.id]" type="submit">Guardar</button>                -->
+                {{control.nombre}}
             </span>
-        </form>
+            <span class="cell">
+                <md-checkbox [checked]="checkControl[control.id]" (change)="changeControl(control.id)">
+                    Permitido
+                </md-checkbox>
+            </span>
+        </div>
     </div>
 </div>
 
@@ -37,16 +36,15 @@
             <span class="header-cell">Control</span>
             <span class="header-cell">Permiso</span>
         </div>
-        <form class="row"
-            *ngFor="let checklist of checklists"
-            (ngSubmit)="actualizarControlchecklist(checklist.id)"
-            #actualizarControlchecklistForm="ngForm"
-        >
-            <span class="cell">{{checklist.nombrechecklist}}</span>
+        <div class="row" *ngFor="let checklist of checklists">
             <span class="cell">
-                <md-checkbox>Permitido</md-checkbox>
-                <!--<button md-button color="primary" [disabled]="!guardar[control.id]" type="submit">Guardar</button>                -->
+                {{checklist.nombrechecklist}}
             </span>
-        </form>
+            <span class="cell">
+                <md-checkbox [checked]="checkChecklist[checklist.id]" (change)="changeChecklist(checklist.id)">
+                    Permitido
+                </md-checkbox>
+            </span>
+        </div>
     </div>
 </div>

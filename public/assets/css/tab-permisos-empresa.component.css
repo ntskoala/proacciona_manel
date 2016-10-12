@@ -15,6 +15,10 @@
     padding-left: 4%;
 }
 
+form {
+    font-size: 1rem;
+}
+
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
