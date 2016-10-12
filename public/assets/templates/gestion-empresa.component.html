@@ -7,7 +7,7 @@
             <button md-button color="primary" (click)="cambiarTab('usuarios')">Usuarios</button>
             <button md-button color="primary" (click)="cambiarTab('controles')">Controles</button>
             <button md-button color="primary" (click)="cambiarTab('checklists')">Check Lists</button>
-            <button md-button color="primary" (click)="cambiarTab('permisos'); permisos.seleccionarUsuario()">Permisos</button>
+            <button md-button color="primary" (click)="cambiarTab('permisos'); permisos.seleccionarPermisos()">Permisos</button>
         </md-card-subtitle>
         <md-card-content>
             <tab-usuarios-empresa class="tab" [class.active]="tabActivo=='usuarios'"></tab-usuarios-empresa>
