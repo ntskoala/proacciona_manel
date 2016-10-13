@@ -11,7 +11,6 @@ import {Usuario} from '../objetos/usuario';
     templateUrl: 'public/assets/templates/tab-usuarios-empresa.component.html',
     styleUrls: ['public/assets/css/tab-usuarios-empresa.component.css']
 })
-
 export class TabUsuariosEmpresaComponent {
 
     private subscription: Subscription;

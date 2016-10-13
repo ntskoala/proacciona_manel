@@ -4,15 +4,15 @@ import {Subscription} from 'rxjs/Subscription';
 import {EmpresasService} from './empresas.service';
 
 @Component({
-    selector: 'gestion-empresa',
-    templateUrl: 'public/assets/templates/gestion-empresa.component.html',
-    styleUrls: ['public/assets/css/gestion-empresa.component.css']
+    selector: 'gestion-informes',
+    templateUrl: 'public/assets/templates/gestion-informes.component.html',
+    styleUrls: ['public/assets/css/gestion-informes.component.css']
 })
-export class GestionEmpresaComponent {
+export class GestionInformesComponent {
 
     private subscription: Subscription;
     public seleccionada: number = 0;
-    public tabActivo = 'usuarios';
+    public tabActivo = 'controles';
 
     constructor(private empresasService: EmpresasService) {
         this.subscription = empresasService.empresaSeleccionada.subscribe(

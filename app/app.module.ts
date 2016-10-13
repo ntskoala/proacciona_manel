@@ -12,10 +12,13 @@ import {EmpresasComponent} from './empresas/empresas.component';
 import {SeleccionarEmpresaComponent} from './empresas/seleccionar-empresa.component';
 import {NuevaEmpresaComponent} from './empresas/nueva-empresa.component';
 import {GestionEmpresaComponent} from './empresas/gestion-empresa.component';
+import {GestionInformesComponent} from './empresas/gestion-informes.component';
 import {TabUsuariosEmpresaComponent} from './empresas/tab-usuarios-empresa.component';
 import {TabControlesEmpresaComponent} from './empresas/tab-controles-empresa.component';
 import {TabChecklistsEmpresaComponent} from './empresas/tab-checklists-empresa.component';
 import {TabPermisosEmpresaComponent} from './empresas/tab-permisos-empresa.component';
+import {TabControlInformesComponent} from './empresas/tab-control-informes.component';
+import {TabChecklistInformesComponent} from './empresas/tab-checklist-informes.component';
 import {PageNotFoundComponent} from './404.component';
 
 import {routing} from './app.routing';
@@ -40,10 +43,13 @@ import {EmpresasService} from './empresas/empresas.service';
         SeleccionarEmpresaComponent,
         NuevaEmpresaComponent,
         GestionEmpresaComponent,
+        GestionInformesComponent,
         TabUsuariosEmpresaComponent,
         TabControlesEmpresaComponent,
         TabChecklistsEmpresaComponent,
         TabPermisosEmpresaComponent,
+        TabControlInformesComponent,
+        TabChecklistInformesComponent,
         PageNotFoundComponent
     ],
     providers: [
