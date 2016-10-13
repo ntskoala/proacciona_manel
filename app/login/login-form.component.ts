@@ -21,9 +21,7 @@ export class LoginFormComponent {
         setTimeout(() => this.active = true, 0);
 
         let parametros = '?user=' + nombre + '&password=' + password; 
-        // let parametros = {'user': nombre, 'password': password}; 
-
-        this.servidor.llamadaServidor('POST', URLS.LOGIN, parametros).subscribe(
+        this.servidor.login(URLS.LOGIN, parametros).subscribe(
             response => {
                 // si el usuario es correcto
                 if (response.success) {

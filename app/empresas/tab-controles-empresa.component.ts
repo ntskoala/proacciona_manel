@@ -23,9 +23,8 @@ export class TabControlesEmpresaComponent {
 
         this.subscription = empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
-                let token = sessionStorage.getItem('token');
-                let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
-                this.servidor.llamadaServidor('GET', URLS.CONTROLES, parametros).subscribe(
+                let parametros = '&idempresa=' + seleccionada.id; 
+                this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
                     response => {
                         this.controles = [];
                         if (response.success && response.data) {
@@ -59,10 +58,7 @@ export class TabControlesEmpresaComponent {
 
         let nuevoControl = new Control(0, nombre, pla, minimo, maximo, objetivo,
             tolerancia, critico, periodicidad, periodo, this.empresasService.seleccionada);
-        let token = sessionStorage.getItem('token');
-        let parametros = '?token=' + token;
-
-        this.servidor.llamadaServidor('POST', URLS.CONTROLES, parametros, nuevoControl).subscribe(
+        this.servidor.postObject(URLS.CONTROLES, nuevoControl).subscribe(
             response => {
                 if (response.success) {
                     nuevoControl.id = response.id;
@@ -72,9 +68,8 @@ export class TabControlesEmpresaComponent {
     }
 
     borrarControl(idControl: number) {
-        let token = sessionStorage.getItem('token');
-        let parametros = '?id=' + idControl + '&token=' + token;
-        this.servidor.llamadaServidor('DELETE', URLS.CONTROLES, parametros).subscribe(
+        let parametros = '?id=' + idControl;
+        this.servidor.deleteObject(URLS.CONTROLES, parametros).subscribe(
             response => {
                 if (response.success) {
                     let controlBorrar = this.controles.find(control => control.id == idControl);
@@ -90,11 +85,9 @@ export class TabControlesEmpresaComponent {
 
     actualizarControl(idControl: number) {
         this.guardar[idControl] = false;
-        let token = sessionStorage.getItem('token');
-        let parametros = '?id=' + idControl.toString() + '&token=' + token;        
+        let parametros = '?id=' + idControl;        
         let modControl = this.controles.find(control => control.id == idControl);
-
-        this.servidor.llamadaServidor('PUT', URLS.CONTROLES, parametros, modControl).subscribe(
+        this.servidor.putObject(URLS.CONTROLES, parametros, modControl).subscribe(
             response => {
                 if (response.success) {
                     console.log('Control modificado');

@@ -7,31 +7,10 @@ import {Empresa} from '../objetos/empresa';
 @Injectable()
 export class Servidor {
 
-    public resultado: any;
-
     constructor (private llamada: Http) {}
     
-    llamadaServidor(metodo: string, serverUrl: string, parametros: string, object?: Object) {
-        let payload = JSON.stringify(object);
-        // llamada en función del método
-        switch(metodo) {
-            case 'POST':
-                this.resultado = this.llamada.post(serverUrl + parametros, payload);
-                break;
-            case 'GET':
-                this.resultado = this.llamada.get(serverUrl + parametros);
-                break;
-            case 'PUT':
-                this.resultado =  this.llamada.put(serverUrl + parametros, payload);
-                break;
-            case 'DELETE':
-                this.resultado = this.llamada.delete(serverUrl + parametros);
-                break;
-            default:
-                console.log('Método erróneo');
-                return;
-        }
-        return this.resultado.map((res: Response) => JSON.parse(res.json()));
+    login(url: string, param: string) {
+        return this.llamada.post(url + param, '').map((res: Response) => JSON.parse(res.json()));
     }
 
     getObjects(url: string, param: string) {

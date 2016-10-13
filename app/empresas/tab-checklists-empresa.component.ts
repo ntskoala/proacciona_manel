@@ -25,10 +25,9 @@ export class TabChecklistsEmpresaComponent {
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {
         this.subscription = empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
-                let token = sessionStorage.getItem('token');
-                let parametros = '?idempresa=' + seleccionada.id + '&token=' + token;
+                let parametros = '&idempresa=' + seleccionada.id;
                 // llamada al servidor para conseguir las checklists
-                this.servidor.llamadaServidor('GET', URLS.CHECKLISTS, parametros).subscribe(
+                this.servidor.getObjects(URLS.CHECKLISTS, parametros).subscribe(
                     response => {
                         // ocultamos mostrar control checklists
                         this.checklistNumber = 0;
@@ -49,9 +48,8 @@ export class TabChecklistsEmpresaComponent {
     }
 
     borrarChecklist() {
-        let token = sessionStorage.getItem('token');
-        let parametros = '?id=' +  this.checklistNumber + '&token=' + token;
-        this.servidor.llamadaServidor('DELETE', URLS.CHECKLISTS, parametros).subscribe(
+        let parametros = '?id=' +  this.checklistNumber;
+        this.servidor.deleteObject(URLS.CHECKLISTS, parametros).subscribe(
             response => {
                 if (response.success) {
                     let checklistBorrar = this.checklists.find(checklist => checklist.id == this.checklistNumber);
@@ -68,9 +66,7 @@ export class TabChecklistsEmpresaComponent {
         setTimeout(() => this.active = true, 0);
         
         let nuevaChecklist = new Checklist(0, this.empresasService.seleccionada, nombre);
-        let token = sessionStorage.getItem('token');
-        let parametros = '?token=' + token;
-        this.servidor.llamadaServidor('POST', URLS.CHECKLISTS, parametros, nuevaChecklist).subscribe(
+        this.servidor.postObject(URLS.CHECKLISTS, nuevaChecklist).subscribe(
             response => {
                 // si tiene éxito
                 if (response.success) {
@@ -86,10 +82,9 @@ export class TabChecklistsEmpresaComponent {
     }
     
     mostrarControlchecklist(seleccion: number) {
-        let token = sessionStorage.getItem('token');
-        let parametros = '?idchecklist=' + seleccion + '&token=' + token;
+        let parametros = '&idchecklist=' + seleccion;
         // llamada al servidor para conseguir los controlchecklist
-        this.servidor.llamadaServidor('GET', URLS.CONTROLCHECKLISTS, parametros).subscribe(
+        this.servidor.getObjects(URLS.CONTROLCHECKLISTS, parametros).subscribe(
             response => {
                 this.controlchecklists = [];
                 if (response.success && response.data) {
@@ -113,10 +108,7 @@ export class TabChecklistsEmpresaComponent {
         setTimeout(() => this.active = true, 0);
 
         let nuevoControlchecklist = new ControlChecklist(0, this.checklistNumber, nombre);
-        let token = sessionStorage.getItem('token');
-        let parametros = '?token=' + token;
-
-        this.servidor.llamadaServidor('POST', URLS.CONTROLCHECKLISTS, parametros, nuevoControlchecklist).subscribe(
+        this.servidor.postObject(URLS.CONTROLCHECKLISTS, nuevoControlchecklist).subscribe(
             response => {
                 if (response.success) {
                     nuevoControlchecklist.id = response.id;
@@ -126,9 +118,8 @@ export class TabChecklistsEmpresaComponent {
     }
 
     borrarControlchecklist(idControlchecklist: number) {
-        let token = sessionStorage.getItem('token');
-        let parametros = '?id=' + idControlchecklist + '&token=' + token;
-        this.servidor.llamadaServidor('DELETE', URLS.CONTROLCHECKLISTS, parametros).subscribe(
+        let parametros = '?id=' + idControlchecklist;
+        this.servidor.deleteObject(URLS.CONTROLCHECKLISTS, parametros).subscribe(
             response => {
                 if (response.success) {
                     let controlchecklistBorrar = this.controlchecklists.find(controlchecklist => controlchecklist.id == idControlchecklist);
@@ -145,9 +136,8 @@ export class TabChecklistsEmpresaComponent {
     actualizarControlchecklist(idControlchecklist: number) {
         this.guardar[idControlchecklist] = false;
         let modControlchecklist = this.controlchecklists.find(controlchecklist => controlchecklist.id == idControlchecklist);
-        let token = sessionStorage.getItem('token');
-        let parametros = '?id=' +  idControlchecklist.toString() + '&token=' + token;
-        this.servidor.llamadaServidor('PUT', URLS.CONTROLCHECKLISTS, parametros, modControlchecklist).subscribe(
+        let parametros = '?id=' +  idControlchecklist;
+        this.servidor.putObject(URLS.CONTROLCHECKLISTS, parametros, modControlchecklist).subscribe(
             response => {
                 if (response.success) {
                     console.log('Controlchecklist modificado');

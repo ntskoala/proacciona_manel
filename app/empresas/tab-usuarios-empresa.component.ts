@@ -79,7 +79,7 @@ export class TabUsuariosEmpresaComponent {
     actualizarUsuario(idUsuario: number) {
         this.guardar[idUsuario] = false;
         let modUsuario = this.usuarios.find(usuario => usuario.id == idUsuario);
-        let parametros = '?id=' + idUsuario.toString();        
+        let parametros = '?id=' + idUsuario;        
         this.servidor.putObject(URLS.USUARIOS, parametros, modUsuario).subscribe(
             response => {
                 if (response.success) {

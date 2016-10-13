@@ -37,10 +37,9 @@ export class TabPermisosEmpresaComponent {
 
     seleccionarPermisos() {
         this.usuarioSeleccionado = 0;
-        let token = sessionStorage.getItem('token');
-        let parametros = '?idempresa=' + this.empresasService.seleccionada + '&token=' + token;
+        let parametros = '&idempresa=' + this.empresasService.seleccionada;
         // conseguir usuarios
-        this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
+        this.servidor.getObjects(URLS.USUARIOS, parametros).subscribe(
             response => {
                 this.usuarios = [];
                 this.usuarios.push(this.usuario);
@@ -58,7 +57,7 @@ export class TabPermisosEmpresaComponent {
                 }
         });
         // conseguir controles
-        this.servidor.llamadaServidor('GET', URLS.CONTROLES, parametros).subscribe(
+        this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
             response => {
                 this.controles = [];
                 if (response.success && response.data) {
@@ -80,7 +79,7 @@ export class TabPermisosEmpresaComponent {
                 }
         });
         // conseguir checklists
-        this.servidor.llamadaServidor('GET', URLS.CHECKLISTS, parametros).subscribe(
+        this.servidor.getObjects(URLS.CHECKLISTS, parametros).subscribe(
             response => {
                 this.checklists = [];
                 if (response.success && response.data) {
@@ -99,10 +98,9 @@ export class TabPermisosEmpresaComponent {
         this.usuarioSeleccionado = idUsuario;
         this.checkControl = [];
         this.checkChecklist = [];
-        let token = sessionStorage.getItem('token');
-        let parametros = '?idusuario=' + idUsuario + '&token=' + token;
+        let parametros = '&idusuario=' + idUsuario;
         // conseguir permissionusercontrol
-        this.servidor.llamadaServidor('GET', URLS.PERMISSION_USER_CONTROL, parametros).subscribe(
+        this.servidor.getObjects(URLS.PERMISSION_USER_CONTROL, parametros).subscribe(
             response => {
                 this.permissionusercontrols = [];
                 if (response.success && response.data) {
@@ -112,7 +110,7 @@ export class TabPermisosEmpresaComponent {
                 }
         });
         // conseguir permissionuserchecklist
-        this.servidor.llamadaServidor('GET', URLS.PERMISSION_USER_CHECKLIST, parametros).subscribe(
+        this.servidor.getObjects(URLS.PERMISSION_USER_CHECKLIST, parametros).subscribe(
             response => {
                 this.permissionuserchecklists = [];
                 if (response.success && response.data) {
@@ -125,11 +123,10 @@ export class TabPermisosEmpresaComponent {
     }
 
     changeControl(idControl: number) {
-        let token = sessionStorage.getItem('token');
-        let parametros = '?id=' + this.checkControl[idControl] + '&token=' + token;
+        let parametros = '?id=' + this.checkControl[idControl];
         if (this.checkControl[idControl]) {
             this.checkControl[idControl] = false;
-            this.servidor.llamadaServidor('DELETE', URLS.PERMISSION_USER_CONTROL, parametros).subscribe(
+            this.servidor.deleteObject(URLS.PERMISSION_USER_CONTROL, parametros).subscribe(
                 response => {
                     if (response.success) {
                         console.log('Permiso eliminado')
@@ -138,7 +135,7 @@ export class TabPermisosEmpresaComponent {
         }
         else {
             let nuevoPermiso = new PermissionUserControl(0, idControl, this.usuarioSeleccionado);
-            this.servidor.llamadaServidor('POST', URLS.PERMISSION_USER_CONTROL, parametros, nuevoPermiso).subscribe(
+            this.servidor.postObject(URLS.PERMISSION_USER_CONTROL, nuevoPermiso).subscribe(
                 response => {
                     if (response.success) {
                         this.checkControl[idControl] = response.id;
@@ -149,11 +146,10 @@ export class TabPermisosEmpresaComponent {
     }
 
     changeChecklist(idChecklist: number) {
-        let token = sessionStorage.getItem('token');
-        let parametros = '?id=' + this.checkChecklist[idChecklist] + '&token=' + token;
+        let parametros = '?id=' + this.checkChecklist[idChecklist];
         if (this.checkChecklist[idChecklist]) {
             this.checkChecklist[idChecklist] = false;
-            this.servidor.llamadaServidor('DELETE', URLS.PERMISSION_USER_CHECKLIST, parametros).subscribe(
+            this.servidor.deleteObject(URLS.PERMISSION_USER_CHECKLIST, parametros).subscribe(
                 response => {
                     if (response.success) {
                         console.log('Permiso eliminado')
@@ -162,7 +158,7 @@ export class TabPermisosEmpresaComponent {
         }
         else {
             let nuevoPermiso = new PermissionUserChecklist(0, idChecklist, this.usuarioSeleccionado);
-            this.servidor.llamadaServidor('POST', URLS.PERMISSION_USER_CHECKLIST, parametros, nuevoPermiso).subscribe(
+            this.servidor.postObject(URLS.PERMISSION_USER_CHECKLIST, nuevoPermiso).subscribe(
                 response => {
                     if (response.success) {
                         this.checkChecklist[idChecklist] = response.id;

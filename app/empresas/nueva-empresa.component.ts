@@ -23,10 +23,7 @@ export class NuevaEmpresaComponent {
         setTimeout(() => this.active = true, 0);
 
         let nuevaEmpresa = new Empresa(nombre, nif, 0);
-        let token = sessionStorage.getItem('token');
-        let parametros = '?token=' + token;
-
-        this.servidor.llamadaServidor('POST', URLS.EMPRESAS, parametros, nuevaEmpresa).subscribe(
+        this.servidor.postObject(URLS.EMPRESAS, nuevaEmpresa).subscribe(
             response => {
                 // si tiene éxito
                 if (response.success) {
