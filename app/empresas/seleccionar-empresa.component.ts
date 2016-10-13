@@ -17,6 +17,7 @@ export class SeleccionarEmpresaComponent {
     private subscription: Subscription;
     public empresa: Empresa = new Empresa('Seleccionar empresa', '', 0);
     public empresas: Empresa[] = [];
+    public modal: boolean = false;
     
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {
         // subscripción a la creación de nuevas empresa
@@ -45,6 +46,14 @@ export class SeleccionarEmpresaComponent {
         this.empresasService.seleccionarEmpresa(this.empresas.find(empresa => empresa.id == seleccion));
     }
 
+    checkBorrar() {
+        this.modal = true;
+    }
+
+    noBorrar() {
+        this.modal = false;
+    }
+
     borrarEmpresa() {
         let parametros = '?id=' +  this.empresasService.seleccionada;
         this.servidor.deleteObject(URLS.EMPRESAS, parametros).subscribe(
@@ -54,7 +63,8 @@ export class SeleccionarEmpresaComponent {
                     let indice = this.empresas.indexOf(empresaBorrar);
                     this.empresas.splice(indice, 1);
                     console.log('Empresa eliminada');
-                    this.empresasService.seleccionada = 0;        
+                    this.empresasService.seleccionada = 0;
+                    this.modal = false;
                 }
         });
     }
