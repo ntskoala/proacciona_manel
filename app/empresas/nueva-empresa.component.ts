@@ -30,6 +30,7 @@ export class NuevaEmpresaComponent {
             response => {
                 // si tiene éxito
                 if (response.success) {
+                    nuevaEmpresa.id = response.id;
                     this.empresasService.empresaCreada(nuevaEmpresa);
                     console.log('Empresa creada')
                 }

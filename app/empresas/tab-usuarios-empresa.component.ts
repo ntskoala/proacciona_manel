@@ -22,10 +22,9 @@ export class TabUsuariosEmpresaComponent {
 
         this.subscription = empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
-                let token = sessionStorage.getItem('token');
-                let parametros = '?idempresa=' + seleccionada.id + '&token=' + token;
+                let parametros = '&idempresa=' + seleccionada.id;
                 // llamada al servidor para conseguir los usuarios
-                this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
+                this.servidor.getObjects(URLS.USUARIOS, parametros).subscribe(
                     response => {
                         this.usuarios = [];
                         if (response.success && response.data) {
@@ -52,9 +51,7 @@ export class TabUsuariosEmpresaComponent {
         setTimeout(() => this.active = true, 0);
 
         let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.empresasService.seleccionada);
-        let token = sessionStorage.getItem('token');
-        let parametros = '?token=' + token;
-        this.servidor.llamadaServidor('POST', URLS.USUARIOS, parametros, nuevoUsuario).subscribe(
+        this.servidor.postObject(URLS.USUARIOS, nuevoUsuario).subscribe(
             response => {
                 if (response.success) {
                     nuevoUsuario.id = response.id;
@@ -64,9 +61,8 @@ export class TabUsuariosEmpresaComponent {
     }
 
     borrarUsuario(idUsuario: number) {
-        let token = sessionStorage.getItem('token');
-        let parametros = '?id=' + idUsuario + '&token=' + token;
-        this.servidor.llamadaServidor('DELETE', URLS.USUARIOS, parametros).subscribe(
+        let parametros = '?id=' + idUsuario;
+        this.servidor.deleteObject(URLS.USUARIOS, parametros).subscribe(
             response => {
                 if (response.success) {
                     let usuarioBorrar = this.usuarios.find(usuario => usuario.id == idUsuario);
@@ -82,10 +78,9 @@ export class TabUsuariosEmpresaComponent {
 
     actualizarUsuario(idUsuario: number) {
         this.guardar[idUsuario] = false;
-        let token = sessionStorage.getItem('token');
-        let parametros = '?id=' + idUsuario.toString() + '&token=' + token;        
         let modUsuario = this.usuarios.find(usuario => usuario.id == idUsuario);
-        this.servidor.llamadaServidor('PUT', URLS.USUARIOS, parametros, modUsuario).subscribe(
+        let parametros = '?id=' + idUsuario.toString();        
+        this.servidor.putObject(URLS.USUARIOS, parametros, modUsuario).subscribe(
             response => {
                 if (response.success) {
                     console.log('Usuario modificado');

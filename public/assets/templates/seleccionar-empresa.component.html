@@ -4,7 +4,7 @@
     </md-card-title>
     <md-card-content>
         <form>
-            <select (change)="seleccionaEmpresa($event.target.value)">
+            <select (change)="selecciona($event.target.value)">
                 <option *ngFor="let empresa of empresas" [value]="empresa.id">
                     {{empresa.nombre}}
                 </option>
