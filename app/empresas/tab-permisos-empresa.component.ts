@@ -24,7 +24,6 @@ export class TabPermisosEmpresaComponent {
     public checklists: Checklist[] = [];
     public permissionusercontrols: PermissionUserControl[] = [];
     public permissionuserchecklists: PermissionUserChecklist[] = [];
-    public empresaSeleccionada: number = 0;
     public usuarioSeleccionado: number = 0;
 
     public checkControl: number | boolean[] = [];
@@ -32,17 +31,14 @@ export class TabPermisosEmpresaComponent {
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {
         this.subscription = this.empresasService.empresaSeleccionada.subscribe(
-            seleccionada => {
-                this.empresaSeleccionada = seleccionada.id;
-                this.seleccionarPermisos();
-        });
+            seleccionada => this.seleccionarPermisos()
+        );
     }
 
     seleccionarPermisos() {
         this.usuarioSeleccionado = 0;
-        this.empresaSeleccionada = this.empresasService.seleccionada;
         let token = sessionStorage.getItem('token');
-        let parametros = '?idempresa=' + this.empresaSeleccionada + '&token=' + token;
+        let parametros = '?idempresa=' + this.empresasService.seleccionada + '&token=' + token;
         // conseguir usuarios
         this.servidor.llamadaServidor('GET', URLS.USUARIOS, parametros).subscribe(
             response => {

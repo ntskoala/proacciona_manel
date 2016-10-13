@@ -14,7 +14,6 @@ import {Usuario} from '../objetos/usuario';
 export class TabUsuariosEmpresaComponent {
 
     private subscription: Subscription;
-    public seleccionada: number;
     public usuarios: Usuario[] = [];
     public active: boolean = true;
     public guardar = [];
@@ -23,7 +22,6 @@ export class TabUsuariosEmpresaComponent {
 
         this.subscription = empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
-                this.seleccionada = seleccionada.id;
                 let token = sessionStorage.getItem('token');
                 let parametros = '?idempresa=' + seleccionada.id + '&token=' + token;
                 // llamada al servidor para conseguir los usuarios
@@ -53,7 +51,7 @@ export class TabUsuariosEmpresaComponent {
         this.active = false;
         setTimeout(() => this.active = true, 0);
 
-        let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.seleccionada);
+        let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.empresasService.seleccionada);
         let token = sessionStorage.getItem('token');
         let parametros = '?token=' + token;
         this.servidor.llamadaServidor('POST', URLS.USUARIOS, parametros, nuevoUsuario).subscribe(

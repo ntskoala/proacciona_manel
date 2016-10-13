@@ -14,9 +14,7 @@ import {ControlChecklist} from '../objetos/controlchecklist';
 })
 export class TabChecklistsEmpresaComponent {
 
-    private subscription1: Subscription;
-    private subscription2: Subscription;
-    public seleccionada: number = 0;
+    private subscription: Subscription;
     public checklistNumber: number = 0;
     public checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist');
     public checklists: Checklist[] = [];
@@ -25,9 +23,8 @@ export class TabChecklistsEmpresaComponent {
     public active: boolean = true;
     
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {
-        this.subscription1 = empresasService.empresaSeleccionada.subscribe(
+        this.subscription = empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
-                this.seleccionada = seleccionada.id;
                 let token = sessionStorage.getItem('token');
                 let parametros = '?idempresa=' + seleccionada.id + '&token=' + token;
                 // llamada al servidor para conseguir las checklists
@@ -49,14 +46,6 @@ export class TabChecklistsEmpresaComponent {
                         }
                 });
         });
-        this.subscription2 = empresasService.nuevaChecklist.subscribe(
-            checklist => this.checklists.push(checklist)
-        );
-    }
-
-    seleccionaChecklist(seleccion: number){
-        this.empresasService.seleccionarChecklist(this.checklists.find(checklist => checklist.id == seleccion));
-        this.mostrarControlchecklist(seleccion);
     }
 
     borrarChecklist() {
@@ -78,7 +67,7 @@ export class TabChecklistsEmpresaComponent {
         this.active = false;
         setTimeout(() => this.active = true, 0);
         
-        let nuevaChecklist = new Checklist(0, this.seleccionada, nombre);
+        let nuevaChecklist = new Checklist(0, this.empresasService.seleccionada, nombre);
         let token = sessionStorage.getItem('token');
         let parametros = '?token=' + token;
         this.servidor.llamadaServidor('POST', URLS.CHECKLISTS, parametros, nuevaChecklist).subscribe(
@@ -86,7 +75,7 @@ export class TabChecklistsEmpresaComponent {
                 // si tiene éxito
                 if (response.success) {
                     nuevaChecklist.id = response.id;
-                    this.empresasService.checklistCreada(nuevaChecklist);
+                    this.checklists.push(nuevaChecklist);
                     console.log('Checklist creada');
                 }
                 // checklist errónea

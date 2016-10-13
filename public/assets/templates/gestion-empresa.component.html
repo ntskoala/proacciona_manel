@@ -1,4 +1,4 @@
-<div [class.hide]="seleccionada == 0">
+<div [class.hide]="empresasService.seleccionada == 0">
     <md-card>
         <md-card-title>
             <md-toolbar color="accent">Tablas</md-toolbar>
@@ -6,7 +6,7 @@
         <md-card-subtitle>
             <button md-button color="primary" (click)="cambiarTab('usuarios')">Usuarios</button>
             <button md-button color="primary" (click)="cambiarTab('controles')">Controles</button>
-            <button md-button color="primary" (click)="cambiarTab('checklists')">Check Lists</button>
+            <button md-button color="primary" (click)="cambiarTab('checklists')">Checklists</button>
             <button md-button color="primary" (click)="cambiarTab('permisos'); permisos.seleccionarPermisos()">Permisos</button>
         </md-card-subtitle>
         <md-card-content>

@@ -15,7 +15,6 @@ import {Control} from '../objetos/control';
 export class TabControlesEmpresaComponent {
 
     private subscription: Subscription;
-    public seleccionada: number;
     public controles: Control[] = [];
     public active: boolean = true;
     public guardar = [];
@@ -24,7 +23,6 @@ export class TabControlesEmpresaComponent {
 
         this.subscription = empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
-                this.seleccionada = seleccionada.id;
                 let token = sessionStorage.getItem('token');
                 let parametros = '?idempresa=' + seleccionada.id + '&token=' + token; 
                 this.servidor.llamadaServidor('GET', URLS.CONTROLES, parametros).subscribe(
@@ -60,7 +58,7 @@ export class TabControlesEmpresaComponent {
         setTimeout(() => this.active = true, 0);
 
         let nuevoControl = new Control(0, nombre, pla, minimo, maximo, objetivo,
-            tolerancia, critico, periodicidad, periodo, this.seleccionada);
+            tolerancia, critico, periodicidad, periodo, this.empresasService.seleccionada);
         let token = sessionStorage.getItem('token');
         let parametros = '?token=' + token;
 

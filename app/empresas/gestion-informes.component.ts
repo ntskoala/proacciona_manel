@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
 
@@ -10,15 +9,9 @@ import {EmpresasService} from './empresas.service';
 })
 export class GestionInformesComponent {
 
-    private subscription: Subscription;
-    public seleccionada: number = 0;
     public tabActivo = 'controles';
 
-    constructor(private empresasService: EmpresasService) {
-        this.subscription = empresasService.empresaSeleccionada.subscribe(
-            seleccionada => this.seleccionada = seleccionada.id
-        )
-    }
+    constructor(private empresasService: EmpresasService) {}
 
     cambiarTab(tab: string) {
         this.tabActivo = tab;
