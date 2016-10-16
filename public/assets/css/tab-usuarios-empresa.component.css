@@ -19,8 +19,5 @@ select {
     border-radius: 0;
     padding: 0.2rem;
 	background: url('public/assets/images/keyboard_arrow_down.svg') no-repeat 97% 50% #fff;
-}
-    
-select:focus {
-	outline: 0;
+    outline: 0;
 }

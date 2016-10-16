@@ -6,10 +6,12 @@
         <md-card-subtitle>
             <button md-button color="primary" (click)="cambiarTab('controles')">Controles</button>
             <button md-button color="primary" (click)="cambiarTab('checklists')">Checklists</button>
+            <button md-button color="primary" (click)="cambiarTab('periodicidad')">Periodicidad</button>
         </md-card-subtitle>
         <md-card-content>
             <tab-control-informes class="tab" [class.active]="tabActivo=='controles'"></tab-control-informes>
             <tab-checklist-informes class="tab" [class.active]="tabActivo=='checklists'"></tab-checklist-informes>
+            <tab-periodicidad-informes class="tab" [class.active]="tabActivo=='periodicidad'"></tab-periodicidad-informes>
         </md-card-content>
     </md-card>
 </div>

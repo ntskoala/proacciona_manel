@@ -34,4 +34,5 @@ export class Servidor {
         let parametros = param + '&token=' + sessionStorage.getItem('token');
         return this.llamada.delete(url + parametros).map((res: Response) => JSON.parse(res.json()));
     }
+
 }

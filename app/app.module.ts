@@ -19,6 +19,7 @@ import {TabChecklistsEmpresaComponent} from './empresas/tab-checklists-empresa.c
 import {TabPermisosEmpresaComponent} from './empresas/tab-permisos-empresa.component';
 import {TabControlInformesComponent} from './empresas/tab-control-informes.component';
 import {TabChecklistInformesComponent} from './empresas/tab-checklist-informes.component';
+import {TabPeriodicidadInformesComponent} from './empresas/tab-periodicidad-informes.component';
 import {PageNotFoundComponent} from './404.component';
 
 import {routing} from './app.routing';
@@ -50,6 +51,7 @@ import {EmpresasService} from './empresas/empresas.service';
         TabPermisosEmpresaComponent,
         TabControlInformesComponent,
         TabChecklistInformesComponent,
+        TabPeriodicidadInformesComponent,
         PageNotFoundComponent
     ],
     providers: [

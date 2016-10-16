@@ -47,7 +47,9 @@ export class SeleccionarEmpresaComponent {
     }
 
     checkBorrar() {
-        this.modal = true;
+        if (this.empresasService.seleccionada != 0) {
+            this.modal = true;
+        }
     }
 
     noBorrar() {
