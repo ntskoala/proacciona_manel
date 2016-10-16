@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
@@ -11,16 +11,17 @@ import {Usuario} from '../objetos/usuario';
     templateUrl: 'public/assets/templates/tab-usuarios-empresa.component.html',
     styleUrls: ['public/assets/css/tab-usuarios-empresa.component.css']
 })
-export class TabUsuariosEmpresaComponent {
+export class TabUsuariosEmpresaComponent implements OnInit {
 
     private subscription: Subscription;
     public usuarios: Usuario[] = [];
     public active: boolean = true;
     public guardar = [];
 
-    constructor(private servidor: Servidor, private empresasService: EmpresasService) {
+    constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
-        this.subscription = empresasService.empresaSeleccionada.subscribe(
+    ngOnInit() {
+        this.subscription = this.empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
                 let parametros = '&idempresa=' + seleccionada.id;
                 // llamada al servidor para conseguir los usuarios
@@ -42,7 +43,6 @@ export class TabUsuariosEmpresaComponent {
                         }
                 });
         });
-
     }
 
     crearUsuario(usuario: string, password: string, tipo: string) {

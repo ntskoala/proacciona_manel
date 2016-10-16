@@ -1,3 +1,17 @@
+<!-- Modal aviso borrado checklist -->
+<div class="modal" *ngIf="modal">
+    <div class="modal-window">
+        <md-card>
+            <md-card-content>
+                <p class="aviso">¿Estás seguro de querer eliminar la checklist?</p>
+                <p>Se borrarán los resultados asociados a la checklist y los permisos de los usuarios.</p>
+                <button md-button color="primary" (click)="borrarChecklist()" type="submit">Eliminar</button>
+                <button md-button color="primary" (click)="noBorrar()" type="submit">Cancelar</button>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>
+
 <div class="left">
     <div class="seleccionar-checklist">
         <h2>Checklist</h2>
@@ -8,7 +22,7 @@
                 </option>
             </select>
         </form>
-        <button md-button color="primary" (click)="borrarChecklist()" type="submit">Eliminar</button>
+        <button md-button color="primary" (click)="checkBorrar()" type="submit">Eliminar</button>
     </div>
 
     <div class="nueva-checklist">

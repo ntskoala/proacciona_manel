@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
@@ -12,21 +12,22 @@ import {Empresa} from '../objetos/empresa';
     styleUrls: ['public/assets/css/seleccionar-empresa.component.css']
 })
 
-export class SeleccionarEmpresaComponent {
+export class SeleccionarEmpresaComponent implements OnInit {
     
     private subscription: Subscription;
     public empresa: Empresa = new Empresa('Seleccionar empresa', '', 0);
     public empresas: Empresa[] = [];
     public modal: boolean = false;
     
-    constructor(private servidor: Servidor, private empresasService: EmpresasService) {
+    constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
+
+    ngOnInit() {
         // subscripción a la creación de nuevas empresa
         this.subscription = this.empresasService.nuevaEmpresa.subscribe(
             empresa => this.empresas.push(empresa)
         );
         // conseguir la lista de empresas
         this.empresas.push(this.empresa);
-        // this.servidor.llamadaServidor('GET', URLS.EMPRESAS, parametros).subscribe(
         this.servidor.getObjects(URLS.EMPRESAS, '').subscribe(
             response => {
                 if (response.success) {

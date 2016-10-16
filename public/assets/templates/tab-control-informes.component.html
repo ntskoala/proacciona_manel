@@ -15,9 +15,10 @@
     </div>
     <div class="row" *ngFor="let resultado of tabla">
         <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy"}}</span>
-        <span class="cell" *ngFor="let columna of columnas">{{resultado[columna]}}</span>
-        <!--<span class="cell">{{resultado['control2']}}</span>
-        <span class="cell">{{resultado['control3']}}</span>-->
+        <span class="cell" *ngFor="let columna of columnas">
+            {{resultado[columna]}}
+            <!--{{resultado.foto}}-->
+        </span>
     </div>
 
 </div>

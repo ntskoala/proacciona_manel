@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
@@ -12,7 +12,7 @@ import {ControlChecklist} from '../objetos/controlchecklist';
     templateUrl: 'public/assets/templates/tab-checklists-empresa.component.html',
     styleUrls: ['public/assets/css/tab-checklists-empresa.component.css']
 })
-export class TabChecklistsEmpresaComponent {
+export class TabChecklistsEmpresaComponent implements OnInit{
 
     private subscription: Subscription;
     public checklistNumber: number = 0;
@@ -21,9 +21,12 @@ export class TabChecklistsEmpresaComponent {
     public controlchecklists: ControlChecklist[] = [];
     public guardar = [];
     public active: boolean = true;
+    public modal: boolean = false;
     
-    constructor(private servidor: Servidor, private empresasService: EmpresasService) {
-        this.subscription = empresasService.empresaSeleccionada.subscribe(
+    constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
+
+    ngOnInit() {
+        this.subscription = this.empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
                 let parametros = '&idempresa=' + seleccionada.id;
                 // llamada al servidor para conseguir las checklists
@@ -47,6 +50,17 @@ export class TabChecklistsEmpresaComponent {
         });
     }
 
+    checkBorrar() {
+        if (this.empresasService.seleccionada != 0) {
+            this.modal = true;
+        }
+    }
+
+    noBorrar() {
+        this.modal = false;
+    }
+
+
     borrarChecklist() {
         let parametros = '?id=' +  this.checklistNumber;
         this.servidor.deleteObject(URLS.CHECKLISTS, parametros).subscribe(
@@ -55,7 +69,8 @@ export class TabChecklistsEmpresaComponent {
                     let checklistBorrar = this.checklists.find(checklist => checklist.id == this.checklistNumber);
                     let indice = this.checklists.indexOf(checklistBorrar);
                     this.checklists.splice(indice, 1);
-                    console.log('Checklist eliminada')
+                    console.log('Checklist eliminada');
+                    this.modal = false;
                 }
         });
     }

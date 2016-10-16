@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 
 import {EmpresasService} from './empresas.service';
@@ -12,16 +12,17 @@ import {Control} from '../objetos/control';
     styleUrls: ['public/assets/css/tab-controles-empresa.component.css']
 })
 
-export class TabControlesEmpresaComponent {
+export class TabControlesEmpresaComponent implements OnInit {
 
     private subscription: Subscription;
     public controles: Control[] = [];
     public active: boolean = true;
     public guardar = [];
 
-    constructor(private servidor: Servidor, private empresasService: EmpresasService) {
+    constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
-        this.subscription = empresasService.empresaSeleccionada.subscribe(
+    ngOnInit() {
+        this.subscription = this.empresasService.empresaSeleccionada.subscribe(
             seleccionada => {
                 let parametros = '&idempresa=' + seleccionada.id; 
                 this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
@@ -47,7 +48,6 @@ export class TabControlesEmpresaComponent {
                         }
                 });
         });
-
     }
 
     crearControl(nombre: string, pla: string, minimo:number, maximo: number, objetivo: number,
