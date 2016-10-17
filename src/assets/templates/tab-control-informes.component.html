@@ -1,0 +1,24 @@
+<h2>Informes de control</h2>
+
+<div class="fechas">
+    <form (ngSubmit)="filtrarFechas(principio.value, fin.value)" #filtrarFechasForm="ngForm">
+        <md-input placeholder="Inicio" type="date" required [(ngModel)]="principio.value" name="principio" #principio="ngModel"></md-input>
+        <md-input placeholder="Fin" type="date" required [(ngModel)]="fin.value" name="fin" #fin="ngModel"></md-input>
+        <button md-raised-button color="accent" [disabled]="!filtrarFechasForm.form.valid" type="submit">Enviar</button>
+    </form>
+</div>
+
+<div class="table">
+    <div class="header-row">
+        <span class="header-cell">Fecha</span>
+        <span class="header-cell" *ngFor="let columna of columnas">{{columna}}</span>
+    </div>
+    <div class="row" *ngFor="let resultado of tabla">
+        <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy"}}</span>
+        <span class="cell" *ngFor="let columna of columnas">
+            {{resultado[columna]}}
+            <!--<img src="{{resultado.foto}}" alt="">-->
+        </span>
+    </div>
+
+</div>
