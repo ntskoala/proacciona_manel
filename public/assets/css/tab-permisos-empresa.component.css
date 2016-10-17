@@ -24,7 +24,7 @@ select {
     -moz-appearance: none;
     appearance: none;
     min-width: 300px;
-    font: 600 1rem 'Open Sans', sans-serif;
+    font-size: 0.9rem;
     border: 1px solid #fbc02d;
     border-radius: 0;
     padding: 0.3rem 0.6rem;

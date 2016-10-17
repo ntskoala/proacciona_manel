@@ -44,13 +44,15 @@ export class TabControlInformesComponent implements OnInit {
     }
 
     filtrarFechas(fechaInicio: string, fechaFin: string) {
+        console.log(fechaInicio, fechaFin);
         let inicio = new Date(fechaInicio);
         let fin = new Date(fechaFin);
         fin.setDate(fin.getDate() + 1);
         // conseguir resultadoscontrol
-        let parametros = '&idempresa=' + this.empresasService.seleccionada; 
+        let parametros = '&idempresa=' + this.empresasService.seleccionada; // fechainicio, fechafin
         this.servidor.getObjects(URLS.RESULTADOS_CONTROL, parametros).subscribe(
             response => {
+                console.log(response);
                 this.resultadoscontrol = [];
                 if (response.success && response.data) {
                     for (let i = 0; i < response.data.length; i++) {
@@ -65,6 +67,7 @@ export class TabControlInformesComponent implements OnInit {
                             ));
                         }
                     }
+                    console.log(this.resultadoscontrol);
                 }
                 for (let i = 0; i < this.resultadoscontrol.length; i++) {
                     for (let x = 0; x < this.controles.length; x++) {

@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'empresas',
@@ -6,4 +7,12 @@ import {Component} from '@angular/core';
     styleUrls: ['public/assets/css/empresas.component.css'],
 })
 
-export class EmpresasComponent {}
+export class EmpresasComponent implements OnInit {
+    constructor(private router: Router) {}
+    ngOnInit() {
+        let token = sessionStorage.getItem('token');
+        if (!token) {
+            this.router.navigate(['login']);
+        }
+    }
+}

@@ -1,15 +1,15 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {Servidor} from '../empresas/servidor.service';
-import {URLS} from '../config';
+import {Servidor} from './empresas/servidor.service';
+import {URLS} from './config';
 
 @Component({
-    selector: 'login-form',
-    templateUrl: 'public/assets/templates/login-form.component.html',
-    styleUrls: ['public/assets/css/login-form.component.css']
+    selector: 'login',
+    templateUrl: 'public/assets/templates/login.component.html',
+    styleUrls: ['public/assets/css/login.component.css']
 })
-export class LoginFormComponent {
+export class LoginComponent {
 
     public active = true;
 
@@ -30,7 +30,7 @@ export class LoginFormComponent {
                     sessionStorage.setItem('usuario', response.data[0].usuario);
                     sessionStorage.setItem('empresa', response.data[0].idempresa);
                     // redirecciona a home
-                    this.router.navigate(['home']);
+                    this.router.navigate(['empresas']);
                 }
                 // usuario erróneo
                 else {

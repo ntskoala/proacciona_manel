@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -10,4 +11,9 @@ import 'rxjs/add/operator/map';
         </div>
     `
 })
-export class AppComponent { }
+export class AppComponent implements OnInit {
+    constructor(private router: Router) {}
+    ngOnInit() {
+        this.router.navigate(['empresas']);
+    }
+}

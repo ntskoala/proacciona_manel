@@ -5,9 +5,8 @@ import {HttpModule, JsonpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
-import {NavComponent} from './nav/nav.component';
-import {LoginFormComponent} from './login/login-form.component';
+import {NavComponent} from './nav.component';
+import {LoginComponent} from './login.component';
 import {EmpresasComponent} from './empresas/empresas.component';
 import {SeleccionarEmpresaComponent} from './empresas/seleccionar-empresa.component';
 import {NuevaEmpresaComponent} from './empresas/nueva-empresa.component';
@@ -37,9 +36,8 @@ import {EmpresasService} from './empresas/empresas.service';
     ],
     declarations: [
         AppComponent,
-        HomeComponent,
         NavComponent,
-        LoginFormComponent,
+        LoginComponent,
         EmpresasComponent,
         SeleccionarEmpresaComponent,
         NuevaEmpresaComponent,
