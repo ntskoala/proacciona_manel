@@ -26,7 +26,7 @@ select {
     border: 1px solid #fbc02d;
     border-radius: 0;
     padding: 0.3rem 0.6rem;
-	background: url('../images/keyboard_arrow_down.svg') no-repeat 97% 50% #fff9c4;
+	background: url('src/assets/images/keyboard_arrow_down.svg') no-repeat 97% 50% #fff9c4;
     outline: 0;
 }
 

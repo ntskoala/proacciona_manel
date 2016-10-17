@@ -30,6 +30,7 @@ export class TabControlInformesComponent implements OnInit {
                     response => {
                         this.controles = [];
                         this.columnas = [];
+                        this.tabla = [];
                         if (response.success && response.data) {
                             for (let i = 0; i < response.data.length; i++) {
                                 this.controles.push({
@@ -44,20 +45,16 @@ export class TabControlInformesComponent implements OnInit {
     }
 
     filtrarFechas(fechaInicio: string, fechaFin: string) {
-        console.log(fechaInicio, fechaFin);
-        let inicio = new Date(fechaInicio);
-        let fin = new Date(fechaFin);
-        fin.setDate(fin.getDate() + 1);
         // conseguir resultadoscontrol
-        let parametros = '&idempresa=' + this.empresasService.seleccionada; // fechainicio, fechafin
+        let parametros = '&idempresa=' + this.empresasService.seleccionada + '&fechainicio=' + fechaInicio + '&fechafin=' + fechaFin;
         this.servidor.getObjects(URLS.RESULTADOS_CONTROL, parametros).subscribe(
             response => {
                 console.log(response);
                 this.resultadoscontrol = [];
+                this.tabla = [];
                 if (response.success && response.data) {
                     for (let i = 0; i < response.data.length; i++) {
                         let fecha = new Date(response.data[i].fecha);
-                        if (fecha >= inicio && fecha <= fin) {
                             this.resultadoscontrol.push(new ResultadoControl(
                                 response.data[i].id,
                                 response.data[i].idcontrol,
@@ -65,18 +62,16 @@ export class TabControlInformesComponent implements OnInit {
                                 new Date(response.data[i].fecha),
                                 response.data[i].foto
                             ));
-                        }
                     }
-                    console.log(this.resultadoscontrol);
                 }
                 for (let i = 0; i < this.resultadoscontrol.length; i++) {
                     for (let x = 0; x < this.controles.length; x++) {
                         if (this.controles[x].id == this.resultadoscontrol[i].idcontrol) {
-                        this.resultado = new Object;
-                        this.resultado['fecha'] = this.resultadoscontrol[i].fecha;
-                        this.resultado[this.controles[x].nombre] = this.resultadoscontrol[i].resultado;
-                        this.resultado['foto'] = this.resultadoscontrol[i].foto;
-                        this.tabla.push(this.resultado);
+                            this.resultado = new Object;
+                            this.resultado['fecha'] = this.resultadoscontrol[i].fecha;
+                            this.resultado[this.controles[x].nombre] = this.resultadoscontrol[i].resultado;
+                            this.resultado['foto'] = this.resultadoscontrol[i].foto;
+                            this.tabla.push(this.resultado);
                         }
                     }
                 }

@@ -69,6 +69,7 @@ export class TabChecklistsEmpresaComponent implements OnInit{
                     let checklistBorrar = this.checklists.find(checklist => checklist.id == this.checklistNumber);
                     let indice = this.checklists.indexOf(checklistBorrar);
                     this.checklists.splice(indice, 1);
+                    this.checklistNumber = 0;                    
                     console.log('Checklist eliminada');
                     this.modal = false;
                 }
