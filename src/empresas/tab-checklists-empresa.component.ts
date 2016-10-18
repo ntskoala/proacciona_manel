@@ -21,7 +21,9 @@ export class TabChecklistsEmpresaComponent implements OnInit{
     public controlchecklists: ControlChecklist[] = [];
     public guardar = [];
     public active: boolean = true;
-    public modal: boolean = false;
+    public modalChecklist: boolean = false;
+    public modalControlchecklist: boolean = false;
+    public idBorrar: number;
     
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -50,16 +52,15 @@ export class TabChecklistsEmpresaComponent implements OnInit{
         });
     }
 
-    checkBorrar() {
+    checkBorrarChecklist() {
         if (this.empresasService.seleccionada != 0) {
-            this.modal = true;
+            this.modalChecklist = true;
         }
     }
 
-    noBorrar() {
-        this.modal = false;
+    noBorrarChecklist() {
+        this.modalChecklist = false;
     }
-
 
     borrarChecklist() {
         let parametros = '?id=' +  this.checklistNumber;
@@ -71,7 +72,7 @@ export class TabChecklistsEmpresaComponent implements OnInit{
                     this.checklists.splice(indice, 1);
                     this.checklistNumber = 0;                    
                     console.log('Checklist eliminada');
-                    this.modal = false;
+                    this.modalChecklist = false;
                 }
         });
     }
@@ -133,14 +134,24 @@ export class TabChecklistsEmpresaComponent implements OnInit{
         });
     }
 
-    borrarControlchecklist(idControlchecklist: number) {
-        let parametros = '?id=' + idControlchecklist;
+    checkBorrarControlchecklist(idControlchecklist: number) {
+        this.modalControlchecklist = true;
+        this.idBorrar = idControlchecklist;
+    }
+
+    noBorrarControlchecklist() {
+        this.modalControlchecklist = false;
+    }
+
+    borrarControlchecklist() {
+        let parametros = '?id=' + this.idBorrar;
         this.servidor.deleteObject(URLS.CONTROLCHECKLISTS, parametros).subscribe(
             response => {
                 if (response.success) {
-                    let controlchecklistBorrar = this.controlchecklists.find(controlchecklist => controlchecklist.id == idControlchecklist);
+                    let controlchecklistBorrar = this.controlchecklists.find(controlchecklist => controlchecklist.id == this.idBorrar);
                     let indice = this.controlchecklists.indexOf(controlchecklistBorrar);
                     this.controlchecklists.splice(indice, 1);
+                    this.modalControlchecklist = false;
                 }
         });
     }

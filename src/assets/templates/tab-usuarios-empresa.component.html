@@ -29,7 +29,9 @@
         </span>
         <span class="cell"></span>
         <span class="cell">
-            <button md-raised-button color="accent" [disabled]="!crearUsuarioForm.form.valid" type="submit">Crear</button>
+            <button md-mini-fab color="accent" [disabled]="!crearUsuarioForm.form.valid" type="submit">
+                <span class="material-icons">add</span>
+            </button>
         </span>
     </form>
     <div class="header-row">
@@ -54,10 +56,14 @@
             </select>
         </span>
         <span class="cell">
-            <button md-button color="primary" (click)="checkBorrar(usuario.id)" type="button">Borrar</button>
+            <button md-mini-fab color="primary" (click)="checkBorrar(usuario.id)" type="submit">
+                <span class="material-icons">close</span>
+            </button>
         </span>
         <span class="cell">
-            <button md-button color="primary" [disabled]="!guardar[usuario.id]" type="submit">Guardar</button>                
+            <button md-mini-fab color="primary" [disabled]="!guardar[usuario.id]" type="submit">
+                <span class="material-icons">check</span>
+            </button>                
         </span>
     </form>
 </div>

@@ -1,12 +1,26 @@
 <!-- Modal aviso borrado checklist -->
-<div class="modal" *ngIf="modal">
+<div class="modal" *ngIf="modalChecklist">
     <div class="modal-window">
         <md-card>
             <md-card-content>
                 <p class="aviso">¿Estás seguro de querer eliminar la checklist?</p>
                 <p>Se borrarán los resultados asociados a la checklist y los permisos de los usuarios.</p>
                 <button md-button color="primary" (click)="borrarChecklist()" type="submit">Eliminar</button>
-                <button md-button color="primary" (click)="noBorrar()" type="submit">Cancelar</button>
+                <button md-button color="primary" (click)="noBorrarChecklist()" type="submit">Cancelar</button>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>
+
+<!-- Modal aviso borrado control checklist-->
+<div class="modal" *ngIf="modalControlchecklist">
+    <div class="modal-window">
+        <md-card>
+            <md-card-content>
+                <p class="aviso">¿Estás seguro de querer eliminar el control checklist?</p>
+                <p>Se borrarán sus resultados asociados.</p>
+                <button md-button color="primary" (click)="borrarControlchecklist()" type="submit">Eliminar</button>
+                <button md-button color="primary" (click)="noBorrarControlchecklist()" type="submit">Cancelar</button>
             </md-card-content>
         </md-card>
     </div>
@@ -22,7 +36,7 @@
                 </option>
             </select>
         </form>
-        <button md-button color="primary" (click)="checkBorrar()" type="submit">Eliminar</button>
+        <button md-button color="primary" (click)="checkBorrarChecklist()" type="submit">Eliminar</button>
     </div>
 
     <div class="nueva-checklist">
@@ -43,7 +57,9 @@
                 </span>
                 <span class="cell"></span>
                 <span class="cell">
-                    <button md-raised-button color="accent" [disabled]="!crearControlchecklistForm.form.valid" type="submit">Crear</button>
+                    <button md-mini-fab color="accent" [disabled]="!crearControlchecklistForm.form.valid" type="submit">
+                        <span class="material-icons">add</span>
+                    </button>
                 </span>
             </form>
             <div class="header-row">
@@ -60,10 +76,14 @@
                     <input type="text" name="modNombre" [(ngModel)]="controlchecklist.nombre" (keyup)="modificarControlchecklist(controlchecklist.id)" #modNombre="ngModel">
                 </span>
                 <span class="cell">
-                    <button md-button color="primary" (click)="borrarControlchecklist(controlchecklist.id)" type="button">Borrar</button>
+                    <button md-mini-fab color="primary" (click)="checkBorrarControlchecklist(controlchecklist.id)" type="submit">
+                        <span class="material-icons">close</span>
+                    </button>
                 </span>
                 <span class="cell">
-                    <button md-button color="primary" [disabled]="!guardar[controlchecklist.id]" type="submit">Guardar</button>                
+                    <button md-mini-fab color="primary" [disabled]="!guardar[controlchecklist.id]" type="submit">
+                        <span class="material-icons">check</span>
+                    </button>                
                 </span>
             </form>
         </div>

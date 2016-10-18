@@ -1,6 +1,6 @@
-npm-debug.log
 node_modules/
+typings/
 build/
 dist/
-typings/
 src/config.ts
+npm-debug.log

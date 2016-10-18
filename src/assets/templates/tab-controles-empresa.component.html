@@ -44,7 +44,9 @@
         </span>
         <span class="cell"></span>
         <span class="cell">
-            <button md-raised-button color="accent" [disabled]="!crearControlForm.form.valid" type="submit">Crear</button>
+            <button md-mini-fab color="accent" [disabled]="!crearControlForm.form.valid" type="submit">
+                <span class="material-icons">add</span>
+            </button>
         </span>
     </form>
     <div class="header-row">
@@ -89,10 +91,14 @@
             <input type="text" [(ngModel)]="control.tipoperiodo" name="modTipoPeriodo" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <button md-button color="primary" (click)="checkBorrar(control.id)" type="button">Borrar</button>
+            <button md-mini-fab color="primary" (click)="checkBorrar(control.id)" type="submit">
+                <span class="material-icons">close</span>
+            </button>
         </span>
         <span class="cell">
-            <button md-button color="primary" [disabled]="!guardar[control.id]" type="submit">Guardar</button>                
+            <button md-mini-fab color="primary" [disabled]="!guardar[control.id]" type="submit">
+                <span class="material-icons">check</span>
+            </button>                
         </span>
     </form>
 </div>
