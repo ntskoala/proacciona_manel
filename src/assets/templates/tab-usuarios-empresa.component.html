@@ -1,13 +1,27 @@
+<!-- Modal aviso borrado usuario-->
+<div class="modal" *ngIf="modal">
+    <div class="modal-window">
+        <md-card>
+            <md-card-content>
+                <p class="aviso">¿Estás seguro de querer eliminar el usuario?</p>
+                <p>Se borrarán todos sus permisos.</p>
+                <button md-button color="primary" (click)="borrarUsuario()" type="submit">Eliminar</button>
+                <button md-button color="primary" (click)="noBorrar()" type="submit">Cancelar</button>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>
+
 <div class="table">
-    <form class="row" *ngIf="active" (ngSubmit)="crearUsuario(usuario.value, password.value, tipo.value)" #crearUsuarioForm="ngForm">
+    <form class="row" #crearUsuarioForm="ngForm" (ngSubmit)="crearUsuario(crearUsuarioForm.value)">
         <span class="cell">
-            <input type="text" name="usuario" placeholder="usuario" [(ngModel)]="usuario.value" required #usuario="ngModel">
+            <input type="text" placeholder="Usuario" required [(ngModel)]="nuevoUsuario.usuario" name="usuario">
         </span>
         <span class="cell">
-            <input type="text" name="password" placeholder="password" [(ngModel)]="password.value" required #password="ngModel">                
+            <input type="text" placeholder="Password" required [(ngModel)]="nuevoUsuario.password" name="password">                
         </span>
         <span class="cell">
-            <select name="tipo" [(ngModel)]="tipo.value" required #tipo="ngModel">
+            <select name="tipouser" required [(ngModel)]="nuevoUsuario.tipouser" name="tipouser">
                 <option>Normal</option>
                 <option>Gerente</option>
                 <option>Administrador</option>
@@ -25,26 +39,22 @@
         <span class="header-cell"></span>
         <span class="header-cell"></span>
     </div>
-    <form class="row"
-        *ngFor="let usuario of usuarios"
-        (ngSubmit)="actualizarUsuario(usuario.id)"
-        #actualizarUsuarioForm="ngForm"
-    >
+    <form class="row" #actualizarUsuarioForm="ngForm" (ngSubmit)="actualizarUsuario(usuario.id)" *ngFor="let usuario of usuarios">
         <span class="cell">
-            <input type="text" name="modUsuario" [(ngModel)]="usuario.usuario" (keyup)="modificarUsuario(usuario.id)" #modUsuario="ngModel">
+            <input type="text" [(ngModel)]="usuario.usuario" name="modUsuario" (keyup)="modificarUsuario(usuario.id)">
         </span>
         <span class="cell">
-            <input type="text" name="modPassword" [(ngModel)]="usuario.password" (keyup)="modificarUsuario(usuario.id)" #modPassword="ngModel">
+            <input type="text" [(ngModel)]="usuario.password" name="modPassword" (keyup)="modificarUsuario(usuario.id)">
         </span>
         <span class="cell">
-            <select name="modTipo" [(ngModel)]="usuario.tipouser" (change)="modificarUsuario(usuario.id)" #modTipo="ngModel">
+            <select [(ngModel)]="usuario.tipouser" name="modTipo" (change)="modificarUsuario(usuario.id)">
                 <option>Normal</option>
                 <option>Gerente</option>
                 <option>Administrador</option>
             </select>
         </span>
         <span class="cell">
-            <button md-button color="primary" (click)="borrarUsuario(usuario.id)" type="button">Borrar</button>
+            <button md-button color="primary" (click)="checkBorrar(usuario.id)" type="button">Borrar</button>
         </span>
         <span class="cell">
             <button md-button color="primary" [disabled]="!guardar[usuario.id]" type="submit">Guardar</button>                

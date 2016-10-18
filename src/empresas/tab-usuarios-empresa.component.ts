@@ -15,8 +15,11 @@ export class TabUsuariosEmpresaComponent implements OnInit {
 
     private subscription: Subscription;
     public usuarios: Usuario[] = [];
-    public active: boolean = true;
     public guardar = [];
+    public nuevoUsuario: Object = {usuario: '', password: '', tipouser: 'Normal'};
+    public idBorrar: number;
+    public modal: boolean = false;
+
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -45,29 +48,38 @@ export class TabUsuariosEmpresaComponent implements OnInit {
         });
     }
 
-    crearUsuario(usuario: string, password: string, tipo: string) {
-        // truco de Angular para recargar el form y que se vacíe
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
-
-        let nuevoUsuario = new Usuario(0, usuario, password, tipo, '', this.empresasService.seleccionada);
-        this.servidor.postObject(URLS.USUARIOS, nuevoUsuario).subscribe(
+    crearUsuario(usuario) {
+        let usuarioCrear = new Usuario(0, usuario.usuario, usuario.password,
+            usuario.tipouser, '', this.empresasService.seleccionada);
+        this.servidor.postObject(URLS.USUARIOS, usuarioCrear).subscribe(
             response => {
                 if (response.success) {
-                    nuevoUsuario.id = response.id;
-                    this.usuarios.push(nuevoUsuario);
+                    usuarioCrear.id = response.id;
+                    this.usuarios.push(usuarioCrear);
                 }
         });
+        // limpiar form
+        this.nuevoUsuario = {usuario: '', password: '', tipouser: 'Normal'}  
     }
 
-    borrarUsuario(idUsuario: number) {
-        let parametros = '?id=' + idUsuario;
+    checkBorrar(idBorrar: number) {
+        this.modal = true;
+        this.idBorrar = idBorrar;
+    }
+
+    noBorrar() {
+        this.modal = false;
+    }
+
+    borrarUsuario() {
+        let parametros = '?id=' + this.idBorrar;
         this.servidor.deleteObject(URLS.USUARIOS, parametros).subscribe(
             response => {
                 if (response.success) {
-                    let usuarioBorrar = this.usuarios.find(usuario => usuario.id == idUsuario);
+                    let usuarioBorrar = this.usuarios.find(usuario => usuario.id == this.idBorrar);
                     let indice = this.usuarios.indexOf(usuarioBorrar);
                     this.usuarios.splice(indice, 1);
+                    this.modal = false;
                 }
         });
     }
