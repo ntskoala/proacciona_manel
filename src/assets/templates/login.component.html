@@ -3,10 +3,10 @@
         <md-card-title>
             <md-toolbar color="accent">Login form</md-toolbar>
         </md-card-title>
-        <form *ngIf="active" (ngSubmit)="onSubmit(user.value, password.value)" #loginForm="ngForm">
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
             <md-card-content>
-                <md-input class="full" placeholder="User" type="text" id="user" required [(ngModel)]="user.value" name="user" #user="ngModel"></md-input>
-                <md-input class="full" placeholder="Password" type="password" id="password" required [(ngModel)]="password.value" name="password" #password="ngModel"></md-input>
+                <md-input class="full" placeholder="Usuario" type="text" required [(ngModel)]="usuario.user" name="user"></md-input>
+                <md-input class="full" placeholder="Password" type="password" required [(ngModel)]="usuario.password" name="password"></md-input>
             </md-card-content>
             <md-card-footer>
                 <button md-raised-button color="accent" [disabled]="!loginForm.form.valid" type="submit">Enviar</button>

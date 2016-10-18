@@ -8,10 +8,10 @@ import {Router} from '@angular/router';
 })
 
 export class EmpresasComponent implements OnInit {
+    public token = sessionStorage.getItem('token');   
     constructor(private router: Router) {}
     ngOnInit() {
-        let token = sessionStorage.getItem('token');
-        if (!token) {
+        if (!this.token) {
             this.router.navigate(['login']);
         }
     }

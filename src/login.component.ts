@@ -11,25 +11,24 @@ import {URLS} from './config';
 })
 export class LoginComponent {
 
-    public active = true;
+    public usuario: Object = {user: '', password: ''};
 
     constructor(private servidor: Servidor, public router: Router) {};
 
-    onSubmit(nombre: string, password: string) {
-        // truco de Angular para recargar el form y que se vacíe
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
-
-        let parametros = '?user=' + nombre + '&password=' + password; 
+    onSubmit(usuario) {
+        // limpiar form
+        this.usuario = {user: '', password: ''};        
+        // comprobación
+        let parametros = '?user=' + usuario.user + '&password=' + usuario.password; 
         this.servidor.login(URLS.LOGIN, parametros).subscribe(
             response => {
                 // si el usuario es correcto
-                if (response.success) {
+                if (response.success && response.success == 'true') {
                     // guarda los valores en Session Storage
                     sessionStorage.setItem('token', response.token);
                     sessionStorage.setItem('usuario', response.data[0].usuario);
                     sessionStorage.setItem('empresa', response.data[0].idempresa);
-                    // redirecciona a home
+                    // redirecciona a empresas
                     this.router.navigate(['empresas']);
                 }
                 // usuario erróneo
