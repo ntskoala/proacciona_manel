@@ -31,11 +31,11 @@ export class SeleccionarEmpresaComponent implements OnInit {
         this.servidor.getObjects(URLS.EMPRESAS, '').subscribe(
             response => {
                 if (response.success) {
-                    for (let i = 0; i < response.data.length; i++) {
+                    for (let element of response.data) {
                         this.empresas.push(new Empresa(
-                            response.data[i].nombre,
-                            response.data[i].cif,
-                            response.data[i].id
+                            element.nombre,
+                            element.cif,
+                            element.id
                         ))
                     }
                 }

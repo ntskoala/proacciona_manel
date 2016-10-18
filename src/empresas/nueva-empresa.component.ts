@@ -15,14 +15,12 @@ export class NuevaEmpresaComponent {
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
     
-    public active: boolean = true;
+    public empresa: Object = {};
     
-    nuevaEmpresa(nombre: string, nif: string) {
-        // truco de Angular para recargar el form y que se vacíe
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
-
-        let nuevaEmpresa = new Empresa(nombre, nif, 0);
+    nuevaEmpresa(empresa: any) {
+        // limpiar form
+        this.empresa = {}
+        let nuevaEmpresa = new Empresa(empresa.nombre, empresa.nif, 0);
         this.servidor.postObject(URLS.EMPRESAS, nuevaEmpresa).subscribe(
             response => {
                 // si tiene éxito

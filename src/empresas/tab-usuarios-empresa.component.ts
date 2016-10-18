@@ -32,16 +32,16 @@ export class TabUsuariosEmpresaComponent implements OnInit {
                     response => {
                         this.usuarios = [];
                         if (response.success && response.data) {
-                            for (let i = 0; i < response.data.length; i++) {
+                            for (let element of response.data) {
                                 this.usuarios.push(new Usuario(
-                                    response.data[i].id,
-                                    response.data[i].usuario,
-                                    response.data[i].password,
-                                    response.data[i].tipouser,
-                                    response.data[i].nombre,
-                                    response.data[i].idempresa
+                                    element.id,
+                                    element.usuario,
+                                    element.password,
+                                    element.tipouser,
+                                    element.nombre,
+                                    element.idempresa
                                 ))
-                                this.guardar[response.data[i].id] = false;
+                                this.guardar[element.id] = false;
                             }
                         }
                 });

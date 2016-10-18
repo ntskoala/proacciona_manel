@@ -14,11 +14,12 @@ import {ResultadoChecklist} from '../objetos/resultadochecklist';
 export class TabChecklistInformesComponent implements OnInit{
     
     private subscription: Subscription;
-    public controles: any[] = [];
+    public checklists: any[] = [];
     public resultadoschecklist: ResultadoChecklist[] = [];
     public columnas: string[] = [];
     public resultado: Object;
     public tabla: Object[] = [];
+    public fecha: Object = {inicio: '', fin: ''}
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -28,15 +29,15 @@ export class TabChecklistInformesComponent implements OnInit{
                 let parametros = '&idempresa=' + seleccionada.id; 
                 this.servidor.getObjects(URLS.CHECKLISTS, parametros).subscribe(
                     response => {
-                        this.controles = [];
+                        this.checklists = [];
                         this.columnas = [];
                         if (response.success && response.data) {
-                            for (let i = 0; i < response.data.length; i++) {
-                                this.controles.push({
-                                    id: response.data[i].id,
-                                    nombre: response.data[i].nombre,
+                            for (let element of response.data) {
+                                this.checklists.push({
+                                    id: element.id,
+                                    nombre: element.nombrechecklist,
                                 });
-                                this.columnas.push(response.data[i].nombre);
+                                this.columnas.push(element.nombrechecklist);
                             }
                         }
                 });

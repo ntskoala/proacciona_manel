@@ -44,14 +44,14 @@ export class TabPermisosEmpresaComponent {
                 this.usuarios = [];
                 this.usuarios.push(this.usuario);
                 if (response.success && response.data) {
-                    for (let i = 0; i < response.data.length; i++) {
+                    for (let element of response.data) {
                         this.usuarios.push(new Usuario(
-                            response.data[i].id,
-                            response.data[i].usuario,
-                            response.data[i].password,
-                            response.data[i].tipouser,
-                            response.data[i].nombre,
-                            response.data[i].idempresa
+                            element.id,
+                            element.usuario,
+                            element.password,
+                            element.tipouser,
+                            element.nombre,
+                            element.idempresa
                         ))
                     }
                 }
@@ -61,19 +61,19 @@ export class TabPermisosEmpresaComponent {
             response => {
                 this.controles = [];
                 if (response.success && response.data) {
-                    for (let i = 0; i < response.data.length; i++) {
+                    for (let element of response.data) {
                         this.controles.push(new Control(
-                            response.data[i].id,
-                            response.data[i].nombre,
-                            response.data[i].pla,
-                            response.data[i].valorminimo,
-                            response.data[i].valormaximo,
-                            response.data[i].objetivo,
-                            response.data[i].tolerancia,
-                            response.data[i].critico,
-                            response.data[i].periodicidad,
-                            response.data[i].tipoperiodo,
-                            response.data[i].idempresa
+                            element.id,
+                            element.nombre,
+                            element.pla,
+                            element.valorminimo,
+                            element.valormaximo,
+                            element.objetivo,
+                            element.tolerancia,
+                            element.critico,
+                            element.periodicidad,
+                            element.tipoperiodo,
+                            element.idempresa
                         ));
                     }
                 }
@@ -83,11 +83,11 @@ export class TabPermisosEmpresaComponent {
             response => {
                 this.checklists = [];
                 if (response.success && response.data) {
-                    for (let i = 0; i < response.data.length; i++) {
+                    for (let element of response.data) {
                         this.checklists.push(new Checklist(
-                            response.data[i].id,
-                            response.data[i].idempresa,
-                            response.data[i].nombrechecklist
+                            element.id,
+                            element.idempresa,
+                            element.nombrechecklist
                         ));
                     }
                 }
@@ -104,8 +104,8 @@ export class TabPermisosEmpresaComponent {
             response => {
                 this.permissionusercontrols = [];
                 if (response.success && response.data) {
-                    for (let i = 0; i < response.data.length; i++) {
-                        this.checkControl[response.data[i].idcontrol] = parseInt(response.data[i].id);
+                    for (let element of response.data) {
+                        this.checkControl[element.idcontrol] = parseInt(element.id);
                     }
                 }
         });
@@ -114,8 +114,8 @@ export class TabPermisosEmpresaComponent {
             response => {
                 this.permissionuserchecklists = [];
                 if (response.success && response.data) {
-                    for (let i = 0; i < response.data.length; i++) {
-                        this.checkChecklist[response.data[i].idchecklist] = parseInt(response.data[i].id);
+                    for (let element of response.data) {
+                        this.checkChecklist[element.idchecklist] = parseInt(element.id);
                     }
                 }
         });

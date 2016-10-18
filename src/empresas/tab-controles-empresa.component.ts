@@ -33,21 +33,21 @@ export class TabControlesEmpresaComponent implements OnInit {
                     response => {
                         this.controles = [];
                         if (response.success && response.data) {
-                            for (let i = 0; i < response.data.length; i++) {
+                            for (let element of response.data) {
                                 this.controles.push(new Control(
-                                    response.data[i].id,
-                                    response.data[i].nombre,
-                                    response.data[i].pla,
-                                    response.data[i].valorminimo,
-                                    response.data[i].valormaximo,
-                                    response.data[i].objetivo,
-                                    response.data[i].tolerancia,
-                                    response.data[i].critico,
-                                    response.data[i].periodicidad,
-                                    response.data[i].tipoperiodo,
-                                    response.data[i].idempresa
+                                    element.id,
+                                    element.nombre,
+                                    element.pla,
+                                    element.valorminimo,
+                                    element.valormaximo,
+                                    element.objetivo,
+                                    element.tolerancia,
+                                    element.critico,
+                                    element.periodicidad,
+                                    element.tipoperiodo,
+                                    element.idempresa
                                 ));
-                                this.guardar[response.data[i].id] = false;
+                                this.guardar[element.id] = false;
                             }
                         }
                 });

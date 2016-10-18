@@ -40,11 +40,11 @@ export class TabChecklistsEmpresaComponent implements OnInit{
                         this.checklists = [];
                         this.checklists.push(this.checklist);
                         if (response.success && response.data) {
-                            for (let i = 0; i < response.data.length; i++) {
+                            for (let element of response.data) {
                                 this.checklists.push(new Checklist(
-                                    response.data[i].id,
-                                    response.data[i].idempresa,
-                                    response.data[i].nombrechecklist
+                                    element.id,
+                                    element.idempresa,
+                                    element.nombrechecklist
                                 ))
                             }
                         }
@@ -105,13 +105,13 @@ export class TabChecklistsEmpresaComponent implements OnInit{
             response => {
                 this.controlchecklists = [];
                 if (response.success && response.data) {
-                    for (let i = 0; i < response.data.length; i++) {
+                    for (let element of response.data) {
                         this.controlchecklists.push(new ControlChecklist(
-                            response.data[i].id,
-                            response.data[i].idchecklist,
-                            response.data[i].nombre
+                            element.id,
+                            element.idchecklist,
+                            element.nombre
                         ))
-                        this.guardar[response.data[i].id] = false;
+                        this.guardar[element.id] = false;
                     }
                 }
             // mostramos la lista de control checklists

@@ -19,6 +19,7 @@ export class TabControlInformesComponent implements OnInit {
     public columnas: string[] = [];
     public resultado: Object;
     public tabla: Object[] = [];
+    public fecha: Object = {}
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -32,45 +33,47 @@ export class TabControlInformesComponent implements OnInit {
                         this.columnas = [];
                         this.tabla = [];
                         if (response.success && response.data) {
-                            for (let i = 0; i < response.data.length; i++) {
+                            for (let element of response.data) {
                                 this.controles.push({
-                                    id: response.data[i].id,
-                                    nombre: response.data[i].nombre,
+                                    id: element.id,
+                                    nombre: element.nombre,
                                 });
-                                this.columnas.push(response.data[i].nombre);
+                                this.columnas.push(element.nombre);
                             }
                         }
                 });
         });
     }
 
-    filtrarFechas(fechaInicio: string, fechaFin: string) {
+    filtrarFechas(fecha) {
         // conseguir resultadoscontrol
-        let parametros = '&idempresa=' + this.empresasService.seleccionada + '&fechainicio=' + fechaInicio + '&fechafin=' + fechaFin;
+        let parametros = '&idempresa=' + this.empresasService.seleccionada + '&fechainicio=' + fecha.inicio + '&fechafin=' + fecha.fin;
         this.servidor.getObjects(URLS.RESULTADOS_CONTROL, parametros).subscribe(
             response => {
-                console.log(response);
                 this.resultadoscontrol = [];
                 this.tabla = [];
                 if (response.success && response.data) {
-                    for (let i = 0; i < response.data.length; i++) {
-                        let fecha = new Date(response.data[i].fecha);
+                    for (let element of response.data) {
+                        let fecha = new Date(element.fecha);
                             this.resultadoscontrol.push(new ResultadoControl(
-                                response.data[i].id,
-                                response.data[i].idcontrol,
-                                response.data[i].resultado,
-                                new Date(response.data[i].fecha),
-                                response.data[i].foto
+                                element.id,
+                                element.idcontrol,
+                                element.resultado,
+                                new Date(element.fecha),
+                                element.foto
                             ));
                     }
                 }
-                for (let i = 0; i < this.resultadoscontrol.length; i++) {
-                    for (let x = 0; x < this.controles.length; x++) {
-                        if (this.controles[x].id == this.resultadoscontrol[i].idcontrol) {
+                for (let element of this.resultadoscontrol) {
+                    for (let control of this.controles) {
+                        if (control.id == element.idcontrol) {
                             this.resultado = new Object;
-                            this.resultado['fecha'] = this.resultadoscontrol[i].fecha;
-                            this.resultado[this.controles[x].nombre] = this.resultadoscontrol[i].resultado;
-                            this.resultado['foto'] = this.resultadoscontrol[i].foto;
+                            this.resultado['id'] = element.id;
+                            this.resultado['fecha'] = element.fecha;
+                            this.resultado[control.nombre] = element.resultado;
+                            if (element.foto == 'true') {
+                                this.resultado['foto'] = true;
+                            }
                             this.tabla.push(this.resultado);
                         }
                     }
