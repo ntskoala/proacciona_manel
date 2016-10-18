@@ -18,6 +18,10 @@ export class TabControlesEmpresaComponent implements OnInit {
     public controles: Control[] = [];
     public active: boolean = true;
     public guardar = [];
+    public nuevoControl: Object = {};
+    public idBorrar: number;
+    public modal: boolean = false;
+
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -50,31 +54,36 @@ export class TabControlesEmpresaComponent implements OnInit {
         });
     }
 
-    crearControl(nombre: string, pla: string, minimo:number, maximo: number, objetivo: number,
-        tolerancia: number, critico: number, periodicidad: string, periodo: string) {
-        // truco de Angular para recargar el form y que se vacíe
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
-
-        let nuevoControl = new Control(0, nombre, pla, minimo, maximo, objetivo,
-            tolerancia, critico, periodicidad, periodo, this.empresasService.seleccionada);
+    crearControl(nuevoControl: Control) {
+        nuevoControl.idempresa = this.empresasService.seleccionada;
         this.servidor.postObject(URLS.CONTROLES, nuevoControl).subscribe(
             response => {
                 if (response.success) {
                     nuevoControl.id = response.id;
                     this.controles.push(nuevoControl);
+                    this.nuevoControl = {};
                 }
         });
     }
+    
+    checkBorrar(idBorrar: number) {
+        this.modal = true;
+        this.idBorrar = idBorrar;
+    }
 
-    borrarControl(idControl: number) {
-        let parametros = '?id=' + idControl;
+    noBorrar() {
+        this.modal = false;
+    }
+
+    borrarControl() {
+        let parametros = '?id=' + this.idBorrar;
         this.servidor.deleteObject(URLS.CONTROLES, parametros).subscribe(
             response => {
                 if (response.success) {
-                    let controlBorrar = this.controles.find(control => control.id == idControl);
+                    let controlBorrar = this.controles.find(control => control.id == this.idBorrar);
                     let indice = this.controles.indexOf(controlBorrar)
                     this.controles.splice(indice, 1);
+                    this.modal = false;
                 }
         });
     }

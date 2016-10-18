@@ -1,35 +1,46 @@
+<!-- Modal aviso borrado control-->
+<div class="modal" *ngIf="modal">
+    <div class="modal-window">
+        <md-card>
+            <md-card-content>
+                <p class="aviso">¿Estás seguro de querer eliminar el control?</p>
+                <p>Se borrarán los resultados asociados al control y los permisos de los usuarios.</p>
+                <button md-button color="primary" (click)="borrarControl()" type="submit">Eliminar</button>
+                <button md-button color="primary" (click)="noBorrar()" type="submit">Cancelar</button>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>
+
 <div class="table">
-    <form class="row" *ngIf="active"
-        (ngSubmit)="crearControl(nombre.value, pla.value, valorminimo.value, valormaximo.value, objetivo.value,
-            tolerancia.value, critico.value, periodicidad.value, tipoperiodo.value)"
-        #crearControlForm="ngForm"
-    >
+    <form class="row" #crearControlForm="ngForm" (ngSubmit)="crearControl(crearControlForm.value)">
+        <input type="hidden" [(ngModel)]="nuevoControl.id" name="id">
         <span class="cell">
-            <input type="text" name="nombre" placeholder="nombre" [(ngModel)]="nombre.value" required #nombre="ngModel">
+            <input type="text" placeholder="Nombre" required [(ngModel)]="nuevoControl.nombre" name="nombre">
         </span>
         <span class="cell">
-            <input type="text" name="pla" placeholder="" [(ngModel)]="pla.value" required #pla="ngModel">
+            <input type="text" placeholder="Pla" required [(ngModel)]="nuevoControl.pla" name="pla">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="valorminimo" placeholder="" [(ngModel)]="valorminimo.value" required #valorminimo="ngModel">
+            <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.valorminimo" name="valorminimo">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="valormaximo" placeholder="" [(ngModel)]="valormaximo.value" required #valormaximo="ngModel">
+            <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.valormaximo" name="valormaximo">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="objetivo" placeholder="" [(ngModel)]="objetivo.value" required #objetivo="ngModel">
+            <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.objetivo" name="objetivo">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="tolerancia" placeholder="" [(ngModel)]="tolerancia.value" required #tolerancia="ngModel">
+            <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.tolerancia" name="tolerancia">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="critico" placeholder="" [(ngModel)]="critico.value" required #critico="ngModel">
+            <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.critico" name="critico">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="periodicidad" placeholder="" [(ngModel)]="periodicidad.value" required #periodicidad="ngModel">
+            <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.periodicidad" name="periodicidad">
         </span>
         <span class="cell">
-            <input type="text" name="tipoperiodo" placeholder="" [(ngModel)]="tipoperiodo.value" required #tipoperiodo="ngModel">
+            <input type="text" placeholder="Periodo" required [(ngModel)]="nuevoControl.tipoperiodo" name="tipoperiodo">
         </span>
         <span class="cell"></span>
         <span class="cell">
@@ -49,40 +60,36 @@
         <span class="header-cell"></span>
         <span class="header-cell"></span>
     </div>
-    <form class="row"
-        *ngFor="let control of controles"
-        (ngSubmit)="actualizarControl(control.id)"
-        #actualizarControlForm="ngForm"
-    >
+    <form class=" row"#actualizarControlForm="ngForm" (ngSubmit)="actualizarControl(control.id)" *ngFor="let control of controles">
         <span class="cell">
-            <input type="text" name="modNombre" [(ngModel)]="control.nombre" (keyup)="modificarControl(control.id)" #modNombre="ngModel">
+            <input type="text" [(ngModel)]="control.nombre" name="modNombre" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <input type="text" name="modPla" [(ngModel)]="control.pla" (keyup)="modificarControl(control.id)" #modPla="ngModel">
+            <input type="text" [(ngModel)]="control.pla" name="modPla" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="modValorMinimo" [(ngModel)]="control.valorminimo" (keyup)="modificarControl(control.id)" #modValorMinimo="ngModel">
+            <input class="small" type="text" [(ngModel)]="control.valorminimo" name="modValorMinimo" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="modValorMaximo" [(ngModel)]="control.valormaximo" (keyup)="modificarControl(control.id)" #modValorMaximo="ngModel">
+            <input class="small" type="text" [(ngModel)]="control.valormaximo" name="modValorMaximo" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="modObjetivo" [(ngModel)]="control.objetivo" (keyup)="modificarControl(control.id)" #modObjetivo="ngModel">
+            <input class="small" type="text" [(ngModel)]="control.objetivo" name="modObjetivo" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="modTolerancia" [(ngModel)]="control.tolerancia" (keyup)="modificarControl(control.id)" #modTolerancia="ngModel">
+            <input class="small" type="text" [(ngModel)]="control.tolerancia" name="modTolerancia" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="modCritico" [(ngModel)]="control.critico" (keyup)="modificarControl(control.id)" #modCritico="ngModel">
+            <input class="small" type="text" [(ngModel)]="control.critico" name="modCritico" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <input class="small" type="text" name="modPeriodicidad" [(ngModel)]="control.periodicidad" (keyup)="modificarControl(control.id)" #modPeriodo="ngModel">
+            <input class="small" type="text" [(ngModel)]="control.periodicidad" name="modPeriodicidad" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <input type="text" name="modTipoPeriodo" [(ngModel)]="control.tipoperiodo" (keyup)="modificarControl(control.id)" #modTipoPeriodo="ngModel">
+            <input type="text" [(ngModel)]="control.tipoperiodo" name="modTipoPeriodo" (keyup)="modificarControl(control.id)">
         </span>
         <span class="cell">
-            <button md-button color="primary" (click)="borrarControl(control.id)" type="button">Borrar</button>
+            <button md-button color="primary" (click)="checkBorrar(control.id)" type="button">Borrar</button>
         </span>
         <span class="cell">
             <button md-button color="primary" [disabled]="!guardar[control.id]" type="submit">Guardar</button>                
