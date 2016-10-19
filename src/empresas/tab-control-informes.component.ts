@@ -36,7 +36,7 @@ export class TabControlInformesComponent implements OnInit {
                             for (let element of response.data) {
                                 this.controles.push({
                                     id: element.id,
-                                    nombre: element.nombre,
+                                    nombre: element.nombre
                                 });
                                 this.columnas.push(element.nombre);
                             }
@@ -56,7 +56,7 @@ export class TabControlInformesComponent implements OnInit {
                     for (let element of response.data) {
                         let fecha = new Date(element.fecha);
                             this.resultadoscontrol.push(new ResultadoControl(
-                                element.id,
+                                element.idr,
                                 element.idcontrol,
                                 element.resultado,
                                 new Date(element.fecha),
@@ -68,7 +68,7 @@ export class TabControlInformesComponent implements OnInit {
                     for (let control of this.controles) {
                         if (control.id == element.idcontrol) {
                             this.resultado = new Object;
-                            this.resultado['id'] = element.id;
+                            this.resultado['id'] = element.idr;
                             this.resultado['fecha'] = element.fecha;
                             this.resultado[control.nombre] = element.resultado;
                             if (element.foto == 'true') {

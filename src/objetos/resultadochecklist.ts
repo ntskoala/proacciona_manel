@@ -1,6 +1,6 @@
 export class ResultadoChecklist {
     constructor (
-        public id: number,
+        public idr: number,
         public idchecklist: number,
         public resultado: number,
         public fecha: Date,

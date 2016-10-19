@@ -1,6 +1,6 @@
 export class ResultadoControl {
     constructor (
-        public id: number,
+        public idr: number,
         public idcontrol: number,
         public resultado: number,
         public fecha: Date,

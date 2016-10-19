@@ -110,7 +110,7 @@ export class TabChecklistsEmpresaComponent implements OnInit{
                             element.id,
                             element.idchecklist,
                             element.nombre
-                        ))
+                        ));
                         this.guardar[element.id] = false;
                     }
                 }

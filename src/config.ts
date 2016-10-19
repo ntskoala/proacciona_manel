@@ -9,7 +9,7 @@ const URLS = {
     PERMISSION_USER_CONTROL: 'http://tfc.ntskoala.com/api/permissionusercontrol.php',
     PERMISSION_USER_CHECKLIST: 'http://tfc.ntskoala.com/api/permissionuserchecklist.php',
     RESULTADOS_CONTROL: 'http://tfc.ntskoala.com/api/resultadoscontrol.php',
-    RESULTADOS_CHECKLIST: '',
+    RESULTADOS_CHECKLIST: 'http://tfc.ntskoala.com/api/resultadoschecklist.php',
     RESULTADOS_PERIODICIDAD: ''
 }
 

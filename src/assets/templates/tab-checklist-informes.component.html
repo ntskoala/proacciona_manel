@@ -1,5 +1,16 @@
 <h2>Informes de checklist</h2>
 
+<div class="seleccionar-checklist">
+    <h2>Checklist</h2>
+    <form>
+        <select (change)="cambioChecklist($event.target.value)">
+            <option *ngFor="let checklist of checklists" [value]="checklist.id">
+                {{checklist.nombrechecklist}}
+            </option>
+        </select>
+    </form>
+</div>
+
 <div class="fechas">
     <form #filtrarFechasForm="ngForm" (ngSubmit)="filtrarFechas(filtrarFechasForm.value)">
         <md-input type="date" placeholder="Inicio" required [(ngModel)]="fecha.inicio" name="inicio"></md-input>
@@ -16,7 +27,7 @@
         <span class="header-cell">Imagen</span>
         <span class="header-cell" *ngFor="let columna of columnas">{{columna}}</span>
     </div>
-    <!--<div class="row" *ngFor="let resultado of tabla">
+    <div class="row" *ngFor="let resultado of tabla">
         <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy"}}</span>
         <span class="cell" *ngIf="resultado.foto">
             <a href="http://tfc.ntskoala.com/controles/{{empresasService.seleccionada}}/control{{resultado.id}}.jpg" target="_blank">
@@ -29,6 +40,6 @@
         <span class="cell" *ngFor="let columna of columnas">
             {{resultado[columna]}}
         </span>
-    </div>-->
+    </div>
 
 </div>
