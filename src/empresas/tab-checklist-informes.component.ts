@@ -7,6 +7,7 @@ import {URLS} from '../config';
 import {Checklist} from '../objetos/checklist';
 import {ControlChecklist} from '../objetos/controlchecklist';
 import {ResultadoChecklist} from '../objetos/resultadochecklist';
+import {Columna} from '../objetos/columna';
 
 @Component({
     selector: 'tab-checklist-informes',
@@ -18,13 +19,16 @@ export class TabChecklistInformesComponent implements OnInit{
     private subscription: Subscription;
     public checklistSeleccionada: number = 0;
     public checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist');
-    public checklists: any[] = [];
-    public controlchecklists: ControlChecklist[] = [];
-    public resultadoschecklist: ResultadoChecklist[] = [];
-    public columnas: string[] = [];
-    public resultado: Object;
-    public tabla: Object[] = [];
-    public fecha: Object = {inicio: '', fin: ''}
+    public checklists: Checklist[];
+    public controlchecklists: ControlChecklist[];
+    public resultadoschecklist: ResultadoChecklist[];
+    public columnas: Columna[];
+    public resultado: Object = {};
+    public tabla: Object[];
+    public fecha: Object = {inicio: '2016-10-16', fin: '2016-10-19'};
+    public idrs: string[] = [];
+
+    
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -51,6 +55,7 @@ export class TabChecklistInformesComponent implements OnInit{
     }
 
     cambioChecklist(idChecklist: number) {
+        this.tabla = [];
         this.checklistSeleccionada = idChecklist;
         let parametros = '&idchecklist=' + idChecklist;
         // llamada al servidor para conseguir las controlchecklist
@@ -65,7 +70,10 @@ export class TabChecklistInformesComponent implements OnInit{
                             element.idchecklist,
                             element.nombre
                         ));
-                        this.columnas.push(element.nombre);
+                        this.columnas.push(new Columna(
+                            'id' + element.id,
+                            element.nombre
+                        ));
                     }
                 }
         });
@@ -73,6 +81,7 @@ export class TabChecklistInformesComponent implements OnInit{
 
 
     filtrarFechas(fecha) {
+        this.idrs = [];
         // conseguir resultadoschecklist
         let parametros = '&idchecklist=' + this.checklistSeleccionada + '&fechainicio=' + fecha.inicio + '&fechafin=' + fecha.fin;
         this.servidor.getObjects(URLS.RESULTADOS_CHECKLIST, parametros).subscribe(
@@ -84,31 +93,31 @@ export class TabChecklistInformesComponent implements OnInit{
                         let fecha = new Date(element.fecha);
                             this.resultadoschecklist.push(new ResultadoChecklist(
                                 element.idr,
-                                element.idcontrol,
+                                element.idcontrolchecklist,
+                                element.idchecklist,
                                 element.resultado,
+                                element.descripcion,
                                 new Date(element.fecha),
                                 element.foto
                             ));
+                        if (this.idrs.indexOf(element.idr) == -1) this.idrs.push(element.idr);
                     }
                 }
-                for (let element of this.resultadoschecklist) {
-                    for (let control of this.checklists) {
-                        if (control.id == element.idchecklist) {
-                            this.resultado = new Object;
-                            this.resultado['id'] = element.idr;
-                            this.resultado['fecha'] = element.fecha;
-                            this.resultado[control.nombre] = element.resultado;
-                            if (element.foto == 'true') {
-                                this.resultado['foto'] = true;
-                            }
-                            this.tabla.push(this.resultado);
+                for (let idr of this.idrs) {
+                    let contador = 0
+                    for (let resultado of this.resultadoschecklist) {
+                        if (idr == resultado.idr) {
+                            this.resultado['id'] = resultado.idr;
+                            this.resultado['fecha'] = resultado.fecha;
+                            if (resultado.foto == 'true') this.resultado['foto'] = true;
+                            this.resultado['id' + resultado.idcontrolchecklist] = resultado.resultado;
+                            contador++;
                         }
                     }
+                    this.tabla.push(this.resultado);
+                    this.resultado = {};
                 }
         });
     }
 
 }
-
-// agrupar por idresultadochecklist
-// idcontrolchecklist (item)

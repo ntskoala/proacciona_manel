@@ -25,12 +25,12 @@
     <div class="header-row">
         <span class="header-cell">Fecha</span>
         <span class="header-cell">Imagen</span>
-        <span class="header-cell" *ngFor="let columna of columnas">{{columna}}</span>
+        <span class="header-cell" *ngFor="let columna of columnas">{{columna.nombre}}</span>
     </div>
     <div class="row" *ngFor="let resultado of tabla">
         <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy"}}</span>
         <span class="cell" *ngIf="resultado.foto">
-            <a href="http://tfc.ntskoala.com/controles/{{empresasService.seleccionada}}/control{{resultado.id}}.jpg" target="_blank">
+            <a href="http://tfc.ntskoala.com/controles/{{empresasService.seleccionada}}/checklist{{resultado.id}}.jpg" target="_blank">
                 <span class="material-icons">image</span>
             </a>
         </span>
@@ -38,7 +38,7 @@
             <span class="material-icons">close</span>
         </span>
         <span class="cell" *ngFor="let columna of columnas">
-            {{resultado[columna]}}
+            {{resultado[columna.id]}}
         </span>
     </div>
 
