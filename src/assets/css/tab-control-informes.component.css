@@ -1,9 +1,11 @@
-a {
+.foto-link {
     cursor: pointer;
+    color: #673ab7;
 }
 
-a:hover {
-    color: #000;
+.foto-link:hover {
+    color: #673ab7;
+    opacity: 0.6;
 }
 
 .header-cell {
@@ -26,5 +28,21 @@ input[type="text"] {
 }
 
 .material-icons {
+    vertical-align: middle;
+}
+
+.red {
+    color: red;
+}
+
+.red .tooltip {
+    display: none;
+    position: absolute;
+    right: -100px;
+    z-index: 5;
+}
+
+.red:hover .tooltip {
+    display: inline;
     vertical-align: middle;
 }

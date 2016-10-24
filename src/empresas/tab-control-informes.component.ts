@@ -17,9 +17,10 @@ export class TabControlInformesComponent implements OnInit {
     public controles: any[] = [];
     public resultadoscontrol: ResultadoControl[] = [];
     public columnas: string[] = [];
-    public resultado: Object;
     public tabla: Object[] = [];
     public fecha: Object = {}
+    public modal: boolean = false;
+    public fotoSrc: string;
 
     constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -36,7 +37,11 @@ export class TabControlInformesComponent implements OnInit {
                             for (let element of response.data) {
                                 this.controles.push({
                                     id: element.id,
-                                    nombre: element.nombre
+                                    nombre: element.nombre,
+                                    minimo: element.valorminimo,
+                                    maximo: element.valormaximo,
+                                    tolerancia: element.tolerancia,
+                                    critico: element.critico
                                 });
                                 this.columnas.push(element.nombre);
                             }
@@ -58,7 +63,7 @@ export class TabControlInformesComponent implements OnInit {
                             this.resultadoscontrol.push(new ResultadoControl(
                                 element.idr,
                                 element.idcontrol,
-                                element.resultado,
+                                parseInt(element.resultado),
                                 new Date(element.fecha),
                                 element.foto
                             ));
@@ -67,18 +72,43 @@ export class TabControlInformesComponent implements OnInit {
                 for (let element of this.resultadoscontrol) {
                     for (let control of this.controles) {
                         if (control.id == element.idcontrol) {
-                            this.resultado = new Object;
-                            this.resultado['id'] = element.idr;
-                            this.resultado['fecha'] = element.fecha;
-                            this.resultado[control.nombre] = element.resultado;
+                            let resultado = new Object;
+                            resultado['id'] = element.idr;
+                            resultado['fecha'] = element.fecha;
+                            resultado[control.nombre] = element.resultado;
                             if (element.foto == 'true') {
-                                this.resultado['foto'] = true;
+                                resultado['foto'] = true;
                             }
-                            this.tabla.push(this.resultado);
+                            if (resultado[control.nombre] != '') {
+                                if (resultado[control.nombre] < control.minimo) {
+                                    resultado['mensaje'] = 'Menor que mínimo';
+                                }
+                                if (resultado[control.nombre] > control.maximo) {
+                                    resultado['mensaje'] = 'Mayor que máximo';
+                                }
+                                if (resultado[control.nombre] > control.tolerancia) {
+                                    resultado['mensaje'] = 'Mayor que tolerancia';
+                                }
+                                if (resultado[control.nombre] > control.critico) {
+                                    resultado['mensaje'] = 'Menor que crítico';
+                                }
+                                if (resultado['mensaje']) resultado['error'] = true;
+                            }
+                            this.tabla.push(resultado);
                         }
                     }
                 }
+                console.log(this.tabla);
         });
+    }
+
+    ventanaFoto(idResultado: number) {
+        this.fotoSrc = 'http://tfc.ntskoala.com/controles/' + this.empresasService.seleccionada + '/control' + idResultado + '.jpg'
+        this.modal = true;
+    }
+
+    cerrarFoto() {
+        this.modal = false;
     }
 
 }

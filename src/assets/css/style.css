@@ -32,10 +32,29 @@ h2 {
 }
 
 .modal-window {
-    position: absolute;
-    left: calc(50vw - 250px);
-    top: 200px;
     width: 500px;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.foto-window {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close {
+    position: absolute;
+    cursor: pointer;
+    top: 2px;
+    right: 2px;
+}
+
+.close:hover {
+    opacity: 0.6;
 }
 
 .aviso {
