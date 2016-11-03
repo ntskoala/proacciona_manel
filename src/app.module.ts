@@ -7,6 +7,7 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav.component';
 import { LoginComponent } from './components/login.component';
+import { EmpresaComponent } from './components/empresa.component';
 import { EmpresasComponent } from './components/empresas.component';
 import { SeleccionarEmpresaComponent } from './components/seleccionar-empresa.component';
 import { NuevaEmpresaComponent } from './components/nueva-empresa.component';
@@ -16,10 +17,11 @@ import { TabUsuariosComponent } from './components/tab-usuarios.component';
 import { TabControlesComponent } from './components/tab-controles.component';
 import { TabChecklistsComponent } from './components/tab-checklists.component';
 import { TabPermisosComponent } from './components/tab-permisos.component';
-import { TabControlInformesComponent } from './components/tab-control-informes.component';
-import { TabChecklistInformesComponent } from './components/tab-checklist-informes.component';
-import { TabPeriodicidadInformesComponent } from './components/tab-periodicidad-informes.component';
+import { InformeControlesComponent } from './components/informe-controles.component';
+import { InformeChecklistsComponent } from './components/informe-checklists.component';
+import { InformePeriodicidadComponent } from './components/informe-periodicidad.component';
 import { ModalComponent } from './components/modal.component';
+import { PageNotFoundComponent } from './components/404.component';
 
 import { routing } from './app.routing';
 import { Servidor } from './services/servidor.service';
@@ -38,6 +40,7 @@ import { EmpresasService } from './services/empresas.service';
     AppComponent,
     NavComponent,
     LoginComponent,
+    EmpresaComponent,
     EmpresasComponent,
     SeleccionarEmpresaComponent,
     NuevaEmpresaComponent,
@@ -47,10 +50,11 @@ import { EmpresasService } from './services/empresas.service';
     TabControlesComponent,
     TabChecklistsComponent,
     TabPermisosComponent,
-    TabControlInformesComponent,
-    TabChecklistInformesComponent,
-    TabPeriodicidadInformesComponent,
-    ModalComponent
+    InformeControlesComponent,
+    InformeChecklistsComponent,
+    InformePeriodicidadComponent,
+    ModalComponent,
+    PageNotFoundComponent
   ],
   providers: [
     Servidor,

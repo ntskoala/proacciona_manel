@@ -18,12 +18,12 @@ export class LoginComponent {
   constructor(private servidor: Servidor, private router: Router, private empresasService: EmpresasService) {};
 
   login(usuario) {
-    // Limpiar form
-    this.usuario = {};        
     // Parámetros
     let param = '?user=' + usuario.user + '&password=' + usuario.password; 
     this.servidor.login(URLS.LOGIN, param).subscribe(
       response => {
+        // Limpiar form
+        this.usuario = {};        
         // Si el usuario es correcto
         if (response.success == 'true') {
           // Guarda token en sessionStorage
@@ -31,16 +31,17 @@ export class LoginComponent {
           // Redirección en función del tipo de usuario
           switch (response.data[0].tipouser) {
             case 'Administrador':
-              console.log('Admin');
               // Redirecciona a empresas
               this.router.navigate(['empresas']);
+              this.empresasService.administrador = true;
               break;
             case 'Gerente':
-              console.log('Gerente');
               // Redirecciona a página de empresa
+              let idEmpresa = response.data[0].idempresa;
+              this.empresasService.empresaActiva = idEmpresa;
+              this.router.navigate(['empresa', idEmpresa]);
               break;
             default:
-              console.log('Normal');
               // Se queda en login
               this.mensaje = 'Usuario sin permisos';
               this.modal = true;

@@ -8,10 +8,10 @@ import { ResultadoControl } from '../models/resultadocontrol';
 
 @Component({
   selector: 'tab-control-informes',
-  templateUrl: '../../assets/html/tab-control-informes.component.html',
-  styleUrls: ['../../assets/css/tab-control-informes.component.css']
+  templateUrl: '../../assets/html/informe-controles.component.html',
+  styleUrls: ['../../assets/css/informe-controles.component.css']
 })
-export class TabControlInformesComponent implements OnInit {
+export class InformeControlesComponent implements OnInit {
 
   private subscription: Subscription;
   public controles: any[] = [];

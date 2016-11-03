@@ -111,23 +111,23 @@ select {
 }
 
 /* EmpresasComponent */
-empresas {
+.empresas {
   display: flex;
   flex-wrap: wrap;
 }
 
 /* SeleccionarEmpresaComponent */
 seleccionar-empresa {
-  width: 46%;
+  width: 48%;
   float: left;
-  padding-right: 4%;
+  padding-right: 2%;
 }
 
 /* NuevaEmpresaComponent */
 nueva-empresa {
-  width: 46%;
+  width: 48%;
   float: right;
-  padding-left: 4%;
+  padding-left: 2%;
 }
 
 /* GestionTablasEmpresaComponent */

@@ -11,10 +11,10 @@ import { Columna } from '../models/columna';
 
 @Component({
   selector: 'tab-checklist-informes',
-  templateUrl: '../../assets/html/tab-checklist-informes.component.html',
-  styleUrls: ['../../assets/css/tab-checklist-informes.component.css']
+  templateUrl: '../../assets/html/informe-checklists.component.html',
+  styleUrls: ['../../assets/css/informe-checklists.component.css']
 })
-export class TabChecklistInformesComponent implements OnInit{
+export class InformeChecklistsComponent implements OnInit{
   
   private subscription: Subscription;
   public checklistSeleccionada: number = 0;
