@@ -1,0 +1,19 @@
+:host {
+  width: 100%;
+  display: flex;
+  margin: auto;
+  min-height: 56px;
+}
+
+nav {
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  padding: 1px 0 1px;
+}

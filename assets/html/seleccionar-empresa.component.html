@@ -1,0 +1,30 @@
+<!-- Modal aviso borrado empresa -->
+<div class="modal" *ngIf="modal">
+	<div class="modal-window">
+		<md-card>
+			<md-card-content>
+				<p class="aviso">¿Estás seguro de querer eliminar la empresa?</p>
+				<p>Se borrarán todos sus usuarios, controles, checklists asociados y los resultados de los mismos.</p>
+				<button md-button color="primary" (click)="borrarEmpresa()" type="submit">Eliminar</button>
+				<button md-button color="primary" (click)="noBorrar()" type="submit">Cancelar</button>
+			</md-card-content>
+		</md-card>
+	</div>
+</div>
+
+<md-card>
+	<md-card-title>
+		<md-toolbar color="accent">Empresa</md-toolbar>
+	</md-card-title>
+	<md-card-content>
+		<form>
+			<select (change)="selecciona($event.target.value)">
+				<option selected disabled value="0">Seleccionar empresa</option>
+				<option *ngFor="let empresa of empresas" [value]="empresa.id">
+					{{empresa.nombre}}
+				</option>
+			</select>
+		</form>
+		<button md-button color="primary" (click)="checkBorrar()" type="submit">Eliminar</button>
+	</md-card-content>
+</md-card>

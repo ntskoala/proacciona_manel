@@ -1,0 +1,19 @@
+a {
+  cursor: pointer;
+}
+
+a:hover {
+  color: #000;
+}
+
+.header-cell {
+  max-width: 150px;
+}
+
+.fechas {
+  width: 100%;
+}
+
+.seleccionar-checklist {
+  width: 100%;
+}

@@ -1,6 +1,4 @@
+.gitignore
 node_modules/
-typings/
-build/
 dist/
-src/config.ts
 npm-debug.log
