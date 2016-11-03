@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Servidor } from '../services/servidor.service';
+import { EmpresasService } from '../services/empresas.service';
 import { URLS } from '../models/urls';
 
 @Component({
@@ -12,8 +13,9 @@ export class LoginComponent {
 
   usuario: Object = {};
   modal: boolean = false;
+  mensaje: string;
 
-  constructor(private servidor: Servidor, public router: Router) {};
+  constructor(private servidor: Servidor, private router: Router, private empresasService: EmpresasService) {};
 
   login(usuario) {
     // Limpiar form
@@ -26,11 +28,27 @@ export class LoginComponent {
         if (response.success == 'true') {
           // Guarda token en sessionStorage
           sessionStorage.setItem('token', response.token);
-          // Redirecciona a empresas
-          this.router.navigate(['empresas']);
+          // Redirección en función del tipo de usuario
+          switch (response.data[0].tipouser) {
+            case 'Administrador':
+              console.log('Admin');
+              // Redirecciona a empresas
+              this.router.navigate(['empresas']);
+              break;
+            case 'Gerente':
+              console.log('Gerente');
+              // Redirecciona a página de empresa
+              break;
+            default:
+              console.log('Normal');
+              // Se queda en login
+              this.mensaje = 'Usuario sin permisos';
+              this.modal = true;
+          }
         } else {
           // TODO: chequear si la sesión está caducada
           // Usuario erróneo
+          this.mensaje = 'Usuario incorrecto';
           this.modal = true;
         }
       }

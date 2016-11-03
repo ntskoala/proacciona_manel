@@ -14,11 +14,12 @@ import { GestionTablasComponent } from './components/gestion-tablas.component';
 import { GestionInformesComponent } from './components/gestion-informes.component';
 import { TabUsuariosComponent } from './components/tab-usuarios.component';
 import { TabControlesComponent } from './components/tab-controles.component';
-import { TabChecklistsEmpresaComponent } from './components/tab-checklists-empresa.component';
-import { TabPermisosEmpresaComponent } from './components/tab-permisos-empresa.component';
+import { TabChecklistsComponent } from './components/tab-checklists.component';
+import { TabPermisosComponent } from './components/tab-permisos.component';
 import { TabControlInformesComponent } from './components/tab-control-informes.component';
 import { TabChecklistInformesComponent } from './components/tab-checklist-informes.component';
 import { TabPeriodicidadInformesComponent } from './components/tab-periodicidad-informes.component';
+import { ModalComponent } from './components/modal.component';
 
 import { routing } from './app.routing';
 import { Servidor } from './services/servidor.service';
@@ -44,11 +45,12 @@ import { EmpresasService } from './services/empresas.service';
     GestionInformesComponent,
     TabUsuariosComponent,
     TabControlesComponent,
-    TabChecklistsEmpresaComponent,
-    TabPermisosEmpresaComponent,
+    TabChecklistsComponent,
+    TabPermisosComponent,
     TabControlInformesComponent,
     TabChecklistInformesComponent,
-    TabPeriodicidadInformesComponent
+    TabPeriodicidadInformesComponent,
+    ModalComponent
   ],
   providers: [
     Servidor,

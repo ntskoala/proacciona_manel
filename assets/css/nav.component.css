@@ -3,6 +3,7 @@
   display: flex;
   margin: auto;
   min-height: 56px;
+  background: #fff;
 }
 
 nav {

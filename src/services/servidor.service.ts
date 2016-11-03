@@ -14,24 +14,28 @@ export class Servidor {
 
   getObjects(url: string, param: string) {
     let parametros = '?token=' + sessionStorage.getItem('token') + param; 
-    return this.llamada.get(url + parametros).map((res: Response) => JSON.parse(res.json()));
+    return this.llamada.get(url + parametros)
+      .map((res: Response) => JSON.parse(res.json()));
   }
 
   postObject(url: string, object: Object) {
     let payload = JSON.stringify(object);        
     let parametros = '?token=' + sessionStorage.getItem('token');
-    return this.llamada.post(url + parametros, payload).map((res: Response) => JSON.parse(res.json()));
+    return this.llamada.post(url + parametros, payload)
+      .map((res: Response) => JSON.parse(res.json()));
   }
 
   putObject(url: string, param: string, object: Object) {
     let payload = JSON.stringify(object);        
     let parametros = param + '&token=' + sessionStorage.getItem('token');
-    return this.llamada.put(url + parametros, payload).map((res: Response) => JSON.parse(res.json()));
+    return this.llamada.put(url + parametros, payload)
+      .map((res: Response) => JSON.parse(res.json()));
   }
   
   deleteObject(url: string, param: string) {
     let parametros = param + '&token=' + sessionStorage.getItem('token');
-    return this.llamada.delete(url + parametros).map((res: Response) => JSON.parse(res.json()));
+    return this.llamada.delete(url + parametros)
+      .map((res: Response) => JSON.parse(res.json()));
   }
 
 }

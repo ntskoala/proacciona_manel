@@ -11,10 +11,10 @@ body {
 }
 
 h2 {
-	font-weight: normal;
-	font-size: 1.2rem;
-	margin-bottom: 0.5rem;
-	color: #673ab7;
+  font-weight: normal;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #673ab7;
 }
 
 .modal {
@@ -41,10 +41,10 @@ h2 {
 }
 
 input[type="text"] {
-	font-size: 0.9rem;
-	border: 0;
-	padding: 0.2rem;
-	outline: 0;
+  font-size: 0.9rem;
+  border: 0;
+  padding: 0.2rem;
+  outline: 0;
 }
 
 select {
@@ -60,34 +60,34 @@ select {
 }
 
 .foto-window {
-	position: fixed;
-	top: 20%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .close {
-	position: absolute;
-	cursor: pointer;
-	top: 2px;
-	right: 2px;
+  position: absolute;
+  cursor: pointer;
+  top: 2px;
+  right: 2px;
 }
 
 .close:hover {
-	opacity: 0.6;
+  opacity: 0.6;
 }
 
 .full-width {
-	width: 100%;
+  width: 100%;
 }
 
 .small {
-	width: 45px !important;
-	text-align: right;
+  width: 45px !important;
+  text-align: right;
 }
 
 .hide {
-	display: none;
+  display: none;
 }
 
 .left {
@@ -112,73 +112,73 @@ select {
 
 /* EmpresasComponent */
 empresas {
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* SeleccionarEmpresaComponent */
 seleccionar-empresa {
-	width: 46%;
-	float: left;
-	padding-right: 4%;
+  width: 46%;
+  float: left;
+  padding-right: 4%;
 }
 
 /* NuevaEmpresaComponent */
 nueva-empresa {
-	width: 46%;
-	float: right;
-	padding-left: 4%;
+  width: 46%;
+  float: right;
+  padding-left: 4%;
 }
 
 /* GestionTablasEmpresaComponent */
 gestion-tablas {
-	width: 100%;
-	padding-top: 4%;
+  width: 100%;
+  padding-top: 4%;
 }
 
 .tab {
-	display: none;
+  display: none;
 }
 
 .active {
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* GestionInformesComponent */
 gestion-informes {
-	width: 100%;
-	padding-top: 4%;
+  width: 100%;
+  padding-top: 4%;
 }
 
 /* TabChecklistsEmpresaComponent */
 .seleccionar-checklist,
 .nueva-checklist {
-	width: 100%;
-	float: left;
+  width: 100%;
+  float: left;
 }
 
 .mostrar-checklist {
-	width: 50%;
-	padding-left: 4%;
+  width: 50%;
+  padding-left: 4%;
 }
 
 /* TabPermisosEmpresaComponent */
 .seleccionar-usuario {
-	width: 100%;
+  width: 100%;
 }
 
 .marcar-controles,
 .marcar-checklists {
-	width: 50%;
+  width: 50%;
 }
 
 .marcar-controles {
-	padding-right: 4%;
+  padding-right: 4%;
 }
 
 .marcar-checklists {
-	padding-left: 4%;
+  padding-left: 4%;
 }
 
 /*
@@ -188,42 +188,42 @@ gestion-informes {
 */
 
 .table {
-	display: table;
-	width: 100%;
-	border-collapse: collapse;
-	text-align: left;
-	background: #fff;
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background: #fff;
 }
 
 .header-row {
-	display: table-row;
-	background: #fff59d;
+  display: table-row;
+  background: #fff59d;
 }
 
 .header-cell {
-	display: table-cell;
-	font-size: 0.9rem;
-	font-weight: 500;
-	padding: 0.6rem;
+  display: table-cell;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.6rem;
 }
 
 .header-cell .small {
-	text-align: left;
+  text-align: left;
 }
 
 .row {
-	display: table-row;
-	transition: background-color, 0.2s;
+  display: table-row;
+  transition: background-color, 0.2s;
 }
 
 .row:hover {
-	background-color: #eee;
+  background-color: #eee;
 }
 
 .cell {
-	display: table-cell;
-	padding: 0.3rem;
-	vertical-align: middle;
+  display: table-cell;
+  padding: 0.3rem;
+  vertical-align: middle;
 }
 
 /*
@@ -241,14 +241,14 @@ md-card-footer {
 }
 
 md-card-title {
-	margin: -24px -24px 24px -24px !important;
+  margin: -24px -24px 24px -24px !important;
 }
 
 md-input {
-	font-size: 0.9rem !important;
+  font-size: 0.9rem !important;
 }
 
 button[md-mini-fab] {
-	width: 35px;
-	height: 35px;
+  width: 35px;
+  height: 35px;
 }

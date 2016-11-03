@@ -6,7 +6,8 @@ import { Empresa } from '../models/empresa';
 @Injectable()
 export class EmpresasService {
   // variables
-  public seleccionada: number = 0;
+  tipoUsuario: string;
+  seleccionada: number = 0;
 
   // fuente del observable
   private empresaSeleccionadaFuente = new Subject<Empresa>();

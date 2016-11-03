@@ -1,15 +1,4 @@
-<!-- Modal aviso usuario erróneo -->
-<div class="modal" *ngIf="modal">
-  <div class="modal-window">
-    <md-card>
-      <md-card-content>
-        <p class="aviso">Usuario incorrecto</p>
-        <button md-raised-button (click)="cerrarModal()">Cerrar</button>
-      </md-card-content>
-    </md-card>
-  </div>
-</div>
-
+<modal [modal]="modal" [mensaje]="mensaje" (onCerrar)="cerrarModal()"></modal>
 <div class="login-form">
   <md-card>
     <md-card-title>

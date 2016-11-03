@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <nav>
       <div class="logo">
-        <img src="../../assets/images/logo.svg" alt="Logo">
+        <img src="../../assets/images/logo.jpg" alt="Logo">
       </div>
     </nav>
   `,
