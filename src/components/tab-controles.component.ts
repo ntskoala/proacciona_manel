@@ -5,6 +5,7 @@ import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
 import { URLS } from '../models/urls';
 import { Control } from '../models/control';
+import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-controles',
@@ -14,12 +15,12 @@ import { Control } from '../models/control';
 export class TabControlesComponent implements OnInit {
 
   private subscription: Subscription;
-  public controles: Control[] = [];
-  public active: boolean = true;
-  public guardar = [];
-  public nuevoControl: Object = {};
-  public idBorrar: number;
-  public modal: boolean = false;
+  controles: Control[] = [];
+  active: boolean = true;
+  guardar = [];
+  nuevoControl: Object = {};
+  idBorrar: number;
+  modal: Modal = new Modal();
 
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
@@ -66,25 +67,28 @@ export class TabControlesComponent implements OnInit {
   }
   
   checkBorrar(idBorrar: number) {
-    this.modal = true;
+    // Guardar el id del control a borrar
     this.idBorrar = idBorrar;
+    // Crea el modal
+    this.modal.titulo = '¿Estás seguro de querer eliminar el control?';
+    this.modal.subtitulo = 'Se borrarán los resultados asociados al control y los permisos de los usuarios.';
+    this.modal.eliminar = true;
+    this.modal.visible = true;
   }
 
-  noBorrar() {
-    this.modal = false;
-  }
-
-  borrarControl() {
-    let parametros = '?id=' + this.idBorrar;
-    this.servidor.deleteObject(URLS.CONTROLES, parametros).subscribe(
-      response => {
-        if (response.success) {
-          let controlBorrar = this.controles.find(control => control.id == this.idBorrar);
-          let indice = this.controles.indexOf(controlBorrar)
-          this.controles.splice(indice, 1);
-          this.modal = false;
-        }
-    });
+  cerrarModal(event: boolean) {
+    this.modal.visible = false;
+    if (event) {
+      let parametros = '?id=' + this.idBorrar;
+      this.servidor.deleteObject(URLS.CONTROLES, parametros).subscribe(
+        response => {
+          if (response.success) {
+            let controlBorrar = this.controles.find(control => control.id == this.idBorrar);
+            let indice = this.controles.indexOf(controlBorrar);
+            this.controles.splice(indice, 1);
+          }
+      });
+    }
   }
 
   modificarControl(idControl: number) {

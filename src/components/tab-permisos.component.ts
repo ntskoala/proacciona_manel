@@ -86,7 +86,9 @@ export class TabPermisosComponent {
             this.checklists.push(new Checklist(
               element.id,
               element.idempresa,
-              element.nombrechecklist
+              element.nombrechecklist,
+              element.periodicidad,
+              element.tipoperiodo
             ));
           }
         }

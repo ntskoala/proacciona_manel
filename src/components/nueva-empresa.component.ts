@@ -14,19 +14,17 @@ export class NuevaEmpresaComponent {
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
   
-  empresa: Object = {};
+  empresa: Empresa = {nombre: ''};
   
-  nuevaEmpresa(empresa: any) {
-    // limpiar form
-    this.empresa = {}
-    let nuevaEmpresa = new Empresa(empresa.nombre, empresa.nif, 0);
-    this.servidor.postObject(URLS.EMPRESAS, nuevaEmpresa).subscribe(
+  nuevaEmpresa(empresa: Empresa) {
+    this.servidor.postObject(URLS.EMPRESAS, empresa).subscribe(
       response => {
         // si tiene éxito
         if (response.success) {
-          nuevaEmpresa.id = response.id;
-          this.empresasService.empresaCreada(nuevaEmpresa);
-          console.log('Empresa creada')
+          empresa.id = response.id;
+          this.empresasService.empresaCreada(empresa);
+          // limpiar form
+          this.empresa = {nombre: ''};
         }
         // usuario erróneo
         else {

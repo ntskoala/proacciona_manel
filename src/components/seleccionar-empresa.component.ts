@@ -16,7 +16,7 @@ export class SeleccionarEmpresaComponent implements OnInit {
   
   subscription: Subscription;
   empresas: Empresa[] = [];
-  empresa: Empresa = new Empresa('Seleccionar empresa', '', 0);
+  empresa: Empresa = new Empresa('Seleccionar empresa', 0);
   modal: Modal = new Modal();
   
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
@@ -34,7 +34,6 @@ export class SeleccionarEmpresaComponent implements OnInit {
           for (let element of response.data) {
             this.empresas.push(new Empresa(
               element.nombre,
-              element.cif,
               element.id
             ))
           }

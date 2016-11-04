@@ -15,10 +15,11 @@ export class TabChecklistsComponent implements OnInit{
 
   private subscription: Subscription;
   checklistNumber: number = 0;
-  checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist');
+  checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist', 0, '');
   checklists: Checklist[] = [];
   controlchecklists: ControlChecklist[] = [];
   ccl: Object = {};
+  cl: Object = {};
   guardar = [];
   active: boolean = true;
   modalChecklist: boolean = false;
@@ -44,7 +45,9 @@ export class TabChecklistsComponent implements OnInit{
                 this.checklists.push(new Checklist(
                   element.id,
                   element.idempresa,
-                  element.nombrechecklist
+                  element.nombrechecklist,
+                  element.periodicidad,
+                  element.tipoperiodo
                 ))
               }
             }
@@ -77,12 +80,13 @@ export class TabChecklistsComponent implements OnInit{
     });
   }
 
-  nuevaChecklist(nombre: string) {
+  nuevaChecklist(cl: Checklist) {
     // truco de Angular para recargar el form y que se vacíe
     this.active = false;
     setTimeout(() => this.active = true, 0);
     
-    let nuevaChecklist = new Checklist(0, this.empresasService.seleccionada, nombre);
+    let nuevaChecklist = new Checklist(0, this.empresasService.seleccionada,
+      cl.nombrechecklist, cl.periodicidad, cl.tipoperiodo);
     this.servidor.postObject(URLS.CHECKLISTS, nuevaChecklist).subscribe(
       response => {
         // si tiene éxito
@@ -109,9 +113,7 @@ export class TabChecklistsComponent implements OnInit{
             this.controlchecklists.push(new ControlChecklist(
               element.id,
               element.idchecklist,
-              element.nombre,
-              element.periodicidad,
-              element.tipoperiodo
+              element.nombre
             ));
             this.guardar[element.id] = false;
           }
@@ -126,7 +128,7 @@ export class TabChecklistsComponent implements OnInit{
     this.active = false;
     setTimeout(() => this.active = true, 0);
 
-    let nuevoCCL = new ControlChecklist(0, this.checklistNumber, ccl.nombre, ccl.periodicidad, ccl.tipoperiodo);
+    let nuevoCCL = new ControlChecklist(0, this.checklistNumber, ccl.nombre);
     this.servidor.postObject(URLS.CONTROLCHECKLISTS, nuevoCCL).subscribe(
       response => {
         if (response.success) {

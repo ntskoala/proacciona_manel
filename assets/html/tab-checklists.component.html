@@ -40,9 +40,11 @@
   </div>
   <div class="nueva-checklist">
     <h2>Nueva checklist</h2>
-    <form *ngIf="active" (ngSubmit)="nuevaChecklist(nombreChecklist.value)" #nuevaChecklistForm="ngForm">
-      <md-input class="full" placeholder="Nombre" type="text" required [(ngModel)]="nombreChecklist.value" name="nombreChecklist" #nombreChecklist="ngModel"></md-input>
-      <button md-raised-button color="accent" [disabled]="!nuevaChecklistForm.form.valid" type="submit">Crear</button>
+    <form *ngIf="active" (ngSubmit)="nuevaChecklist(nuevaCLf.value)" #nuevaCLf="ngForm">
+      <md-input class="full" placeholder="Nombre" type="text" required [(ngModel)]="cl.nombrechecklist" name="nombrechecklist" ></md-input>
+      <md-input class="full" placeholder="Periodicidad" type="text" required [(ngModel)]="cl.periodicidad" name="periodicidad"></md-input>
+      <md-input class="full" placeholder="Tipo periodo" type="text" required [(ngModel)]="cl.tipoperiodo" name="tipoperiodo"></md-input>
+      <button md-raised-button color="accent" [disabled]="!nuevaCLf.form.valid" type="submit">Crear</button>
     </form>
   </div>
 </div>
@@ -55,12 +57,6 @@
         <span class="cell">
           <input placeholder="Nombre" type="text" required [(ngModel)]="ccl.nombre" name="nombre">
         </span>
-        <span class="cell">
-          <input placeholder="Periodicidad" type="text" required [(ngModel)]="ccl.periodicidad" name="periodicidad">
-        </span>
-        <span class="cell">
-          <input placeholder="Tipo periodo"type="text" required [(ngModel)]="ccl.tipoperiodo" name="tipoperiodo">
-        </span>
         <span class="cell"></span>
         <span class="cell">
           <button md-mini-fab color="accent" [disabled]="!crearCCLf.form.valid" type="submit">
@@ -70,8 +66,6 @@
       </form>
       <div class="header-row">
         <span class="header-cell">Nombre</span>
-        <span class="header-cell">Periodicidad</span>
-        <span class="header-cell">Tipo periodo</span>
         <span class="header-cell"></span>
         <span class="header-cell"></span>
       </div>
@@ -79,12 +73,6 @@
         #actualizarCCLf="ngForm" (ngSubmit)="actualizarCCL(controlchecklist.id)">
         <span class="cell">
           <input type="text" [(ngModel)]="controlchecklist.nombre" (keyup)="modificarCCL(controlchecklist.id)" name="modNombre">
-        </span>
-        <span class="cell">
-          <input type="text" [(ngModel)]="controlchecklist.periodicidad" (keyup)="modificarCCL(controlchecklist.id)" name="modPeriodicidad">
-        </span>
-        <span class="cell">
-          <input type="text" [(ngModel)]="controlchecklist.tipoperiodo" (keyup)="modificarCCL(controlchecklist.id)" name="modTipoperiodo">
         </span>
         <span class="cell">
           <button md-mini-fab color="primary" (click)="checkBorrarControlchecklist(controlchecklist.id)" type="submit">

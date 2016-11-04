@@ -5,7 +5,6 @@
   <form #nuevaEmpresaForm="ngForm" (ngSubmit)="nuevaEmpresa(nuevaEmpresaForm.value)">
     <md-card-content>
       <md-input class="full-width" placeholder="Nombre" type="text" required [(ngModel)]="empresa.nombre" name="nombre"></md-input>
-      <md-input class="full-width" placeholder="NIF" type="text" required [(ngModel)]="empresa.nif" name="nif"></md-input>
     </md-card-content>
     <md-card-footer>
       <button md-raised-button color="accent" [disabled]="!nuevaEmpresaForm.form.valid" type="submit">Crear</button>

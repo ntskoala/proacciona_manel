@@ -5,6 +5,7 @@ import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
 import { URLS } from '../models/urls';
 import { Usuario } from '../models/usuario';
+import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-usuarios',
@@ -14,12 +15,11 @@ import { Usuario } from '../models/usuario';
 export class TabUsuariosComponent implements OnInit {
 
   private subscription: Subscription;
-  public usuarios: Usuario[] = [];
-  public guardar = [];
-  public nuevoUsuario: Object = {usuario: '', password: '', tipouser: 'Normal'};
-  public idBorrar: number;
-  public modal: boolean = false;
-
+  usuarios: Usuario[] = [];
+  guardar = [];
+  nuevoUsuario: Object = {tipouser: 'Normal'};
+  idBorrar: number;
+  modal: Modal = new Modal();
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -63,25 +63,28 @@ export class TabUsuariosComponent implements OnInit {
   }
 
   checkBorrar(idBorrar: number) {
-    this.modal = true;
+    // Guardar el id del usuario a borrar
     this.idBorrar = idBorrar;
+    // Crea el modal
+    this.modal.titulo = '¿Estás seguro de querer eliminar el usuario?';
+    this.modal.subtitulo = 'Se borrarán todos sus permisos.';
+    this.modal.eliminar = true;
+    this.modal.visible = true;
   }
 
-  noBorrar() {
-    this.modal = false;
-  }
-
-  borrarUsuario() {
-    let parametros = '?id=' + this.idBorrar;
-    this.servidor.deleteObject(URLS.USUARIOS, parametros).subscribe(
-      response => {
-        if (response.success) {
-          let usuarioBorrar = this.usuarios.find(usuario => usuario.id == this.idBorrar);
-          let indice = this.usuarios.indexOf(usuarioBorrar);
-          this.usuarios.splice(indice, 1);
-          this.modal = false;
-        }
-    });
+  cerrarModal(event: boolean) {
+    this.modal.visible = false;
+    if (event) {
+      let parametros = '?id=' + this.idBorrar;
+      this.servidor.deleteObject(URLS.USUARIOS, parametros).subscribe(
+        response => {
+          if (response.success) {
+            let usuarioBorrar = this.usuarios.find(usuario => usuario.id == this.idBorrar);
+            let indice = this.usuarios.indexOf(usuarioBorrar);
+            this.usuarios.splice(indice, 1);
+          }
+      });
+    }
   }
 
   modificarUsuario(idUsuario: number) {

@@ -1,6 +1,6 @@
 select {
   font-size: 0.9rem;
-  border: 0;
+  border: 1px solid #eee;
   border-radius: 0;
   background: url('../assets/images/keyboard_arrow_down.svg') no-repeat 97% 50% #fff;
 }

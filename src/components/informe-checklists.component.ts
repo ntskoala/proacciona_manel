@@ -17,19 +17,17 @@ import { Columna } from '../models/columna';
 export class InformeChecklistsComponent implements OnInit{
   
   private subscription: Subscription;
-  public checklistSeleccionada: number = 0;
-  public checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist');
-  public checklists: Checklist[];
-  public controlchecklists: ControlChecklist[];
-  public resultadoschecklist: ResultadoChecklist[];
-  public columnas: Columna[];
-  public resultado: Object = {};
-  public tabla: Object[];
-  public fecha: Object = {inicio: '2016-10-16', fin: '2016-10-19'};
-  public idrs: string[] = [];
-
+  checklistSeleccionada: number = 0;
+  checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist', 0, '');
+  checklists: Checklist[];
+  controlchecklists: ControlChecklist[];
+  resultadoschecklist: ResultadoChecklist[];
+  columnas: Columna[];
+  resultado: Object = {};
+  tabla: Object[];
+  fecha: Object = {inicio: '2016-10-16', fin: '2016-10-19'};
+  idrs: string[] = [];
   
-
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   ngOnInit() {
@@ -46,7 +44,9 @@ export class InformeChecklistsComponent implements OnInit{
                 this.checklists.push(new Checklist(
                   element.id,
                   element.idempresa,
-                  element.nombrechecklist
+                  element.nombrechecklist,
+                  element.periodicidad,
+                  element.tipoperiodo
                 ));
               }
             }
@@ -78,7 +78,6 @@ export class InformeChecklistsComponent implements OnInit{
         }
     });
   }
-
 
   filtrarFechas(fecha) {
     this.idrs = [];
