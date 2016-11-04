@@ -5,6 +5,7 @@ import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
 import { URLS } from '../models/urls';
 import { Empresa } from '../models/empresa';
+import { Modal } from '../models/modal';
 
 @Component({
   selector: 'seleccionar-empresa',
@@ -15,8 +16,8 @@ export class SeleccionarEmpresaComponent implements OnInit {
   
   subscription: Subscription;
   empresas: Empresa[] = [];
-  modal: boolean = false;
-  empresa: Empresa = {nombre: 'Seleccionar empresa', cif: '', id: 0};
+  empresa: Empresa = new Empresa('Seleccionar empresa', '', 0);
+  modal: Modal = new Modal();
   
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -41,33 +42,34 @@ export class SeleccionarEmpresaComponent implements OnInit {
     });
   }
 
-  selecciona(seleccion: number){
-    this.empresasService.seleccionarEmpresa(this.empresas.find(empresa => empresa.id == seleccion));
+  selecciona(idEmpresa: number){
+    this.empresasService.seleccionarEmpresa(this.empresas.find(emp => emp.id == idEmpresa));
   }
 
   checkBorrar() {
     if (this.empresasService.seleccionada != 0) {
-      this.modal = true;
+      this.modal.titulo = '¿Estás seguro de querer eliminar la empresa?';
+      this.modal.subtitulo = 'Se borrarán todos sus usuarios, controles, checklists asociados y los resultados de los mismos.'
+      this.modal.eliminar = true;
+      this.modal.visible = true;
     }
   }
 
-  noBorrar() {
-    this.modal = false;
-  }
-
-  borrarEmpresa() {
-    let parametros = '?id=' +  this.empresasService.seleccionada;
-    this.servidor.deleteObject(URLS.EMPRESAS, parametros).subscribe(
-      response => {
-        if (response.success) {
-          let empresaBorrar = this.empresas.find(empresa => empresa.id == this.empresasService.seleccionada);
-          let indice = this.empresas.indexOf(empresaBorrar);
-          this.empresas.splice(indice, 1);
-          console.log('Empresa eliminada');
-          this.empresasService.seleccionada = 0;
-          this.modal = false;
-        }
-    });
+  cerrarModal(event: boolean) {
+    this.modal.visible = false;
+    if (event) {
+      let parametros = '?id=' +  this.empresasService.seleccionada;
+      this.servidor.deleteObject(URLS.EMPRESAS, parametros).subscribe(
+        response => {
+          if (response.success) {
+            let empresaBorrar = this.empresas.find(emp => emp.id == this.empresasService.seleccionada);
+            let indice = this.empresas.indexOf(empresaBorrar);
+            this.empresas.splice(indice, 1);
+            console.log('Empresa eliminada');
+            this.empresasService.seleccionada = 0;
+          }
+      });
+    }
   }
 
 }

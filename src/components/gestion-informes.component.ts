@@ -7,9 +7,18 @@ import { EmpresasService } from '../services/empresas.service';
   templateUrl: '../../assets/html/gestion-informes.component.html'
 })
 export class GestionInformesComponent {
-  public tabActivo = 'controles';
+
+  tabs = [true, null, null, null]
+  tabActivo: number = 0;
+
   constructor(private empresasService: EmpresasService) {}
-  cambiarTab(tab: string) {
+
+  cambiarTab(tab: number) {
     this.tabActivo = tab;
+    // Quitar true al tab anterior
+    this.tabs[this.tabs.indexOf(true)] = null;
+    // Poner true en el nuevo tab
+    this.tabs[tab] = true;
   }
+
 }

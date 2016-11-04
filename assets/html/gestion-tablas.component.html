@@ -4,16 +4,20 @@
       <md-toolbar color="accent">Tablas</md-toolbar>
     </md-card-title>
     <md-card-subtitle>
-      <button md-button color="primary" (click)="cambiarTab('usuarios')">Usuarios</button>
-      <button md-button color="primary" (click)="cambiarTab('controles')">Controles</button>
-      <button md-button color="primary" (click)="cambiarTab('checklists')">Checklists</button>
-      <button md-button color="primary" (click)="cambiarTab('permisos'); permisos.seleccionarPermisos()">Permisos</button>
+      <button md-button color="primary" [attr.md-raised-button]="tabs[0]"
+        (click)="cambiarTab(0)">Usuarios</button>
+      <button md-button color="primary" [attr.md-raised-button]="tabs[1]"
+        (click)="cambiarTab(1)">Controles</button>
+      <button md-button color="primary" [attr.md-raised-button]="tabs[2]"
+        (click)="cambiarTab(2)">Checklists</button>
+      <button md-button color="primary" [attr.md-raised-button]="tabs[3]"
+        (click)="cambiarTab(3); permisos.seleccionarPermisos()">Permisos</button>
     </md-card-subtitle>
     <md-card-content>
-      <tab-usuarios-empresa class="tab" [class.active]="tabActivo=='usuarios'"></tab-usuarios-empresa>
-      <tab-controles-empresa class="tab" [class.active]="tabActivo=='controles'"></tab-controles-empresa>
-      <tab-checklists-empresa class="tab" [class.active]="tabActivo=='checklists'"></tab-checklists-empresa>
-      <tab-permisos-empresa #permisos class="tab" [class.active]="tabActivo=='permisos'"></tab-permisos-empresa>
+      <tab-usuarios class="tab" [class.active]="tabActivo == 0"></tab-usuarios>
+      <tab-controles class="tab" [class.active]="tabActivo == 1"></tab-controles>
+      <tab-checklists class="tab" [class.active]="tabActivo == 2"></tab-checklists>
+      <tab-permisos #permisos class="tab" [class.active]="tabActivo == 3"></tab-permisos>
     </md-card-content>
   </md-card>
 </div>

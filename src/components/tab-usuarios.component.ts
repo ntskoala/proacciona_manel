@@ -7,7 +7,7 @@ import { URLS } from '../models/urls';
 import { Usuario } from '../models/usuario';
 
 @Component({
-  selector: 'tab-usuarios-empresa',
+  selector: 'tab-usuarios',
   templateUrl: '../../assets/html/tab-usuarios.component.html',
   styleUrls: ['../../assets/css/tab-usuarios.component.css']
 })
@@ -25,8 +25,8 @@ export class TabUsuariosComponent implements OnInit {
 
   ngOnInit() {
     this.subscription = this.empresasService.empresaSeleccionada.subscribe(
-      seleccionada => {
-        let parametros = '&idempresa=' + seleccionada.id;
+      emp => {
+        let parametros = '&idempresa=' + emp.id;
         // llamada al servidor para conseguir los usuarios
         this.servidor.getObjects(URLS.USUARIOS, parametros).subscribe(
           response => {

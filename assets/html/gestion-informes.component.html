@@ -4,14 +4,17 @@
       <md-toolbar color="accent">Informes</md-toolbar>
     </md-card-title>
     <md-card-subtitle>
-      <button md-button color="primary" (click)="cambiarTab('controles')">Controles</button>
-      <button md-button color="primary" (click)="cambiarTab('checklists')">Checklists</button>
-      <button md-button color="primary" (click)="cambiarTab('periodicidad')">Periodicidad</button>
+      <button md-button color="primary" [attr.md-raised-button]="tabs[0]"
+        (click)="cambiarTab(0)">Controles</button>
+      <button md-button color="primary" [attr.md-raised-button]="tabs[1]"
+        (click)="cambiarTab(1)">Checklists</button>
+      <button md-button color="primary" [attr.md-raised-button]="tabs[2]"
+        (click)="cambiarTab(2)">Periodicidad</button>
     </md-card-subtitle>
     <md-card-content>
-      <tab-control-informes class="tab" [class.active]="tabActivo=='controles'"></tab-control-informes>
-      <tab-checklist-informes class="tab" [class.active]="tabActivo=='checklists'"></tab-checklist-informes>
-      <tab-periodicidad-informes class="tab" [class.active]="tabActivo=='periodicidad'"></tab-periodicidad-informes>
+      <informe-controles class="tab" [class.active]="tabActivo == 0"></informe-controles>
+      <informe-checklists class="tab" [class.active]="tabActivo == 1"></informe-checklists>
+      <informe-periodicidad class="tab" [class.active]="tabActivo == 2"></informe-periodicidad>
     </md-card-content>
   </md-card>
 </div>

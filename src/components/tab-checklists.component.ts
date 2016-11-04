@@ -8,21 +8,22 @@ import { Checklist } from '../models/checklist';
 import { ControlChecklist } from '../models/controlchecklist';
 
 @Component({
-  selector: 'tab-checklists-empresa',
+  selector: 'tab-checklists',
   templateUrl: '../../assets/html/tab-checklists.component.html'
 })
 export class TabChecklistsComponent implements OnInit{
 
   private subscription: Subscription;
-  public checklistNumber: number = 0;
-  public checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist');
-  public checklists: Checklist[] = [];
-  public controlchecklists: ControlChecklist[] = [];
-  public guardar = [];
-  public active: boolean = true;
-  public modalChecklist: boolean = false;
-  public modalControlchecklist: boolean = false;
-  public idBorrar: number;
+  checklistNumber: number = 0;
+  checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist');
+  checklists: Checklist[] = [];
+  controlchecklists: ControlChecklist[] = [];
+  ccl: Object = {};
+  guardar = [];
+  active: boolean = true;
+  modalChecklist: boolean = false;
+  modalControlchecklist: boolean = false;
+  idBorrar: number;
   
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -97,7 +98,7 @@ export class TabChecklistsComponent implements OnInit{
     });
   }
   
-  mostrarControlchecklist(seleccion: number) {
+  mostrarCCL(seleccion: number) {
     let parametros = '&idchecklist=' + seleccion;
     // llamada al servidor para conseguir los controlchecklist
     this.servidor.getObjects(URLS.CONTROLCHECKLISTS, parametros).subscribe(
@@ -108,7 +109,9 @@ export class TabChecklistsComponent implements OnInit{
             this.controlchecklists.push(new ControlChecklist(
               element.id,
               element.idchecklist,
-              element.nombre
+              element.nombre,
+              element.periodicidad,
+              element.tipoperiodo
             ));
             this.guardar[element.id] = false;
           }
@@ -118,17 +121,17 @@ export class TabChecklistsComponent implements OnInit{
     });
   }
 
-  crearControlchecklist(nombre: string) {
+  crearCCL(ccl: ControlChecklist) {
     // truco de Angular para recargar el form y que se vacíe
     this.active = false;
     setTimeout(() => this.active = true, 0);
 
-    let nuevoControlchecklist = new ControlChecklist(0, this.checklistNumber, nombre);
-    this.servidor.postObject(URLS.CONTROLCHECKLISTS, nuevoControlchecklist).subscribe(
+    let nuevoCCL = new ControlChecklist(0, this.checklistNumber, ccl.nombre, ccl.periodicidad, ccl.tipoperiodo);
+    this.servidor.postObject(URLS.CONTROLCHECKLISTS, nuevoCCL).subscribe(
       response => {
         if (response.success) {
-          nuevoControlchecklist.id = response.id;
-          this.controlchecklists.push(nuevoControlchecklist);
+          nuevoCCL.id = response.id;
+          this.controlchecklists.push(nuevoCCL);
         }
     });
   }
@@ -155,11 +158,11 @@ export class TabChecklistsComponent implements OnInit{
     });
   }
 
-  modificarControlchecklist(idControlchecklist: number) {
+  modificarCCL(idControlchecklist: number) {
     this.guardar[idControlchecklist] = true;
   }
   
-  actualizarControlchecklist(idControlchecklist: number) {
+  actualizarCCL(idControlchecklist: number) {
     this.guardar[idControlchecklist] = false;
     let modControlchecklist = this.controlchecklists.find(controlchecklist => controlchecklist.id == idControlchecklist);
     let parametros = '?id=' +  idControlchecklist;

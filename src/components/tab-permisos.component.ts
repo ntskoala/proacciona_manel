@@ -11,7 +11,7 @@ import { PermissionUserControl } from '../models/permissionusercontrol';
 import { PermissionUserChecklist } from '../models/permissionuserchecklist';
 
 @Component({
-  selector: 'tab-permisos-empresa',
+  selector: 'tab-permisos',
   templateUrl: '../../assets/html/tab-permisos.component.html'
 })
 export class TabPermisosComponent {

@@ -30,7 +30,7 @@
   <div class="seleccionar-checklist">
     <h2>Checklist</h2>
     <form>
-      <select (change)="mostrarControlchecklist($event.target.value)">
+      <select (change)="mostrarCCL($event.target.value)">
         <option *ngFor="let checklist of checklists" [value]="checklist.id">
           {{checklist.nombrechecklist}}
         </option>
@@ -38,7 +38,6 @@
     </form>
     <button md-button color="primary" (click)="checkBorrarChecklist()" type="submit">Eliminar</button>
   </div>
-
   <div class="nueva-checklist">
     <h2>Nueva checklist</h2>
     <form *ngIf="active" (ngSubmit)="nuevaChecklist(nombreChecklist.value)" #nuevaChecklistForm="ngForm">
@@ -47,33 +46,45 @@
     </form>
   </div>
 </div>
+
 <div class="mostrar-checklist">
   <div *ngIf="checklistNumber != 0">
     <h2>Control checklists</h2>
     <div class="table">
-      <form class="row" *ngIf="active" (ngSubmit)="crearControlchecklist(nombre.value)" #crearControlchecklistForm="ngForm">
+      <form class="row" *ngIf="active" #crearCCLf="ngForm" (ngSubmit)="crearCCL(crearCCLf.value)">
         <span class="cell">
-          <input type="text" name="nombre" placeholder="nombre" [(ngModel)]="nombre.value" required #nombre="ngModel">
+          <input placeholder="Nombre" type="text" required [(ngModel)]="ccl.nombre" name="nombre">
+        </span>
+        <span class="cell">
+          <input placeholder="Periodicidad" type="text" required [(ngModel)]="ccl.periodicidad" name="periodicidad">
+        </span>
+        <span class="cell">
+          <input placeholder="Tipo periodo"type="text" required [(ngModel)]="ccl.tipoperiodo" name="tipoperiodo">
         </span>
         <span class="cell"></span>
         <span class="cell">
-          <button md-mini-fab color="accent" [disabled]="!crearControlchecklistForm.form.valid" type="submit">
+          <button md-mini-fab color="accent" [disabled]="!crearCCLf.form.valid" type="submit">
             <span class="material-icons">add</span>
           </button>
         </span>
       </form>
       <div class="header-row">
         <span class="header-cell">Nombre</span>
+        <span class="header-cell">Periodicidad</span>
+        <span class="header-cell">Tipo periodo</span>
         <span class="header-cell"></span>
         <span class="header-cell"></span>
       </div>
-      <form class="row"
-        *ngFor="let controlchecklist of controlchecklists"
-        (ngSubmit)="actualizarControlchecklist(controlchecklist.id)"
-        #actualizarControlchecklistForm="ngForm"
-      >
+      <form class="row" *ngFor="let controlchecklist of controlchecklists"
+        #actualizarCCLf="ngForm" (ngSubmit)="actualizarCCL(controlchecklist.id)">
         <span class="cell">
-          <input type="text" name="modNombre" [(ngModel)]="controlchecklist.nombre" (keyup)="modificarControlchecklist(controlchecklist.id)" #modNombre="ngModel">
+          <input type="text" [(ngModel)]="controlchecklist.nombre" (keyup)="modificarCCL(controlchecklist.id)" name="modNombre">
+        </span>
+        <span class="cell">
+          <input type="text" [(ngModel)]="controlchecklist.periodicidad" (keyup)="modificarCCL(controlchecklist.id)" name="modPeriodicidad">
+        </span>
+        <span class="cell">
+          <input type="text" [(ngModel)]="controlchecklist.tipoperiodo" (keyup)="modificarCCL(controlchecklist.id)" name="modTipoperiodo">
         </span>
         <span class="cell">
           <button md-mini-fab color="primary" (click)="checkBorrarControlchecklist(controlchecklist.id)" type="submit">

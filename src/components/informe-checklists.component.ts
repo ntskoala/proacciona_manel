@@ -10,7 +10,7 @@ import { ResultadoChecklist } from '../models/resultadochecklist';
 import { Columna } from '../models/columna';
 
 @Component({
-  selector: 'tab-checklist-informes',
+  selector: 'informe-checklists',
   templateUrl: '../../assets/html/informe-checklists.component.html',
   styleUrls: ['../../assets/css/informe-checklists.component.css']
 })

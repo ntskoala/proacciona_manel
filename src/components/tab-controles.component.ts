@@ -7,7 +7,7 @@ import { URLS } from '../models/urls';
 import { Control } from '../models/control';
 
 @Component({
-  selector: 'tab-controles-empresa',
+  selector: 'tab-controles',
   templateUrl: '../../assets/html/tab-controles.component.html'
 })
 

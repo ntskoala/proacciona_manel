@@ -7,7 +7,7 @@ import { URLS } from '../models/urls';
 import { ResultadoControl } from '../models/resultadocontrol';
 
 @Component({
-  selector: 'tab-control-informes',
+  selector: 'informe-controles',
   templateUrl: '../../assets/html/informe-controles.component.html',
   styleUrls: ['../../assets/css/informe-controles.component.css']
 })

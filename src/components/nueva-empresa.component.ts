@@ -14,7 +14,7 @@ export class NuevaEmpresaComponent {
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
   
-  public empresa: Object = {};
+  empresa: Object = {};
   
   nuevaEmpresa(empresa: any) {
     // limpiar form

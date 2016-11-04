@@ -29,7 +29,7 @@
     <span class="header-cell" *ngFor="let columna of columnas">{{columna}}</span>
   </div>
   <div class="row" *ngFor="let resultado of tabla">
-    <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy"}}</span>
+    <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy - HH:mm"}}</span>
     <span class="cell" *ngIf="resultado.foto">
       <span class="foto-link material-icons" (click)="ventanaFoto(resultado.id)">image</span>
     </span>

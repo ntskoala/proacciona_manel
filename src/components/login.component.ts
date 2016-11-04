@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Servidor } from '../services/servidor.service';
 import { EmpresasService } from '../services/empresas.service';
 import { URLS } from '../models/urls';
+import { Modal } from '../models/modal';
 
 @Component({
   selector: 'login',
@@ -12,8 +13,7 @@ import { URLS } from '../models/urls';
 export class LoginComponent {
 
   usuario: Object = {};
-  modal: boolean = false;
-  mensaje: string;
+  modal: Modal = new Modal();
 
   constructor(private servidor: Servidor, private router: Router, private empresasService: EmpresasService) {};
 
@@ -43,21 +43,21 @@ export class LoginComponent {
               break;
             default:
               // Se queda en login
-              this.mensaje = 'Usuario sin permisos';
-              this.modal = true;
+              this.modal.titulo = 'Usuario sin permisos';
+              this.modal.visible = true;
           }
         } else {
           // TODO: chequear si la sesión está caducada
           // Usuario erróneo
-          this.mensaje = 'Usuario incorrecto';
-          this.modal = true;
+          this.modal.titulo = 'Usuario incorrecto';
+          this.modal.visible = true;
         }
       }
     );
   }
 
   cerrarModal() {
-    this.modal = false;
+    this.modal.visible = false;
   }
 
 }
