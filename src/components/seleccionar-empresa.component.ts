@@ -48,7 +48,7 @@ export class SeleccionarEmpresaComponent implements OnInit {
   checkBorrar() {
     if (this.empresasService.seleccionada != 0) {
       this.modal.titulo = '¿Estás seguro de querer eliminar la empresa?';
-      this.modal.subtitulo = 'Se borrarán todos sus usuarios, controles, checklists asociados y los resultados de los mismos.'
+      this.modal.subtitulo = 'Se borrarán todos sus usuarios, controles, checklists asociados y los resultados de los mismos.';
       this.modal.eliminar = true;
       this.modal.visible = true;
     }

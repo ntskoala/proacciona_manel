@@ -1,59 +1,48 @@
-<!-- Modal aviso borrado checklist -->
-<div class="modal" *ngIf="modalChecklist">
-  <div class="modal-window">
-    <md-card>
-      <md-card-content>
-        <p class="aviso">¿Estás seguro de querer eliminar la checklist?</p>
-        <p>Se borrarán los resultados asociados a la checklist y los permisos de los usuarios.</p>
-        <button md-button color="primary" (click)="borrarChecklist()" type="submit">Eliminar</button>
-        <button md-button color="primary" (click)="noBorrarChecklist()" type="submit">Cancelar</button>
-      </md-card-content>
-    </md-card>
-  </div>
+<modal [modal]="modalCL" (onCerrar)="cerrarModalCL($event)"></modal>
+<modal [modal]="modalCCL" (onCerrar)="cerrarModalCCL($event)"></modal>
+
+<!-- Seleccionar checklist -->
+<div class="seleccionar-checklist">
+  <h2>Checklist</h2>
+  <form>
+    <select (change)="mostrarCCL($event.target.value)">
+      <option *ngFor="let checklist of checklists" [value]="checklist.id">
+        {{checklist.nombrechecklist}}
+      </option>
+    </select>
+  </form>
+  <button md-button color="warn" (click)="checkBorrarCL()" type="submit">Eliminar</button>
 </div>
 
-<!-- Modal aviso borrado control checklist -->
-<div class="modal" *ngIf="modalControlchecklist">
-  <div class="modal-window">
-    <md-card>
-      <md-card-content>
-        <p class="aviso">¿Estás seguro de querer eliminar el control checklist?</p>
-        <p>Se borrarán sus resultados asociados.</p>
-        <button md-button color="primary" (click)="borrarControlchecklist()" type="submit">Eliminar</button>
-        <button md-button color="primary" (click)="noBorrarControlchecklist()" type="submit">Cancelar</button>
-      </md-card-content>
-    </md-card>
-  </div>
-</div>
-
-<div class="left">
-  <div class="seleccionar-checklist">
-    <h2>Checklist</h2>
-    <form>
-      <select (change)="mostrarCCL($event.target.value)">
-        <option *ngFor="let checklist of checklists" [value]="checklist.id">
-          {{checklist.nombrechecklist}}
-        </option>
-      </select>
-    </form>
-    <button md-button color="primary" (click)="checkBorrarChecklist()" type="submit">Eliminar</button>
-  </div>
-  <div class="nueva-checklist">
-    <h2>Nueva checklist</h2>
-    <form *ngIf="active" (ngSubmit)="nuevaChecklist(nuevaCLf.value)" #nuevaCLf="ngForm">
-      <md-input class="full" placeholder="Nombre" type="text" required [(ngModel)]="cl.nombrechecklist" name="nombrechecklist" ></md-input>
-      <md-input class="full" placeholder="Periodicidad" type="text" required [(ngModel)]="cl.periodicidad" name="periodicidad"></md-input>
-      <md-input class="full" placeholder="Tipo periodo" type="text" required [(ngModel)]="cl.tipoperiodo" name="tipoperiodo"></md-input>
-      <button md-raised-button color="accent" [disabled]="!nuevaCLf.form.valid" type="submit">Crear</button>
+<!-- Nueva checklist -->
+<div class="nueva-checklist">
+  <h2>Nueva checklist</h2>
+  <div class="table">
+    <form class="row" (ngSubmit)="nuevaChecklist(nuevaCLf.value)" #nuevaCLf="ngForm">
+      <span class="cell">
+        <input class="full" placeholder="Nombre" type="text" required [(ngModel)]="cl.nombrechecklist" name="nombrechecklist">
+      </span>
+      <span class="cell">
+        <input class="full" placeholder="Periodicidad" type="text" required [(ngModel)]="cl.periodicidad" name="periodicidad">
+      </span>
+      <span class="cell">
+        <input class="full" placeholder="Tipo periodo" type="text" required [(ngModel)]="cl.tipoperiodo" name="tipoperiodo">
+      </span>
+      <span class="cell">
+        <button md-mini-fab color="accent" [disabled]="!nuevaCLf.form.valid" type="submit">
+          <span class="material-icons">add</span>
+        </button>
+      </span>
     </form>
   </div>
 </div>
 
+<!-- Mostrar control checklists -->
 <div class="mostrar-checklist">
-  <div *ngIf="checklistNumber != 0">
+  <div *ngIf="checklistActiva != 0">
     <h2>Control checklists</h2>
     <div class="table">
-      <form class="row" *ngIf="active" #crearCCLf="ngForm" (ngSubmit)="crearCCL(crearCCLf.value)">
+      <form class="row" #crearCCLf="ngForm" (ngSubmit)="crearCCL(crearCCLf.value)">
         <span class="cell">
           <input placeholder="Nombre" type="text" required [(ngModel)]="ccl.nombre" name="nombre">
         </span>
@@ -75,7 +64,7 @@
           <input type="text" [(ngModel)]="controlchecklist.nombre" (keyup)="modificarCCL(controlchecklist.id)" name="modNombre">
         </span>
         <span class="cell">
-          <button md-mini-fab color="primary" (click)="checkBorrarControlchecklist(controlchecklist.id)" type="submit">
+          <button md-mini-fab color="primary" (click)="checkBorrarCCL(controlchecklist.id)" type="submit">
             <span class="material-icons">close</span>
           </button>
         </span>

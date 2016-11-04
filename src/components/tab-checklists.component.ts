@@ -6,6 +6,7 @@ import { Servidor } from '../services/servidor.service';
 import { URLS } from '../models/urls';
 import { Checklist } from '../models/checklist';
 import { ControlChecklist } from '../models/controlchecklist';
+import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-checklists',
@@ -14,17 +15,16 @@ import { ControlChecklist } from '../models/controlchecklist';
 export class TabChecklistsComponent implements OnInit{
 
   private subscription: Subscription;
-  checklistNumber: number = 0;
+  checklistActiva: number = 0;
   checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist', 0, '');
   checklists: Checklist[] = [];
   controlchecklists: ControlChecklist[] = [];
-  ccl: Object = {};
   cl: Object = {};
+  ccl: Object = {};
   guardar = [];
-  active: boolean = true;
-  modalChecklist: boolean = false;
-  modalControlchecklist: boolean = false;
   idBorrar: number;
+  modalCL: Modal = new Modal();
+  modalCCL: Modal = new Modal();
   
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -32,15 +32,15 @@ export class TabChecklistsComponent implements OnInit{
     this.subscription = this.empresasService.empresaSeleccionada.subscribe(
       seleccionada => {
         let parametros = '&idempresa=' + seleccionada.id;
-        // llamada al servidor para conseguir las checklists
+        // Llamada al servidor para conseguir las checklists
         this.servidor.getObjects(URLS.CHECKLISTS, parametros).subscribe(
           response => {
-            // ocultamos mostrar control checklists
-            this.checklistNumber = 0;
-            // vaciamos la lista actual
+            // Ocultar mostrar control checklists
+            this.checklistActiva = 0;
+            // Vaciar la lista actual
             this.checklists = [];
             this.checklists.push(this.checklist);
-            if (response.success && response.data) {
+            if (response.success == 'true' && response.data) {
               for (let element of response.data) {
                 this.checklists.push(new Checklist(
                   element.id,
@@ -55,36 +55,9 @@ export class TabChecklistsComponent implements OnInit{
     });
   }
 
-  checkBorrarChecklist() {
-    if (this.empresasService.seleccionada != 0) {
-      this.modalChecklist = true;
-    }
-  }
-
-  noBorrarChecklist() {
-    this.modalChecklist = false;
-  }
-
-  borrarChecklist() {
-    let parametros = '?id=' +  this.checklistNumber;
-    this.servidor.deleteObject(URLS.CHECKLISTS, parametros).subscribe(
-      response => {
-        if (response.success) {
-          let checklistBorrar = this.checklists.find(checklist => checklist.id == this.checklistNumber);
-          let indice = this.checklists.indexOf(checklistBorrar);
-          this.checklists.splice(indice, 1);
-          this.checklistNumber = 0;                    
-          console.log('Checklist eliminada');
-          this.modalChecklist = false;
-        }
-    });
-  }
-
   nuevaChecklist(cl: Checklist) {
-    // truco de Angular para recargar el form y que se vacíe
-    this.active = false;
-    setTimeout(() => this.active = true, 0);
-    
+    // Limpiar el form
+    this.cl = {}
     let nuevaChecklist = new Checklist(0, this.empresasService.seleccionada,
       cl.nombrechecklist, cl.periodicidad, cl.tipoperiodo);
     this.servidor.postObject(URLS.CHECKLISTS, nuevaChecklist).subscribe(
@@ -102,6 +75,31 @@ export class TabChecklistsComponent implements OnInit{
     });
   }
   
+  checkBorrarCL() {
+    if (this.checklistActiva !== 0) {
+      this.modalCL.titulo = '¿Estás seguro de querer eliminar la checklist?';
+      this.modalCL.subtitulo = 'Se borrarán los resultados asociados a la checklist y los permisos de los usuarios.';
+      this.modalCL.eliminar = true;
+      this.modalCL.visible = true;
+    }
+  }
+
+  cerrarModalCL(event: boolean) {
+    this.modalCL.visible = false;
+    if (event) {
+      let parametros = '?id=' +  this.checklistActiva;
+      this.servidor.deleteObject(URLS.CHECKLISTS, parametros).subscribe(
+        response => {
+          if (response.success) {
+            let clBorrar = this.checklists.find(cl => cl.id == this.checklistActiva);
+            let indice = this.checklists.indexOf(clBorrar);
+            this.checklists.splice(indice, 1);
+            this.checklistActiva = 0;                    
+          }
+      });
+    }
+  }
+
   mostrarCCL(seleccion: number) {
     let parametros = '&idchecklist=' + seleccion;
     // llamada al servidor para conseguir los controlchecklist
@@ -119,16 +117,14 @@ export class TabChecklistsComponent implements OnInit{
           }
         }
       // mostramos la lista de control checklists
-      this.checklistNumber = seleccion;        
+      this.checklistActiva = seleccion;        
     });
   }
 
   crearCCL(ccl: ControlChecklist) {
-    // truco de Angular para recargar el form y que se vacíe
-    this.active = false;
-    setTimeout(() => this.active = true, 0);
-
-    let nuevoCCL = new ControlChecklist(0, this.checklistNumber, ccl.nombre);
+    // Limpiar el form
+    this.ccl = {};
+    let nuevoCCL = new ControlChecklist(0, this.checklistActiva, ccl.nombre);
     this.servidor.postObject(URLS.CONTROLCHECKLISTS, nuevoCCL).subscribe(
       response => {
         if (response.success) {
@@ -138,26 +134,27 @@ export class TabChecklistsComponent implements OnInit{
     });
   }
 
-  checkBorrarControlchecklist(idControlchecklist: number) {
-    this.modalControlchecklist = true;
-    this.idBorrar = idControlchecklist;
+  checkBorrarCCL(idCCL: number) {
+    this.idBorrar = idCCL;
+    this.modalCCL.titulo = '¿Estás seguro de querer eliminar el control checklist?';
+    this.modalCCL.subtitulo = 'Se borrarán sus resultados asociados.';
+    this.modalCCL.eliminar = true;
+    this.modalCCL.visible = true;
   }
 
-  noBorrarControlchecklist() {
-    this.modalControlchecklist = false;
-  }
-
-  borrarControlchecklist() {
-    let parametros = '?id=' + this.idBorrar;
-    this.servidor.deleteObject(URLS.CONTROLCHECKLISTS, parametros).subscribe(
-      response => {
-        if (response.success) {
-          let controlchecklistBorrar = this.controlchecklists.find(controlchecklist => controlchecklist.id == this.idBorrar);
-          let indice = this.controlchecklists.indexOf(controlchecklistBorrar);
-          this.controlchecklists.splice(indice, 1);
-          this.modalControlchecklist = false;
-        }
-    });
+  cerrarModalCCL(event: boolean) {
+    this.modalCCL.visible = false;
+    if (event) {
+      let parametros = '?id=' + this.idBorrar;
+      this.servidor.deleteObject(URLS.CONTROLCHECKLISTS, parametros).subscribe(
+        response => {
+          if (response.success) {
+            let cclBorrar = this.controlchecklists.find(ccl => ccl.id == this.idBorrar);
+            let indice = this.controlchecklists.indexOf(cclBorrar);
+            this.controlchecklists.splice(indice, 1);
+          }
+      });
+    }
   }
 
   modificarCCL(idControlchecklist: number) {

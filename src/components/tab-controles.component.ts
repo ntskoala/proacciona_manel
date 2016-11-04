@@ -9,7 +9,8 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-controles',
-  templateUrl: '../../assets/html/tab-controles.component.html'
+  templateUrl: '../../assets/html/tab-controles.component.html',
+  styleUrls: ['../../assets/css/tab-controles.component.css']
 })
 
 export class TabControlesComponent implements OnInit {
@@ -18,10 +19,9 @@ export class TabControlesComponent implements OnInit {
   controles: Control[] = [];
   active: boolean = true;
   guardar = [];
-  nuevoControl: Object = {};
+  nuevoControl: Object = {tipoperiodo: 'Día'};
   idBorrar: number;
   modal: Modal = new Modal();
-
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
