@@ -108,11 +108,12 @@ export class InformeChecklistsComponent implements OnInit{
           let contador = 0;
           for (let resultado of this.resultadoschecklist) {
             if (idr == resultado.idr) {
-              console.log(typeof(resultado.resultado));
               this.resultado['id'] = resultado.idr;
               this.resultado['fecha'] = resultado.fecha;
               if (resultado.foto == 'true') this.resultado['foto'] = true;
-              this.resultado['id' + resultado.idcontrolchecklist] = resultado.resultado;
+              if (resultado.resultado == 'true') {
+                this.resultado['id' + resultado.idcontrolchecklist] = true;
+              }
               contador++;
             }
           }

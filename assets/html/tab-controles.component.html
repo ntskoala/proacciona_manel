@@ -53,33 +53,34 @@
     <span class="header-cell"></span>
     <span class="header-cell"></span>
   </div>
-  <form class=" row"#actualizarControlForm="ngForm" (ngSubmit)="actualizarControl(control.id)" *ngFor="let control of controles">
+  <form class=" row"#actControlF="ngForm" (ngSubmit)="actualizarControl(actControlF.value)" *ngFor="let control of controles">
+    <input type="hidden" [(ngModel)]="control.id" name="id">
     <span class="cell">
-      <input type="text" [(ngModel)]="control.nombre" name="modNombre" (keyup)="modificarControl(control.id)">
+      <input type="text" [(ngModel)]="control.nombre" name="nombre" (keyup)="modificarControl(control.id)">
     </span>
     <span class="cell">
-      <input type="text" [(ngModel)]="control.pla" name="modPla" (keyup)="modificarControl(control.id)">
+      <input type="text" [(ngModel)]="control.pla" name="pla" (keyup)="modificarControl(control.id)">
     </span>
     <span class="cell">
-      <input class="small" type="text" [(ngModel)]="control.valorminimo" name="modValorMinimo" (keyup)="modificarControl(control.id)">
+      <input class="small" type="text" [(ngModel)]="control.valorminimo" name="valorminimo" (keyup)="modificarControl(control.id)">
     </span>
     <span class="cell">
-      <input class="small" type="text" [(ngModel)]="control.valormaximo" name="modValorMaximo" (keyup)="modificarControl(control.id)">
+      <input class="small" type="text" [(ngModel)]="control.valormaximo" name="valormaximo" (keyup)="modificarControl(control.id)">
     </span>
     <span class="cell">
-      <input class="small" type="text" [(ngModel)]="control.objetivo" name="modObjetivo" (keyup)="modificarControl(control.id)">
+      <input class="small" type="text" [(ngModel)]="control.objetivo" name="objetivo" (keyup)="modificarControl(control.id)">
     </span>
     <span class="cell">
-      <input class="small" type="text" [(ngModel)]="control.tolerancia" name="modTolerancia" (keyup)="modificarControl(control.id)">
+      <input class="small" type="text" [(ngModel)]="control.tolerancia" name="tolerancia" (keyup)="modificarControl(control.id)">
     </span>
     <span class="cell">
-      <input class="small" type="text" [(ngModel)]="control.critico" name="modCritico" (keyup)="modificarControl(control.id)">
+      <input class="small" type="text" [(ngModel)]="control.critico" name="critico" (keyup)="modificarControl(control.id)">
     </span>
     <span class="cell">
-      <input class="small" type="text" [(ngModel)]="control.periodicidad" name="modPeriodicidad" (keyup)="modificarControl(control.id)">
+      <input class="small" type="text" [(ngModel)]="control.periodicidad" name="periodicidad" (keyup)="modificarControl(control.id)">
     </span>
     <span class="cell">
-      <select class="white-select" [(ngModel)]="control.tipoperiodo" name="modTipoPeriodo" (change)="modificarControl(control.id)">
+      <select class="white-select" [(ngModel)]="control.tipoperiodo" name="tipoPeriodo" (change)="modificarControl(control.id)">
         <option>Día</option>
         <option>Mes</option>
         <option>Semana</option>

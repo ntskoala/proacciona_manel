@@ -22,18 +22,18 @@
 <div class="table">
   <div class="header-row">
     <span class="header-cell">Fecha</span>
-    <span class="header-cell">Imagen</span>
+    <span class="header-cell small">Imagen</span>
     <span class="header-cell right" *ngFor="let columna of columnas">{{columna}}</span>
   </div>
   <div class="row" *ngFor="let resultado of tabla">
     <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy - HH:mm"}}</span>
-    <span class="cell" *ngIf="resultado.foto">
-      <span class="foto-link material-icons" (click)="ventanaFoto(resultado.id)">image</span>
+    <span class="cell center" *ngIf="resultado.foto">
+      <span class="foto-link material-icons" (click)="ventanaFoto(resultado.id)">photo_camera</span>
     </span>
-    <span class="cell" *ngIf="!resultado.foto">
-      <span class="material-icons">close</span>
+    <span class="cell center" *ngIf="!resultado.foto">
+      <span class="material-icons">do_not_disturb_alt</span>
     </span>
-    <span class="cell right" *ngFor="let columna of columnas" [class.red]="resultado.error"
+    <span class="cell right" *ngFor="let columna of columnas" [class.wrong]="resultado.error"
       title="{{resultado[columna + 'mensaje']}}">
       {{resultado[columna]}}
     </span>

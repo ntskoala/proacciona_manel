@@ -89,7 +89,7 @@ export class InformeControlesComponent implements OnInit {
                 if (resultado[control.nombre] > control.tolerancia) {
                   resultado[control.nombre + 'mensaje'] = 'Mayor que tolerancia';
                 }
-                if (resultado[control.nombre] > control.critico) {
+                if (resultado[control.nombre] < control.critico) {
                   resultado[control.nombre + 'mensaje'] = 'Menor que crítico';
                 }
                 if (resultado[control.nombre + 'mensaje']) resultado['error'] = true;

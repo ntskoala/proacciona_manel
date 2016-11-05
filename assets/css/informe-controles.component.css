@@ -40,17 +40,17 @@
   vertical-align: middle;
 }
 
-.red {
+.wrong {
   color: red;
   position: relative;
 }
 
-.red:hover:after{
+.wrong:hover:before {
   content: attr(title);
   font-size: 1rem;
-  color: red;
+  color: #9c27b0;
   position: absolute;
-  left: 30px;
+  left: -20px;
   top: 5px;
-  display: inline-table;
+  opacity: 0.6;
 }

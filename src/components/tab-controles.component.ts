@@ -84,11 +84,10 @@ export class TabControlesComponent implements OnInit {
     this.guardar[idControl] = true;
   }
 
-  actualizarControl(idControl: number) {
-    this.guardar[idControl] = false;
-    let parametros = '?id=' + idControl;        
-    let modControl = this.controles.find(control => control.id == idControl);
-    this.servidor.putObject(URLS.CONTROLES, parametros, modControl).subscribe(
+  actualizarControl(control: Control) {
+    this.guardar[control.id] = false;
+    let parametros = '?id=' + control.id;        
+    this.servidor.putObject(URLS.CONTROLES, parametros, control).subscribe(
       response => {
         if (response.success) {
           console.log('Control modificado');

@@ -3,7 +3,7 @@ export class ResultadoChecklist {
     public idr: string,
     public idcontrolchecklist: number,
     public idchecklist: number,
-    public resultado: number,
+    public resultado: string,
     public descripcion: string,
     public fecha: Date,
     public foto: string
