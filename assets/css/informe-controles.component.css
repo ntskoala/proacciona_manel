@@ -1,3 +1,27 @@
+.foto-window {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  background: #fff;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.6);
+  transform: translate(-50%, -50%);
+}
+
+.close {
+  position: absolute;
+  cursor: pointer;
+  top: 2px;
+  right: 2px;
+}
+
+.close:hover {
+  opacity: 0.6;
+}
+
+.foto {
+  padding: 2rem;
+}
+
 .foto-link {
   cursor: pointer;
   color: #673ab7;
@@ -6,10 +30,6 @@
 .foto-link:hover {
   color: #673ab7;
   opacity: 0.6;
-}
-
-.header-cell {
-  max-width: 150px;
 }
 
 .fechas {
@@ -22,16 +42,15 @@
 
 .red {
   color: red;
+  position: relative;
 }
 
-.red .tooltip {
-  display: none;
+.red:hover:after{
+  content: attr(title);
+  font-size: 1rem;
+  color: red;
   position: absolute;
-  right: -100px;
-  z-index: 5;
-}
-
-.red:hover .tooltip {
-  display: inline;
-  vertical-align: middle;
+  left: 30px;
+  top: 5px;
+  display: inline-table;
 }

@@ -8,7 +8,7 @@ export class Control {
     public objetivo: number,
     public tolerancia: number,
     public critico: number,
-    public periodicidad: string,
+    public periodicidad: number,
     public tipoperiodo: string,
     public idempresa: number
   ) {}

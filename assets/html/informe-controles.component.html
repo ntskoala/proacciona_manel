@@ -1,17 +1,14 @@
-<!-- Modal foto informe control -->
+<!-- Modal foto -->
 <div class="modal" *ngIf="modal">
   <div class="foto-window">
-    <md-card>
-      <md-card-content>
-        <span class="close material-icons" (click)="cerrarFoto()">close</span>
+      <span class="close material-icons" (click)="cerrarFoto()">close</span>
+      <div class="foto">
         <img src="{{fotoSrc}}">
-      </md-card-content>
-    </md-card>
+      </div>
   </div>
 </div>
 
 <h2>Informes de control</h2>
-
 <div class="fechas">
   <form #filtrarFechasForm="ngForm" (ngSubmit)="filtrarFechas(filtrarFechasForm.value)">
     <md-input type="date" placeholder="Inicio" required [(ngModel)]="fecha.inicio" name="inicio"></md-input>
@@ -26,7 +23,7 @@
   <div class="header-row">
     <span class="header-cell">Fecha</span>
     <span class="header-cell">Imagen</span>
-    <span class="header-cell" *ngFor="let columna of columnas">{{columna}}</span>
+    <span class="header-cell right" *ngFor="let columna of columnas">{{columna}}</span>
   </div>
   <div class="row" *ngFor="let resultado of tabla">
     <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy - HH:mm"}}</span>
@@ -36,10 +33,9 @@
     <span class="cell" *ngIf="!resultado.foto">
       <span class="material-icons">close</span>
     </span>
-    <span class="cell" *ngFor="let columna of columnas" [class.red]="this.resultado.error">
+    <span class="cell right" *ngFor="let columna of columnas" [class.red]="resultado.error"
+      title="{{resultado[columna + 'mensaje']}}">
       {{resultado[columna]}}
-      <div class="tooltip">{{this.resultado.mensaje}}</div>
     </span>
   </div>
-
 </div>

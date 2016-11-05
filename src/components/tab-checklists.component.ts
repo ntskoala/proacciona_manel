@@ -19,7 +19,7 @@ export class TabChecklistsComponent implements OnInit{
   checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist', 0, '');
   checklists: Checklist[] = [];
   controlchecklists: ControlChecklist[] = [];
-  cl: Object = {};
+  cl: Object = {tipoperiodo: 'Día'};
   ccl: Object = {};
   guardar = [];
   idBorrar: number;
@@ -57,7 +57,7 @@ export class TabChecklistsComponent implements OnInit{
 
   nuevaChecklist(cl: Checklist) {
     // Limpiar el form
-    this.cl = {}
+    this.cl = {tipoperiodo: 'Día'};
     let nuevaChecklist = new Checklist(0, this.empresasService.seleccionada,
       cl.nombrechecklist, cl.periodicidad, cl.tipoperiodo);
     this.servidor.postObject(URLS.CHECKLISTS, nuevaChecklist).subscribe(

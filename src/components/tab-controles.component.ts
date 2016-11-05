@@ -9,17 +9,15 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-controles',
-  templateUrl: '../../assets/html/tab-controles.component.html',
-  styleUrls: ['../../assets/css/tab-controles.component.css']
+  templateUrl: '../../assets/html/tab-controles.component.html'
 })
 
 export class TabControlesComponent implements OnInit {
 
   private subscription: Subscription;
   controles: Control[] = [];
-  active: boolean = true;
-  guardar = [];
   nuevoControl: Object = {tipoperiodo: 'Día'};
+  guardar = [];
   idBorrar: number;
   modal: Modal = new Modal();
 
@@ -34,18 +32,9 @@ export class TabControlesComponent implements OnInit {
             this.controles = [];
             if (response.success && response.data) {
               for (let element of response.data) {
-                this.controles.push(new Control(
-                  element.id,
-                  element.nombre,
-                  element.pla,
-                  element.valorminimo,
-                  element.valormaximo,
-                  element.objetivo,
-                  element.tolerancia,
-                  element.critico,
-                  element.periodicidad,
-                  element.tipoperiodo,
-                  element.idempresa
+                this.controles.push(new Control(element.id, element.nombre, element.pla, element.valorminimo,
+                  element.valormaximo, element.objetivo, element.tolerancia, element.critico, element.periodicidad,
+                  element.tipoperiodo, element.idempresa
                 ));
                 this.guardar[element.id] = false;
               }
@@ -61,7 +50,7 @@ export class TabControlesComponent implements OnInit {
         if (response.success) {
           nuevoControl.id = response.id;
           this.controles.push(nuevoControl);
-          this.nuevoControl = {};
+          this.nuevoControl = {tipoperiodo: 'Día'};
         }
     });
   }

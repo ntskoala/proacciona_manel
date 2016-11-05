@@ -14,13 +14,13 @@ import { ResultadoControl } from '../models/resultadocontrol';
 export class InformeControlesComponent implements OnInit {
 
   private subscription: Subscription;
-  public controles: any[] = [];
-  public resultadoscontrol: ResultadoControl[] = [];
-  public columnas: string[] = [];
-  public tabla: Object[] = [];
-  public fecha: Object = {}
-  public modal: boolean = false;
-  public fotoSrc: string;
+  controles: any[] = [];
+  resultadoscontrol: ResultadoControl[] = [];
+  columnas: string[] = [];
+  tabla: Object[] = [];
+  fecha: Object = {}
+  modal: boolean = false;
+  fotoSrc: string;
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -79,26 +79,25 @@ export class InformeControlesComponent implements OnInit {
               if (element.foto == 'true') {
                 resultado['foto'] = true;
               }
-              if (resultado[control.nombre] != '') {
+              if (resultado[control.nombre] !== '') {
                 if (resultado[control.nombre] < control.minimo) {
-                  resultado['mensaje'] = 'Menor que mínimo';
+                  resultado[control.nombre + 'mensaje'] = 'Menor que mínimo';
                 }
                 if (resultado[control.nombre] > control.maximo) {
-                  resultado['mensaje'] = 'Mayor que máximo';
+                  resultado[control.nombre + 'mensaje'] = 'Mayor que máximo';
                 }
                 if (resultado[control.nombre] > control.tolerancia) {
-                  resultado['mensaje'] = 'Mayor que tolerancia';
+                  resultado[control.nombre + 'mensaje'] = 'Mayor que tolerancia';
                 }
                 if (resultado[control.nombre] > control.critico) {
-                  resultado['mensaje'] = 'Menor que crítico';
+                  resultado[control.nombre + 'mensaje'] = 'Menor que crítico';
                 }
-                if (resultado['mensaje']) resultado['error'] = true;
+                if (resultado[control.nombre + 'mensaje']) resultado['error'] = true;
               }
               this.tabla.push(resultado);
             }
           }
         }
-        console.log(this.tabla);
     });
   }
 

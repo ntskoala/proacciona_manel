@@ -1,5 +1,14 @@
-<h2>Informes de checklist</h2>
+<!-- Modal foto -->
+<div class="modal" *ngIf="modal">
+  <div class="foto-window">
+      <span class="close material-icons" (click)="cerrarFoto()">close</span>
+      <div class="foto">
+        <img src="{{fotoSrc}}">
+      </div>
+  </div>
+</div>
 
+<h2>Informes de checklist</h2>
 <div class="seleccionar-checklist">
   <h2>Checklist</h2>
   <form>
@@ -28,16 +37,15 @@
     <span class="header-cell" *ngFor="let columna of columnas">{{columna.nombre}}</span>
   </div>
   <div class="row" *ngFor="let resultado of tabla">
-    <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy"}}</span>
+    <span class="cell">{{resultado.fecha | date: "dd/MM/yyyy - HH:mm"}}</span>
     <span class="cell" *ngIf="resultado.foto">
-      <a href="http://tfc.ntskoala.com/controles/{{empresasService.seleccionada}}/checklist{{resultado.id}}.jpg" target="_blank">
-        <span class="material-icons">image</span>
-      </a>
+      <span class="foto-link material-icons" (click)="ventanaFoto(resultado.id)">image</span>
     </span>
     <span class="cell" *ngIf="!resultado.foto">
       <span class="material-icons">close</span>
     </span>
     <span class="cell" *ngFor="let columna of columnas">
+      <!--<span class="material-icons" *ngIf="resultado[columna.id]">image</span>-->
       {{resultado[columna.id]}}
     </span>
   </div>

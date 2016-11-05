@@ -20,13 +20,18 @@
   <div class="table">
     <form class="row" (ngSubmit)="nuevaChecklist(nuevaCLf.value)" #nuevaCLf="ngForm">
       <span class="cell">
-        <input class="full" placeholder="Nombre" type="text" required [(ngModel)]="cl.nombrechecklist" name="nombrechecklist">
+        <input placeholder="Nombre" type="text" required [(ngModel)]="cl.nombrechecklist" name="nombrechecklist">
       </span>
       <span class="cell">
-        <input class="full" placeholder="Periodicidad" type="text" required [(ngModel)]="cl.periodicidad" name="periodicidad">
+        <input placeholder="Periodicidad" type="text" required [(ngModel)]="cl.periodicidad" name="periodicidad">
       </span>
       <span class="cell">
-        <input class="full" placeholder="Tipo periodo" type="text" required [(ngModel)]="cl.tipoperiodo" name="tipoperiodo">
+        <select class="white-select" required [(ngModel)]="cl.tipoperiodo" name="tipoperiodo">
+          <option>Día</option>
+          <option>Semana</option>
+          <option>Mes</option>
+        </select>
+        <!--<input class="full" placeholder="Tipo periodo" type="text" required [(ngModel)]="cl.tipoperiodo" name="tipoperiodo">-->
       </span>
       <span class="cell">
         <button md-mini-fab color="accent" [disabled]="!nuevaCLf.form.valid" type="submit">

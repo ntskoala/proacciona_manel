@@ -25,9 +25,11 @@ export class InformeChecklistsComponent implements OnInit{
   columnas: Columna[];
   resultado: Object = {};
   tabla: Object[];
-  fecha: Object = {inicio: '2016-10-16', fin: '2016-10-19'};
+  fecha: Object = {inicio: '2016-10-01', fin: '2016-11-30'};
   idrs: string[] = [];
-  
+  modal: boolean = false;
+  fotoSrc: string;
+
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   ngOnInit() {
@@ -58,7 +60,7 @@ export class InformeChecklistsComponent implements OnInit{
     this.tabla = [];
     this.checklistSeleccionada = idChecklist;
     let parametros = '&idchecklist=' + idChecklist;
-    // llamada al servidor para conseguir las controlchecklist
+    // Conseguir las controlchecklist
     this.servidor.getObjects(URLS.CONTROLCHECKLISTS, parametros).subscribe(
       response => {
         this.controlchecklists = [];
@@ -81,7 +83,7 @@ export class InformeChecklistsComponent implements OnInit{
 
   filtrarFechas(fecha) {
     this.idrs = [];
-    // conseguir resultadoschecklist
+    // Conseguir resultadoschecklist
     let parametros = '&idchecklist=' + this.checklistSeleccionada + '&fechainicio=' + fecha.inicio + '&fechafin=' + fecha.fin;
     this.servidor.getObjects(URLS.RESULTADOS_CHECKLIST, parametros).subscribe(
       response => {
@@ -103,9 +105,10 @@ export class InformeChecklistsComponent implements OnInit{
           }
         }
         for (let idr of this.idrs) {
-          let contador = 0
+          let contador = 0;
           for (let resultado of this.resultadoschecklist) {
             if (idr == resultado.idr) {
+              console.log(typeof(resultado.resultado));
               this.resultado['id'] = resultado.idr;
               this.resultado['fecha'] = resultado.fecha;
               if (resultado.foto == 'true') this.resultado['foto'] = true;
@@ -117,6 +120,15 @@ export class InformeChecklistsComponent implements OnInit{
           this.resultado = {};
         }
     });
+  }
+
+  ventanaFoto(idResultado: number) {
+    this.fotoSrc = 'http://tfc.ntskoala.com/controles/' + this.empresasService.seleccionada + '/checklist' + idResultado + '.jpg'
+    this.modal = true;
+  }
+
+  cerrarFoto() {
+    this.modal = false;
   }
 
 }

@@ -68,22 +68,10 @@ select {
   outline: 0;
 }
 
-.foto-window {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.close {
-  position: absolute;
-  cursor: pointer;
-  top: 2px;
-  right: 2px;
-}
-
-.close:hover {
-  opacity: 0.6;
+.white-select {
+  min-width: 140px;
+  border: 1px solid #eee;
+  background: url('../images/keyboard_arrow_down.svg') no-repeat 97% 50% #fff;
 }
 
 .full-width {
@@ -97,7 +85,7 @@ select {
 
 .right {
   text-align: right;
-  padding-right: 20px !important;
+  padding-right: 11px !important;
 }
 
 .leyenda {
@@ -222,7 +210,7 @@ gestion-informes {
   display: table-cell;
   font-size: 0.9rem;
   font-weight: 500;
-  padding: 0.6rem;
+  padding: 8px 0 8px 11px;
 }
 
 .header-cell .small {
@@ -240,7 +228,7 @@ gestion-informes {
 
 .cell {
   display: table-cell;
-  padding: 0.3rem;
+  padding: 3px 0 3px 8px;
   vertical-align: middle;
 }
 

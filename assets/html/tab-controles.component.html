@@ -9,25 +9,25 @@
       <input type="text" placeholder="Pla" required [(ngModel)]="nuevoControl.pla" name="pla">
     </span>
     <span class="cell">
-      <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.valorminimo" name="valorminimo">
+      <input class="small" type="text" [(ngModel)]="nuevoControl.valorminimo" name="valorminimo">
     </span>
     <span class="cell">
-      <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.valormaximo" name="valormaximo">
+      <input class="small" type="text" [(ngModel)]="nuevoControl.valormaximo" name="valormaximo">
     </span>
     <span class="cell">
-      <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.objetivo" name="objetivo">
+      <input class="small" type="text" [(ngModel)]="nuevoControl.objetivo" name="objetivo">
     </span>
     <span class="cell">
-      <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.tolerancia" name="tolerancia">
+      <input class="small" type="text" [(ngModel)]="nuevoControl.tolerancia" name="tolerancia">
     </span>
     <span class="cell">
-      <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.critico" name="critico">
+      <input class="small" type="text" [(ngModel)]="nuevoControl.critico" name="critico">
     </span>
     <span class="cell">
       <input class="small" type="text" placeholder="0" required [(ngModel)]="nuevoControl.periodicidad" name="periodicidad">
     </span>
     <span class="cell">
-      <select required [(ngModel)]="nuevoControl.tipoperiodo" name="tipoperiodo">
+      <select class="white-select" required [(ngModel)]="nuevoControl.tipoperiodo" name="tipoperiodo">
         <option>Día</option>
         <option>Semana</option>
         <option>Mes</option>
@@ -79,7 +79,7 @@
       <input class="small" type="text" [(ngModel)]="control.periodicidad" name="modPeriodicidad" (keyup)="modificarControl(control.id)">
     </span>
     <span class="cell">
-      <select [(ngModel)]="control.tipoperiodo" name="modTipoPeriodo" (change)="modificarControl(control.id)">
+      <select class="white-select" [(ngModel)]="control.tipoperiodo" name="modTipoPeriodo" (change)="modificarControl(control.id)">
         <option>Día</option>
         <option>Mes</option>
         <option>Semana</option>
