@@ -11,8 +11,7 @@ import { Columna } from '../models/columna';
 
 @Component({
   selector: 'informe-checklists',
-  templateUrl: '../../assets/html/informe-checklists.component.html',
-  styleUrls: ['../../assets/css/informe-checklists.component.css']
+  templateUrl: '../../assets/html/informe-checklists.component.html'
 })
 export class InformeChecklistsComponent implements OnInit{
   
@@ -25,7 +24,7 @@ export class InformeChecklistsComponent implements OnInit{
   columnas: Columna[];
   resultado: Object = {};
   tabla: Object[];
-  fecha: Object = {inicio: '2016-10-01', fin: '2016-11-30'};
+  fecha: Object = {};
   idrs: string[] = [];
   modal: boolean = false;
   fotoSrc: string;

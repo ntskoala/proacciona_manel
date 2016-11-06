@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
         <img src="../../assets/images/logo.jpg" alt="Logo">
       </div>
     </nav>
-  `,
-  styleUrls: ['../../assets/css/nav.component.css']
+  `
 })
 export class NavComponent {}

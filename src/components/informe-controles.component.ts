@@ -8,8 +8,7 @@ import { ResultadoControl } from '../models/resultadocontrol';
 
 @Component({
   selector: 'informe-controles',
-  templateUrl: '../../assets/html/informe-controles.component.html',
-  styleUrls: ['../../assets/css/informe-controles.component.css']
+  templateUrl: '../../assets/html/informe-controles.component.html'
 })
 export class InformeControlesComponent implements OnInit {
 
@@ -52,7 +51,8 @@ export class InformeControlesComponent implements OnInit {
 
   filtrarFechas(fecha) {
     // conseguir resultadoscontrol
-    let parametros = '&idempresa=' + this.empresasService.seleccionada + '&fechainicio=' + fecha.inicio + '&fechafin=' + fecha.fin;
+    let parametros = '&idempresa=' + this.empresasService.seleccionada +
+      '&fechainicio=' + fecha.inicio + '&fechafin=' + fecha.fin;
     this.servidor.getObjects(URLS.RESULTADOS_CONTROL, parametros).subscribe(
       response => {
         this.resultadoscontrol = [];
