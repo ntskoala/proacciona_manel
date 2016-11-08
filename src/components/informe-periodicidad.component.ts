@@ -13,8 +13,9 @@ import { Control } from '../models/control';
 export class InformePeriodicidadComponent {
 
   private subscription: Subscription;
-  tabla: any[] = [];
-  fecha: Object = {inicio: '2016-10-01', fin: '2016-11-30'};
+  controles: any[] = [];
+  checklists: any[] = [];
+  fecha: Object = {inicio: '2016-10-01'};
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
@@ -22,41 +23,104 @@ export class InformePeriodicidadComponent {
     let parametros = '&idempresa=' + this.empresasService.seleccionada;
     // Conseguir controles
     this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
-      response => {
-        this.tabla = [];
-        if (response.success && response.data) {
-          for (let element of response.data) {
-            let parametros = '&idcontrol=' + element.id + '&fecha=' + fecha.inicio;
+      controles => {
+        if (controles.success && controles.data) {
+          // Limpiar tabla
+          this.controles = [];
+          // Iterar los controles
+          for (let control of controles.data) {
+            let per: Object = {nombre: control.nombre};
+            let dias: number;
+            switch (control.tipoperiodo) {
+              case 'Día':
+                dias = 1;
+                break;
+              case 'Semana':
+                dias = 7;
+                break;
+              case 'Mes':
+                dias = 30;
+                break;
+              case 'Año':
+                dias = 365;
+                break;
+            }
+            let fechaLimite = new Date(Date.now() - dias * 86400000);
+            let parametros = '&idcontrol=' + control.id + '&fecha=' + fecha.inicio;
+            // Conseguir resultados
             this.servidor.getObjects(URLS.PERIODICIDAD_CONTROL, parametros).subscribe(
               response => {
                 if (response.data) {
-                  this.tabla.push({nombre: element.nombre, resultado: true});
-                } else {
-                  this.tabla.push({nombre: element.nombre, resultado: false});
+                  // Iterar los resultados
+                  for (let resultado of response.data) {
+                    let fechaResultado = new Date(resultado.fecha);
+                    // Validar
+                    if (fechaResultado >= fechaLimite) {
+                      per['resultado'] = true;
+                    }
+                  }
                 }
-            });
+              },
+              error => console.log(error),
+              () => {
+                this.controles.push(per);
+                this.controles.sort((a, b) => {return a.nombre > b.nombre ? 1 : a.nombre < b.nombre ? -1 : 0});
+              }
+            );
           }
         }
-    });
+      }
+    );
     // Conseguir checklists
     this.servidor.getObjects(URLS.CHECKLISTS, parametros).subscribe(
-      response => {
-        this.tabla = [];
-        if (response.success && response.data) {
-          for (let element of response.data) {
-            let parametros = '&idchecklist=' + element.id + '&fecha=' + Date.now();
+      checklists => {
+        if (checklists.success && checklists.data) {
+          // Limpiar tabla
+          this.checklists = [];
+          // Iterar los checklists
+          for (let checklist of checklists.data) {
+            let per: Object = {nombre: checklist.nombrechecklist};
+            let dias: number;
+            switch (checklist.tipoperiodo) {
+              case 'Día':
+                dias = 1;
+                break;
+              case 'Semana':
+                dias = 7;
+                break;
+              case 'Mes':
+                dias = 30;
+                break;
+              case 'Año':
+                dias = 365;
+                break;
+            }
+            let fechaLimite = new Date(Date.now() - dias * 86400000);
+            let parametros = '&idchecklist=' + checklist.id + '&fecha=' + fecha.inicio;
+            // Conseguir resultados
             this.servidor.getObjects(URLS.PERIODICIDAD_CHECKLIST, parametros).subscribe(
               response => {
                 if (response.data) {
-                  this.tabla.push({nombre: element.nombrechecklist, resultado: true});
-                } else {
-                  this.tabla.push({nombre: element.nombrechecklist, resultado: false});
+                  // Iterar los resultados
+                  for (let resultado of response.data) {
+                    let fechaResultado = new Date(resultado.fecha);
+                    // Validar
+                    if (fechaResultado >= fechaLimite) {
+                      per['resultado'] = true;
+                    }
+                  }
                 }
-            });
+              },
+              error => console.log(error),
+              () => {
+                this.checklists.push(per);
+                this.checklists.sort((a, b) => {return a.nombre > b.nombre ? 1 : a.nombre < b.nombre ? -1 : 0});
+              }
+            );
           }
         }
-    });
-
+      }
+    );
   }
 
 }

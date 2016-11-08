@@ -2,7 +2,6 @@
 <div class="fechas">
   <form #filtrarFechasForm="ngForm" (ngSubmit)="filtrarFechas(filtrarFechasForm.value)">
     <md-input type="date" placeholder="Inicio" required [(ngModel)]="fecha.inicio" name="inicio"></md-input>
-    <md-input type="date" placeholder="Fin" required [(ngModel)]="fecha.fin" name="fin"></md-input>
     <button md-mini-fab color="primary" [disabled]="!filtrarFechasForm.form.valid" type="submit">
       <span class="material-icons">check</span>
     </button>                
@@ -14,7 +13,16 @@
     <span class="header-cell">Nombre</span>
     <span class="header-cell small">Resultado</span>
   </div>
-  <div class="row" *ngFor="let element of tabla">
+  <div class="row" *ngFor="let element of controles">
+    <span class="cell">{{element.nombre}}</span>
+    <span class="cell center" *ngIf="element.resultado">
+      <span class="material-icons green">check</span>
+    </span>
+    <span class="cell center" *ngIf="!element.resultado">
+      <span class="material-icons red">close</span>
+    </span>
+  </div>
+  <div class="row" *ngFor="let element of checklists">
     <span class="cell">{{element.nombre}}</span>
     <span class="cell center" *ngIf="element.resultado">
       <span class="material-icons green">check</span>
