@@ -9,5 +9,7 @@ export const URLS = {
   PERMISSION_USER_CHECKLIST: 'http://tfc.ntskoala.com/api/permissionuserchecklist.php',
   RESULTADOS_CONTROL: 'http://tfc.ntskoala.com/api/resultadoscontrol.php',
   RESULTADOS_CHECKLIST: 'http://tfc.ntskoala.com/api/resultadoschecklist.php',
-  RESULTADOS_PERIODICIDAD: ''
+  PERIODICIDAD_CONTROL: 'http://tfc.ntskoala.com/api/periodicidadcontrol.php',
+  PERIODICIDAD_CHECKLIST: 'http://tfc.ntskoala.com/api/periodicidadchecklist.php',
+  FOTOS: 'http://tfc.ntskoala.com/controles/'
 }

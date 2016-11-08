@@ -10,9 +10,9 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-checklists',
-  templateUrl: '../../assets/html/tab-checklists.component.html'
+  templateUrl: '../../assets/html/checklists.component.html'
 })
-export class TabChecklistsComponent implements OnInit{
+export class ChecklistsComponent implements OnInit{
 
   private subscription: Subscription;
   checklistActiva: number = 0;
@@ -42,13 +42,8 @@ export class TabChecklistsComponent implements OnInit{
             this.checklists.push(this.checklist);
             if (response.success == 'true' && response.data) {
               for (let element of response.data) {
-                this.checklists.push(new Checklist(
-                  element.id,
-                  element.idempresa,
-                  element.nombrechecklist,
-                  element.periodicidad,
-                  element.tipoperiodo
-                ))
+                this.checklists.push(new Checklist(element.id, element.idempresa, element.nombrechecklist,
+                  element.periodicidad, element.tipoperiodo));
               }
             }
         });

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
 import { URLS } from '../models/urls';
-import { ResultadoControl } from '../models/resultadocontrol';
+import { Control } from '../models/control';
 
 @Component({
   selector: 'informe-periodicidad',
@@ -13,44 +13,50 @@ import { ResultadoControl } from '../models/resultadocontrol';
 export class InformePeriodicidadComponent {
 
   private subscription: Subscription;
-  controles: any[] = [];
-  resultadoscontrol: any[] = [];
+  tabla: any[] = [];
   fecha: Object = {inicio: '2016-10-01', fin: '2016-11-30'};
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   filtrarFechas(fecha) {
-    // Conseguir controles
     let parametros = '&idempresa=' + this.empresasService.seleccionada;
+    // Conseguir controles
     this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
       response => {
-        this.controles = [];
+        this.tabla = [];
         if (response.success && response.data) {
           for (let element of response.data) {
-            this.controles.push({id: element.id, nombre: element.nombre, periodicidad: element.periodicidad,
-              tipoperiodo: element.tipoperiodo});
+            let parametros = '&idcontrol=' + element.id + '&fecha=' + fecha.inicio;
+            this.servidor.getObjects(URLS.PERIODICIDAD_CONTROL, parametros).subscribe(
+              response => {
+                if (response.data) {
+                  this.tabla.push({nombre: element.nombre, resultado: true});
+                } else {
+                  this.tabla.push({nombre: element.nombre, resultado: false});
+                }
+            });
           }
         }
-        console.log(this.controles);
     });
-    parametros = '&idempresa=' + this.empresasService.seleccionada +
-      '&fechainicio=' + fecha.inicio + '&fechafin=' + fecha.fin;
-    this.servidor.getObjects(URLS.RESULTADOS_CONTROL, parametros).subscribe(
+    // Conseguir checklists
+    this.servidor.getObjects(URLS.CHECKLISTS, parametros).subscribe(
       response => {
-        this.resultadoscontrol = [];
+        this.tabla = [];
         if (response.success && response.data) {
           for (let element of response.data) {
-            this.resultadoscontrol.push(new ResultadoControl(
-              element.idr,
-              element.idcontrol,
-              parseInt(element.resultado),
-              new Date(element.fecha),
-              element.foto
-            ));
+            let parametros = '&idchecklist=' + element.id + '&fecha=' + Date.now();
+            this.servidor.getObjects(URLS.PERIODICIDAD_CHECKLIST, parametros).subscribe(
+              response => {
+                if (response.data) {
+                  this.tabla.push({nombre: element.nombrechecklist, resultado: true});
+                } else {
+                  this.tabla.push({nombre: element.nombrechecklist, resultado: false});
+                }
+            });
           }
         }
-        console.log(this.resultadoscontrol);
     });
+
   }
 
 }

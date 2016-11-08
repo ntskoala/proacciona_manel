@@ -9,9 +9,9 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-usuarios',
-  templateUrl: '../../assets/html/tab-usuarios.component.html'
+  templateUrl: '../../assets/html/usuarios.component.html'
 })
-export class TabUsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit {
 
   private subscription: Subscription;
   usuarios: Usuario[] = [];

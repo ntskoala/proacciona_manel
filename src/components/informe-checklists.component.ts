@@ -32,9 +32,13 @@ export class InformeChecklistsComponent implements OnInit{
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   ngOnInit() {
-    this.subscription = this.empresasService.empresaSeleccionada.subscribe(
-      seleccionada => {
-        let parametros = '&idempresa=' + seleccionada.id;
+    // Conseguir checklists
+    this.getChecklists();
+    this.subscription = this.empresasService.empresaSeleccionada.subscribe(x => this.getChecklists());
+  }
+
+  getChecklists() {
+        let parametros = '&idempresa=' + this.empresasService.seleccionada;
         // llamada al servidor para conseguir las checklists
         this.servidor.getObjects(URLS.CHECKLISTS, parametros).subscribe(
           response => {
@@ -42,17 +46,11 @@ export class InformeChecklistsComponent implements OnInit{
             this.checklists.push(this.checklist);
             if (response.success && response.data) {
               for (let element of response.data) {
-                this.checklists.push(new Checklist(
-                  element.id,
-                  element.idempresa,
-                  element.nombrechecklist,
-                  element.periodicidad,
-                  element.tipoperiodo
-                ));
+                this.checklists.push(new Checklist(element.id, element.idempresa, element.nombrechecklist,
+                  element.periodicidad, element.tipoperiodo));
               }
             }
         });
-    });
   }
 
   cambioChecklist(idChecklist: number) {
@@ -66,11 +64,8 @@ export class InformeChecklistsComponent implements OnInit{
         this.columnas = [];
         if (response.success && response.data) {
           for (let element of response.data) {
-            this.controlchecklists.push(new ControlChecklist(
-              element.id,
-              element.idchecklist,
-              element.nombre
-            ));
+            this.controlchecklists.push(new ControlChecklist(element.id, element.idchecklist,
+              element.nombre));
             this.columnas.push(new Columna(
               'id' + element.id,
               element.nombre
@@ -91,15 +86,8 @@ export class InformeChecklistsComponent implements OnInit{
         if (response.success && response.data) {
           for (let element of response.data) {
             let fecha = new Date(element.fecha);
-              this.resultadoschecklist.push(new ResultadoChecklist(
-                element.idr,
-                element.idcontrolchecklist,
-                element.idchecklist,
-                element.resultado,
-                element.descripcion,
-                new Date(element.fecha),
-                element.foto
-              ));
+              this.resultadoschecklist.push(new ResultadoChecklist(element.idr, element.idcontrolchecklist,
+                element.idchecklist, element.resultado, element.descripcion, new Date(element.fecha), element.foto));
             if (this.idrs.indexOf(element.idr) == -1) this.idrs.push(element.idr);
           }
         }
@@ -123,7 +111,7 @@ export class InformeChecklistsComponent implements OnInit{
   }
 
   ventanaFoto(idResultado: number) {
-    this.fotoSrc = 'http://tfc.ntskoala.com/controles/' + this.empresasService.seleccionada + '/checklist' + idResultado + '.jpg'
+    this.fotoSrc = URLS.FOTOS + this.empresasService.seleccionada + '/checklist' + idResultado + '.jpg'
     this.modal = true;
   }
 

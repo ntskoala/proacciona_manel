@@ -24,28 +24,25 @@ export class InformeControlesComponent implements OnInit {
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   ngOnInit() {
-    this.subscription = this.empresasService.empresaSeleccionada.subscribe(
-      seleccionada => {
-        let parametros = '&idempresa=' + seleccionada.id; 
-        this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
-          response => {
-            this.controles = [];
-            this.columnas = [];
-            this.tabla = [];
-            if (response.success && response.data) {
-              for (let element of response.data) {
-                this.controles.push({
-                  id: element.id,
-                  nombre: element.nombre,
-                  minimo: element.valorminimo,
-                  maximo: element.valormaximo,
-                  tolerancia: element.tolerancia,
-                  critico: element.critico
-                });
-                this.columnas.push(element.nombre);
-              }
-            }
-        });
+    // Conseguir controles
+    this.getControles();
+    this.subscription = this.empresasService.empresaSeleccionada.subscribe(x => this.getControles());
+  }
+
+  getControles() {
+    let parametros = '&idempresa=' + this.empresasService.seleccionada; 
+    this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
+      response => {
+        this.controles = [];
+        this.columnas = [];
+        this.tabla = [];
+        if (response.success && response.data) {
+          for (let element of response.data) {
+            this.controles.push({id: element.id, nombre: element.nombre, minimo: element.valorminimo,
+              maximo: element.valormaximo, tolerancia: element.tolerancia, critico: element.critico});
+            this.columnas.push(element.nombre);
+          }
+        }
     });
   }
 
@@ -60,13 +57,8 @@ export class InformeControlesComponent implements OnInit {
         if (response.success && response.data) {
           for (let element of response.data) {
             let fecha = new Date(element.fecha);
-              this.resultadoscontrol.push(new ResultadoControl(
-                element.idr,
-                element.idcontrol,
-                parseInt(element.resultado),
-                new Date(element.fecha),
-                element.foto
-              ));
+              this.resultadoscontrol.push(new ResultadoControl(element.idr, element.idcontrol,
+                parseInt(element.resultado), new Date(element.fecha), element.foto));
           }
         }
         for (let element of this.resultadoscontrol) {
@@ -102,7 +94,7 @@ export class InformeControlesComponent implements OnInit {
   }
 
   ventanaFoto(idResultado: number) {
-    this.fotoSrc = 'http://tfc.ntskoala.com/controles/' + this.empresasService.seleccionada + '/control' + idResultado + '.jpg'
+    this.fotoSrc = URLS.FOTOS + this.empresasService.seleccionada + '/control' + idResultado + '.jpg'
     this.modal = true;
   }
 

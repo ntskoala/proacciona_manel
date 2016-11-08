@@ -13,10 +13,10 @@ import { SeleccionarEmpresaComponent } from './components/seleccionar-empresa.co
 import { NuevaEmpresaComponent } from './components/nueva-empresa.component';
 import { GestionTablasComponent } from './components/gestion-tablas.component';
 import { GestionInformesComponent } from './components/gestion-informes.component';
-import { TabUsuariosComponent } from './components/tab-usuarios.component';
-import { TabControlesComponent } from './components/tab-controles.component';
-import { TabChecklistsComponent } from './components/tab-checklists.component';
-import { TabPermisosComponent } from './components/tab-permisos.component';
+import { UsuariosComponent } from './components/usuarios.component';
+import { ControlesComponent } from './components/controles.component';
+import { ChecklistsComponent } from './components/checklists.component';
+import { PermisosComponent } from './components/permisos.component';
 import { InformeControlesComponent } from './components/informe-controles.component';
 import { InformeChecklistsComponent } from './components/informe-checklists.component';
 import { InformePeriodicidadComponent } from './components/informe-periodicidad.component';
@@ -46,10 +46,10 @@ import { EmpresasService } from './services/empresas.service';
     NuevaEmpresaComponent,
     GestionTablasComponent,
     GestionInformesComponent,
-    TabUsuariosComponent,
-    TabControlesComponent,
-    TabChecklistsComponent,
-    TabPermisosComponent,
+    UsuariosComponent,
+    ControlesComponent,
+    ChecklistsComponent,
+    PermisosComponent,
     InformeControlesComponent,
     InformeChecklistsComponent,
     InformePeriodicidadComponent,

@@ -12,9 +12,9 @@ import { PermissionUserChecklist } from '../models/permissionuserchecklist';
 
 @Component({
   selector: 'tab-permisos',
-  templateUrl: '../../assets/html/tab-permisos.component.html'
+  templateUrl: '../../assets/html/permisos.component.html'
 })
-export class TabPermisosComponent {
+export class PermisosComponent {
 
   private subscription: Subscription;
   public usuario: Usuario = new Usuario(0, 'Seleccionar usuario', '', '', '', 0)

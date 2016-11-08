@@ -9,10 +9,10 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-controles',
-  templateUrl: '../../assets/html/tab-controles.component.html'
+  templateUrl: '../../assets/html/controles.component.html'
 })
 
-export class TabControlesComponent implements OnInit {
+export class ControlesComponent implements OnInit {
 
   private subscription: Subscription;
   controles: Control[] = [];
@@ -86,6 +86,10 @@ export class TabControlesComponent implements OnInit {
 
   actualizarControl(control: Control) {
     this.guardar[control.id] = false;
+    for (let property in control) {
+      console.log(property, control[property]);
+      if (control[property] == '') control[property] = null;
+    }
     let parametros = '?id=' + control.id;        
     this.servidor.putObject(URLS.CONTROLES, parametros, control).subscribe(
       response => {

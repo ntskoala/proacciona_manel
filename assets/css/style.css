@@ -178,7 +178,7 @@ gestion-tablas {
   flex-wrap: wrap;
 }
 
-/* TabChecklistsComponent */
+/* ChecklistsComponent */
 .seleccionar-checklist {
   width: 30%;
   padding-right: 1%;
@@ -196,7 +196,7 @@ gestion-tablas {
   padding-right: 1%;
 }
 
-/* TabPermisosComponent */
+/* PermisosComponent */
 .seleccionar-usuario {
   width: 100%;
 }
@@ -274,11 +274,15 @@ gestion-informes {
   opacity: 0.6;
 }
 
-/* InformeChecklistsComponent */
-.seleccionar-checklist {
+/* InformePeriodicidadComponent */
+.checklist {
   width: 100%;
 }
 
+/* InformePeriodicidadComponent */
+.informe {
+  max-width: 400px;
+}
 
 /*
 *********
@@ -304,6 +308,10 @@ gestion-informes {
   font-size: 0.9rem;
   font-weight: 500;
   padding: 8px 0 8px 11px;
+}
+
+.header-cell:last-child {
+  padding-right: 8px;
 }
 
 .header-cell .small {
