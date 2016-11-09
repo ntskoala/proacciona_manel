@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app.component';
 import { NavComponent } from './components/nav.component';
 import { LoginComponent } from './components/login.component';
 import { EmpresaComponent } from './components/empresa.component';

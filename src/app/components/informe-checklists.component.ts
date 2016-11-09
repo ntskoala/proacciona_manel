@@ -11,7 +11,7 @@ import { Columna } from '../models/columna';
 
 @Component({
   selector: 'informe-checklists',
-  templateUrl: '../../assets/html/informe-checklists.component.html'
+  templateUrl: 'app/assets/html/informe-checklists.component.html'
 })
 export class InformeChecklistsComponent implements OnInit{
   

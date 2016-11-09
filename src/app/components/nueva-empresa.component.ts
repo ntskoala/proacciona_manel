@@ -7,7 +7,7 @@ import { Empresa } from '../models/empresa';
 
 @Component({
   selector: 'nueva-empresa',
-  templateUrl: '../../assets/html/nueva-empresa.component.html'
+  templateUrl: 'app/assets/html/nueva-empresa.component.html'
 })
 
 export class NuevaEmpresaComponent {

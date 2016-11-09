@@ -8,7 +8,7 @@ import { ResultadoControl } from '../models/resultadocontrol';
 
 @Component({
   selector: 'informe-controles',
-  templateUrl: '../../assets/html/informe-controles.component.html'
+  templateUrl: 'app/assets/html/informe-controles.component.html'
 })
 export class InformeControlesComponent implements OnInit {
 

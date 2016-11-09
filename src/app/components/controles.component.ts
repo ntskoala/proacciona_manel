@@ -9,7 +9,7 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-controles',
-  templateUrl: '../../assets/html/controles.component.html'
+  templateUrl: 'app/assets/html/controles.component.html'
 })
 
 export class ControlesComponent implements OnInit {
@@ -87,7 +87,6 @@ export class ControlesComponent implements OnInit {
   actualizarControl(control: Control) {
     this.guardar[control.id] = false;
     for (let property in control) {
-      console.log(property, control[property]);
       if (control[property] == '') control[property] = null;
     }
     let parametros = '?id=' + control.id;        

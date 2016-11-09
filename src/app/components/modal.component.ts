@@ -4,7 +4,7 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'modal',
-  templateUrl: '../../assets/html/modal.component.html'
+  templateUrl: 'app/assets/html/modal.component.html'
 })
 export class ModalComponent {
 

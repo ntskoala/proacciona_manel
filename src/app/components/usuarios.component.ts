@@ -9,7 +9,7 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-usuarios',
-  templateUrl: '../../assets/html/usuarios.component.html'
+  templateUrl: 'app/assets/html/usuarios.component.html'
 })
 export class UsuariosComponent implements OnInit {
 

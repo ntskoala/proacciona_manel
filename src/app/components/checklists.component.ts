@@ -10,7 +10,7 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-checklists',
-  templateUrl: '../../assets/html/checklists.component.html'
+  templateUrl: 'app/assets/html/checklists.component.html'
 })
 export class ChecklistsComponent implements OnInit{
 

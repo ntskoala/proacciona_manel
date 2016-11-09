@@ -1,13 +1,7 @@
 <h2>Informe de periodicidad</h2>
-<div class="fechas">
-  <form #filtrarFechasForm="ngForm" (ngSubmit)="filtrarFechas(filtrarFechasForm.value)">
-    <md-input type="date" placeholder="Inicio" required [(ngModel)]="fecha.inicio" name="inicio"></md-input>
-    <button md-mini-fab color="primary" [disabled]="!filtrarFechasForm.form.valid" type="submit">
-      <span class="material-icons">check</span>
-    </button>                
-  </form>
+<div class="mostrar-informe">
+  <button md-button color="primary" (click)="mostrarInforme()">Calcular informe</button>
 </div>
-
 <div class="table informe">
   <div class="header-row">
     <span class="header-cell">Nombre</span>
@@ -22,6 +16,7 @@
       <span class="material-icons red">close</span>
     </span>
   </div>
+  <div class="row"><hr></div>
   <div class="row" *ngFor="let element of checklists">
     <span class="cell">{{element.nombre}}</span>
     <span class="cell center" *ngIf="element.resultado">

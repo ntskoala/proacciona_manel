@@ -17,6 +17,10 @@ h2 {
   color: #673ab7;
 }
 
+hr {
+  width: 137%;
+}
+
 navigation {
   width: 100%;
   display: flex;
@@ -274,14 +278,19 @@ gestion-informes {
   opacity: 0.6;
 }
 
-/* InformePeriodicidadComponent */
+/* InformeChecklistsComponent */
 .checklist {
   width: 100%;
 }
 
 /* InformePeriodicidadComponent */
+.mostrar-informe {
+  width: 100%;
+  padding: 1rem 0;
+}
+
 .informe {
-  max-width: 400px;
+  width: 30% !important;
 }
 
 /*

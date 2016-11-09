@@ -12,7 +12,7 @@ import { PermissionUserChecklist } from '../models/permissionuserchecklist';
 
 @Component({
   selector: 'tab-permisos',
-  templateUrl: '../../assets/html/permisos.component.html'
+  templateUrl: 'app/assets/html/permisos.component.html'
 })
 export class PermisosComponent {
 

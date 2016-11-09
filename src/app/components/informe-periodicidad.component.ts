@@ -8,7 +8,7 @@ import { Control } from '../models/control';
 
 @Component({
   selector: 'informe-periodicidad',
-  templateUrl: '../../assets/html/informe-periodicidad.component.html'
+  templateUrl: 'app/assets/html/informe-periodicidad.component.html'
 })
 export class InformePeriodicidadComponent {
 
@@ -19,7 +19,7 @@ export class InformePeriodicidadComponent {
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
-  filtrarFechas(fecha) {
+  mostrarInforme() {
     let parametros = '&idempresa=' + this.empresasService.seleccionada;
     // Conseguir controles
     this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
@@ -45,21 +45,12 @@ export class InformePeriodicidadComponent {
                 dias = 365;
                 break;
             }
-            let fechaLimite = new Date(Date.now() - dias * 86400000);
-            let parametros = '&idcontrol=' + control.id + '&fecha=' + fecha.inicio;
+            let fechaLimite = Date.now() - dias / control.periodicidad * 86400000;
+            let parametros = '&idcontrol=' + control.id + '&fecha=' + fechaLimite;
             // Conseguir resultados
             this.servidor.getObjects(URLS.PERIODICIDAD_CONTROL, parametros).subscribe(
               response => {
-                if (response.data) {
-                  // Iterar los resultados
-                  for (let resultado of response.data) {
-                    let fechaResultado = new Date(resultado.fecha);
-                    // Validar
-                    if (fechaResultado >= fechaLimite) {
-                      per['resultado'] = true;
-                    }
-                  }
-                }
+                if (response.data) per['resultado'] = true;
               },
               error => console.log(error),
               () => {
@@ -95,21 +86,12 @@ export class InformePeriodicidadComponent {
                 dias = 365;
                 break;
             }
-            let fechaLimite = new Date(Date.now() - dias * 86400000);
-            let parametros = '&idchecklist=' + checklist.id + '&fecha=' + fecha.inicio;
+            let fechaLimite = Date.now() - dias * 86400000;
+            let parametros = '&idchecklist=' + checklist.id + '&fecha=' + fechaLimite;
             // Conseguir resultados
             this.servidor.getObjects(URLS.PERIODICIDAD_CHECKLIST, parametros).subscribe(
               response => {
-                if (response.data) {
-                  // Iterar los resultados
-                  for (let resultado of response.data) {
-                    let fechaResultado = new Date(resultado.fecha);
-                    // Validar
-                    if (fechaResultado >= fechaLimite) {
-                      per['resultado'] = true;
-                    }
-                  }
-                }
+                if (response.data) per['resultado'] = true;
               },
               error => console.log(error),
               () => {
