@@ -1,10 +1,10 @@
 <md-card>
   <md-card-title>
-    <md-toolbar color="accent">Nueva empresa</md-toolbar>
+    <md-toolbar color="accent">{{'Nueva' | translate}} empresa</md-toolbar>
   </md-card-title>
   <form #nuevaEmpresaForm="ngForm" (ngSubmit)="nuevaEmpresa(nuevaEmpresaForm.value)">
     <md-card-content>
-      <md-input class="full-width" placeholder="Nombre" type="text" required [(ngModel)]="empresa.nombre" name="nombre"></md-input>
+      <md-input class="full-width" [placeholder]="'Nombre' | translate" type="text" required [(ngModel)]="empresa.nombre" name="nombre"></md-input>
     </md-card-content>
     <md-card-footer>
       <button md-raised-button color="accent" [disabled]="!nuevaEmpresaForm.form.valid" type="submit">Crear</button>

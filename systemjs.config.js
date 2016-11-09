@@ -19,6 +19,7 @@
       'rxjs': 'npm:rxjs',
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
       '@angular/material': 'npm:@angular/material/material.umd.js',
+      'ng2-translate': 'npm:ng2-translate/bundles/ng2-translate.umd.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

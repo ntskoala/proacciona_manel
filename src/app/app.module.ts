@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
+import { Http } from '@angular/http';
 
 import { AppComponent } from './components/app.component';
 import { NavComponent } from './components/nav.component';
@@ -34,6 +36,11 @@ import { EmpresasService } from './services/empresas.service';
     HttpModule,
     JsonpModule,
     MaterialModule,
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (http: Http) => new TranslateStaticLoader(http, 'app/assets/i18n', '.json'),
+      deps: [Http]
+    }),
     routing
   ],
   declarations: [

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
+import { EmpresasService } from '../services/empresas.service';
+import { TranslateService } from 'ng2-translate';
 import { URLS } from '../models/urls';
 import { Empresa } from '../models/empresa';
 import { Modal } from '../models/modal';
@@ -19,7 +20,10 @@ export class SeleccionarEmpresaComponent implements OnInit {
   empresa: Empresa = new Empresa('Seleccionar empresa', 0);
   modal: Modal = new Modal();
   
-  constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
+  constructor(private servidor: Servidor, private empresasService: EmpresasService,
+    translate: TranslateService) {
+      translate.getDefaultLang()
+    }
 
   ngOnInit() {
     // Subscripción a la creación de nuevas empresa

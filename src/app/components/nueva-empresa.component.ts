@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
-import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
+import { EmpresasService } from '../services/empresas.service';
+import { TranslateService } from 'ng2-translate';
 import { URLS } from '../models/urls';
 import { Empresa } from '../models/empresa';
 
@@ -12,7 +13,10 @@ import { Empresa } from '../models/empresa';
 
 export class NuevaEmpresaComponent {
 
-  constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
+  constructor(private servidor: Servidor, private empresasService: EmpresasService,
+    private translate: TranslateService) {
+      translate.getDefaultLang();
+    }
   
   empresa: Empresa = {nombre: ''};
   

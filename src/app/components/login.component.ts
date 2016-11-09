@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Servidor } from '../services/servidor.service';
 import { EmpresasService } from '../services/empresas.service';
+import { TranslateService } from 'ng2-translate';
 import { URLS } from '../models/urls';
 import { Modal } from '../models/modal';
 
@@ -15,9 +16,14 @@ export class LoginComponent {
   usuario: Object = {};
   modal: Modal = new Modal();
 
-  constructor(private servidor: Servidor, private router: Router, private empresasService: EmpresasService) {};
+  constructor(private servidor: Servidor, private router: Router,
+    private empresasService: EmpresasService, private translate: TranslateService) {
+      translate.setDefaultLang('cat');
+      translate.use('cat');
+    };
 
   login(usuario) {
+    this.empresasService.idioma = usuario.idioma;
     // Parámetros
     let param = '?user=' + usuario.user + '&password=' + usuario.password; 
     this.servidor.login(URLS.LOGIN, param).subscribe(

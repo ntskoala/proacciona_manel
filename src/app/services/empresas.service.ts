@@ -6,6 +6,7 @@ import { Empresa } from '../models/empresa';
 @Injectable()
 export class EmpresasService {
   // variables
+  idioma: string = 'cat';
   seleccionada: number = 0;
   administrador: boolean = true;
   empresaActiva: number;
