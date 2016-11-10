@@ -32,14 +32,8 @@ export class UsuariosComponent implements OnInit {
             this.usuarios = [];
             if (response.success && response.data) {
               for (let element of response.data) {
-                this.usuarios.push(new Usuario(
-                  element.id,
-                  element.usuario,
-                  element.password,
-                  element.tipouser,
-                  element.nombre,
-                  element.idempresa
-                ))
+                this.usuarios.push(new Usuario(element.id, element.usuario, element.password,
+                  element.tipouser, element.nombre, element.idempresa));
                 this.guardar[element.id] = false;
               }
             }
@@ -65,8 +59,8 @@ export class UsuariosComponent implements OnInit {
     // Guardar el id del usuario a borrar
     this.idBorrar = idBorrar;
     // Crea el modal
-    this.modal.titulo = '¿Estás seguro de querer eliminar el usuario?';
-    this.modal.subtitulo = 'Se borrarán todos sus permisos.';
+    this.modal.titulo = 'borrarUsuarioT';
+    this.modal.subtitulo = 'borrarUsuarioST';
     this.modal.eliminar = true;
     this.modal.visible = true;
   }
@@ -97,7 +91,7 @@ export class UsuariosComponent implements OnInit {
     this.servidor.putObject(URLS.USUARIOS, parametros, modUsuario).subscribe(
       response => {
         if (response.success) {
-          console.log('Usuario modificado');
+          console.log('User updated');
         }
     });
   }

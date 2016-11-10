@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { Servidor } from '../services/servidor.service';
 import { EmpresasService } from '../services/empresas.service';
-import { TranslateService } from 'ng2-translate';
 import { URLS } from '../models/urls';
 import { Empresa } from '../models/empresa';
 import { Modal } from '../models/modal';
@@ -20,10 +19,7 @@ export class SeleccionarEmpresaComponent implements OnInit {
   empresa: Empresa = new Empresa('Seleccionar empresa', 0);
   modal: Modal = new Modal();
   
-  constructor(private servidor: Servidor, private empresasService: EmpresasService,
-    translate: TranslateService) {
-      translate.getDefaultLang()
-    }
+  constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   ngOnInit() {
     // Subscripción a la creación de nuevas empresa
@@ -51,8 +47,8 @@ export class SeleccionarEmpresaComponent implements OnInit {
 
   checkBorrar() {
     if (this.empresasService.seleccionada != 0) {
-      this.modal.titulo = '¿Estás seguro de querer eliminar la empresa?';
-      this.modal.subtitulo = 'Se borrarán todos sus usuarios, controles, checklists asociados y los resultados de los mismos.';
+      this.modal.titulo = 'borrarEmpresaT';
+      this.modal.subtitulo = 'borrarEmpresaST';
       this.modal.eliminar = true;
       this.modal.visible = true;
     }
@@ -68,7 +64,6 @@ export class SeleccionarEmpresaComponent implements OnInit {
             let empresaBorrar = this.empresas.find(emp => emp.id == this.empresasService.seleccionada);
             let indice = this.empresas.indexOf(empresaBorrar);
             this.empresas.splice(indice, 1);
-            console.log('Empresa eliminada');
             this.empresasService.seleccionada = 0;
           }
       });

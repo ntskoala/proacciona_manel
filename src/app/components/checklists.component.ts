@@ -16,7 +16,7 @@ export class ChecklistsComponent implements OnInit{
 
   private subscription: Subscription;
   checklistActiva: number = 0;
-  checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist', 0, '');
+  checklist: Checklist = new Checklist(0, 0, 'Seleccionar', 0, '');
   checklists: Checklist[] = [];
   controlchecklists: ControlChecklist[] = [];
   cl: Object = {tipoperiodo: 'Día'};
@@ -72,8 +72,8 @@ export class ChecklistsComponent implements OnInit{
   
   checkBorrarCL() {
     if (this.checklistActiva !== 0) {
-      this.modalCL.titulo = '¿Estás seguro de querer eliminar la checklist?';
-      this.modalCL.subtitulo = 'Se borrarán los resultados asociados a la checklist y los permisos de los usuarios.';
+      this.modalCL.titulo = 'borrarChecklistT';
+      this.modalCL.subtitulo = 'borrarChecklistST';
       this.modalCL.eliminar = true;
       this.modalCL.visible = true;
     }
@@ -131,8 +131,8 @@ export class ChecklistsComponent implements OnInit{
 
   checkBorrarCCL(idCCL: number) {
     this.idBorrar = idCCL;
-    this.modalCCL.titulo = '¿Estás seguro de querer eliminar el control checklist?';
-    this.modalCCL.subtitulo = 'Se borrarán sus resultados asociados.';
+    this.modalCCL.titulo = 'borrarControlchecklistT';
+    this.modalCCL.subtitulo = 'borrarControlchecklistST';
     this.modalCCL.eliminar = true;
     this.modalCCL.visible = true;
   }
@@ -163,7 +163,7 @@ export class ChecklistsComponent implements OnInit{
     this.servidor.putObject(URLS.CONTROLCHECKLISTS, parametros, modControlchecklist).subscribe(
       response => {
         if (response.success) {
-          console.log('Controlchecklist modificado');
+          console.log('Controlchecklist updated');
         }
     });
   }

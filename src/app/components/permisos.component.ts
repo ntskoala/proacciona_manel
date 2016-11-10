@@ -17,7 +17,7 @@ import { PermissionUserChecklist } from '../models/permissionuserchecklist';
 export class PermisosComponent {
 
   private subscription: Subscription;
-  public usuario: Usuario = new Usuario(0, 'Seleccionar usuario', '', '', '', 0)
+  public usuario: Usuario = new Usuario(0, 'Seleccionar', '', '', '', 0)
   public usuarios: Usuario[] = [];
   public controles: Control[] = [];
   public checklists: Checklist[] = [];
@@ -44,14 +44,8 @@ export class PermisosComponent {
         this.usuarios.push(this.usuario);
         if (response.success && response.data) {
           for (let element of response.data) {
-            this.usuarios.push(new Usuario(
-              element.id,
-              element.usuario,
-              element.password,
-              element.tipouser,
-              element.nombre,
-              element.idempresa
-            ))
+            this.usuarios.push(new Usuario(element.id, element.usuario, element.password,
+              element.tipouser, element.nombre, element.idempresa));
           }
         }
     });
@@ -61,19 +55,9 @@ export class PermisosComponent {
         this.controles = [];
         if (response.success && response.data) {
           for (let element of response.data) {
-            this.controles.push(new Control(
-              element.id,
-              element.nombre,
-              element.pla,
-              element.valorminimo,
-              element.valormaximo,
-              element.objetivo,
-              element.tolerancia,
-              element.critico,
-              element.periodicidad,
-              element.tipoperiodo,
-              element.idempresa
-            ));
+            this.controles.push(new Control(element.id, element.nombre, element.pla, element.valorminimo,
+              element.valormaximo, element.objetivo, element.tolerancia, element.critico,
+              element.periodicidad, element.tipoperiodo, element.idempresa));
           }
         }
     });
@@ -83,13 +67,8 @@ export class PermisosComponent {
         this.checklists = [];
         if (response.success && response.data) {
           for (let element of response.data) {
-            this.checklists.push(new Checklist(
-              element.id,
-              element.idempresa,
-              element.nombrechecklist,
-              element.periodicidad,
-              element.tipoperiodo
-            ));
+            this.checklists.push(new Checklist(element.id, element.idempresa, element.nombrechecklist,
+              element.periodicidad, element.tipoperiodo));
           }
         }
     });
@@ -130,7 +109,7 @@ export class PermisosComponent {
       this.servidor.deleteObject(URLS.PERMISSION_USER_CONTROL, parametros).subscribe(
         response => {
           if (response.success) {
-            console.log('Permiso eliminado')
+            console.log('Permiso deleted')
           }
       });
     }
@@ -140,7 +119,6 @@ export class PermisosComponent {
         response => {
           if (response.success) {
             this.checkControl[idControl] = response.id;
-            console.log('Permiso añadido')
           }
       });
     }
@@ -153,7 +131,7 @@ export class PermisosComponent {
       this.servidor.deleteObject(URLS.PERMISSION_USER_CHECKLIST, parametros).subscribe(
         response => {
           if (response.success) {
-            console.log('Permiso eliminado')
+            console.log('Permiso deleted')
           }
       });
     }
@@ -163,7 +141,6 @@ export class PermisosComponent {
         response => {
           if (response.success) {
             this.checkChecklist[idChecklist] = response.id;
-            console.log('Permiso añadido')
           }
       });
     }

@@ -3,7 +3,7 @@
   <form class="row" #crearControlForm="ngForm" (ngSubmit)="crearControl(crearControlForm.value)">
     <input type="hidden" [(ngModel)]="nuevoControl.id" name="id">
     <span class="cell">
-      <input type="text" placeholder="Nombre" required [(ngModel)]="nuevoControl.nombre" name="nombre">
+      <input type="text" [placeholder]="'Nombre' | translate" required [(ngModel)]="nuevoControl.nombre" name="nombre">
     </span>
     <span class="cell">
       <input type="text" placeholder="Pla" required [(ngModel)]="nuevoControl.pla" name="pla">
@@ -28,10 +28,10 @@
     </span>
     <span class="cell">
       <select class="white-select" required [(ngModel)]="nuevoControl.tipoperiodo" name="tipoperiodo">
-        <option>Día</option>
-        <option>Semana</option>
+        <option value="Día">{{'Día' | translate}}</option>
+        <option value="Semana">{{'Semana' | translate}}</option>
         <option>Mes</option>
-        <option>Año</option>
+        <option value="Año">{{'Año' | translate}}</option>
       </select>
     </span>
     <span class="cell"></span>
@@ -50,7 +50,7 @@
     <span class="header-cell right">tol</span>
     <span class="header-cell right">crit</span>
     <span class="header-cell right">per</span>
-    <span class="header-cell">Periodo</span>
+    <span class="header-cell">{{'Periodo' | translate}}</span>
     <span class="header-cell"></span>
     <span class="header-cell"></span>
   </div>
@@ -82,10 +82,10 @@
     </span>
     <span class="cell">
       <select class="white-select" [(ngModel)]="control.tipoperiodo" name="tipoPeriodo" (change)="modificarControl(control.id)">
-        <option>Día</option>
-        <option>Semana</option>
+        <option value="Día">{{'Día' | translate}}</option>
+        <option value="Semana">{{'Semana' | translate}}</option>
         <option>Mes</option>
-        <option>Año</option>
+        <option value="Año">{{'Año' | translate}}</option>
       </select>
     </span>
     <span class="cell">
@@ -100,7 +100,4 @@
     </span>
   </form>
 </div>
-<div class="leyenda">
-  <strong>min</strong>: Mínimo | <strong>max</strong>: Máximo | <strong>obj</strong>: Objetivo |
-  <strong>tol</strong>: Tolerancia | <strong>crit</strong>: Crítico | <strong>per</strong>: Periodicidad
-</div>
+<div class="leyenda" [innerHTML]="'pieControles' | translate"></div>

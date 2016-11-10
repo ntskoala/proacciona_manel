@@ -8,11 +8,11 @@
   </div>
 </div>
 
-<h2>Informe de controles</h2>
+<h2>{{'Informe de controles' | translate}}</h2>
 <div class="fechas">
   <form #filtrarFechasForm="ngForm" (ngSubmit)="filtrarFechas(filtrarFechasForm.value)">
-    <md-input type="date" placeholder="Inicio" required [(ngModel)]="fecha.inicio" name="inicio"></md-input>
-    <md-input type="date" placeholder="Fin" required [(ngModel)]="fecha.fin" name="fin"></md-input>
+    <md-input type="date" [placeholder]="'Inicio' | translate" required [(ngModel)]="fecha.inicio" name="inicio"></md-input>
+    <md-input type="date" [placeholder]="'Fin' | translate" required [(ngModel)]="fecha.fin" name="fin"></md-input>
     <button md-mini-fab color="primary" [disabled]="!filtrarFechasForm.form.valid" type="submit">
       <span class="material-icons">check</span>
     </button>                
@@ -21,8 +21,8 @@
 
 <div class="table">
   <div class="header-row">
-    <span class="header-cell">Fecha</span>
-    <span class="header-cell small">Imagen</span>
+    <span class="header-cell">{{'Fecha' | translate}}</span>
+    <span class="header-cell small">{{'Imagen' | translate}}</span>
     <span class="header-cell right" *ngFor="let columna of columnas">{{columna}}</span>
   </div>
   <div class="row" *ngFor="let resultado of tabla">
@@ -34,7 +34,7 @@
       <span class="material-icons">do_not_disturb_alt</span>
     </span>
     <span class="cell right" *ngFor="let columna of columnas" [class.wrong]="resultado.error"
-      title="{{resultado[columna + 'mensaje']}}">
+      title="{{resultado[columna + 'mensaje'] | translate}}">
       {{resultado[columna]}}
     </span>
   </div>

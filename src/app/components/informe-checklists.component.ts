@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
+import { EmpresasService } from '../services/empresas.service';
 import { URLS } from '../models/urls';
 import { Checklist } from '../models/checklist';
 import { ControlChecklist } from '../models/controlchecklist';
@@ -17,7 +17,7 @@ export class InformeChecklistsComponent implements OnInit{
   
   private subscription: Subscription;
   checklistSeleccionada: number = 0;
-  checklist: Checklist = new Checklist(0, 0, 'Seleccionar checklist', 0, '');
+  checklist: Checklist = new Checklist(0, 0, 'Seleccionar', 0, '');
   checklists: Checklist[];
   controlchecklists: ControlChecklist[];
   resultadoschecklist: ResultadoChecklist[];

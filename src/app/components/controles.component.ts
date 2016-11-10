@@ -59,8 +59,8 @@ export class ControlesComponent implements OnInit {
     // Guardar el id del control a borrar
     this.idBorrar = idBorrar;
     // Crea el modal
-    this.modal.titulo = '¿Estás seguro de querer eliminar el control?';
-    this.modal.subtitulo = 'Se borrarán los resultados asociados al control y los permisos de los usuarios.';
+    this.modal.titulo = 'borrarControlT';
+    this.modal.subtitulo = 'borrarControlST';
     this.modal.eliminar = true;
     this.modal.visible = true;
   }
@@ -93,7 +93,7 @@ export class ControlesComponent implements OnInit {
     this.servidor.putObject(URLS.CONTROLES, parametros, control).subscribe(
       response => {
         if (response.success) {
-          console.log('Control modificado');
+          console.log('Control updated');
         }
     });
   }

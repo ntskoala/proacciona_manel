@@ -2,15 +2,15 @@
 <div class="table">
   <form class="row" #crearUsuarioForm="ngForm" (ngSubmit)="crearUsuario(crearUsuarioForm.value)">
     <span class="cell">
-      <input type="text" placeholder="Usuario" required [(ngModel)]="nuevoUsuario.usuario" name="usuario">
+      <input type="text" [placeholder]="'Usuario' | translate" required [(ngModel)]="nuevoUsuario.usuario" name="usuario">
     </span>
     <span class="cell">
-      <input type="text" placeholder="Password" required [(ngModel)]="nuevoUsuario.password" name="password">                
+      <input type="text" [placeholder]="'Contraseña' | translate" required [(ngModel)]="nuevoUsuario.password" name="password">                
     </span>
     <span class="cell">
       <select class="white-select" required [(ngModel)]="nuevoUsuario.tipouser" name="tipouser">
         <option>Normal</option>
-        <option>Gerente</option>
+        <option value="Gerente">{{'Gerente' | translate}}</option>
         <option>Administrador</option>
       </select>
     </span>
@@ -22,9 +22,9 @@
     </span>
   </form>
   <div class="header-row">
-    <span class="header-cell">Usuario</span>
-    <span class="header-cell">Password</span>
-    <span class="header-cell">Tipo</span>
+    <span class="header-cell">{{'Usuario' | translate}}</span>
+    <span class="header-cell">{{'Contraseña' | translate}}</span>
+    <span class="header-cell">{{'Tipo' | translate}}</span>
     <span class="header-cell"></span>
     <span class="header-cell"></span>
   </div>
@@ -38,7 +38,7 @@
     <span class="cell">
       <select class="white-select" [(ngModel)]="usuario.tipouser" name="modTipo" (change)="modificarUsuario(usuario.id)">
         <option>Normal</option>
-        <option>Gerente</option>
+        <option value="Gerente">{{'Gerente' | translate}}</option>
         <option>Administrador</option>
       </select>
     </span>

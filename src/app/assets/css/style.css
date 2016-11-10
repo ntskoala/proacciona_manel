@@ -18,7 +18,7 @@ h2 {
 }
 
 hr {
-  width: 137%;
+  width: 131%;
 }
 
 navigation {
@@ -273,7 +273,7 @@ gestion-informes {
   font-size: 1rem;
   color: #9c27b0;
   position: absolute;
-  left: -20px;
+  left: -5px;
   top: 5px;
   opacity: 0.6;
 }

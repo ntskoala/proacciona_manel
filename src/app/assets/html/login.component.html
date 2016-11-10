@@ -10,8 +10,8 @@
           [(ngModel)]="usuario.user" name="user"></md-input>
         <md-input class="full-width" type="password" required [placeholder]="'Contraseña' | translate"
           [(ngModel)]="usuario.password" name="password"></md-input>
+        <label for="idioma">Seleccionar idioma</label>
         <select class="white-select" required [(ngModel)]="usuario.idioma" name="idioma">
-          <option disabled selected value>Seleccionar</option>
           <option value="cat">Català</option>
           <option value="es">Castellano</option>
         </select>

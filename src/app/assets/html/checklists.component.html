@@ -16,21 +16,21 @@
 
 <!-- Nueva checklist -->
 <div class="nueva-checklist">
-  <h2>Nueva checklist</h2>
+  <h2>{{'Nueva' | translate}} checklist</h2>
   <div class="table">
     <form class="row" (ngSubmit)="nuevaChecklist(nuevaCLf.value)" #nuevaCLf="ngForm">
       <span class="cell">
-        <input placeholder="Nombre" type="text" required [(ngModel)]="cl.nombrechecklist" name="nombrechecklist">
+        <input [placeholder]="'Nombre' | translate" type="text" required [(ngModel)]="cl.nombrechecklist" name="nombrechecklist">
       </span>
       <span class="cell">
-        <input placeholder="Periodicidad" type="text" required [(ngModel)]="cl.periodicidad" name="periodicidad">
+        <input [placeholder]="'Periodicidad' | translate" type="text" required [(ngModel)]="cl.periodicidad" name="periodicidad">
       </span>
       <span class="cell">
         <select class="white-select" required [(ngModel)]="cl.tipoperiodo" name="tipoperiodo">
-          <option>Día</option>
-          <option>Semana</option>
+          <option value="Día">{{'Día' | translate}}</option>
+          <option value="Semana">{{'Semana' | translate}}</option>
           <option>Mes</option>
-          <option>Año</option>
+          <option value="Any">{{'Año' | translate}}</option>
         </select>
       </span>
       <span class="cell">
@@ -49,7 +49,7 @@
     <div class="table">
       <form class="row" #crearCCLf="ngForm" (ngSubmit)="crearCCL(crearCCLf.value)">
         <span class="cell">
-          <input placeholder="Nombre" type="text" required [(ngModel)]="ccl.nombre" name="nombre">
+          <input [placeholder]="'Nombre' | translate" type="text" required [(ngModel)]="ccl.nombre" name="nombre">
         </span>
         <span class="cell"></span>
         <span class="cell">
@@ -59,7 +59,7 @@
         </span>
       </form>
       <div class="header-row">
-        <span class="header-cell">Nombre</span>
+        <span class="header-cell">{{'Nombre' | translate}}</span>
         <span class="header-cell"></span>
         <span class="header-cell"></span>
       </div>
