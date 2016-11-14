@@ -21,6 +21,8 @@ export class ChecklistsComponent implements OnInit{
   controlchecklists: ControlChecklist[] = [];
   cl: Object = {tipoperiodo: 'Día'};
   ccl: Object = {};
+  modificar: boolean = false;
+  modCL: Checklist;
   guardar = [];
   idBorrar: number;
   modalCL: Modal = new Modal();
@@ -70,6 +72,25 @@ export class ChecklistsComponent implements OnInit{
     });
   }
   
+  modificarCL() {
+    if (this.checklistActiva !== 0) {
+      this.modificar = true;
+    }
+    this.modCL = this.checklists.find(checklist => checklist.id == this.checklistActiva);
+  }
+
+  actualizarCL() {
+    let parametros = '?id=' + this.modCL.id;            
+    this.servidor.putObject(URLS.CHECKLISTS, parametros, this.modCL).subscribe(
+      response => {
+        if (response.success) {
+          console.log('Checklist updated');
+        }
+      }
+    )
+    this.modificar = false;
+  }
+
   checkBorrarCL() {
     if (this.checklistActiva !== 0) {
       this.modalCL.titulo = 'borrarChecklistT';
@@ -95,24 +116,21 @@ export class ChecklistsComponent implements OnInit{
     }
   }
 
-  mostrarCCL(seleccion: number) {
-    let parametros = '&idchecklist=' + seleccion;
+  mostrarCCL(idChecklist: number) {
+    let parametros = '&idchecklist=' + idChecklist;
     // llamada al servidor para conseguir los controlchecklist
     this.servidor.getObjects(URLS.CONTROLCHECKLISTS, parametros).subscribe(
       response => {
         this.controlchecklists = [];
         if (response.success && response.data) {
           for (let element of response.data) {
-            this.controlchecklists.push(new ControlChecklist(
-              element.id,
-              element.idchecklist,
-              element.nombre
-            ));
+            this.controlchecklists.push(new ControlChecklist(element.id, element.idchecklist,
+              element.nombre));
             this.guardar[element.id] = false;
           }
         }
       // mostramos la lista de control checklists
-      this.checklistActiva = seleccion;        
+      this.checklistActiva = idChecklist;        
     });
   }
 

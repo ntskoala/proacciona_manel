@@ -200,6 +200,12 @@ gestion-tablas {
   padding-right: 1%;
 }
 
+.modificar-checklist {
+  width: 68%;
+  padding-left: 1%;
+  float: right;
+}
+
 /* PermisosComponent */
 .seleccionar-usuario {
   width: 100%;
