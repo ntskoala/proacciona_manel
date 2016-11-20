@@ -9,7 +9,7 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'seleccionar-empresa',
-  templateUrl: 'app/assets/html/seleccionar-empresa.component.html'
+  templateUrl: '../assets/html/seleccionar-empresa.component.html'
 })
 
 export class SeleccionarEmpresaComponent implements OnInit {

@@ -9,7 +9,7 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'tab-controles',
-  templateUrl: 'app/assets/html/controles.component.html'
+  templateUrl: '../assets/html/controles.component.html'
 })
 
 export class ControlesComponent implements OnInit {

@@ -4,7 +4,7 @@ import { EmpresasService } from '../services/empresas.service';
 
 @Component({
   selector: 'gestion-informes',
-  templateUrl: 'app/assets/html/gestion-informes.component.html'
+  templateUrl: '../assets/html/gestion-informes.component.html'
 })
 export class GestionInformesComponent {
 

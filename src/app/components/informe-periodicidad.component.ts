@@ -8,7 +8,7 @@ import { Control } from '../models/control';
 
 @Component({
   selector: 'informe-periodicidad',
-  templateUrl: 'app/assets/html/informe-periodicidad.component.html'
+  templateUrl: '../assets/html/informe-periodicidad.component.html'
 })
 export class InformePeriodicidadComponent {
 

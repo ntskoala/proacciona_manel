@@ -9,7 +9,7 @@ import { Modal } from '../models/modal';
 
 @Component({
   selector: 'login',
-  templateUrl: 'app/assets/html/login.component.html'
+  templateUrl: '../assets/html/login.component.html'
 })
 export class LoginComponent {
 

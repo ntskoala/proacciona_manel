@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { EmpresasService } from '../services/empresas.service';
 @Component({
   selector: 'gestion-tablas',
-  templateUrl: 'app/assets/html/gestion-tablas.component.html'
+  templateUrl: '../assets/html/gestion-tablas.component.html'
 })
 export class GestionTablasComponent {
 
