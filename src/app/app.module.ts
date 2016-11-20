@@ -38,7 +38,7 @@ import { EmpresasService } from './services/empresas.service';
     MaterialModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
-      useFactory: (http: Http) => new TranslateStaticLoader(http, 'app/assets/i18n', '.json'),
+      useFactory: (http: Http) => new TranslateStaticLoader(http, 'src/app/assets/i18n', '.json'),
       deps: [Http]
     }),
     routing

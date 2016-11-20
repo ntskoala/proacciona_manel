@@ -5,9 +5,11 @@ import { Component } from '@angular/core';
   template: `
     <nav>
       <div class="logo">
-        <img src="app/assets/images/logo.jpg" alt="Logo">
+        <img src="{{logo}}" alt="Logo">
       </div>
     </nav>
   `
 })
-export class NavComponent {}
+export class NavComponent {
+    logo = require('../assets/images/logo.jpg');
+}

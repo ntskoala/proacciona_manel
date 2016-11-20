@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+// Import for webpack
+import '../assets/css/deeppurple-amber.css';
+import '../assets/css/style.css';
+
 @Component({
   selector: 'app',
   template: `
