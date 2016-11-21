@@ -17,7 +17,7 @@ export class InformeControlesComponent implements OnInit {
   resultadoscontrol: ResultadoControl[] = [];
   columnas: string[] = [];
   tabla: Object[] = [];
-  fecha: Object = {}
+  fecha: Object = {};
   modal: boolean = false;
   fotoSrc: string;
 
