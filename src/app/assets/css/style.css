@@ -160,6 +160,11 @@ seleccionar-empresa {
   padding-right: 2%;
 }
 
+.id-empresa {
+  color: #9e9e9e;
+  margin-left: 1rem;
+}
+
 /* NuevaEmpresaComponent */
 nueva-empresa {
   width: 48%;
