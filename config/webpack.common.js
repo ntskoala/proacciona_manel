@@ -24,7 +24,11 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)$/,
-        loader: 'file?name=assets/[name].[hash].[ext]'
+        loader: 'file?name=assets/images/[name].[hash].[ext]'
+      },
+      {
+        test: /\.json/,
+        loader: 'file?name=assets/i18n/[name].[ext]'
       },
       {
         test: /\.css$/,

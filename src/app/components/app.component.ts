@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 // Import for webpack
 import '../assets/css/deeppurple-amber.css';
 import '../assets/css/style.css';
+import '../assets/i18n/cat.json';
+import '../assets/i18n/es.json';
 
 @Component({
   selector: 'app',
