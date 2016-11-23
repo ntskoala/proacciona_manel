@@ -18,7 +18,8 @@ export class SeleccionarEmpresaComponent implements OnInit {
   empresas: Empresa[] = [];
   empresa: Empresa = new Empresa('Seleccionar empresa', 0);
   modal: Modal = new Modal();
-  
+  formdata: FormData = new FormData();
+
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   ngOnInit() {
@@ -68,6 +69,16 @@ export class SeleccionarEmpresaComponent implements OnInit {
           }
       });
     }
+  }
+
+  uploadLogo(event) {
+    let files = event.srcElement.files;
+    let idEmpresa = this.empresasService.seleccionada.toString();
+    this.servidor.postLogo(URLS.UPLOAD_LOGO, files, idEmpresa).subscribe(
+      response => {
+        console.log(response);
+      }
+    )
   }
 
 }

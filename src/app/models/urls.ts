@@ -13,5 +13,7 @@ export const URLS = {
   RESULTADOS_CHECKLIST: base + 'resultadoschecklist.php',
   PERIODICIDAD_CONTROL: base + 'periodicidadcontrol.php',
   PERIODICIDAD_CHECKLIST: base + 'periodicidadchecklist.php',
-  FOTOS: 'http://tfc.ntskoala.com/controles/'
+  UPLOAD_LOGO: base + 'logoempresa.php',
+  FOTOS: 'http://tfc.ntskoala.com/controles/',
+  LOGOS: 'http://tfc.ntskoala.com/logos/'
 }

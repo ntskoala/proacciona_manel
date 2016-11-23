@@ -37,9 +37,25 @@ nav {
   align-items: center;
 }
 
+.logo,
+.logo-empresa {
+  width: 50%;
+}
+
 .logo img {
-  height: 50px;
-  padding: 1px 0 1px;
+  float: left;
+  height: 56px;
+  padding: 3px 0 3px;
+}
+
+.logo-empresa {
+  width: 50%;
+}
+
+.logo-empresa img {
+  float: right;
+  height: 56px;
+  padding: 3px 0 3px;
 }
 
 .modal {
@@ -161,8 +177,23 @@ seleccionar-empresa {
 }
 
 .id-empresa {
-  color: #9e9e9e;
+  color: #fff;
   margin-left: 1rem;
+}
+
+.inputfile {
+  opacity: 0;
+}
+
+.inputlabel {
+  margin-left: 1rem;
+  color: #673ab7;
+}
+
+.inputlabel:focus,
+.inputlabel:hover {
+  cursor: pointer;
+  border-bottom: 1px solid #673ab7;
 }
 
 /* NuevaEmpresaComponent */
