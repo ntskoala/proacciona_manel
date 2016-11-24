@@ -1,5 +1,4 @@
 let base = 'http://tfc.ntskoala.com/api/';
-
 export const URLS = {
   LOGIN: base + 'actions/login.php',
   EMPRESAS: base + 'empresas.php',
@@ -14,4 +13,5 @@ export const URLS = {
   PERIODICIDAD_CONTROL: base + 'periodicidadcontrol.php',
   PERIODICIDAD_CHECKLIST: base + 'periodicidadchecklist.php',
   FOTOS: 'http://tfc.ntskoala.com/controles/'
+
 }
