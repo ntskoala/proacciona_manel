@@ -16,7 +16,7 @@ export class UsuariosComponent implements OnInit {
   private subscription: Subscription;
   usuarios: Usuario[] = [];
   guardar = [];
-  nuevoUsuario: Object = {tipouser: 'Normal'};
+  nuevoUsuario: Object = {tipouser: 'Operario'};
   idBorrar: number;
   modal: Modal = new Modal();
 
@@ -52,7 +52,7 @@ export class UsuariosComponent implements OnInit {
         }
     });
     // limpiar form
-    this.nuevoUsuario = {usuario: '', password: '', tipouser: 'Normal'}  
+    this.nuevoUsuario = {usuario: '', password: '', tipouser: 'Operario'}  
   }
 
   checkBorrar(idBorrar: number) {

@@ -160,6 +160,11 @@ seleccionar-empresa {
   padding-right: 2%;
 }
 
+.id-empresa {
+  color: #9e9e9e;
+  margin-left: 1rem;
+}
+
 /* NuevaEmpresaComponent */
 nueva-empresa {
   width: 48%;
@@ -245,13 +250,16 @@ gestion-informes {
   opacity: 0.6;
 }
 
+.foto {
+  padding: 30px;
+}
+
 .foto-window {
   position: fixed;
-  top: 20%;
-  left: 50%;
+  top: calc(50% - 180px);
+  left: calc(50% - 142px);
   background: #fff;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.6);
-  transform: translate(-50%, -50%);
 }
 
 .close {
@@ -263,10 +271,6 @@ gestion-informes {
 
 .close:hover {
   opacity: 0.6;
-}
-
-.foto {
-  padding: 2rem;
 }
 
 .wrong {

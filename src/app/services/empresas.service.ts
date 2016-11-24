@@ -8,7 +8,7 @@ export class EmpresasService {
   // variables
   idioma: string = 'cat';
   seleccionada: number = 0;
-  administrador: boolean = false;
+  administrador: boolean = true;
   empresaActiva: number;
 
   // fuente del observable
