@@ -16,7 +16,7 @@ export class SeleccionarEmpresaComponent implements OnInit {
   
   subscription: Subscription;
   empresas: Empresa[] = [];
-  empresa: Empresa = new Empresa('Seleccionar empresa', 0);
+  empresa: Empresa = new Empresa('Seleccionar empresa', '0', 0);
   modal: Modal = new Modal();
   formdata: FormData = new FormData();
 
@@ -35,6 +35,7 @@ export class SeleccionarEmpresaComponent implements OnInit {
           for (let element of response.data) {
             this.empresas.push(new Empresa(
               element.nombre,
+              element.logo,
               element.id
             ))
           }
@@ -76,7 +77,8 @@ export class SeleccionarEmpresaComponent implements OnInit {
     let idEmpresa = this.empresasService.seleccionada.toString();
     this.servidor.postLogo(URLS.UPLOAD_LOGO, files, idEmpresa).subscribe(
       response => {
-        console.log(response);
+        let activa = this.empresas.find(emp => emp.id == this.empresasService.seleccionada);
+        activa.logo = '1';
       }
     )
   }

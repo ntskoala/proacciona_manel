@@ -19,7 +19,7 @@ export class NavComponent implements OnInit{
     this.subscription = this.empresasService.empresaSeleccionada.subscribe(
       empresa => {
         this.logoEmpresa = URLS.LOGOS + empresa.id + '/logo.jpg';
-        if (empresa.id == 0) this.logoEmpresa = '';
+        if (empresa.logo == '0') this.logoEmpresa = '';
       }
     )
   }
