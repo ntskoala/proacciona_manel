@@ -1,15 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+
+import { Servidor } from '../services/servidor.service';
+import { EmpresasService } from '../services/empresas.service';
+import { URLS } from '../models/urls';
 
 @Component({
   selector: 'navigation',
-  template: `
-    <nav>
-      <div class="logo">
-        <img src="{{logo}}" alt="Logo">
-      </div>
-    </nav>
-  `
+  templateUrl: '../assets/html/nav.component.html'
 })
-export class NavComponent {
-    logo = require('../assets/images/logo.jpg');
+export class NavComponent implements OnInit{
+  logoEmpresa: string;
+  subscription: Subscription;
+
+  constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
+
+  ngOnInit() {
+    this.subscription = this.empresasService.empresaSeleccionada.subscribe(
+      empresa => {
+        this.logoEmpresa = URLS.LOGOS + empresa.id + '/logo.jpg';
+        if (empresa.logo == '0') this.logoEmpresa = '';
+      }
+    )
+  }
 }

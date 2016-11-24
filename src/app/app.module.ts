@@ -38,13 +38,8 @@ import { EmpresasService } from './services/empresas.service';
     MaterialModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
-<<<<<<< HEAD
       //useFactory: (http: Http) => new TranslateStaticLoader(http, 'src/app/assets/i18n', '.json'),
        useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
-=======
-      // useFactory: (http: Http) => new TranslateStaticLoader(http, 'src/app/assets/i18n', '.json'),
-      useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
->>>>>>> efe44dca0271b05b183e8cd1f717e4ce95792071
       deps: [Http]
     }),
     routing

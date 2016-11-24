@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -35,6 +35,14 @@ export class Servidor {
   deleteObject(url: string, param: string) {
     let parametros = param + '&token=' + sessionStorage.getItem('token');
     return this.llamada.delete(url + parametros)
+      .map((res: Response) => JSON.parse(res.json()));
+  }
+
+  postLogo(url: string, files: File[], idEmpresa: string) {
+    let formData: FormData = new FormData();
+    let parametros = '?token=' + sessionStorage.getItem('token') + '&idempresa=' + idEmpresa;
+    formData.append('logo', files[0], files[0].name);
+    return this.llamada.post(url + parametros, formData)
       .map((res: Response) => JSON.parse(res.json()));
   }
 
