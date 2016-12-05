@@ -5,6 +5,7 @@ import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
 import { URLS } from '../models/urls';
 import { Usuario } from '../models/usuario';
+import { Empresa } from '../models/empresa';
 import { Modal } from '../models/modal';
 
 @Component({
@@ -25,19 +26,27 @@ export class UsuariosComponent implements OnInit {
   ngOnInit() {
     this.subscription = this.empresasService.empresaSeleccionada.subscribe(
       emp => {
-        let parametros = '&idempresa=' + emp.id;
-        // llamada al servidor para conseguir los usuarios
-        this.servidor.getObjects(URLS.USUARIOS, parametros).subscribe(
-          response => {
-            this.usuarios = [];
-            if (response.success && response.data) {
-              for (let element of response.data) {
-                this.usuarios.push(new Usuario(element.id, element.usuario, element.password,
-                  element.tipouser, element.nombre, element.idempresa));
-                this.guardar[element.id] = false;
-              }
-            }
-        });
+        this.setEmpresa(emp);
+    });
+    if (this.empresasService.administrador == false) {
+      this.setEmpresa(this.empresasService.empresaActiva.toString());
+    }
+  }
+
+  setEmpresa(emp: Empresa | string) {
+    let params = typeof(emp) == "string" ? emp : emp.id
+    let parametros = '&idempresa=' + params;
+    // llamada al servidor para conseguir los usuarios
+    this.servidor.getObjects(URLS.USUARIOS, parametros).subscribe(
+      response => {
+        this.usuarios = [];
+        if (response.success && response.data) {
+          for (let element of response.data) {
+            this.usuarios.push(new Usuario(element.id, element.usuario, element.password,
+              element.tipouser, element.nombre, element.idempresa));
+            this.guardar[element.id] = false;
+          }
+        }
     });
   }
 
