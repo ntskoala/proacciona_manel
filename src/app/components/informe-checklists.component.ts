@@ -14,7 +14,7 @@ import { Columna } from '../models/columna';
   templateUrl: '../assets/html/informe-checklists.component.html'
 })
 export class InformeChecklistsComponent implements OnInit{
-  
+
   private subscription: Subscription;
   checklistSeleccionada: number = 0;
   checklist: Checklist = new Checklist(0, 0, 'Seleccionar', 0, '');
@@ -24,7 +24,7 @@ export class InformeChecklistsComponent implements OnInit{
   columnas: Columna[];
   resultado: Object = {};
   tabla: Object[];
-  fecha: Object = {};
+  fecha: Object = {"inicio":"2016-01-01","fin":"2016-12-02"};
   idrs: string[] = [];
   modal: boolean = false;
   fotoSrc: string;

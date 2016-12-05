@@ -324,6 +324,20 @@ gestion-informes {
   width: 100%;
 }
 
+.descripcion {
+    visibility: hidden;
+    position: absolute;
+    background-color: #fff;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+
+}
+.descrip-link:hover + .descripcion{
+  visibility: visible;
+}
+
+
 /* InformePeriodicidadComponent */
 .mostrar-informe {
   width: 100%;

@@ -1,6 +1,6 @@
 <modal [modal]="modal" (onCerrar)="cerrarModal($event)"></modal>
 <div class="table">
-  <form class="row" #crearUsuarioForm="ngForm" (ngSubmit)="crearUsuario(crearUsuarioForm.value)">
+  <form class="row" #crearUsuarioForm="ngForm" (ngSubmit)="crearUsuario(crearUsuarioForm.value)" *ngIf="!readOnly">
     <span class="cell">
       <input type="text" [placeholder]="'Usuario' | translate" required [(ngModel)]="nuevoUsuario.usuario" name="usuario">
     </span>
@@ -30,25 +30,25 @@
   </div>
   <form class="row" #actualizarUsuarioForm="ngForm" (ngSubmit)="actualizarUsuario(usuario.id)" *ngFor="let usuario of usuarios">
     <span class="cell">
-      <input type="text" [(ngModel)]="usuario.usuario" name="modUsuario" (keyup)="modificarUsuario(usuario.id)">
+      <input type="text" [(ngModel)]="usuario.usuario" name="modUsuario" (keyup)="modificarUsuario(usuario.id)" [readonly]="readOnly">
     </span>
     <span class="cell">
-      <input type="text" [(ngModel)]="usuario.password" name="modPassword" (keyup)="modificarUsuario(usuario.id)">
+      <input type="text" [(ngModel)]="usuario.password" name="modPassword" (keyup)="modificarUsuario(usuario.id)" [readonly]="readOnly">
     </span>
     <span class="cell">
-      <select class="white-select" [(ngModel)]="usuario.tipouser" name="modTipo" (change)="modificarUsuario(usuario.id)">
+      <select class="white-select" [(ngModel)]="usuario.tipouser" name="modTipo" (change)="modificarUsuario(usuario.id)" >
         <option value="Operario">{{'Operario' | translate}}</option>
         <option value="Gerente">{{'Gerente' | translate}}</option>
         <option>Administrador</option>
       </select>
     </span>
     <span class="cell">
-      <button md-mini-fab color="primary" (click)="checkBorrar(usuario.id)" type="submit">
+      <button md-mini-fab color="primary" (click)="checkBorrar(usuario.id)" type="submit" *ngIf="!readOnly">
         <span class="material-icons">close</span>
       </button>
     </span>
     <span class="cell">
-      <button md-mini-fab color="primary" [disabled]="!guardar[usuario.id]" type="submit">
+      <button md-mini-fab color="primary" [disabled]="!guardar[usuario.id]" type="submit" *ngIf="!readOnly">
         <span class="material-icons">check</span>
       </button>                
     </span>

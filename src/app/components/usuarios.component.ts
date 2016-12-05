@@ -19,7 +19,7 @@ export class UsuariosComponent implements OnInit {
   nuevoUsuario: Object = {tipouser: 'Operario'};
   idBorrar: number;
   modal: Modal = new Modal();
-
+readOnly:boolean;
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   ngOnInit() {
@@ -39,6 +39,7 @@ export class UsuariosComponent implements OnInit {
             }
         });
     });
+    this.empresasService.administrador ? this.readOnly = false : this.readOnly = true;
   }
 
   crearUsuario(usuario) {
