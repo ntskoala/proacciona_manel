@@ -7,7 +7,9 @@ import { EmpresasService } from '../services/empresas.service';
   selector: 'empresa',
   template: `
     <div class="empresas">
-    <gestion-tablas></gestion-tablas>
+
+      <gestion-tablas></gestion-tablas>
+
       <gestion-informes></gestion-informes>
     </div>
   `
