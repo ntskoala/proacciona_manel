@@ -16,7 +16,9 @@
         <option>Administrador</option>
       </select>
     </span>
-    <span class="cell"></span>
+    <span class="cell">
+      <input type="text" [placeholder]="'email' | translate" [(ngModel)]="nuevoUsuario.usuario" name="email">
+    </span>
     <span class="cell">
       <button md-mini-fab color="accent" [disabled]="!crearUsuarioForm.form.valid" type="submit">
         <span class="material-icons">add</span>
@@ -45,6 +47,10 @@
         <option value="Gerente">{{'Gerente' | translate}}</option>
         <option>Administrador</option>
       </select>
+    </span>
+        <span class="cell">
+
+      <input type="text" [readonly]="!empresasService.administrador" [(ngModel)]="usuario.email" name="modEmail" (keyup)="modificarUsuario(usuario.id)">
     </span>
     <span class="cell">
 

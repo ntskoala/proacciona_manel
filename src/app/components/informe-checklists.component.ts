@@ -24,7 +24,7 @@ export class InformeChecklistsComponent implements OnInit{
   columnas: Columna[];
   resultado: Object = {};
   tabla: Object[];
-  fecha: Object = {"inicio":"2016-01-01","fin":"2016-12-02"};
+  fecha: Object = {"inicio":"","fin":""};
   idrs: string[] = [];
   modal: boolean = false;
   fotoSrc: string;
@@ -68,6 +68,7 @@ export class InformeChecklistsComponent implements OnInit{
               element.nombre));
             this.columnas.push(new Columna(
               'id' + element.id,
+              'id2' + element.id,
               element.nombre
             ));
           }
@@ -101,6 +102,9 @@ export class InformeChecklistsComponent implements OnInit{
               if (resultado.resultado == 'true') {
                 this.resultado['id' + resultado.idcontrolchecklist] = true;
               }
+              if (resultado.descripcion) {
+                this.resultado['id2' + resultado.idcontrolchecklist] = resultado.descripcion;
+              }              
               contador++;
             }
           }

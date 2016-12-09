@@ -20,7 +20,7 @@ export class UsuariosComponent implements OnInit {
   nuevoUsuario: Object = {tipouser: 'Operario'};
   idBorrar: number;
   modal: Modal = new Modal();
-readOnly:boolean;
+
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   ngOnInit() {
@@ -43,17 +43,17 @@ readOnly:boolean;
         if (response.success && response.data) {
           for (let element of response.data) {
             this.usuarios.push(new Usuario(element.id, element.usuario, element.password,
-              element.tipouser, element.nombre, element.idempresa));
+              element.tipouser, element.email, element.idempresa));
             this.guardar[element.id] = false;
           }
         }
     });
-    this.empresasService.administrador ? this.readOnly = false : this.readOnly = true;
+    
   }
 
   crearUsuario(usuario) {
     let usuarioCrear = new Usuario(0, usuario.usuario, usuario.password,
-      usuario.tipouser, '', this.empresasService.seleccionada);
+      usuario.tipouser, usuario.email, this.empresasService.seleccionada);
     this.servidor.postObject(URLS.USUARIOS, usuarioCrear).subscribe(
       response => {
         if (response.success) {

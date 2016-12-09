@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
+import { Empresa } from '../models/empresa';
 import { URLS } from '../models/urls';
 import { Checklist } from '../models/checklist';
 import { ControlChecklist } from '../models/controlchecklist';
@@ -32,8 +33,18 @@ export class ChecklistsComponent implements OnInit{
 
   ngOnInit() {
     this.subscription = this.empresasService.empresaSeleccionada.subscribe(
-      seleccionada => {
-        let parametros = '&idempresa=' + seleccionada.id;
+      emp => {
+        this.setEmpresa(emp);
+    });
+    if (this.empresasService.administrador == false) {
+      this.setEmpresa(this.empresasService.empresaActiva.toString());
+    }
+  }
+
+     setEmpresa(emp: Empresa | string) {
+    let params = typeof(emp) == "string" ? emp : emp.id
+    let parametros = '&idempresa=' + params;
+        //let parametros = '&idempresa=' + seleccionada.id;
         // Llamada al servidor para conseguir las checklists
         this.servidor.getObjects(URLS.CHECKLISTS, parametros).subscribe(
           response => {
@@ -49,8 +60,7 @@ export class ChecklistsComponent implements OnInit{
               }
             }
         });
-    });
-  }
+   }
 
   nuevaChecklist(cl: Checklist) {
     // Limpiar el form

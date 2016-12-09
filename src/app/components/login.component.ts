@@ -13,7 +13,7 @@ import { Modal } from '../models/modal';
 })
 export class LoginComponent {
 
-  usuario: Object = {"user":"demo","password":"demo"};
+  usuario: Object = {"user":"","password":""};
   modal: Modal = new Modal();
 
   constructor(private servidor: Servidor, private router: Router,
