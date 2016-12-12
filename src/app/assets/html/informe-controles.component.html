@@ -11,8 +11,10 @@
 <h2>{{'Informe de controles' | translate}}</h2>
 <div class="fechas">
   <form #filtrarFechasForm="ngForm" (ngSubmit)="filtrarFechas(filtrarFechasForm.value)">
-    <md-input type="date" [placeholder]="'Inicio' | translate" required [(ngModel)]="fecha.inicio" name="inicio"></md-input>
-    <md-input type="date" [placeholder]="'Fin' | translate" required [(ngModel)]="fecha.fin" name="fin"></md-input>
+    <ng2-datepicker type="date" name="inicio" [(ngModel)]="fecha.inicio"></ng2-datepicker>
+   <ng2-datepicker type="date" name="fin" [(ngModel)]="fecha.fin"></ng2-datepicker>
+    <!--<md-input type="date" [placeholder]="'Inicio' | translate" required [(ngModel)]="fecha.inicio" name="inicio"></md-input>
+    <md-input type="date" [placeholder]="'Fin' | translate" required [(ngModel)]="fecha.fin" name="fin"></md-input>-->
     <button md-mini-fab color="primary" [disabled]="!filtrarFechasForm.form.valid" type="submit">
       <span class="material-icons">check</span>
     </button>                

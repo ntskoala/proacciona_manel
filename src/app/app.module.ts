@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
+import { DatePickerModule } from 'ng2-datepicker';
 import { Http } from '@angular/http';
 
 import { AppComponent } from './components/app.component';
@@ -36,6 +37,7 @@ import { EmpresasService } from './services/empresas.service';
     HttpModule,
     JsonpModule,
     MaterialModule,
+    DatePickerModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       //useFactory: (http: Http) => new TranslateStaticLoader(http, 'src/app/assets/i18n', '.json'),
