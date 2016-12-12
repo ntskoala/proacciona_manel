@@ -17,7 +17,7 @@ export class InformeControlesComponent implements OnInit {
   resultadoscontrol: ResultadoControl[] = [];
   columnas: string[] = [];
   tabla: Object[] = [];
-  fecha: Object = {};
+  fecha: Object ={};// = {"inicio":"2016-12-09","fin":"2016-12-12"};
   modal: boolean = false;
   fotoSrc: string;
 
@@ -47,9 +47,10 @@ export class InformeControlesComponent implements OnInit {
   }
 
   filtrarFechas(fecha) {
+    console.log (fecha.inicio.formatted,fecha.fin.formatted);
     // conseguir resultadoscontrol
     let parametros = '&idempresa=' + this.empresasService.seleccionada +
-      '&fechainicio=' + fecha.inicio + '&fechafin=' + fecha.fin;
+      '&fechainicio=' + fecha.inicio.formatted + '&fechafin=' + fecha.fin.formatted;
     this.servidor.getObjects(URLS.RESULTADOS_CONTROL, parametros).subscribe(
       response => {
         this.resultadoscontrol = [];
