@@ -73,7 +73,9 @@ export class SeleccionarEmpresaComponent implements OnInit {
   }
 
   uploadLogo(event) {
-    let files = event.srcElement.files;
+    var target = event.target || event.srcElement; //if target isn't there then take srcElement
+    let files = target.files;
+    //let files = event.srcElement.files;
     let idEmpresa = this.empresasService.seleccionada.toString();
     this.servidor.postLogo(URLS.UPLOAD_LOGO, files, idEmpresa).subscribe(
       response => {

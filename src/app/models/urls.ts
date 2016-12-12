@@ -1,4 +1,6 @@
-let base = 'http://tfc.ntskoala.com/api/';
+let server = 'http://tfc.proacciona.es/'; //prod
+//let server = 'http://tfc.ntskoala.com/';//DESARROLLO
+let base = server + 'api/';
 
 export const URLS = {
   LOGIN: base + 'actions/login.php',
@@ -13,7 +15,9 @@ export const URLS = {
   RESULTADOS_CHECKLIST: base + 'resultadoschecklist.php',
   PERIODICIDAD_CONTROL: base + 'periodicidadcontrol.php',
   PERIODICIDAD_CHECKLIST: base + 'periodicidadchecklist.php',
+
   UPLOAD_LOGO: base + 'logoempresa.php',
-  FOTOS: 'http://tfc.ntskoala.com/controles/',
-  LOGOS: 'http://tfc.ntskoala.com/logos/'
+  FOTOS: server +'controles/',
+  LOGOS: server + 'logos/'
+
 }

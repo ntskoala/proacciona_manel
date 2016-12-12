@@ -1,6 +1,8 @@
 <modal [modal]="modal" (onCerrar)="cerrarModal($event)"></modal>
 <div class="table">
+
   <form *ngIf="empresasService.administrador" class="row" #crearUsuarioForm="ngForm" (ngSubmit)="crearUsuario(crearUsuarioForm.value)">
+
     <span class="cell">
       <input type="text" [placeholder]="'Usuario' | translate" required [(ngModel)]="nuevoUsuario.usuario" name="usuario">
     </span>
@@ -14,7 +16,9 @@
         <option>Administrador</option>
       </select>
     </span>
-    <span class="cell"></span>
+    <span class="cell">
+      <input type="text" [placeholder]="'email' | translate" [(ngModel)]="nuevoUsuario.usuario" name="email">
+    </span>
     <span class="cell">
       <button md-mini-fab color="accent" [disabled]="!crearUsuarioForm.form.valid" type="submit">
         <span class="material-icons">add</span>
@@ -30,6 +34,7 @@
   </div>
   <form class="row" #actualizarUsuarioForm="ngForm" (ngSubmit)="actualizarUsuario(usuario.id)" *ngFor="let usuario of usuarios">
     <span class="cell">
+
       <input type="text" [readonly]="!empresasService.administrador" [(ngModel)]="usuario.usuario" name="modUsuario" (keyup)="modificarUsuario(usuario.id)">
     </span>
     <span class="cell">
@@ -37,18 +42,27 @@
     </span>
     <span class="cell">
       <select class="white-select" [disabled]="!empresasService.administrador" [(ngModel)]="usuario.tipouser" name="modTipo" (change)="modificarUsuario(usuario.id)">
+
         <option value="Operario">{{'Operario' | translate}}</option>
         <option value="Gerente">{{'Gerente' | translate}}</option>
         <option>Administrador</option>
       </select>
     </span>
+        <span class="cell">
+
+      <input type="text" [readonly]="!empresasService.administrador" [(ngModel)]="usuario.email" name="modEmail" (keyup)="modificarUsuario(usuario.id)">
+    </span>
     <span class="cell">
+
       <button md-mini-fab *ngIf="empresasService.administrador" color="primary" (click)="checkBorrar(usuario.id)" type="submit">
+
         <span class="material-icons">close</span>
       </button>
     </span>
     <span class="cell">
+
       <button md-mini-fab *ngIf="empresasService.administrador" color="primary" [disabled]="!guardar[usuario.id]" type="submit">
+
         <span class="material-icons">check</span>
       </button>                
     </span>

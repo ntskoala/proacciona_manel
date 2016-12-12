@@ -4,7 +4,7 @@ export class Usuario {
     public usuario: string,
     public password: string,
     public tipouser: string,
-    public nombre: string,
+    public email: string,
     public idempresa: number
   ) {}
 }

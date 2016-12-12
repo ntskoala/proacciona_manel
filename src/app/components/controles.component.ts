@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { EmpresasService } from '../services/empresas.service';
 import { Servidor } from '../services/servidor.service';
+import { Empresa } from '../models/empresa';
 import { URLS } from '../models/urls';
 import { Control } from '../models/control';
 import { Modal } from '../models/modal';
@@ -25,8 +26,18 @@ export class ControlesComponent implements OnInit {
 
   ngOnInit() {
     this.subscription = this.empresasService.empresaSeleccionada.subscribe(
-      seleccionada => {
-        let parametros = '&idempresa=' + seleccionada.id; 
+      emp => {
+        this.setEmpresa(emp);
+    });
+    if (this.empresasService.administrador == false) {
+      this.setEmpresa(this.empresasService.empresaActiva.toString());
+    }
+  }
+
+   setEmpresa(emp: Empresa | string) {
+    let params = typeof(emp) == "string" ? emp : emp.id
+    let parametros = '&idempresa=' + params;
+       // let parametros = '&idempresa=' + seleccionada.id; 
         this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
           response => {
             this.controles = [];
@@ -40,8 +51,7 @@ export class ControlesComponent implements OnInit {
               }
             }
         });
-    });
-  }
+   }
 
   crearControl(nuevoControl: Control) {
     nuevoControl.idempresa = this.empresasService.seleccionada;

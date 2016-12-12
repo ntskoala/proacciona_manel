@@ -43,16 +43,17 @@ export class UsuariosComponent implements OnInit {
         if (response.success && response.data) {
           for (let element of response.data) {
             this.usuarios.push(new Usuario(element.id, element.usuario, element.password,
-              element.tipouser, element.nombre, element.idempresa));
+              element.tipouser, element.email, element.idempresa));
             this.guardar[element.id] = false;
           }
         }
     });
+    
   }
 
   crearUsuario(usuario) {
     let usuarioCrear = new Usuario(0, usuario.usuario, usuario.password,
-      usuario.tipouser, '', this.empresasService.seleccionada);
+      usuario.tipouser, usuario.email, this.empresasService.seleccionada);
     this.servidor.postObject(URLS.USUARIOS, usuarioCrear).subscribe(
       response => {
         if (response.success) {

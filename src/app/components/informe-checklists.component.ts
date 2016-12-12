@@ -14,7 +14,7 @@ import { Columna } from '../models/columna';
   templateUrl: '../assets/html/informe-checklists.component.html'
 })
 export class InformeChecklistsComponent implements OnInit{
-  
+
   private subscription: Subscription;
   checklistSeleccionada: number = 0;
   checklist: Checklist = new Checklist(0, 0, 'Seleccionar', 0, '');
@@ -24,7 +24,7 @@ export class InformeChecklistsComponent implements OnInit{
   columnas: Columna[];
   resultado: Object = {};
   tabla: Object[];
-  fecha: Object = {};
+  fecha: Object = {"inicio":"","fin":""};
   idrs: string[] = [];
   modal: boolean = false;
   fotoSrc: string;
@@ -68,6 +68,7 @@ export class InformeChecklistsComponent implements OnInit{
               element.nombre));
             this.columnas.push(new Columna(
               'id' + element.id,
+              'id2' + element.id,
               element.nombre
             ));
           }
@@ -101,6 +102,9 @@ export class InformeChecklistsComponent implements OnInit{
               if (resultado.resultado == 'true') {
                 this.resultado['id' + resultado.idcontrolchecklist] = true;
               }
+              if (resultado.descripcion) {
+                this.resultado['id2' + resultado.idcontrolchecklist] = resultado.descripcion;
+              }              
               contador++;
             }
           }

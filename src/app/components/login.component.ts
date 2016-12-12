@@ -13,13 +13,14 @@ import { Modal } from '../models/modal';
 })
 export class LoginComponent {
 
-  usuario: Object = {};
+  usuario: Object = {"user":"","password":""};
   modal: Modal = new Modal();
 
   constructor(private servidor: Servidor, private router: Router,
     private empresasService: EmpresasService, private translate: TranslateService) {
       translate.setDefaultLang('cat');
       translate.use('cat');
+      
     };
 
   login(usuario) {
@@ -45,6 +46,7 @@ export class LoginComponent {
               // Redirecciona a página de empresa
               let idEmpresa = response.data[0].idempresa;
               this.empresasService.empresaActiva = idEmpresa;
+//              this.empresasService.empresaSeleccionada =idEmpresa;
               this.router.navigate(['empresa', idEmpresa]);
               break;
             default:
