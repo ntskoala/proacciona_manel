@@ -69,6 +69,7 @@ export class InformeChecklistsComponent implements OnInit{
             this.columnas.push(new Columna(
               'id' + element.id,
               'id2' + element.id,
+              'fotocontrol'+ element.id,
               element.nombre
             ));
           }
@@ -79,7 +80,7 @@ export class InformeChecklistsComponent implements OnInit{
   filtrarFechas(fecha) {
     this.idrs = [];
     // Conseguir resultadoschecklist
-    let parametros = '&idchecklist=' + this.checklistSeleccionada + '&fechainicio=' + fecha.inicio + '&fechafin=' + fecha.fin;
+    let parametros = '&idchecklist=' + this.checklistSeleccionada + '&fechainicio=' + fecha.inicio.formatted + '&fechafin=' + fecha.fin.formatted;
     this.servidor.getObjects(URLS.RESULTADOS_CHECKLIST, parametros).subscribe(
       response => {
         this.resultadoschecklist = [];
@@ -88,7 +89,7 @@ export class InformeChecklistsComponent implements OnInit{
           for (let element of response.data) {
             let fecha = new Date(element.fecha);
               this.resultadoschecklist.push(new ResultadoChecklist(element.idr, element.idcontrolchecklist,
-                element.idchecklist, element.resultado, element.descripcion, new Date(element.fecha), element.foto));
+                element.idchecklist, element.resultado, element.descripcion, new Date(element.fecha), element.foto, element.fotocontrol));
             if (this.idrs.indexOf(element.idr) == -1) this.idrs.push(element.idr);
           }
         }
@@ -104,18 +105,22 @@ export class InformeChecklistsComponent implements OnInit{
               }
               if (resultado.descripcion) {
                 this.resultado['id2' + resultado.idcontrolchecklist] = resultado.descripcion;
-              }              
+              }
+               if (resultado.fotocontrol != "false") {
+                this.resultado['fotocontrol' + resultado.idcontrolchecklist] =  resultado.idcontrolchecklist + "_" + resultado.idr;
+              }                
               contador++;
             }
           }
           this.tabla.push(this.resultado);
           this.resultado = {};
+          console.log("tabla",this.tabla);
         }
     });
   }
 
-  ventanaFoto(idResultado: number) {
-    this.fotoSrc = URLS.FOTOS + this.empresasService.seleccionada + '/checklist' + idResultado + '.jpg'
+  ventanaFoto(idResultado: number, tipocontrol: string) {
+    this.fotoSrc = URLS.FOTOS + this.empresasService.seleccionada + '/'+ tipocontrol + idResultado + '.jpg'
     this.modal = true;
   }
 

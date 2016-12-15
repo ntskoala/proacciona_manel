@@ -6,6 +6,7 @@ export class ResultadoChecklist {
     public resultado: string,
     public descripcion: string,
     public fecha: Date,
-    public foto: string
+    public foto: string,
+    public fotocontrol: string
   ) {}
 }
