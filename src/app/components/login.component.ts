@@ -12,8 +12,8 @@ import { Modal } from '../models/modal';
   templateUrl: '../assets/html/login.component.html'
 })
 export class LoginComponent {
-
-  usuario: Object = {"user":"","password":""};
+  //usuario: Object = {"user":"","password":""};
+  usuario: Object = {"user":"demo","password":"demo","idioma":"es"};
   modal: Modal = new Modal();
 
   constructor(private servidor: Servidor, private router: Router,

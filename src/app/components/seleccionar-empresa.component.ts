@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Servidor } from '../services/servidor.service';
@@ -12,39 +12,23 @@ import { Modal } from '../models/modal';
   templateUrl: '../assets/html/seleccionar-empresa.component.html'
 })
 
-export class SeleccionarEmpresaComponent implements OnInit {
+export class SeleccionarEmpresaComponent {
   
-  subscription: Subscription;
-  empresas: Empresa[] = [];
-  empresa: Empresa = new Empresa('Seleccionar empresa', '0', 0);
-  modal: Modal = new Modal();
-  formdata: FormData = new FormData();
+  // subscription: Subscription;
+  // //empresas: Empresa[] = [];
+  // empresa: Empresa = new Empresa('Seleccionar empresa', '0', 0);
+   modal: Modal = new Modal();
+  // formdata: FormData = new FormData();
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
-  ngOnInit() {
-    // Subscripción a la creación de nuevas empresa
-    this.subscription = this.empresasService.nuevaEmpresa.subscribe(
-      empresa => this.empresas.push(empresa)
-    );
-    // Conseguir la lista de empresas
-    this.servidor.getObjects(URLS.EMPRESAS, '').subscribe(
-      response => {
-        if (response.success) {
-          this.empresas.push(this.empresa);
-          for (let element of response.data) {
-            this.empresas.push(new Empresa(
-              element.nombre,
-              element.logo,
-              element.id
-            ))
-          }
-        }
-    });
-  }
 
-  selecciona(idEmpresa: number){
-    this.empresasService.seleccionarEmpresa(this.empresas.find(emp => emp.id == idEmpresa));
+
+  selecciona(empresa: Empresa){
+    console.log("evento recibido", empresa);
+    this.empresasService.seleccionarEmpresa(empresa);
+    
+
   }
 
   checkBorrar() {
@@ -63,12 +47,15 @@ export class SeleccionarEmpresaComponent implements OnInit {
       this.servidor.deleteObject(URLS.EMPRESAS, parametros).subscribe(
         response => {
           if (response.success) {
-            let empresaBorrar = this.empresas.find(emp => emp.id == this.empresasService.seleccionada);
-            let indice = this.empresas.indexOf(empresaBorrar);
-            this.empresas.splice(indice, 1);
-            this.empresasService.seleccionada = 0;
+            console.log('empresa Borrada');
+//PENDIENTE LIMPIAR DESPLEGABLE DE EMPRESAS            
+            // let empresaBorrar = this.empresas.find(emp => emp.id == this.empresasService.seleccionada);
+            // let indice = this.empresas.indexOf(empresaBorrar);
+            // this.empresas.splice(indice, 1);
+            // this.empresasService.seleccionada = 0;
           }
-      });
+      },
+      error => console.log(error));
     }
   }
 
@@ -79,8 +66,9 @@ export class SeleccionarEmpresaComponent implements OnInit {
     let idEmpresa = this.empresasService.seleccionada.toString();
     this.servidor.postLogo(URLS.UPLOAD_LOGO, files, idEmpresa).subscribe(
       response => {
-        let activa = this.empresas.find(emp => emp.id == this.empresasService.seleccionada);
-        activa.logo = '1';
+        console.log('logo subido correctamente');
+        // let activa = this.empresas.find(emp => emp.id == this.empresasService.seleccionada);
+        // activa.logo = '1';
       }
     )
   }

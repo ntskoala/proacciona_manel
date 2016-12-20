@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login.component';
 import { EmpresaComponent } from './components/empresa.component';
 import { EmpresasComponent } from './components/empresas.component';
 import { SeleccionarEmpresaComponent } from './components/seleccionar-empresa.component';
+import { ListadoEmpresasComponent } from './components/listado-empresas.component';
 import { NuevaEmpresaComponent } from './components/nueva-empresa.component';
 import { GestionTablasComponent } from './components/gestion-tablas.component';
 import { GestionInformesComponent } from './components/gestion-informes.component';
@@ -53,6 +54,7 @@ import { EmpresasService } from './services/empresas.service';
     EmpresaComponent,
     EmpresasComponent,
     SeleccionarEmpresaComponent,
+    ListadoEmpresasComponent,
     NuevaEmpresaComponent,
     GestionTablasComponent,
     GestionInformesComponent,

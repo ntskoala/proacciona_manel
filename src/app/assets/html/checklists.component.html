@@ -34,6 +34,11 @@
           <option value="Any">{{'Año' | translate}}</option>
         </select>
       </span>
+        <span class="cell">
+          <button md-mini-fab color="accent" (click)="import()">
+            <span class="material-icons">archive</span>
+          </button>
+        </span>
       <span class="cell">
         <button md-mini-fab color="accent" [disabled]="!nuevaCLf.form.valid" type="submit">
           <span class="material-icons">add</span>

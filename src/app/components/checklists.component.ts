@@ -195,5 +195,7 @@ export class ChecklistsComponent implements OnInit{
         }
     });
   }
-
+import(){
+  console.log('importando');
+}
 }
