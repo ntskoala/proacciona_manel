@@ -20,6 +20,7 @@ export class EmpresasService {
   nuevaEmpresa = this.nuevaEmpresaFuente.asObservable();
 
   seleccionarEmpresa(empresa: Empresa) {
+      console.log("####EMPRESA SELECCIONADA:",empresa);
       this.seleccionada = empresa.id;
       this.empresaSeleccionadaFuente.next(empresa);
   }

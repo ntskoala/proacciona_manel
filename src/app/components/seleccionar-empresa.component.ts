@@ -25,10 +25,7 @@ export class SeleccionarEmpresaComponent {
 
 
   selecciona(empresa: Empresa){
-    console.log("evento recibido", empresa);
     this.empresasService.seleccionarEmpresa(empresa);
-    
-
   }
 
   checkBorrar() {

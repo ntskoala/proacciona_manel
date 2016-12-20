@@ -30,14 +30,16 @@ export class PermisosComponent {
 
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {
     this.subscription = this.empresasService.empresaSeleccionada.subscribe(
-      seleccionada => this.seleccionarPermisos()
+      seleccionada => {
+        this.seleccionarPermisos()
+      },
+      error => console.log("Error permisos",error)
     );
   }
 
   seleccionarPermisos() {
     this.usuarioSeleccionado = 0;
     let parametros = '&idempresa=' + this.empresasService.seleccionada;
-    // conseguir usuarios
     this.servidor.getObjects(URLS.USUARIOS, parametros).subscribe(
       response => {
         this.usuarios = [];
@@ -48,7 +50,8 @@ export class PermisosComponent {
               element.tipouser, element.nombre, element.idempresa));
           }
         }
-    });
+    },
+    error => console.log("error getting usuarios en permisos",error));
     // conseguir controles
     this.servidor.getObjects(URLS.CONTROLES, parametros).subscribe(
       response => {

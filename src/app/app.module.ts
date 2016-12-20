@@ -20,6 +20,7 @@ import { GestionInformesComponent } from './components/gestion-informes.componen
 import { UsuariosComponent } from './components/usuarios.component';
 import { ControlesComponent } from './components/controles.component';
 import { ChecklistsComponent } from './components/checklists.component';
+import { ListadoChecklistsComponent } from './components/listado-checklists.component';
 import { PermisosComponent } from './components/permisos.component';
 import { InformeControlesComponent } from './components/informe-controles.component';
 import { InformeChecklistsComponent } from './components/informe-checklists.component';
@@ -61,6 +62,7 @@ import { EmpresasService } from './services/empresas.service';
     UsuariosComponent,
     ControlesComponent,
     ChecklistsComponent,
+    ListadoChecklistsComponent,
     PermisosComponent,
     InformeControlesComponent,
     InformeChecklistsComponent,

@@ -28,7 +28,8 @@ export class ChecklistsComponent implements OnInit{
   idBorrar: number;
   modalCL: Modal = new Modal();
   modalCCL: Modal = new Modal();
-  
+  modalImportCL: Modal = new Modal();
+  empresa: any;
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
   ngOnInit() {
@@ -42,6 +43,7 @@ export class ChecklistsComponent implements OnInit{
   }
 
      setEmpresa(emp: Empresa | string) {
+        this.empresa = emp;
     let params = typeof(emp) == "string" ? emp : emp.id
     let parametros = '&idempresa=' + params;
         //let parametros = '&idempresa=' + seleccionada.id;
@@ -197,5 +199,24 @@ export class ChecklistsComponent implements OnInit{
   }
 import(){
   console.log('importando');
+      this.modalImportCL.titulo = 'Importar Checklist';
+      this.modalImportCL.subtitulo = 'Importar Checklistst';
+      this.modalImportCL.eliminar = false;
+      this.modalImportCL.visible = true;
+      this.modalImportCL.importchecklist = true;
 }
+  cerrarModalImportCL(event: boolean) {
+    this.modalImportCL.visible = false;
+    if (event) {
+      // let parametros = '?id=' + this.idBorrar;
+      // this.servidor.deleteObject(URLS.CONTROLCHECKLISTS, parametros).subscribe(
+      //   response => {
+      //     if (response.success) {
+      //       let cclBorrar = this.controlchecklists.find(ccl => ccl.id == this.idBorrar);
+      //       let indice = this.controlchecklists.indexOf(cclBorrar);
+      //       this.controlchecklists.splice(indice, 1);
+      //     }
+      // });
+    }
+  }
 }
