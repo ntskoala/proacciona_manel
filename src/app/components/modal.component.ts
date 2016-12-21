@@ -10,15 +10,17 @@ import { Modal } from '../models/modal';
 })
 export class ModalComponent {
 empresaSeleccionada:string;
-
+checklist:string;
   constructor(private empresasService: EmpresasService, private translate: TranslateService) {
     translate.use(this.empresasService.idioma);
   }
 
   @Input() modal: Modal;
   @Output() onCerrar = new EventEmitter<boolean>();
-
+  @Output() onImportar = new EventEmitter<string>();
   cerrar() {
+    this.empresaSeleccionada="";
+    this.checklist="";
     this.onCerrar.emit(false);
   }
 
@@ -27,13 +29,15 @@ empresaSeleccionada:string;
   }
 
   seleccionada(empresa:any){
-    console.log("modal. seleccionada",empresa);
     this.empresaSeleccionada = empresa.id;
+    this.checklist="";
   }
   checklistseleccionada(checklist:any){
-    console.log("checklist seleccionada",checklist)
+    this.checklist = checklist;
   }
   importar(){
-    console.log("seleccionado importar")
+    this.onImportar.emit(this.checklist);
+    this.empresaSeleccionada="";
+    this.checklist="";
   }
 }

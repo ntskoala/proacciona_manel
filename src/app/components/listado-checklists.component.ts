@@ -14,9 +14,6 @@ import { Modal } from '../models/modal';
   templateUrl: '../assets/html/listado-checklists.component.html'
 })
 export class ListadoChecklistsComponent implements OnInit {
-  //
-  //                        OJO VALOR EMPRESA
-  //
   @Input() empresaSeleccionada: string;
   @Output() checklistSeleccionada: EventEmitter<string>=new EventEmitter<string>();
   private subscription: Subscription;
@@ -27,7 +24,6 @@ export class ListadoChecklistsComponent implements OnInit {
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
 ngOnInit(){
-  console.log("listadoChecklist",this.empresaSeleccionada);
  if (this.empresaSeleccionada) this.loadChecklistList(this.empresaSeleccionada);
 }
 
@@ -56,7 +52,6 @@ ngOnInit(){
 
 
 seleccionarCCL(valor: any){
-  console.log('valor de checklist seleccionada', valor);
   this.checklistSeleccionada.emit(valor);
 }
 
@@ -70,6 +65,7 @@ ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     }
    console.log ("cambio de seleccion",this.empresaSeleccionada);
    if (this.empresaSeleccionada) this.loadChecklistList(this.empresaSeleccionada);
+  // this.checklistSeleccionada.emit("");
   }
 
 }

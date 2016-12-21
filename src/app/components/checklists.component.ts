@@ -129,6 +129,7 @@ export class ChecklistsComponent implements OnInit{
   }
 
   mostrarCCL(idChecklist: number) {
+    console.log(idChecklist);
     let parametros = '&idchecklist=' + idChecklist;
     // llamada al servidor para conseguir los controlchecklist
     this.servidor.getObjects(URLS.CONTROLCHECKLISTS, parametros).subscribe(
@@ -142,7 +143,7 @@ export class ChecklistsComponent implements OnInit{
           }
         }
       // mostramos la lista de control checklists
-      this.checklistActiva = idChecklist;        
+      this.checklistActiva = parseInt(idChecklist.toString());        
     });
   }
 
@@ -197,26 +198,33 @@ export class ChecklistsComponent implements OnInit{
         }
     });
   }
-import(){
-  console.log('importando');
+  import() {
+    if (this.checklistActiva !== 0) {
       this.modalImportCL.titulo = 'Importar Checklist';
       this.modalImportCL.subtitulo = '';
       this.modalImportCL.eliminar = false;
       this.modalImportCL.visible = true;
       this.modalImportCL.importchecklist = true;
-}
-  cerrarModalImportCL(event: boolean) {
-    this.modalImportCL.visible = false;
+    }
+  }
+  cerrarModalImportCL(event: string | boolean) {
+   this.modalImportCL.visible = false;
     if (event) {
-      // let parametros = '?id=' + this.idBorrar;
-      // this.servidor.deleteObject(URLS.CONTROLCHECKLISTS, parametros).subscribe(
-      //   response => {
-      //     if (response.success) {
-      //       let cclBorrar = this.controlchecklists.find(ccl => ccl.id == this.idBorrar);
-      //       let indice = this.controlchecklists.indexOf(cclBorrar);
-      //       this.controlchecklists.splice(indice, 1);
-      //     }
-      // });
+      
+
+  
+    let parametros = '&idchecklist=' + event;
+    // llamada al servidor para conseguir los controlchecklist
+    this.servidor.getObjects(URLS.CONTROLCHECKLISTS, parametros).subscribe(
+      response => {
+        if (response.success && response.data) {
+          for (let element of response.data) {
+            this.crearCCL(new ControlChecklist(0, this.checklistActiva,
+              element.nombre));
+          }
+        }
+    });
+  
     }
   }
 
