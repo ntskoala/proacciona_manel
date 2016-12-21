@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChange,Output,EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { EmpresasService } from '../services/empresas.service';
@@ -14,7 +14,11 @@ import { Modal } from '../models/modal';
   templateUrl: '../assets/html/listado-checklists.component.html'
 })
 export class ListadoChecklistsComponent implements OnInit {
-  @Input('empresa') empresaSeleccionada: any;
+  //
+  //                        OJO VALOR EMPRESA
+  //
+  @Input() empresaSeleccionada: string;
+  @Output() checklistSeleccionada: EventEmitter<string>=new EventEmitter<string>();
   private subscription: Subscription;
   checklistActiva: number = 0;
   checklist: Checklist = new Checklist(0, 0, 'Seleccionar', 0, '');
@@ -23,7 +27,8 @@ export class ListadoChecklistsComponent implements OnInit {
   constructor(private servidor: Servidor, private empresasService: EmpresasService) {}
 
 ngOnInit(){
-  this.loadChecklistList(this.empresaSeleccionada);
+  console.log("listadoChecklist",this.empresaSeleccionada);
+ if (this.empresaSeleccionada) this.loadChecklistList(this.empresaSeleccionada);
 }
 
      loadChecklistList(emp: Empresa | string) {
@@ -52,5 +57,19 @@ ngOnInit(){
 
 seleccionarCCL(valor: any){
   console.log('valor de checklist seleccionada', valor);
+  this.checklistSeleccionada.emit(valor);
 }
+
+
+ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    for (let propName in changes) {
+      let changedProp = changes[propName];
+      let from = JSON.stringify(changedProp.previousValue);
+      let to =   JSON.stringify(changedProp.currentValue);
+       this.empresaSeleccionada = to;
+    }
+   console.log ("cambio de seleccion",this.empresaSeleccionada);
+   if (this.empresaSeleccionada) this.loadChecklistList(this.empresaSeleccionada);
+  }
+
 }

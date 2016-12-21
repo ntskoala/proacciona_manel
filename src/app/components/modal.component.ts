@@ -9,6 +9,7 @@ import { Modal } from '../models/modal';
   templateUrl: '../assets/html/modal.component.html'
 })
 export class ModalComponent {
+empresaSeleccionada:string;
 
   constructor(private empresasService: EmpresasService, private translate: TranslateService) {
     translate.use(this.empresasService.idioma);
@@ -25,4 +26,14 @@ export class ModalComponent {
     this.onCerrar.emit(true);
   }
 
+  seleccionada(empresa:any){
+    console.log("modal. seleccionada",empresa);
+    this.empresaSeleccionada = empresa.id;
+  }
+  checklistseleccionada(checklist:any){
+    console.log("checklist seleccionada",checklist)
+  }
+  importar(){
+    console.log("seleccionado importar")
+  }
 }

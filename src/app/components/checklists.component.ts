@@ -200,7 +200,7 @@ export class ChecklistsComponent implements OnInit{
 import(){
   console.log('importando');
       this.modalImportCL.titulo = 'Importar Checklist';
-      this.modalImportCL.subtitulo = 'Importar Checklistst';
+      this.modalImportCL.subtitulo = '';
       this.modalImportCL.eliminar = false;
       this.modalImportCL.visible = true;
       this.modalImportCL.importchecklist = true;
@@ -219,4 +219,6 @@ import(){
       // });
     }
   }
+
+
 }
